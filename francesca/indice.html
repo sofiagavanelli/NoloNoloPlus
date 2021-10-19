@@ -12,14 +12,12 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="logo1.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            NoloNoloPlus</a>
-    </div>
-    </nav>       
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="logo1.jpg" alt="" width="36" height="35" class="d-inline-block align-text-top">
+      NoloNoloPlus</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -33,21 +31,24 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
         </ul>
       </div>
     </div>
   </nav>
+
+  <script>
+    alert('Attenzione: stai per essere reindirizzato sulla pagina di noleggi')
+    
+  </script>
+  
   <div id="app"> 
     <center> <h3> Name: {{firstName}}  {{lastName}}</h3>
     <h3>User ID: {{user_id}}</h3>
     <h4 >Email: {{email}}</h4>
     <button v-on:click="getUser()"
     :class="change">Change Role</button>
-    
- </div> 
+ </div>
+
 
 
     <script src="https://unpkg.com/vue@3.0.5"></script>
