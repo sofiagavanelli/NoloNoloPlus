@@ -1,7 +1,7 @@
 //js per l'index iniziale!!
 
 export default {
-	name: 'word_cloud',
+	name: 'index',
 
     template: `
         <div id="app">
