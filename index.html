@@ -22,10 +22,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
         <!--Internal dependencies-->
-        <script type="module" src="/routes.js"></script>
+        <script type="module" src="/public/js/routes.js"></script> <!---->
         
         <link rel="stylesheet" href="/public/css/index.css">
-        <link rel="stylesheet" id="stylesheetComp" href="/public/css/index.css">
+        <link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css">
         
         <!--Tooltips enabling
         <script type="text/javascript">
@@ -109,6 +109,12 @@
 
         <div id="app">
             <ul  id="navbar">
+                <li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
+					<button onclick="openMenu()">
+						<i class="icon fa fa-bars"></i>
+						<span id="barsLabel" style="display: none;">Menu</span>
+					</button>
+				</li>
                 <li> 
                     <router-link id="toReserved" tag="button" aria-labelledby="reservedLabel" to="/reserved">
                     <button id="client" onclick="openMenu()"> PROVA </button>

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 //const mongoDB = require('mongodb');
 var http = require('http');
 
-require("./db");
+//require("./db");
 
 const app = express();
 const server = http.createServer(app);
@@ -18,7 +18,9 @@ var client = require('./client-module'); //player-module');
 var manager = require('./manager-module'); //valutatore-module');
 var auth = require('./auth-module'); 
 
-app.use(express.static(`${__dirname}/..`));
+const middleware = express.static(__dirname);
+app.use(middleware);
+//app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/Worker',worker); //'/Editor',editor);
@@ -29,13 +31,14 @@ app.use('/Auth',auth);
 
 app.get('/',(req,res) =>{
 	res.status(200);
-	res.sendFile(path.join(__dirname,"index.html"));
+	res.sendFile(path.join(__dirname,"/index.html"));
 });
 
 server.on('error', (err) => {
   console.error(err);
 });
 
-server.listen(8000, () => {
-  console.log('server is listening on 8000');
+const port = 8000;
+server.listen(port, () => {
+  console.log(`server is listening on ${port}`);
 });
