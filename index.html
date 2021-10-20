@@ -39,7 +39,43 @@
             });
         </script> -->
 
-        
+        <script>
+
+            /*function load(url){
+                window.open(url);
+            }*/
+
+            function openMenu() {
+
+                /*$.ajax({
+                    type: "GET",
+                    url: "/Worker/prove",  //cazzo vuol dire
+                    cache: false,
+                    success: (res) =>{
+                        console.log('dentro success');
+                    },
+                    error: function (e) {
+                        console.log("error",e);
+                    }
+                });*/
+
+                console.log("sta funzionando qualcosa");
+
+                var x = document.getElementById("navbar");
+                console.log("", x);
+
+                if (x.className === "" && window.innerWidth <= 600 )  {
+                    $('#navbar').addClass("responsive");
+                    $('#componentView').hide();
+                }
+                else if(window.innerWidth <= 600 ){
+                    $('#navbar').removeClass("responsive");
+                    $('#componentView').show();
+                }
+			
+            }
+
+        </script>
 	</head>
 
 	<body>
@@ -117,12 +153,12 @@
 				</li>
                 <li> 
                     <router-link id="toReserved" tag="button" aria-labelledby="reservedLabel" to="/reserved">
-                    <button id="client" onclick="openMenu()"> PROVA </button>
+                        <h1> PROVA </h1>
                     </router-link> 
                 </li>
                 <li> 
                     <router-link id="toReserved" tag="button" aria-labelledby="reservedLabel" to="/reserved">
-                    <button id="manager" onclick="openMenu()"> MANAGER </button>
+                        <h1> MANAGER </h1>
                     </router-link>  
                 </li>
                 <li class="nav-item" data-placement="right" title="Grafici" @click="openMenu()">
@@ -148,7 +184,7 @@
             
         </script> -->
 
-        <script>
+        <!-- <script>
 
             /*function load(url){
                 window.open(url);
@@ -184,7 +220,7 @@
 			
             }
 
-        </script>
+        </script> -->
 
 	</body>
 </html>
