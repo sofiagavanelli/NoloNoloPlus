@@ -13,25 +13,25 @@ const app = express();
 const server = http.createServer(app);
 
 //import the middleware to manage the request of the three different app
-var worker = require('./worker-module'); //editor-module');
-var client = require('./client-module'); //player-module');
-var manager = require('./manager-module'); //valutatore-module');
-var auth = require('./auth-module'); 
+var worker = require('./worker-module'); 
+var client = require('./client-module');
+var manager = require('./manager-module');
+var newreg = require('./newreg-module'); 
 
 const middleware = express.static(__dirname);
 app.use(middleware);
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/Worker',worker); //'/Editor',editor);
-app.use('/Client',client); //'/Play',player);
-app.use('/Manager',manager); //'/Valutatore',valutatore);
-app.use('/Auth',auth);
+app.use('/Worker',worker); 
+app.use('/Client',client); 
+app.use('/Manager',manager); 
+app.use('/NewReg',newreg);
 
 
 app.get('/',(req,res) =>{
 	res.status(200);
-	res.sendFile(path.join(__dirname,"/index.html"));
+	res.sendFile(path.join(__dirname,"/front_office/index.html"));
 });
 
 server.on('error', (err) => {

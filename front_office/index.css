@@ -1,3 +1,7 @@
 #app {
     background-color: lightblue;
 }
+
+#navbar {
+    list-style: none;
+}
