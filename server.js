@@ -31,7 +31,7 @@ app.use('/NewReg',newreg);
 
 app.get('/',(req,res) =>{
 	res.status(200);
-	res.sendFile(path.join(__dirname,"/front_office/index.html"));
+	res.sendFile(path.join(__dirname,"/index.html"));
 });
 
 server.on('error', (err) => {

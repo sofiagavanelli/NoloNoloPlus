@@ -6,7 +6,7 @@ const fs = require('fs-extra');
 
 //una volta apre il manager e un'altra gli operai
 client.get('/',(req,res) =>{
-	res.status(200).sendFile(path.join(__dirname,"/Client/index.html"));
+	res.status(200).sendFile(path.join(__dirname,"/front_office/index.html"));
 })
 
 
