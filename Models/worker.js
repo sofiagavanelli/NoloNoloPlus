@@ -6,6 +6,7 @@ var WorkerSchema = new Schema(
   {
     name: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},
+    manager: {type: Boolean, required: true}
   }
 );
 

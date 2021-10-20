@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./models/client");
-const Manager = require("./models/manager");
 const Noleggio = require("./models/noleggi");
 const Prodotto = require("./models/prod");
 const Worker = require("./models/worker");
