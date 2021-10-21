@@ -5,7 +5,7 @@
 }
 
 #app {
-    background-color: #31708E;
+    background-color: #41B3A3;
 }
 
 .navbar {
@@ -20,5 +20,13 @@
 .nav-item:hover {
     color: white;
     font-style: none;
+}
+
+/************************************************************************/
+/* MODAL FOR LOGIN */
+.modal {
+    background: #C38D9E;
+    color: #000;
+    border-radius: 5%;
 }
 
