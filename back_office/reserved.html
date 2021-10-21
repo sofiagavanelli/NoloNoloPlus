@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 	<head>
-		<title>Home NoloNoloPlus</title>
+		<title>Area Riservata</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,23 +12,18 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-        <!-- vue 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-        <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-        <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
-
         <!-- bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
         <!--Internal dependencies-->
-        <script type="module" src="main_page.js"></script> <!---->
+        <script type="module" src="main_page.js"></script>
+        <script type="module" src="reserved.js"></script> <!---->
         
-        <link rel="stylesheet" href="front_office/index.css">
+        <link rel="stylesheet" href="back_office/reserved.css">
         <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
         
         <script>
-
             function load(url){
                 window.open(url, '_self');
             }
@@ -36,50 +31,38 @@
             function load_new(url){
                 window.open(url);
             }
-
-            function openMenu() {
-
-                /*$.ajax({
-                    type: "GET",
-                    url: "/Worker/prove",  //cazzo vuol dire
-                    cache: false,
-                    success: (res) =>{
-                        console.log('dentro success');
-                    },
-                    error: function (e) {
-                        console.log("error",e);
-                    }
-                });*/
-
-                console.log("sta funzionando qualcosa");
-
-                var x = document.getElementById("navbar");
-                console.log("", x);
-
-                if (x.className === "" && window.innerWidth <= 600 )  {
-                    $('#navbar').addClass("responsive");
-                    $('#componentView').hide();
-                }
-                else if(window.innerWidth <= 600 ){
-                    $('#navbar').removeClass("responsive");
-                    $('#componentView').show();
-                }
-			
-            }
-
         </script>
 	</head>
 
 	<body>
-
-        <h1> ciao </h1>
-        <ul  id="navbar">
-            <li class="nav-item" data-placement="right" title="Reserved" onclick="load('/Manager')">
-                <i class="fas fa-tasks"></i>
-                <span id="workerLabel" style="display: none;">Worker</span>
-            </li>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <li class="nav-item" data-placement="right" title="Reserved" onclick="load('/Manager')">
+                    <i class="fas fa-lock">  Managers</i>
+              </a>
+            </div>
+          </nav>
         </ul>
 
+        <!--Contenitore log in-->
+        <div class="loginbox">
+            <img src="avatar.png" class="avatar">
+            <h1>Login Here</h1>
+              <form>
+                  <p>Username</p>
+                  <input type="text" name="" placeholder="Enter Username">
+                  <p>Password</p>
+                  <input type="text" name="" placeholder="Enter Password" id="myInput">
+                 <!--da rivedere, serve a nascondere la password <input type="checkbox" onclick="myFunction()">Show Password-->
+                  <input type="submit" name="" value="Login">
+                  
+                </form>
 
+
+
+
+
+        </div>
 	</body>
 </html>
