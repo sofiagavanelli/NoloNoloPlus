@@ -46,11 +46,8 @@
               <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
 
               <ul class="navbar-nav navbar-nav ml-auto"></ul>
-              <li class="nav-item" title="Workers" data-toggle="modal" data-target="#loginModal">
-                <a class="nav-item" > Login  </a>
-              </li>
-                      <a class="nav-link disabled" onclick="load('/Manager')"> Dashboard-manager </a>
-                  </li>
+                      <a class="nav-link disabled" onclick="load('/Manager')"><i class="fas fa-lock">Dashboard</i></a>
+                    </li>
               </ul>
           </div>
       </nav>
@@ -99,5 +96,19 @@
           $('#loginModal').modal('show');
       });
   </script>
+  <div class="sidebar">
+    <header>Activities</header>
+    <ul>
+      <li><a href="#"><i class="fas fa-qr-code"></i>Dashboard</a></li>
+      <li><a href="#"><i class="fas fa-link"></i>Shortcuts</a></li>
+      <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
+      <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
+      <li><a href="#"><i class="fas fa-question-circle"></i>About</a></li>
+      <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+      <li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
+    
+    </ul>
+
+  </div>
 	</body>
 </html>
