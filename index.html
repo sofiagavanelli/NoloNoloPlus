@@ -22,7 +22,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
         <!--Internal dependencies-->
-        <script type="module" src="main_page.js"></script> <!---->
+        <script type="text/javascript" src="front_office/main_page.js"></script> <!---->
         
         <link rel="stylesheet" href="front_office/index.css">
         <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
@@ -54,7 +54,6 @@
                 console.log("sta funzionando qualcosa");
 
                 var x = document.getElementById("navbar");
-                console.log("", x);
 
                 if (x.className === "" && window.innerWidth <= 600 )  {
                     $('#navbar').addClass("responsive");
@@ -94,6 +93,7 @@
                 </div>
 
             </nav>
+        </div>
 
             <div class="boat-images" data-toggle="modal" data-target="#boatModal">
                     <div class="boat">
@@ -245,4 +245,9 @@
             </div>
 
 	</body>
+    <!-- script>
+        function change(){
+                document.getElementsByClassName("price").display;
+            }
+    </script -->
 </html>
