@@ -76,7 +76,7 @@
 
             <nav class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse">
                     <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
@@ -94,6 +94,71 @@
                 </div>
 
             </nav>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                    <div class="boat">
+                        <img class="post_image" src="img/yacht2.png"></img>
+                        <div class="boat_info">
+                            <h5>Nome: Lucifero</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                            <h5>Potenza: ------</h5>
+                            <h5 class="price">Prezzo: -------</h5>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Apollo</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- si inserisce nella funzione con le variabili!!! e la funzione disegna tutto collegandosi al
+            database e inserendo i dati degli yacht
+             <div class="tweet-images" data-toggle="modal" data-target="#tweetModal">
+                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}" onerror="this.src='/static/img/default_user.png'"></img>
+                    <div class="user">
+                        <h5>${data[i].user}</h5>
+                        <img class="post_image" src="${data[i].images[0]}"></img>
+                    </div>
+            </div> -->
 		
             <!-- modal for login -->
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -124,8 +189,9 @@
                     </div>
                 </div>
             </div> 
-
-            <!--div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+                
+            <!-- 
+                div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">

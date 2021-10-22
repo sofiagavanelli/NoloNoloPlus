@@ -22,6 +22,41 @@
     font-style: none;
 }
 
+/***********************************************************/
+/**** gestisce i div con le immagini e i dati degli yacht *****/
+.boat-images {
+    /*background-color: lightgrey;*/
+    float: left;
+    border: 1px solid lightgrey;
+    /*border-radius: 1rem;*/
+    margin: 4% 0 0 4%;
+    /*padding: 1rem;*/
+    width: 20%;
+    overflow: auto;
+    height: 55vh;
+}
+
+.boat-images h5 {
+    color: black;
+    padding-left: 1rem;
+}
+
+/*.boat-images {
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 0.2rem;
+}*/
+
+.post_image {
+    width: 100%;
+    padding-bottom: 0.2rem;
+    /*border-radius: 0.2rem;*/
+}
+
+.price {
+    visibility: hidden;
+}
+
 /************************************************************************/
 /* MODAL FOR LOGIN */
 .modal-content {
@@ -30,7 +65,6 @@
     width: 20em;
     margin: 20%;
     border-radius: 5%;
-    border-width: 0;
 }
 
 .avatar {
@@ -51,4 +85,15 @@
     color: #000;
     font-size: 18px;
     border-radius: 1em;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
 }
