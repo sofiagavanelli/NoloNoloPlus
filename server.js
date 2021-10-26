@@ -13,10 +13,10 @@ const app = express();
 const server = http.createServer(app);
 
 //import the middleware to manage the request of the three different app
-var worker = require('./worker-module'); //editor-module');
-var client = require('./client-module'); //player-module');
-var manager = require('./manager-module'); //valutatore-module');
-var auth = require('./auth-module');
+var worker = require('./worker-module');
+var client = require('./client-module');
+var manager = require('./manager-module');
+var newreg = require('./newreg-module');
 
 const middleware = express.static(__dirname);
 app.use(middleware);
@@ -24,10 +24,10 @@ app.use(middleware);
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/Worker', worker); //'/Editor',editor);
-app.use('/Client', client); //'/Play',player);
-app.use('/Manager', manager); //'/Valutatore',valutatore);
-app.use('/Auth', auth);
+app.use('/Worker', worker);
+app.use('/Client', client);
+app.use('/Manager', manager);
+app.use('/NewReg', newreg);
 
 
 app.get('/', (req, res) => {
@@ -39,7 +39,7 @@ server.on('error', (err) => {
     console.error(err);
 });
 
-const port = 8000;
+const port = 8680;
 server.listen(port, () => {
     console.log(`server is listening on ${port}`);
 });

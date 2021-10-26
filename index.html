@@ -12,147 +12,30 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-        <!-- vue -->
+        <!-- vue 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
         <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
 
         <!-- bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
         <!--Internal dependencies-->
-        <script type="module" src="/public/js/routes.js"></script> <!---->
+        <script type="text/javascript" src="front_office/main_page.js"></script> <!---->
         
-        <link rel="stylesheet" href="/public/css/index.css">
-        <link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css">
+        <link rel="stylesheet" href="front_office/index.css">
+        <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
         
-        <!--Tooltips enabling
-        <script type="text/javascript">
-            //Tooltips activation
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            });
-            //Tooltips removing
-            $(document).on('click', '.nav-item', (e) => {
-                $('.tooltip').css('display', 'none');
-            });
-        </script> -->
-
-        
-	</head>
-
-	<body>
-        <!-- old navbar -->
-        <!--
-		<div id="app">
-			<ul  id="navbar">
-				<li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
-					<button onclick="openMenu()">
-						<i class="icon fa fa-bars"></i>
-						<span id="barsLabel" style="display: none;">Menu</span>
-					</button>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home" @click="openMenu()">
-					<router-link id="toHome" tag="button" aria-labelledby="homeLabel" to="/">
-						<i class="icon fas fa-home"></i>
-						<span id="homeLabel" style="display: none;">Home</span>
-					</router-link> 
-				</li>
-				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Ricerca" @click="openMenu()">
-					<router-link id="toSearch" tag="button" aria-labelledby="searchLabel" to="/search">
-						<i class="icon fas fa-search"></i>
-						<span id="searchLabel" style="display: none;">Ricerca</span>
-					</router-link>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Risultati e Streaming" @click="openMenu()">
-					<router-link id="toTweets" tag="button" aria-labelledby="tweetLabel" to="/tweets">
-						<i class="icon fab fa-twitter"></i>
-						<span id="tweetLabel" style="display: none;">Visualizzazione</span>
-					</router-link>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mappa" @click="openMenu()">
-					<router-link id="toMap" tag="button" aria-labelledby="mapLabel" to="/map">
-						<i class="icon fas fa-map-marker-alt"></i>
-						<span id="mapLabel" style="display: none;">Mappa</span>
-					</router-link>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Word Cloud" @click="openMenu()">
-					<router-link id="toCloud" tag="button" aria-labelledby="cloudLabel"to="/cloud">
-						<i class="icon fas fa-cloud"></i>
-						<span id="cloudLabel" style="display: none;">Word-cloud</span>
-					</router-link>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grafici" @click="openMenu()">
-					<router-link id="toCharts" tag="button" aria-labelledby="chartsLabel" to="/graphs">
-						<i class="icon far fa-chart-bar" ></i>
-						<span id="chartsLabel" style="display: none;">Grafici</span>
-					</router-link>
-				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post" @click="openMenu()">
-					<router-link id="toPost" tag="button" aria-labelledby="postLabel" to="/post">
-						<i class="icon fas fa-share-alt"></i>
-						<span id="postLabel" style="display: none;">Condividi</span>
-					</router-link>
-				</li>
-
-			</ul>
-
-            <div role="main" id="componentView">
-				<keep-alive>
-					<router-view></router-view>
-				</keep-alive>
-			</div>
-
-        </div>
-        -->
-
-        <div id="app">
-            <ul  id="navbar">
-                <li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
-					<button onclick="openMenu()">
-						<i class="icon fa fa-bars"></i>
-						<span id="barsLabel" style="display: none;">Menu</span>
-					</button>
-				</li>
-                <li> 
-                    <router-link id="toReserved" tag="button" aria-labelledby="reservedLabel" to="/reserved">
-                    <button id="client" onclick="openMenu()"> PROVA </button>
-                    </router-link> 
-                </li>
-                <li> 
-                    <router-link id="toReserved" tag="button" aria-labelledby="reservedLabel" to="/reserved">
-                    <button id="manager" onclick="openMenu()"> MANAGER </button>
-                    </router-link>  
-                </li>
-                <li class="nav-item" data-placement="right" title="Grafici" @click="openMenu()">
-					<router-link id="toReserved" tag="button" to="/reserved">
-						<i class="icon far fa-chart-bar"></i>
-						<span id="chartsLabel" style="display: none;">Grafici</span>
-					</router-link>
-				</li>
-            </ul>
-
-            <div role="main" id="componentView">
-                <keep-alive>
-                    <router-view></router-view>
-                </keep-alive>
-            </div>
-        </div>
-
-        <!-- che roba è -->
-        <!-- <script>
-            $(document).on('click','#', () =>{
-                openMenu();
-            });
-            
-        </script> -->
-
         <script>
 
-            /*function load(url){
+            function load(url){
+                window.open(url, '_self');
+            }
+
+            function load_new(url){
                 window.open(url);
-            }*/
+            }
 
             function openMenu() {
 
@@ -171,7 +54,6 @@
                 console.log("sta funzionando qualcosa");
 
                 var x = document.getElementById("navbar");
-                console.log("", x);
 
                 if (x.className === "" && window.innerWidth <= 600 )  {
                     $('#navbar').addClass("responsive");
@@ -185,6 +67,187 @@
             }
 
         </script>
+	</head>
+
+	<body>
+
+        <div id="app">
+
+            <nav class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
+
+                    <ul class="navbar-nav navbar-nav ml-auto"></ul>
+                        <li class="nav-item" title="Reserved" data-toggle="modal" data-target="#loginModal">
+                            <a class="nav-item" > Login  </a>
+                        </li>
+                        <li class="nav-item" title="Reserved" onclick="load_new('/Worker')">
+                            <i class="icon fas fa-user-lock"></i>
+                            <span id="workerLabel" style="display: none;">Worker</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </nav>
+        </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                    <div class="boat">
+                        <img class="post_image" src="img/yacht2.png"></img>
+                        <div class="boat_info">
+                            <h5>Nome: Lucifero</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                            <h5>Potenza: ------</h5>
+                            <h5 class="price">Prezzo: -------</h5>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Apollo</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                <div class="boat">
+                    <img class="post_image" src="img/yacht2.png"></img>
+                    <div class="boat_info">
+                        <h5>Nome: Zeus</h5> <!-- qui ci sarà tipo ${} con collegamento al db-->
+                        <h5>Potenza: ------</h5>
+                        <h5 class="price">Prezzo: -------</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- si inserisce nella funzione con le variabili!!! e la funzione disegna tutto collegandosi al
+            database e inserendo i dati degli yacht
+             <div class="tweet-images" data-toggle="modal" data-target="#tweetModal">
+                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}" onerror="this.src='/static/img/default_user.png'"></img>
+                    <div class="user">
+                        <h5>${data[i].user}</h5>
+                        <img class="post_image" src="${data[i].images[0]}"></img>
+                    </div>
+            </div> -->
+		
+            <!-- modal for login -->
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <img src="img/avatar.png" class="avatar">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <label data-error="wrong" data-success="right" for="defaultForm-email">Username</label>
+                                <input type="email" id="defaultForm-email" class="form-control validate" placeholder="Enter Username">
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+                                <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+                
+            <!-- 
+                div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">Bentornato in NoloNoloPlus! 
+                        Inserisci i tuoi dati per iniziare i tuoi noleggi con noi! 
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#newRegModal">
+                            Nuova registrazione
+                        </button>
+                    </div>
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button id="deletePostBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div-->
+
+            <!-- fra style 
+                <div class="loginbox">
+            <img src="img/avatar.png" class="avatar">
+            <h1>Login Here</h1>
+              <form>
+                <p>Username</p>
+                  <input type="text" name="" placeholder="Enter Username">
+                  <p>Password</p>
+                  <input type="text" name="" placeholder="Enter Password" id="myInput">
+                 !--da rivedere, serve a nascondere la password <input type="checkbox" onclick="myFunction()">Show Password--
+                 <input type="submit" name="" value="Login">
+                  
+                </form>
+             </div>
+            -->
+
+            <!-- modal for new reg -->
+            <div class="modal fade" id="newRegModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">Benvenuto in NoloNoloPlus! </div>
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <button id="deletePostBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
 	</body>
+    <!-- script>
+        function change(){
+                document.getElementsByClassName("price").display;
+            }
+    </script -->
 </html>
