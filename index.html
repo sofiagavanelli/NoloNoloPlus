@@ -97,6 +97,9 @@
 
         <div id="main_page">
 
+            <!-- DA FARE: inserire questo button in un altro div che fa da contenitore del btn e del modale
+            che si apre quando si clicca: a quel punto giocare con z-index e posizioni per gestire il layering-->
+
             <button id="calcBtn" @click="openCalc" title="calculate">
                 <i class="fas fa-calculator"></i>
             </button>
@@ -181,10 +184,8 @@
             populate();
         });
 
-        calcBtn.addEventListener("click", openCalc());
-        logBtn.addEventListener("click", change());
-
-
+        document.getElementById("calcBtn").addEventListener("click", openCalc);
+        document.getElementById("logBtn").addEventListener("click", change);
 
     </script>
 

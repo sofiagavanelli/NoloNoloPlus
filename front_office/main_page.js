@@ -15,23 +15,21 @@ function openCalc(){
 
     let div = null;
 
-    div = $(` <div class="modal fade" id="calcModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+    div = $(` <div class="modal fade" role="dialog" id="calcModal">
                     <div class="modal-content">    
                         <div class="modal-header text-center">
                             <h4 class="modal-title w-100 font-weight-bold">Calcola il prezzo del tuo noleggio</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="calcModal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body mx-3">
-                            <h5> *ricordiamo che lo yacht scelto potrebbe non essere disponibile nelle date richieste </h5>
+                            <a> *ricordiamo che lo yacht scelto potrebbe non essere disponibile nelle date richieste </a>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
                             <button class="btn btn-default">Login</button>
                         </div>
                     </div>
-                </div>
             </div> `);
         
     $("#main_page").append(div);
