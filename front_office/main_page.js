@@ -9,7 +9,7 @@ function change(){
     x.visibility = "visible";
 }
 
-function openCalc(){
+/*function openCalc(){
 
     console.log("sono dentro open calc"); 
 
@@ -34,7 +34,7 @@ function openCalc(){
         
     $("#main_page").append(div);
 
-}
+}*/
 
 function populate(){
 

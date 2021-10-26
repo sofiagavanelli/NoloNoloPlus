@@ -99,13 +99,34 @@
 
             <!-- DA FARE: inserire questo button in un altro div che fa da contenitore del btn e del modale
             che si apre quando si clicca: a quel punto giocare con z-index e posizioni per gestire il layering-->
-
-            <button id="calcBtn" @click="openCalc" title="calculate">
+            
+            <button id="calcBtn" data-toggle="modal" data-target="#calcModal" title="calculate">
                 <i class="fas fa-calculator"></i>
             </button>
 
         </div>
 
+        <!-- modal for calculating rental -->
+        <div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">    
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Calcola il prezzo del tuo noleggio</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <a> *ricordiamo che lo yacht scelto potrebbe non essere disponibile nelle date richieste </a>
+                        <!--forme per inserimento num cabine, dimensioni OPPURE direttamente il nome dello yacht
+                        + scelta delle date per prenotare -->
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
 
             <!-- modal for login -->
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -185,7 +206,7 @@
             populate();
         });
 
-        document.getElementById("calcBtn").addEventListener("click", openCalc);
+        //document.getElementById("calcBtn").addEventListener("click", openCalc);
         document.getElementById("logBtn").addEventListener("click", change);
 
     </script>
