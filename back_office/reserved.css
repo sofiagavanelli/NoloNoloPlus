@@ -130,10 +130,12 @@
 .sidebar{
   position: fixed;
   left: -250px;
+  bottom: 2px;
   width: 250px;
   height: 100%;
   background: #99CED3;
   transition: all .5s ease;
+
 }
 
 .sidebar header{
@@ -178,11 +180,11 @@ label #btn,label #cancel{
 }
 label #btn{
   left: 40px;
-  top: 25px;
+  top: 15px;
   font-size: 35px;
   color: #99CED3;
   transition: all .5s;
- /* padding-bottom: 10px;  non riesco a metterla più su*/
+ padding-bottom: 10px;  
 }
 
 label #cancel{
