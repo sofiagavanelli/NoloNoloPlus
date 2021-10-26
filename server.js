@@ -16,29 +16,30 @@ const server = http.createServer(app);
 var worker = require('./worker-module'); //editor-module');
 var client = require('./client-module'); //player-module');
 var manager = require('./manager-module'); //valutatore-module');
-var auth = require('./auth-module'); 
+var auth = require('./auth-module');
 
 const middleware = express.static(__dirname);
 app.use(middleware);
+
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/Worker',worker); //'/Editor',editor);
-app.use('/Client',client); //'/Play',player);
-app.use('/Manager',manager); //'/Valutatore',valutatore);
-app.use('/Auth',auth);
+app.use('/Worker', worker); //'/Editor',editor);
+app.use('/Client', client); //'/Play',player);
+app.use('/Manager', manager); //'/Valutatore',valutatore);
+app.use('/Auth', auth);
 
 
-app.get('/',(req,res) =>{
-	res.status(200);
-	res.sendFile(path.join(__dirname,"/index.html"));
+app.get('/', (req, res) => {
+    res.status(200);
+    res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 server.on('error', (err) => {
-  console.error(err);
+    console.error(err);
 });
 
 const port = 8000;
 server.listen(port, () => {
-  console.log(`server is listening on ${port}`);
+    console.log(`server is listening on ${port}`);
 });
