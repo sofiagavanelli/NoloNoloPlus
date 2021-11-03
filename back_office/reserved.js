@@ -1,10 +1,10 @@
 //javascript workers
 
-console.log("ciao prova"); 
+console.log("ciao prova");
 
-function openClient(){
+function openClient() {
 
-    console.log("sono dentro open client"); 
+    console.log("sono dentro open client");
 
     let div = null;
 
