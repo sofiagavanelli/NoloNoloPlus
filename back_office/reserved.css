@@ -6,7 +6,9 @@
 
 #app {
     background-color: #4D6D9A;
-    position: sticky;
+    position: fixed;
+    top: 0px;
+    width: 100%;
 }
 
 .navbar {
@@ -177,6 +179,7 @@ ul li :hover a{
   position: relative;
   right: -120px;
   left: 420px;
-  top: 420px;
+  top: 180px;
+  
 }
 

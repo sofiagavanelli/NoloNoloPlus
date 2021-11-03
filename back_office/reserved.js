@@ -15,12 +15,10 @@ function openClient(){
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
     table{
-        position: static;
-        left: 230px;
-        top: 57px;
+        display: block;
+        overflow-x: auto;
         transform: translate(-50%,-50%);
         border-collapse: collapse;
-        width: 800px;
         height: 200px;
         border: 1px solid rgb(rgb(255, 255, 255), green, blue);
         box-shadow: 2px 2px 12px rgb(172, 170, 170), -1px -1px 8px rgb(172, 170, 170);
@@ -64,7 +62,7 @@ function openClient(){
      }
 
 </style>
-     <table>
+     <table style="width:1000px;">
     <tr id="header">
         <th>First Name</th>
         <th>Last Name</th>
