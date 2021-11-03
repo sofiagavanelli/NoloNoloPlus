@@ -12,10 +12,12 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-        <!-- vue 
+        <!-- vue -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-        <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-        <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+        <!--script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script --
+        <script src="https://unpkg.com/vue@3.0.12"></script>
+        <script src="https://unpkg.com/vue@next"></script> -->
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
         <!-- bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -95,16 +97,35 @@
             </nav>
         </div>
 
-        <div id="main_page">
+        <!-- div id="main_page" -->
 
             <!-- DA FARE: inserire questo button in un altro div che fa da contenitore del btn e del modale
-            che si apre quando si clicca: a quel punto giocare con z-index e posizioni per gestire il layering-->
+            che si apre quando si clicca: a quel punto giocare con z-index e posizioni per gestire il layering
             
             <button id="calcBtn" data-toggle="modal" data-target="#calcModal" title="calculate">
-                <i class="fas fa-calculator"></i>
+                <i class="fas fa-calculator fa-2x"></i>
             </button>
 
-        </div>
+            !-- div v-html="renderEl()"></div --
+
+            {{{ renderEl () }}} -->
+
+            <div class="container" id="vue-app">
+                <div class="col-md-4">
+                    <todo-component></todo-component>
+                </div>
+            </div>
+
+            <div id="components-demo">
+                <button-counter></button-counter>
+            </div>
+
+            <div id="prova">
+                Some value: {{ someValue }} <br />
+                Some computed value: {{ someComputed }}
+            </div>
+
+        <!-- /div -->
 
         <!-- modal for calculating rental -->
         <div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -165,10 +186,9 @@
             
 
             <!-- modal for new reg -->
-            <div class="modal fade" id="newRegModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="container" id="newRegC" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <img src="img/avatar.png" class="avatar">
                         <div class="modal-header text-center">
                             <h4 class="modal-title w-100 font-weight-bold">Insert your informations</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -202,13 +222,36 @@
 	</body>
 
     <script type="text/javascript">
-        $(window).on('load',function() {
+
+        /*$(window).on('load',function() {
             populate();
-        });
+        });*/
 
         //document.getElementById("calcBtn").addEventListener("click", openCalc);
-        document.getElementById("logBtn").addEventListener("click", change);
+        document.getElementById("newreg").addEventListener("click", change);
 
+    </script>
+
+    <script type="x-template" id="todo-component">
+        <div>
+            <h3>Example vue todo component</h3>
+            <div v-for="item in items" class="form-group" :class="{'has-success': item.completed}">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <input type="checkbox" v-model="item.completed">
+                    </div>
+                    <input type="text" v-model="item.title" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" v-model="newItem" class="form-control">
+                    <div class="input-group-btn">
+                        <button class="btn" :class="{'btn-primary': newItem}" @click="addItem()">add!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </script>
 
     <!-- script>

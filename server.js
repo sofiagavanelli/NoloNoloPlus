@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 //const mongoDB = require('mongodb');
 var http = require('http');
 
-//require("./db");
+require("./db");
 
 const app = express();
 const server = http.createServer(app);

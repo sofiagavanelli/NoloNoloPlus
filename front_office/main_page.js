@@ -1,5 +1,6 @@
 //js per l'index iniziale!!
 
+
 console.log("ciao ciao"); //questo viene stampato
 
 function change(){
@@ -7,9 +8,11 @@ function change(){
     var x = document.getElementsByClassName("price");
     console.log("", x);
     x.visibility = "visible";
+    var y = document.getElementById("newRegC").style.visibility;
+    y = "visible";
 }
 
-/*function openCalc(){
+function openCalc(){
 
     console.log("sono dentro open calc"); 
 
@@ -34,7 +37,7 @@ function change(){
         
     $("#main_page").append(div);
 
-}*/
+}
 
 function populate(){
 
@@ -134,5 +137,133 @@ function populate(){
     }
 
     $("#tweets-search").addClass('bd-white');
-}*/
+}
+*/
 
+
+/*Vue.component('todo-component', {
+    template: '#todo-component',
+    data: function () {
+        return {
+            items: [
+                {
+                    id: 'item-1',
+                    title: 'Checkout vue',
+                    completed: false
+                }, {
+                    id: 'item-2',
+                    title: 'Use this stuff!!',
+                    completed: false
+                }
+            ],
+            newItem: ''
+
+        };
+    },
+    methods: {
+        addItem: function () {
+            if (this.newItem) {
+                var item = {
+                    id: Math.random(0, 10000),
+                    title: this.newItem,
+                    completed: false
+                };
+
+                this.items.push(item);
+                this.newItem = '';
+            }
+        }
+    }
+});
+
+//nell'html:
+/* 
+    <div class="container" id="vue-app">
+        [....]
+        <div class="col-md-4">
+            <todo-component></todo-component>
+        </div>
+    </div>
+
+ */
+
+
+/***********************************************************************
+NUOVA VERSIONE JS CON VUE
+
+
+ export default{
+    name: "App", 
+
+    /*created() {
+        //funzione di popolamento ?
+    },*
+    mounted() {
+        //?
+    },
+
+    methods: {
+        //funzioni varie?
+
+        renderEl() {
+
+            return `<div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                        <div class="boat">
+                            <img class="post_image" src="img/yacht2.png"></img>
+                            <div class="boat_info">
+                                <h3 class="title">Lucifero</h5>
+                                <h4 class="title">Marca1</h5>
+                                <div class="details">
+                                    <ul class="d-flex flex-wrap pl-0">
+                                        <li class="title">Potenza:<h5 class="data"> ---- </h5> </li>
+                                        <li class="title">Lunghezza:<h5 class="data"> --- </h5> </li>
+                                        <li class="title">Ospiti:<h5 class="data"> --- </h5> </li>
+                                        <li class="title">Età:<h5 class="data"> --- </h5> </li>
+                                        <li class="title">Prezzo: <h5 class="price_data"> ------ </h5> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+        }
+    }
+};
+
+var vm = new Vue ({
+    el: '#main_page'
+})*/
+
+
+
+/*************************************************** *
+//VERSIONE 3 16:39 27 OTTOBRE
+// Create a Vue application
+const app = Vue.createApp({})
+
+// Define a new global component called button-counter
+app.component('button-counter', {
+  data() {
+    return {
+      count: 0
+    }
+  },
+  template: `
+    <button @click="count++">
+      You clicked me {{ count }} times.
+    </button>`
+})*
+
+
+new Vue({
+    el: "#prova",
+    data() {
+      return {
+        someValue: 10
+      }
+    },
+    computed: {
+      someComputed() {
+        return this.someValue * 10;
+      }
+    }
+  });*/
