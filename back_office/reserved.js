@@ -1,10 +1,10 @@
 //javascript workers
 
-console.log("ciao prova"); 
+console.log("ciao prova");
 
-function openClient(){
+function openClient() {
 
-    console.log("sono dentro open client"); 
+    console.log("sono dentro open client");
 
     let div = null;
 
@@ -16,7 +16,7 @@ function openClient(){
     }
     table{
         position: static;
-        left: 230px;
+        right: 230px;
         transform: translate(-50%,-50%);
         border-collapse: collapse;
         width: 800px;
@@ -101,7 +101,7 @@ function openClient(){
         <td>Usa</td>
     </tr>
 </table> `);
-        
+
     $("#reserved").append(div);
 
 }
