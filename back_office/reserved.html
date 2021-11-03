@@ -35,34 +35,37 @@
 	</head>
 
 	<body>
+
     <!-- Navbar -->
-      <div id="app">
+    <div id="app">
+
 
         <nav class="navbar navbar-expand-lg"> 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse">
-              <!--<a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>-->
+            <div class="collapse navbar-collapse">
+                <!--<a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>-->
 
-              <ul class="navbar-nav navbar-nav ml-auto"></ul>
-                      <a class="nav-link disabled" onclick="load('/Manager')"><i class="fas fa-lock">Dashboard</i></a>
-                    </li>
-              </ul>
-          </div>
-      </nav>
-      </div> 
+                <ul class="navbar-nav navbar-nav ml-auto"></ul>
+                <a class="nav-link disabled" onclick="load('/Manager')"><i class="fas fa-lock">Dashboard</i></a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 
-       <!-- modal for login -->
-       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- modal for login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <img src="img/avatar.png" class="avatar">
+                <img src="../img/avatar.png" class="avatar">
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                      <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body mx-3">
@@ -73,15 +76,14 @@
 
                     <div class="md-form mb-4">
                         <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password">
-                        &nbsp;
-                        &nbsp; <p>Manager</p>
-                      
-                    <label class="switch">
+                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password"> &nbsp; &nbsp;
+                        <p>Manager</p>
+
+                        <label class="switch">
                       <input type="checkbox"> 
                       <span class="slider round"></span>
                     </label>
-                      </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -89,9 +91,9 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
-    
+   
 <!--SIDEBAR ATTIVITA' FUNZIONARI-->
   <div class="sidebar">
     <header>Activities</header>
@@ -121,4 +123,5 @@
 
 </script>
 	</body>
+
 </html>
