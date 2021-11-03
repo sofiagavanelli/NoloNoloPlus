@@ -17,6 +17,7 @@ function openClient(){
     table{
         position: static;
         left: 230px;
+        top: 57px;
         transform: translate(-50%,-50%);
         border-collapse: collapse;
         width: 800px;
@@ -80,6 +81,84 @@ function openClient(){
         <td>Usa</td>
     </tr>
     <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>24</td>
+        <td>Male</td>
+        <td>Usa</td>
+    </tr>
+    
+    <tr>
         <td>Paul</td>
         <td>Smith</td>
         <td>20</td>
@@ -102,6 +181,6 @@ function openClient(){
     </tr>
 </table> `);
         
-    $("#reserved").append(div);
+    $("#inner").append(div);
 
 }
