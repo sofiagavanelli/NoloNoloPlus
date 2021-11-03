@@ -1,0 +1,27 @@
+.btn {
+    padding: 0em 2em;
+    border: none;
+    outline: none;
+    height: 2em;
+    background: #ffff;
+    color: #000;
+    font-size: 18px;
+    border-radius: 1em;
+}
+
+#app {
+    background-color: #4D6D9A;
+}
+
+.navbar {
+    list-style: none;
+}
+
+.nav-item {
+    color: white;
+}
+
+.nav-item:hover {
+    color: white;
+    font-style: none;
+}

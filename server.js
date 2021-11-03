@@ -16,8 +16,8 @@ const server = http.createServer(app);
 var worker = require('./worker-module');
 var client = require('./client-module');
 var manager = require('./manager-module');
-var newreg = require('./newreg-module');
 
+//che senso ha usare middleware così?
 const middleware = express.static(__dirname);
 app.use(middleware);
 
@@ -27,8 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/Worker', worker);
 app.use('/Client', client);
 app.use('/Manager', manager);
-app.use('/NewReg', newreg);
-
 
 app.get('/', (req, res) => {
     res.status(200);

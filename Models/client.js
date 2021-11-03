@@ -11,6 +11,7 @@ var ClientSchema = new Schema(
 );
 
 // Virtual for book's URL
+//PROBABILMENTE queste righe non ci servono per ciò che dobbiamo fare noi!
 ClientSchema
 .virtual('url')
 .get(function () {

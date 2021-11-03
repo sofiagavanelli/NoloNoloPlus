@@ -36,33 +36,34 @@
 
 	<body>
     <!-- Navbar -->
-      <div id="app">
+    <div id="app">
 
-        <nav class="navbar navbar-expand-lg"> <!--background-color: #31708E; -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg">
+            <!--background-color: #31708E; -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse">
-              <!--<a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>-->
+            <div class="collapse navbar-collapse">
+                <!--<a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>-->
 
-              <ul class="navbar-nav navbar-nav ml-auto"></ul>
-                      <a class="nav-link disabled" onclick="load('/Manager')"><i class="fas fa-lock">Dashboard</i></a>
-                    </li>
-              </ul>
-          </div>
-      </nav>
-      </div> 
+                <ul class="navbar-nav navbar-nav ml-auto"></ul>
+                <a class="nav-link disabled" onclick="load('/Manager')"><i class="fas fa-lock">Dashboard</i></a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 
-       <!-- modal for login -->
-       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- modal for login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <img src="img/avatar.png" class="avatar">
+                <img src="../img/avatar.png" class="avatar">
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                      <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body mx-3">
@@ -73,15 +74,14 @@
 
                     <div class="md-form mb-4">
                         <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password">
-                        &nbsp;
-                        &nbsp; <p>Manager</p>
-                      
-                    <label class="switch">
+                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password"> &nbsp; &nbsp;
+                        <p>Manager</p>
+
+                        <label class="switch">
                       <input type="checkbox"> 
                       <span class="slider round"></span>
                     </label>
-                      </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -89,25 +89,36 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
     <script type="text/javascript">
-      $(window).on('load',function(){
-          $('#loginModal').modal('show');
-      });
-  </script>
-<!--SIDEBAR ATTIVITA' FUNZIONARI-->
-  <div class="sidebar">
-    <header>Activities</header>
-    <ul> 
-      <li><a href="#"><i class="fas fa-archive"></i>Inventory</a></li>  <!--per vedere l'inventario degli ogetti-->
-      <li><a href="#"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
-      <li><a href="#"><i class="far fa-address-card"></i>Clients</a></li> <!--per vedere tutti i clienti -->
-      <li><a href="#"><i class="far fa-calendar-alt"></i>Calendar</a></li> <!--per vedere il calendario dei noleggi-->
-      <li><a href="#"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
-      <li><a href="#"><i class="far fa-id-badge"></i>Personal Area</a></li> <!--per vedere informazioni personali-->
-      <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
-    </ul>
-  </div>
-	</body>
+        $(window).on('load', function() {
+            $('#loginModal').modal('show');
+        });
+    </script>
+    <input type="checkbox" id="check">
+    <label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+  </label>
+    <div class="sidebar">
+        <header>Activities</header>
+        <ul>
+            <li><a href="#"><i class="fas fa-archive"></i>Inventory</a></li>
+            <!--per vedere l'inventario degli ogetti-->
+            <li><a href="#"><i class="fas fa-truck-loading"></i>Rents</a></li>
+            <!--per vedere tutti i noleggi-->
+            <li><a href="#"><i class="far fa-address-card"></i>Clients</a></li>
+            <!--per vedere tutti i clienti -->
+            <li><a href="#"><i class="far fa-calendar-alt"></i>Calendar</a></li>
+            <!--per vedere il calendario dei noleggi-->
+            <li><a href="#"><i class="far fa-envelope"></i></i>Contact</a></li>
+            <!--per contattare il manager-->
+            <li><a href="#"><i class="far fa-id-badge"></i>Personal Area</a></li>
+            <!--per vedere informazioni personali-->
+            <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+        </ul>
+    </div>
+</body>
+
 </html>
