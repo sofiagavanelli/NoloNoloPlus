@@ -6,6 +6,9 @@
 
 #app {
     background-color: #4D6D9A;
+    position: fixed;
+    top: 0px;
+    width: 100%;
 }
 
 .navbar {
@@ -167,5 +170,16 @@ ul li :hover a{
 
 .sidebar ul a i{
   margin-right: 16px;
+}
+#inner{
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  margin: 0 auto;
+  position: relative;
+  right: -120px;
+  left: 420px;
+  top: 180px;
+  
 }
 
