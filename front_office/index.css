@@ -56,11 +56,6 @@
     border-top: 1px solid #86B3D1;
 }
 
-/*.boat-images {
-    width: 100%;
-    margin-top: 1rem;
-    border-radius: 0.2rem;
-}*/
 
 .post_image {
     width: 100%;
@@ -153,4 +148,9 @@
     height: 40px;
     color: #000;
     font-size: 16px;
+}
+
+/**/
+#newRegC {
+    visibility: hidden;
 }

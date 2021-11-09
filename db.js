@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+/*const mongoose = require("mongoose");
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./models/client");
@@ -23,9 +23,9 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
-Client.find((err, stories) => {
+Client.find((err, clients) => {
     if (err) return console.error(err);
-    //if (stories.length) return;
+    if (clients.length) return;
 
     new Client({
         name: "Maria",
@@ -34,9 +34,9 @@ Client.find((err, stories) => {
     }).save();
 });
 
-Manager.find((err, stories) => {
+/*Manager.find((err, managers) => {
     if (err) return console.error(err);
-    //if (stories.length) return;
+    if (managers.length) return;
 
     new Manager({
         name: "Mario",
@@ -44,9 +44,9 @@ Manager.find((err, stories) => {
     }).save();
 });
 
-Worker.find((err, stories) => {
+Worker.find((err, workers) => {
     if (err) return console.error(err);
-    //if (stories.length) return;
+    if (workers.length) return;
 
     new Worker({
         name: "Marco",
@@ -54,9 +54,9 @@ Worker.find((err, stories) => {
     }).save();
 });
 
-Prodotto.find((err, stories) => {
+Prodotto.find((err, prods) => {
     if (err) return console.error(err);
-    //if (stories.length) return;
+    if (prods.length) return;
 
     new Prodotto({
         name: "Apollo",
@@ -67,9 +67,9 @@ Prodotto.find((err, stories) => {
     }).save();
 });
 
-Noleggio.find((err, stories) => {
+Noleggio.find((err, rentals) => {
     if (err) return console.error(err);
-    //if (stories.length) return;
+    if (rentals.length) return;
 
     new Noleggio({
         prod_id: "p93292377g",
@@ -88,8 +88,11 @@ async function findOneListeningByName(client, nameOfListing){
        console.log(result); 
     }else{
         console.log(`No listing found`)};
-    }
+    }*/
 
+
+//*******************************************/
+/* FILE DI GITHUB */
 
 /*module.exports = {
   getUsers: async (options = {}) => User.find(options),
@@ -120,7 +123,7 @@ async function findOneListeningByName(client, nameOfListing){
   },
 };*/
 
-async function connessione() {
+/*async function connessione() {
     if (!connectionString) {
         console.error("MongoDB connection string missing!");
         process.exit(1);
@@ -138,16 +141,37 @@ async function connessione() {
         console.log("mongoDB connection established")
     });
 
-};
+};*/
 
 //console.log(db);
 
-var query = { address: "12344" };
+//var query = { address: "12344" };
 
-const a = db.collection("NoloNoloDB").find(query);
+//const a = db.collection("NoloNoloDB").find(query);
 
+//var myobj = { name: "Company Inc", address: "Highway 37" };
 
-//var dbo = db.db("mydb");
+//module.exports = {
+
+    //getUsers: async (options = {}) => User.find(options),
+    /*saveUser: async (username, id) => {
+    await User.updateOne({ id }, { username }, { upsert: true });
+    },*/
+
+    /*saveClients: async (options = {}) => Client.find(options),*/
+
+    /*saveClient: async (options = {}) => {
+        //var myobj = { name: "Company Inc", address: "Highway 37" };
+        await Client.updateOne(options, function(err, res) {
+            if (err) throw err;
+            console.log("1 document inserted");
+            //db.close();
+        });
+    },
+
+};*/
+
+/*var dbo = db.db("mydb");
 function addObject() {
     var myobj = { name: "Company Inc", address: "Highway 37" };
     db.collection("customers").insertOne(myobj, function(err, res) {
@@ -155,5 +179,5 @@ function addObject() {
         console.log("1 document inserted");
         db.close();
     });
-}
+}*/
 

@@ -11,6 +11,7 @@ var ClientSchema = new Schema(
 );
 
 // Virtual for book's URL
+//PROBABILMENTE queste righe non ci servono per ciò che dobbiamo fare noi!
 ClientSchema
 .virtual('url')
 .get(function () {
@@ -19,3 +20,22 @@ ClientSchema
 
 //Export model
 module.exports = mongoose.model('Client', ClientSchema);
+
+
+
+
+
+////////////////////////////////////////////////////////////
+class User {
+  constructor(db) {
+    this.collection = db.collection('users');
+  }
+  async addUser(id, pass, _n) {
+
+    let user = {name: _n, client_id: id, password: pass};
+
+    /*const newUser = */await this.collection.insertOne(user);
+    //return newUser;
+  }
+}
+module.exports = User;
