@@ -78,6 +78,18 @@ Noleggio.find((err, stories) => {
         end_date: 2021 - 7 - 7
     }).save();
 });
+async function findOneListeningByName(client, nameOfListing){
+   const result = await client.db("rental_agency").collection("clients")
+   .findOne({name: nameOfListing});
+
+   if (result){
+       console.log(`Found a listing in the collection with the name '
+       ${nameOfListing}' `);
+       console.log(result); 
+    }else{
+        console.log(`No listing found`)};
+    }
+
 
 /*module.exports = {
   getUsers: async (options = {}) => User.find(options),
@@ -144,3 +156,4 @@ function addObject() {
         db.close();
     });
 }
+

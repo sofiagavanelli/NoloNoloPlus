@@ -8,176 +8,109 @@ function openClient() {
 
     let div = null;
 
-    div = $(`<style>
-    body{
-        padding: 0;
-        margin: 0;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    div = $(`
+    <style>
+    #table-wrapper {
+      position: relative;
+    height: 70vh;
+    margin-top: 6vh;
     }
-    table{
-        display: block;
-        overflow-x: auto;
-        transform: translate(-50%,-50%);
-        border-collapse: collapse;
-        height: 200px;
-        border: 1px solid rgb(rgb(255, 255, 255), green, blue);
-        box-shadow: 2px 2px 12px rgb(172, 170, 170), -1px -1px 8px rgb(172, 170, 170);
+    #table-scroll {
+      height:70vh;
+      overflow:auto;  
+    }
+    #table-wrapper table {
+      width:100%;
+        
+    }
+    #table-wrapper table * {
+      background:pink;
+      color:black;
+    }
+    #table-wrapper table thead th .text {
+      position:absolute;   
+      top:-20px;
+      z-index:2;
+      height:20px;
+      width:45%;
+      border:1px solid red;
+    }
+    .btn-add {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+
+      margin:0.5em;
+      padding: 0.5em 2em 0.5em 2em;
+      border-radius: 12px;
+    }
+    .btn-searchIcon {
+      background-color: white;
+      padding: 0.5em;
+      margin-right:0.5em;
+      margin-left:0;
+      border:none;
+    }
+    .btn:active{
+      margin-right:0;
     }
 
-    tr{
-        transition: all .2s ease-in;
-        cursor: pointer;
-    }
+    </style>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn-searchIcon"> <i class="fas fa-search"></i> </button>
+    </form>
+  <button class="btn-add" type="button">Add </button>
+</div>
 
-    th,td{
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
+<div id="table-wrapper">
+  <div id="table-scroll">
+    <table>
+        <thead>
+            <tr>
+                <th><span class="text">Name</span></th>
+                <th><span class="text">Surname</span></th>
+                <th><span class="text">User ID</span></th>
+            </tr>
+        </thead>
+        <tbody>
 
-    #header{
-        background-color: #16a085;
-        color: #fff;
-     }
 
-     h1{
-         font-weight: 600;
-         text-align: center;
-         background-color: #16a085;
-         color:#fff;
-         padding: 10px 0px;
-     }
+<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
+<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
+<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
+<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
+<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
+<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
+<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
+<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
+<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
+<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
+<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
+<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
+<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
+<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
+<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
+<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
+<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
+<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
+<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
+<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
+<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
+<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
+<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
+<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
 
-     tr:hover{
-         background-color: #f5f5f5;
-         transform: scale(1.02);
-         box-shadow: 2px 2px 12px rgb(172, 170, 170), -1px -1px 8px rgb(172, 170, 170);
-     }
-    
-     /*media query*/
-     @media only screen and (max-widht: 768px){
-          table{
-              width: 90%;
-          }
-     }
 
-</style>
-     <table style="width:1000px;">
-    <tr id="header">
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Country</th>
-    </tr>
-
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>24</td>
-        <td>Male</td>
-        <td>Usa</td>
-    </tr>
-    
-    <tr>
-        <td>Paul</td>
-        <td>Smith</td>
-        <td>20</td>
-        <td>Male</td>
-        <td>Canada</td>
-    </tr>
-    <tr>
-        <td>Mario</td>
-        <td>Rossi</td>
-        <td>29</td>
-        <td>Male</td>
-        <td>Italy</td>
-    </tr>
-    <tr>
-        <td>Sarah</td>
-        <td>Drew</td>
-        <td>30</td>
-        <td>Female</td>
-        <td>Usa</td>
-    </tr>
-</table> `);
+        </tbody>
+    </table>
+  </div>
+</div>
+  `);
         
     $("#inner").append(div);
 
