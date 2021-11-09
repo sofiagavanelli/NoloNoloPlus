@@ -29,7 +29,7 @@ const app = express(); */
 
 
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
-//require("./db");
+require("./db");
 
 
 

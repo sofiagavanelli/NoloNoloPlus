@@ -23,7 +23,9 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
-Client.find((err, clients) => {
+module.export = db;
+
+/*Client.find((err, clients) => {
     if (err) return console.error(err);
     if (clients.length) return;
 
@@ -77,19 +79,7 @@ Noleggio.find((err, rentals) => {
         start_date: 2021 - 6 - 6,
         end_date: 2021 - 7 - 7
     }).save();
-});
-async function findOneListeningByName(client, nameOfListing){
-   const result = await client.db("rental_agency").collection("clients")
-   .findOne({name: nameOfListing});
-
-   if (result){
-       console.log(`Found a listing in the collection with the name '
-       ${nameOfListing}' `);
-       console.log(result); 
-    }else{
-        console.log(`No listing found`)};
-    }*/
-
+});*/
 
 //*******************************************/
 /* FILE DI GITHUB */
@@ -151,12 +141,12 @@ async function findOneListeningByName(client, nameOfListing){
 
 //var myobj = { name: "Company Inc", address: "Highway 37" };
 
-//module.exports = {
+/*module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
     /*saveUser: async (username, id) => {
     await User.updateOne({ id }, { username }, { upsert: true });
-    },*/
+    },*
 
     /*saveClients: async (options = {}) => Client.find(options),*/
 
@@ -167,7 +157,7 @@ async function findOneListeningByName(client, nameOfListing){
             console.log("1 document inserted");
             //db.close();
         });
-    },
+    },*
 
 };*/
 
