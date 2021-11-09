@@ -62,6 +62,7 @@ $(document).ready(function () {
 
 
 ////
+var first_time = true;
 
 $(document).ready(function () {
     console.log("sono dentro ready in main page");
@@ -73,19 +74,20 @@ $(document).ready(function () {
         //var id = url.searchParams.get("id");
     // $.ajax è una funzione che si usa per creare connessioni http
     //get story by id 
-        if (db) {
+        //if (first_time) {
             $.ajax({
                 type: 'GET',
-                url: '/prods/' ,
+                url: url + '/prods' ,
                 success: function (data) {
-                   
+                    console.log(data);
+                    console.log("sono dentro success");
                 },
                 //Non è stata trovata la storia
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log("La storia selezionata non esiste");
                 }
             });
-        }
+        //}
 });
 
 

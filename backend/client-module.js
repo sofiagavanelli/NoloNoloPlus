@@ -17,15 +17,23 @@ var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
 
+console.log("sono dentro client-module");
+
 module.exports = function (app) {
 
     //cosa accade quando viene chiamata una get?
-    app.get('/prods/', function (req, res) {
+    app.get('/prods', function (req, res) {
         console.log("sono dentro client-module");
-
         //lettura dei clients dal db
-        
 
+        /*let newClient = {name: "marta",
+        client_id: "c123459",
+        password: "marta123"}
+
+        const result = db.collection("clients").insertOne(newClient);
+        console.log(`--- ${newClient.insertedId} `)*/
+
+        res.sendFile(path.join(__dirname + "/back_office/reserved.html")); 
 
     });
 }

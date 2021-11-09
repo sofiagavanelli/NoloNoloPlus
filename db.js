@@ -23,7 +23,9 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
-Client.find((err, clients) => {
+module.export = db;
+
+/*Client.find((err, clients) => {
     if (err) return console.error(err);
     if (clients.length) return;
 
@@ -42,7 +44,7 @@ Client.find((err, clients) => {
         name: "Mario",
         password: "blubla",
     }).save();
-});*/
+});
 
 Worker.find((err, workers) => {
     if (err) return console.error(err);
@@ -77,7 +79,7 @@ Noleggio.find((err, rentals) => {
         start_date: 2021 - 6 - 6,
         end_date: 2021 - 7 - 7
     }).save();
-});
+});*/
 
 //*******************************************/
 /* FILE DI GITHUB */
@@ -139,12 +141,12 @@ Noleggio.find((err, rentals) => {
 
 //var myobj = { name: "Company Inc", address: "Highway 37" };
 
-module.exports = {
+/*module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
     /*saveUser: async (username, id) => {
     await User.updateOne({ id }, { username }, { upsert: true });
-    },*/
+    },*
 
     saveClients: async (options = {}) => Client.find(options),
 
@@ -155,9 +157,9 @@ module.exports = {
             console.log("1 document inserted");
             //db.close();
         });
-    },*/
+    },*
 
-};
+};*/
 
 /*var dbo = db.db("mydb");
 function addObject() {
