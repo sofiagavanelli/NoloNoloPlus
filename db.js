@@ -146,7 +146,7 @@ module.exports = {
     await User.updateOne({ id }, { username }, { upsert: true });
     },*/
 
-    getClients: async (options = {}) => Client.find(options),
+    saveClients: async (options = {}) => Client.find(options),
 
     /*saveClient: async (options = {}) => {
         //var myobj = { name: "Company Inc", address: "Highway 37" };

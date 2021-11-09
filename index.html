@@ -25,6 +25,7 @@
         
         <!--Internal dependencies-->
         <script type="text/javascript" src="front_office/main_page.js"></script> <!---->
+        <!-- <script type="text/javascript" defer src="/utils.js"></script> -->
         
         <link rel="stylesheet" href="front_office/index.css">
         <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
@@ -92,7 +93,7 @@
                         <li class="nav-item" title="Reserved" data-toggle="modal" data-target="#loginModal">
                             <a class="nav-item" > Login  </a>
                         </li>
-                        <li class="nav-item" title="Reserved" onclick="load_new('/Worker')">
+                        <li class="nav-item" title="Reserved" onclick="load_new('/worker-module')">
                             <i class="icon fas fa-user-lock"></i>
                             <span id="workerLabel" style="display: none;">Worker</span>
                         </li>
@@ -101,6 +102,12 @@
                 </div>
 
             </nav>
+        </div>
+
+
+
+        <div id="prova">
+            <button class="btn btn-primary" id="provaBtn"> PROVA </button>
         </div>
 
         <!-- div id="main_page" -->
@@ -233,7 +240,7 @@
             populate();
         });*/
 
-        //document.getElementById("calcBtn").addEventListener("click", openCalc);
+        document.getElementById("provaBtn").addEventListener("click", client_details);
         document.getElementById("newreg").addEventListener("click", change);
 
     </script>
