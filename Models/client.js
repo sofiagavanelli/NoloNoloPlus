@@ -25,7 +25,7 @@ module.exports = mongoose.model('Client', ClientSchema);
 
 
 
-////////////////////////////////////////////////////////////
+/*
 class User {
   constructor(db) {
     this.collection = db.collection('users');
@@ -34,8 +34,8 @@ class User {
 
     let user = {name: _n, client_id: id, password: pass};
 
-    /*const newUser = */await this.collection.insertOne(user);
+    /*const newUser = *await this.collection.insertOne(user);
     //return newUser;
   }
 }
-module.exports = User;
+module.exports = User;*/

@@ -33,7 +33,7 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 //import the middleware to manage the request of the three different app
 /*var worker = *require('./backend/worker-module.js')(app);/
 /*var client = */require('./backend/client-module.js')(app);
-/*var manager = *require('./backend/manager-module.js')(app);/
+/*var manager = *require('./backend/manager-module.js')(app);*/
 
 
 

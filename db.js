@@ -1,4 +1,4 @@
-/*const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./models/client");
@@ -23,7 +23,7 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
-module.export = db;
+//module.export = db;
 
 /*Client.find((err, clients) => {
     if (err) return console.error(err);
@@ -141,14 +141,21 @@ Noleggio.find((err, rentals) => {
 
 //var myobj = { name: "Company Inc", address: "Highway 37" };
 
-/*module.exports = {
+module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
-    /*saveUser: async (username, id) => {
-    await User.updateOne({ id }, { username }, { upsert: true });
-    },*
+    saveUser: async (username, id, pass) => {
+        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
+        console.log(username + "--" + id + "--" + pass);
 
-    /*saveClients: async (options = {}) => Client.find(options),*/
+        new Client({
+            name: username,
+            client_id: id,
+            password: pass
+        }).save();
+    },
+
+    saveClients: async (options = {}) => Client.find(options),
 
     /*saveClient: async (options = {}) => {
         //var myobj = { name: "Company Inc", address: "Highway 37" };
@@ -157,9 +164,9 @@ Noleggio.find((err, rentals) => {
             console.log("1 document inserted");
             //db.close();
         });
-    },*
+    },*/
 
-};*/
+};
 
 /*var dbo = db.db("mydb");
 function addObject() {

@@ -79,7 +79,6 @@ $(document).ready(function () {
                 type: 'GET',
                 url: '/prods' ,
                 success: function (data) {
-                    console.log(data);
                     console.log("sono dentro success");
                 },
                 //Non è stata trovata la storia
