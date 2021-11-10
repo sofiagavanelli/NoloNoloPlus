@@ -28,14 +28,12 @@ module.exports = function (app) {
         console.log("sono dentro client-module");
         //lettura dei clients dal db
 
-        /*let newClient = {name: "marta",
+        var newClient = {name: "marta",
         client_id: "c123459",
         password: "marta123"}
 
-        const result = db.collection("clients").insertOne(newClient);
-        console.log(`--- ${newClient.insertedId} `)*/
-
-        res.sendFile(path.join(__dirname + "/back_office/reserved.html")); 
+        //const result = db.collection("clients").insertOne(newClient);
+        //console.log("---  " + newClient);
 
     });
 };
