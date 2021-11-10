@@ -21,18 +21,8 @@ var port = 8680;
 const app = express(); */
 //const server = http.createServer(app);
 
-//import the middleware to manage the request of the three different app
-/*var worker = */require('./backend/worker-module');
-/*var client = */require('./backend/client-module');
-/*var manager = */require('./backend/manager-module');
-
-
-
-//QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
-require("./db");
-
-
-
+process.chdir(__dirname);
+app.use(express.json());
 
 //che senso ha usare middleware così?
 const middleware = express.static(__dirname);
@@ -40,6 +30,17 @@ app.use(middleware);
 
 //app.use(express.static(`${__dirname}/..`));
 //app.use(bodyParser.urlencoded({ extended: true }));
+
+//import the middleware to manage the request of the three different app
+/*var worker = */require('./backend/worker-module.js')(app);
+/*var client = */require('./backend/client-module.js')(app);
+/*var manager = */require('./backend/manager-module.js')(app);
+
+
+
+//QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
+require("./db");
+
 
 /*app.use('/Worker', worker);
 app.use('/Client', client);
