@@ -21,6 +21,8 @@ console.log("sono dentro client-module");
 
 module.exports = function (app) {
 
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
     //cosa accade quando viene chiamata una get?
     app.get('/prods', function (req, res) {
         console.log("sono dentro client-module");
@@ -36,7 +38,7 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname + "/back_office/reserved.html")); 
 
     });
-}
+};
 
 ///////////////////////////////////////////////////////77
 /* DARIO 

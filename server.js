@@ -25,16 +25,15 @@ process.chdir(__dirname);
 app.use(express.json());
 
 //che senso ha usare middleware così?
-const middleware = express.static(__dirname);
-app.use(middleware);
+app.use("/public", express.static(path.resolve(__dirname, 'public')));
 
 //app.use(express.static(`${__dirname}/..`));
 //app.use(bodyParser.urlencoded({ extended: true }));
 
 //import the middleware to manage the request of the three different app
-/*var worker = */require('./backend/worker-module.js')(app);
+/*var worker = *require('./backend/worker-module.js')(app);/
 /*var client = */require('./backend/client-module.js')(app);
-/*var manager = */require('./backend/manager-module.js')(app);
+/*var manager = *require('./backend/manager-module.js')(app);/
 
 
 
@@ -65,20 +64,21 @@ app.get("/",function (req, res) {
 });
 
 //Ambiente client
-app.get('/client-module', function (req, res) {
+/*app.get('/client-module', function (req, res) {
     res.sendFile(path.join(__dirname + "/index.html"));
-});
+});*/
 
 //Ambiente worker
 app.get('/worker-module', function (req, res) {
-    res.sendFile(path.join(__dirname + "/back_office/reserved.html"));
+    //res.sendFile(path.join(__dirname + "/back_office/reserved.html"));
+    res.sendFile(path.join(__dirname + "/reserved.html"));
     //res.sendFile(path.join(__dirname + "/author.html"));
 });
 
 //Ambiente manager
 app.get('/manager-module', function (req, res) {
-    res.sendFile(path.join(__dirname + "/back_office/manager.html"));
-    //res.sendFile(path.join(__dirname + "/author.html"));
+    //res.sendFile(path.join(__dirname + "/back_office/manager.html"));
+    res.sendFile(path.join(__dirname + "/manager.html"));
 });
 /*
 

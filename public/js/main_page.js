@@ -77,7 +77,7 @@ $(document).ready(function () {
         //if (first_time) {
             $.ajax({
                 type: 'GET',
-                url: url + '/prods' ,
+                url: '/prods' ,
                 success: function (data) {
                     console.log(data);
                     console.log("sono dentro success");
