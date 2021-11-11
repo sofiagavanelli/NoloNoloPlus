@@ -28,7 +28,7 @@ module.exports = function (app) {
         console.log("sono dentro client-module");
         //lettura dei clients dal db
 
-        db.saveUser("marta", "c123459", "marta123");
+        db.saveClient("francesca", "c123759", "fra34123");
 
         //const result = db.collection("clients").insertOne(newClient);
         //console.log(`---   + ${insertedId.result} `);
