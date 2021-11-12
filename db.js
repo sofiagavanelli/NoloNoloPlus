@@ -155,7 +155,26 @@ module.exports = {
         }).save();
     },
 
-    saveClients: async (options = {}) => Client.find(options),
+    getProds: async () => {
+        
+        var prods = await Prodotto.find({});
+
+        for(let i in prods) {
+            console.log(prods[i].name);
+        }
+
+        //return prods;
+
+        //console.log(prods);
+
+        /*prods.forEach(element => {
+            console.log(Prodotto.name);
+        });*/
+
+        
+    },
+
+    //saveClients: async (options = {}) => Client.find(options),
 
     /*saveClient: async (options = {}) => {
         //var myobj = { name: "Company Inc", address: "Highway 37" };

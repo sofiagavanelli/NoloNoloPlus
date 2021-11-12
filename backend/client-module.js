@@ -28,12 +28,43 @@ module.exports = function (app) {
         console.log("sono dentro client-module");
         //lettura dei clients dal db
 
-        db.saveClient("francesca", "c123759", "fra34123");
+        //db.saveClient("francesca", "c123759", "fra34123");
 
+        res.writeHead(200);
+
+        var allProduct = db.getProds();
+
+        console.log("sono tornata nella get");
+
+        //res.write(JSON.stringify(allProduct));
+        res.end();
+        
         //const result = db.collection("clients").insertOne(newClient);
         //console.log(`---   + ${insertedId.result} `);
 
+        /*****************************************DARIO 
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        fs.readdir('stories', function(err, files) {
+            let stories = [];
+            if(!err) {            
+                files.forEach(function(f) {
+                    let data = JSON.parse(fs.readFileSync('stories/' + f));
+                    let story = {};
+                    story.name = data.name;
+                    story.id = data.id;
+                    story.accessible = data.accessible;
+                    story.published = data.published;
+                    stories.push(story);
+                });
+            }
+            res.write(JSON.stringify(stories));
+            res.end();
+        });*/
+        
+
     });
+
+
 };
 
 ///////////////////////////////////////////////////////77

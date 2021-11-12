@@ -63,6 +63,7 @@ $(document).ready(function () {
 
 ////
 var first_time = true;
+var prodJSON = 0;
 
 $(document).ready(function () {
     console.log("sono dentro ready in main page");
@@ -79,6 +80,11 @@ $(document).ready(function () {
                 type: 'GET',
                 url: '/prods' ,
                 success: function (data) {
+
+                    prodJSON = data;
+
+                    console.log(prodJSON);
+
                     console.log("sono dentro success");
                 },
                 //Non è stata trovata la storia
