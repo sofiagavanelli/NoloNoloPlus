@@ -2,114 +2,21 @@
 <html lang="it">
 
 <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+
     <title>Manager</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- fontawesome icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-    <!--Internal dependencies-->
-    <!--script type="module" src="main_page.js"></script-->
-    <script type="module" src="public/js/reserved.js"></script>
-    <!---->
-
-    <link rel="stylesheet" href="public/css/manager.css">
-    <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
-
-    <script>
-        function load(url) {
-            window.open(url, '_self');
-        }
-
-        function load_new(url) {
-            window.open(url);
-        }
-    </script>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div id="app" style="background-color: chocolate;">
-        <nav class="navbar navbar-expand-lg" style="background-color: blueviolet;">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
 
-
-            <ul class="navbar-nav navbar-nav ml-auto">
-                <a onclick="load_new('/Worker')" style="color: white; nav-right: auto;"><i class="fas fa-long-arrow-alt-left fa-2x"  ></i></a> &nbsp; &nbsp;
-
-                <a onclick="load('/Client')" style="color: white; nav-right: auto;"><i class="fas fa-sign-out-alt fa-2x"></i></a>
-            </ul>
-    </div>
-    </nav>
     </div>
 
-
-    <!-- modal for login -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <img src="../img/avatar.png" class="avatar">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <label data-error="wrong" data-success="right" for="defaultForm-email">Username</label>
-                        <input type="text" id="defaultForm-email" class="form-control validate" placeholder="Enter Username">
-                    </div>
-
-                    <div class="md-form mb-4">
-                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password"> &nbsp; &nbsp;
-                        <p>Manager</p>
-
-                        <label class="switch">
-                      <input type="checkbox"> 
-                      <span class="slider round"></span>
-                    </label>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-default">Login</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#loginModal').modal('show');
-        });
-    </script>
-    <input type="checkbox" id="check">
-    <label for="check">
-    <i class="fas fa-bars" id="btn"></i>
-    <i class="fas fa-times" id="cancel"></i>
-  </label>
--->
-    <!--
-    <div class="sidebar">
-        <header>Activities</header>
-        <ul>
-            <li><a href="#"><i class="fas fa-wrench"></i></i>Workers</a></li>
-            <li><a href="#"><i class="fas fa-users"></i>Clients</a></li>
-            <li><a href="#"><i class="far fa-chart-bar"></i>Statistics</a></li>
-
-        </ul>
-    </div>
--->
 </body>
 
 </html>
