@@ -70,8 +70,8 @@ $(document).ready(function () {
     // richiesta storia
     // url_string prende l'url sotto forma di stringa della pagina html e con new URL la trasforma in un'url 
     //in modo che si possa accedere ai parametri dell'url url.searchParams.get('id')
-        var url_string = window.location.href;
-        var url = new URL(url_string);
+        //var url_string = window.location.href;
+        //var url = new URL(url_string);
         //var id = url.searchParams.get("id");
     // $.ajax è una funzione che si usa per creare connessioni http
     //get story by id 
