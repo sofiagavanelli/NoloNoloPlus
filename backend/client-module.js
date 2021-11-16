@@ -1,18 +1,3 @@
-/*const client = require('express').Router();
-const formidable = require('formidable');
-const path = require('path');
-const fs = require('fs-extra');
-
-
-//una volta apre il manager e un'altra gli operai
-client.get('/', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "index.html"));
-})
-
-
-
-module.exports = client;*/
-
 var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
@@ -66,6 +51,22 @@ module.exports = function (app) {
 
 
 };
+
+
+/*const client = require('express').Router();
+const formidable = require('formidable');
+const path = require('path');
+const fs = require('fs-extra');
+
+
+//una volta apre il manager e un'altra gli operai
+client.get('/', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "index.html"));
+})
+
+
+
+module.exports = client;*/
 
 ///////////////////////////////////////////////////////77
 /* DARIO 

@@ -23,6 +23,52 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
+module.exports = {
+
+    //getUsers: async (options = {}) => User.find(options),
+    saveClient: async (username, id, pass) => {
+        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
+        console.log(username + "--" + id + "--" + pass);
+
+        new Client({
+            name: username,
+            client_id: id,
+            password: pass
+        }).save();
+    },
+
+    getProds: async () => {
+        
+        var prods = await Prodotto.find({});
+
+        for(let i in prods) {
+            console.log(prods[i].name);
+        }
+
+        //return prods;
+
+        //console.log(prods);
+
+        /*prods.forEach(element => {
+            console.log(Prodotto.name);
+        });*/
+
+        
+    },
+
+    //saveClients: async (options = {}) => Client.find(options),
+
+    /*saveClient: async (options = {}) => {
+        //var myobj = { name: "Company Inc", address: "Highway 37" };
+        await Client.updateOne(options, function(err, res) {
+            if (err) throw err;
+            console.log("1 document inserted");
+            //db.close();
+        });
+    },*/
+
+};
+
 //module.export = db;
 
 /*Client.find((err, clients) => {
@@ -140,51 +186,3 @@ Noleggio.find((err, rentals) => {
 //const a = db.collection("NoloNoloDB").find(query);
 
 //var myobj = { name: "Company Inc", address: "Highway 37" };
-
-module.exports = {
-
-    //getUsers: async (options = {}) => User.find(options),
-    saveClient: async (username, id, pass) => {
-        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
-        console.log(username + "--" + id + "--" + pass);
-
-        new Client({
-            name: username,
-            client_id: id,
-            password: pass
-        }).save();
-    },
-
-    getProds: async () => {
-        
-        var prods = await Prodotto.find({});
-
-        for(let i in prods) {
-            console.log(prods[i].name);
-        }
-
-        //return prods;
-
-        //console.log(prods);
-
-        /*prods.forEach(element => {
-            console.log(Prodotto.name);
-        });*/
-
-        
-    },
-
-    //saveClients: async (options = {}) => Client.find(options),
-
-    /*saveClient: async (options = {}) => {
-        //var myobj = { name: "Company Inc", address: "Highway 37" };
-        await Client.updateOne(options, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
-            //db.close();
-        });
-    },*/
-
-};
-
-

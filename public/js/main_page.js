@@ -1,64 +1,3 @@
-//js per l'index iniziale!!
-
-///////////////////////////////77
-/* DARIO
-var player_id = null;
-var validPhoto = null;
-var index = null;
-var next_index = 0;
-var storyJSON = null;
-var answer = "";
-var isChatOpen = false;
-var isHelpPaneOpen = false;
-var isTextWindowOpen = false;
-
-
----------------------------> qui ha senso mettere il popolamento
-$(document).ready(function () {
-// richiesta storia
-// url_string prende l'url sotto forma di stringa della pagina html e con new URL la trasforma in un'url 
-//in modo che si possa accedere ai parametri dell'url url.searchParams.get('id')
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var id = url.searchParams.get("id");
-// $.ajax è una funzione che si usa per creare connessioni http
-//get story by id 
-    if (id) {
-        $.ajax({
-            type: 'GET',
-            url: '/stories/' + id,
-            success: function (data) {
-                storyJSON = data;
-                //Invoco la funzione per caricare il css della storia
-                loadCustomCSS();
-                
-                //Label accessibilita' storia
-                if (storyJSON.accessible) {
-                    $('#generico').append('<span id="accessibility" class="accessibility-true">Storia accessibile</span>');
-                } else {
-                    $('#generico').append('<span id="accessibility" class="accessibility-false">Storia non accessibile</span>');
-                }
-                
-                //Se la storia è stata pubblicata setto il player, altrimenti blocco l'app
-                if (storyJSON.published) {
-                    $('#score').text('Score: 0');
-                    blinkNotify('#score');
-                    setPlayer(storyJSON);
-                } else {
-                    blockApplication('La storia risulta archiviata, per tanto non è possibile giocarci');
-                }
-               
-            },
-            //Non è stata trovata la storia
-            error: function (xhr, ajaxOptions, thrownError) {
-                blockApplication('La storia selezionata non esiste');
-            }
-        });
-    } else {
-        //Non c'è l'id nel url
-        blockApplication('Non è selezionata nessuna storia')
-    }
-}); */
 
 
 ////
@@ -70,8 +9,8 @@ $(document).ready(function () {
     // richiesta storia
     // url_string prende l'url sotto forma di stringa della pagina html e con new URL la trasforma in un'url 
     //in modo che si possa accedere ai parametri dell'url url.searchParams.get('id')
-        var url_string = window.location.href;
-        var url = new URL(url_string);
+        //var url_string = window.location.href;
+        //var url = new URL(url_string);
         //var id = url.searchParams.get("id");
     // $.ajax è una funzione che si usa per creare connessioni http
     //get story by id 
@@ -362,3 +301,67 @@ new Vue({
       }
     }
   });*/
+
+
+
+  //js per l'index iniziale!!
+
+///////////////////////////////77
+/* DARIO
+var player_id = null;
+var validPhoto = null;
+var index = null;
+var next_index = 0;
+var storyJSON = null;
+var answer = "";
+var isChatOpen = false;
+var isHelpPaneOpen = false;
+var isTextWindowOpen = false;
+
+
+---------------------------> qui ha senso mettere il popolamento
+$(document).ready(function () {
+// richiesta storia
+// url_string prende l'url sotto forma di stringa della pagina html e con new URL la trasforma in un'url 
+//in modo che si possa accedere ai parametri dell'url url.searchParams.get('id')
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var id = url.searchParams.get("id");
+// $.ajax è una funzione che si usa per creare connessioni http
+//get story by id 
+    if (id) {
+        $.ajax({
+            type: 'GET',
+            url: '/stories/' + id,
+            success: function (data) {
+                storyJSON = data;
+                //Invoco la funzione per caricare il css della storia
+                loadCustomCSS();
+                
+                //Label accessibilita' storia
+                if (storyJSON.accessible) {
+                    $('#generico').append('<span id="accessibility" class="accessibility-true">Storia accessibile</span>');
+                } else {
+                    $('#generico').append('<span id="accessibility" class="accessibility-false">Storia non accessibile</span>');
+                }
+                
+                //Se la storia è stata pubblicata setto il player, altrimenti blocco l'app
+                if (storyJSON.published) {
+                    $('#score').text('Score: 0');
+                    blinkNotify('#score');
+                    setPlayer(storyJSON);
+                } else {
+                    blockApplication('La storia risulta archiviata, per tanto non è possibile giocarci');
+                }
+               
+            },
+            //Non è stata trovata la storia
+            error: function (xhr, ajaxOptions, thrownError) {
+                blockApplication('La storia selezionata non esiste');
+            }
+        });
+    } else {
+        //Non c'è l'id nel url
+        blockApplication('Non è selezionata nessuna storia')
+    }
+}); */
