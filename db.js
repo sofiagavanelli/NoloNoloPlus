@@ -6,7 +6,6 @@ const Noleggio = require("./models/noleggi");
 const Prodotto = require("./models/prod");
 const Worker = require("./models/worker");
 
-require('./public/include/utils');
 
 if (!connectionString) {
     console.error("MongoDB connection string missing!");
@@ -41,24 +40,19 @@ module.exports = {
     },
     //  function(callback)  
 
-    getProds: async () => {
+    getProds: async (options = {}) => {
         
-        allProducts = await Prodotto.find({});
-        
-        /*for(let i in allProducts) {
-            console.log(allProducts[i].name);
-        }*/
+        //var prods = await Prodotto.find(options);
 
-        //return prods;
+        return Promise.resolve(Prodotto.find(options));
 
-        //console.log(prods);
-
-        /*prods.forEach(element => {
-            console.log(Prodotto.name);
-        });*/
-
-        
     },
+
+    getClients: async (options = {}) => {
+        
+        return Promise.resolve(Client.find(options));
+
+    }
 
     //saveClients: async (options = {}) => Client.find(options),
 

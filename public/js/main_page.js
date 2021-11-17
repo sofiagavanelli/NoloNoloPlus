@@ -20,11 +20,9 @@ $(document).ready(function () {
                 url: '/prods' ,
                 success: function (data) {
 
-                    prodJSON = data;
+                    console.log(data);
 
-                    console.log(prodJSON);
-
-                    console.log("sono dentro success");
+                    //console.log("sono dentro success");
                 },
                 //Non è stata trovata la storia
                 error: function (xhr, ajaxOptions, thrownError) {

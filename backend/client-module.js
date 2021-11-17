@@ -2,31 +2,32 @@ var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
 
-require('../public/include/utils');
-
-console.log("sono dentro client-module");
-
 module.exports = function (app) {
 
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
-    //cosa accade quando viene chiamata una get?
     app.get('/prods', function (req, res) {
-        console.log("sono dentro client-module");
         //lettura dei clients dal db
-
-        //db.saveClient("francesca", "c123759", "fra34123");
 
         res.writeHead(200);
 
-        i=1;
-        console.log(allProducts[i].name);
+        db.getProds().then(res => {
+            /*console.log(res);
+
+            for(let i in res) {
+                console.log(res[i].name);
+            }*/
+
+            //res.write();
+        });
+
+        //console.log("post promise");
+        
+        /*.catch((error) => {
+            res.status(500);
+            console.log("sono nel catch");
+        });;*/
 
         //res.write(JSON.stringify(allProduct));
-        res.end();
-        
-        //const result = db.collection("clients").insertOne(newClient);
-        //console.log(`---   + ${insertedId.result} `);
+        //res.end();
 
         /*****************************************DARIO 
         res.writeHead(200, {'Content-Type': 'application/json'});

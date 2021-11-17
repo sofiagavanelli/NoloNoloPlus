@@ -1,10 +1,10 @@
-//javascript workers
-const express = require('express');
-const mongoose = require('mongoose');
-
-const app = express(); 
 
 function openClient() {
+
+  //chiamata a get(/allClients) senza ajax
+  
+
+    console.log("sono dentro open client");
 
     let div = null;
 
