@@ -2,6 +2,8 @@ var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
 
+require('../public/include/utils');
+
 console.log("sono dentro client-module");
 
 module.exports = function (app) {
@@ -17,9 +19,8 @@ module.exports = function (app) {
 
         res.writeHead(200);
 
-        var allProduct = db.getProds();
-
-        console.log("sono tornata nella get");
+        i=1;
+        console.log(allProducts[i].name);
 
         //res.write(JSON.stringify(allProduct));
         res.end();

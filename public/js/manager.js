@@ -7,6 +7,7 @@ var React = require('react');
 ReactDOM.render(
     //colsole.log("hi") 
     //<React.StrictMode>
+    //<Navbar/>,
     <Navbar/>,
     //</React.StrictMode>,
     document.getElementById('root'));

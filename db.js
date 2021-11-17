@@ -6,6 +6,8 @@ const Noleggio = require("./models/noleggi");
 const Prodotto = require("./models/prod");
 const Worker = require("./models/worker");
 
+require('./public/include/utils');
+
 if (!connectionString) {
     console.error("MongoDB connection string missing!");
     process.exit(1);
@@ -23,6 +25,7 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
+
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
@@ -36,14 +39,15 @@ module.exports = {
             password: pass
         }).save();
     },
+    //  function(callback)  
 
     getProds: async () => {
         
-        var prods = await Prodotto.find({});
-
-        for(let i in prods) {
-            console.log(prods[i].name);
-        }
+        allProducts = await Prodotto.find({});
+        
+        /*for(let i in allProducts) {
+            console.log(allProducts[i].name);
+        }*/
 
         //return prods;
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var WorkerSchema = new Schema(
+const WorkerSchema = new Schema(
   {
     name: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},

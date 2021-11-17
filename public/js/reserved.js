@@ -1,10 +1,10 @@
 //javascript workers
+const express = require('express');
+const mongoose = require('mongoose');
 
-console.log("ciao prova");
+const app = express(); 
 
 function openClient() {
-
-    console.log("sono dentro open client");
 
     let div = null;
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var ProdSchema = new Schema(
+const ProdSchema = new Schema(
   {
     name: {type: String, required: true},
     prod_id: {type: String, required: true},

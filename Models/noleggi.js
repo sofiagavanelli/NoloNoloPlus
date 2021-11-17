@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var RentalSchema = new Schema(
+const RentalSchema = new Schema(
   {
     prod_id: {type: String, required: true},
     client_id: {type: String, required: true},
