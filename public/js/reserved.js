@@ -5,6 +5,13 @@ console.log("ciao prova");
 function openClient() {
 
   //chiamata a get(/allClients)
+    $.get({
+      url: '/allClients', 
+      //data: { source: sourceElem, target: targetElem },
+      success: function( data ){ 
+        $('html').html( data ); 
+      }
+    });
 
     console.log("sono dentro open client");
 
