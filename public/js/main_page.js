@@ -1,8 +1,7 @@
 
 
 ////
-var first_time = true;
-var prodJSON = 0;
+var prodARRAY = 0;
 
 $(document).ready(function () {
     console.log("sono dentro ready in main page");
@@ -20,9 +19,10 @@ $(document).ready(function () {
                 url: '/prods' ,
                 success: function (data) {
 
-                    console.log(data);
+                    prodARRAY = JSON.parse(data);
 
-                    //console.log("sono dentro success");
+                    populate(prodARRAY);
+
                 },
                 //Non è stata trovata la storia
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -30,6 +30,37 @@ $(document).ready(function () {
                 }
             });
         //}
+
+        /*console.log(prodARRAY);
+
+        for(let i in prodARRAY) {
+            console.log("sono nel for");
+
+
+            let div = null;
+    
+                div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                            <div class="boat">
+                                <img class="post_image" src="img/yacht2.png"></img>
+                                <div class="boat_info">
+                                    <h3 class="title">${prodARRAY[i].name}</h5>
+                                    <h4 class="title">${prodARRAY[i].brand}</h5>
+                                    <div class="details">
+                                        <ul class="d-flex flex-wrap pl-0">
+                                            <li class="title">Potenza:<h5 class="data"> ${prodARRAY[i].power} </h5> </li>
+                                            <li class="title">Lunghezza:<h5 class="data"> ${prodARRAY[i].lenght} </h5> </li>
+                                            <li class="title">Ospiti:<h5 class="data"> ${prodARRAY[i].guests} </h5> </li>
+                                            <li class="title">Età:<h5 class="data"> ${prodARRAY[i].year} </h5> </li>
+                                            <li class="title">Prezzo: <h5 class="price_data"> ${prodARRAY[i].price} </h5> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>`);
+    
+                $("#main_page").append(div);
+                
+        }*/
 });
 
 
@@ -71,31 +102,34 @@ function openCalc(){
 
 }
 
-function populate(){
+function populate(ProductInfo){
 
-    for (i=0; i<=8; i++) {
+    console.log("sono dentro populate");
+    console.log(ProductInfo);
+
+    for (let i in ProductInfo) {
         let div = null;
 
             div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
-                        <div class="boat">
-                            <img class="post_image" src="img/yacht2.png"></img>
-                            <div class="boat_info">
-                                <h3 class="title">Lucifero</h5>
-                                <h4 class="title">Marca1</h5>
-                                <div class="details">
-                                    <ul class="d-flex flex-wrap pl-0">
-                                        <li class="title">Potenza:<h5 class="data"> ---- </h5> </li>
-                                        <li class="title">Lunghezza:<h5 class="data"> --- </h5> </li>
-                                        <li class="title">Ospiti:<h5 class="data"> --- </h5> </li>
-                                        <li class="title">Età:<h5 class="data"> --- </h5> </li>
-                                        <li class="title">Prezzo: <h5 class="price_data"> ------ </h5> </li>
-                                    </ul>
-                                </div>
+                    <div class="boat">
+                        <img class="post_image" src="public/img/yacht2.png"></img>
+                        <div class="boat_info">
+                            <h3 class="title">${ProductInfo[i].name}</h5>
+                            <h4 class="title">${ProductInfo[i].brand}</h5>
+                            <div class="details">
+                                <ul class="d-flex flex-wrap pl-0">
+                                    <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
+                                    <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
+                                    <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
+                                    <li class="title">Età:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                                    <li class="title">Prezzo: <h5 class="price_data"> ${ProductInfo[i].price} </h5> </li>
+                                </ul>
                             </div>
                         </div>
-                </div>`);
+                    </div>
+            </div>`);
 
-            $("#main_page").append(div);
+        $("#main_page").append(div);
             
     }
 
