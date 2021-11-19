@@ -9,14 +9,17 @@ module.exports = function (app) {
 
         res.writeHead(200);
 
-        db.getProds().then(res => {
+        db.getProds().then(prodsinfo => {
             /*console.log(res);
 
             for(let i in res) {
                 console.log(res[i].name);
             }*/
 
-            //res.write();
+            //console.log(prodsinfo);
+
+            res.write(JSON.stringify(prodsinfo));
+            res.end();
         });
 
         //console.log("post promise");

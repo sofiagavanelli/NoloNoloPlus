@@ -94,39 +94,9 @@
 
 
 
-        <div id="prova">
-            <button class="btn btn-primary" id="provaBtn"> PROVA </button>
+        <div id="main_page">
+            <!--QUI APPAIONO LE COSE!-->
         </div>
-
-        <!-- div id="main_page" -->
-
-            <!-- DA FARE: inserire questo button in un altro div che fa da contenitore del btn e del modale
-            che si apre quando si clicca: a quel punto giocare con z-index e posizioni per gestire il layering
-            
-            <button id="calcBtn" data-toggle="modal" data-target="#calcModal" title="calculate">
-                <i class="fas fa-calculator fa-2x"></i>
-            </button>
-
-            !-- div v-html="renderEl()"></div --
-
-            {{{ renderEl () }}} -->
-
-            <div class="container" id="vue-app">
-                <div class="col-md-4">
-                    <todo-component></todo-component>
-                </div>
-            </div>
-
-            <div id="components-demo">
-                <button-counter></button-counter>
-            </div>
-
-            <div id="prova">
-                Some value: {{ someValue }} <br />
-                Some computed value: {{ someComputed }}
-            </div>
-
-        <!-- /div -->
 
         <!-- modal for calculating rental -->
         <div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -228,7 +198,7 @@
             populate();
         });*/
 
-        document.getElementById("provaBtn").addEventListener("click", client_details);
+        //document.getElementById("provaBtn").addEventListener("click", client_details);
         document.getElementById("newreg").addEventListener("click", change);
 
     </script>
