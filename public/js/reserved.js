@@ -1,8 +1,30 @@
 
 function openClient() {
 
-  //chiamata a get(/allClients) senza ajax
-  
+  //chiamata a get(/allClients)
+    /*$.get({
+      url: '/allClients', 
+      //data: { source: sourceElem, target: targetElem },
+      success: function( data ){ 
+        $('html').html( data ); 
+      }
+    });*/
+
+    $.ajax({
+      type: 'GET',
+      url: '/allClients' ,
+      success: function (data) {
+
+          console.log(data);
+
+          //console.log("sono dentro success");
+      },
+      //Non è stata trovata la storia
+      error: function (xhr, ajaxOptions, thrownError) {
+          console.log("La storia selezionata non esiste");
+      }
+  });
+
 
     console.log("sono dentro open client");
 
