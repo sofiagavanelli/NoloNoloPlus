@@ -104,9 +104,6 @@ function openCalc(){
 
 function populate(ProductInfo){
 
-    console.log("sono dentro populate");
-    console.log(ProductInfo);
-
     for (let i in ProductInfo) {
         let div = null;
 
