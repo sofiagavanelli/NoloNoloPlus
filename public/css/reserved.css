@@ -2,6 +2,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     margin: 0;
+
 }
 
 #app {
@@ -171,13 +172,42 @@ ul li :hover a{
 .sidebar ul a i{
   margin-right: 16px;
 }
-#inner{
+#ctable{
   position: relative;
   top:10vh;
   left: 16vw;
   width: 80vw;
   height: 85vh;
   margin: 3vh;
+
   /*background-color:#EDB5BF;*/
 }
+.card{
+  border-color: #4D6D9A;
+  border-radius: 10px;
+  padding: 25px;
+  display: block;
+  background-color: rgb(218, 236, 248);
+}
+#btn-upd{
+  background-color: rgb(52, 189, 93);
+  border: #000;
+  float: right;
+  border-radius: 25px;
+  padding: 12px 25px;
+}
+#btn-del{
+  background-color: #eb5248;
+  border: #000;
+  float: right;
+  border-radius: 25px;
+  padding: 12px 27px;
+}
+#btn-pass{
+  background-color: #ffffff;
+  border: #000;
+  border-radius: 25px;
+  padding: 10px 23px;
+  cursor: not-allowed;
 
+}
