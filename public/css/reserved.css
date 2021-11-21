@@ -172,7 +172,7 @@ ul li :hover a{
 .sidebar ul a i{
   margin-right: 16px;
 }
-#ctable{
+#ctable2{
   position: relative;
   top:10vh;
   left: 16vw;
@@ -182,13 +182,8 @@ ul li :hover a{
 
   /*background-color:#EDB5BF;*/
 }
-.card{
-  border-color: #4D6D9A;
-  border-radius: 10px;
-  padding: 25px;
-  display: block;
-  background-color: rgb(218, 236, 248);
-}
+/*
+
 #btn-upd{
   background-color: rgb(52, 189, 93);
   border: #000;
@@ -202,6 +197,7 @@ ul li :hover a{
   float: right;
   border-radius: 25px;
   padding: 12px 27px;
+  margin-left: 5px;
 }
 #btn-pass{
   background-color: #ffffff;
@@ -210,4 +206,25 @@ ul li :hover a{
   padding: 10px 23px;
   cursor: not-allowed;
 
+} 
+*/
+.table-row{
+  display: table;
+  width:90%;
+  margin: 10px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent;
+  padding: 12px 0;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,50,0.3);
+
+}
+.table-cell{
+  display: table-cell;
+  width:22.5%;
+  text-align: center;
+  padding: 4px 0;
+  border-right: 1px solid #d6d4d4;
+  vertical-align: middle;
 }

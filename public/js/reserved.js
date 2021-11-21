@@ -22,7 +22,26 @@ function openClient() {
           console.log("La storia selezionata non esiste");
       }
   });
+  div = $(`
+            <div class = "table-box">
+              <div class = "table-row">
+                <div class="table-cell">
+                  <p>Name</p>
+                </div>
+                <div class="table-cell">
+                  <p>Surname</p>
+                </div>
+                <div class="table-cell">
+                  <p> Customer ID</p>
+                </div>
+                <div class="table-cell">
+                  <p>Actions</p>
+                </div>
+              </div>
+            </div>
 
+            `);
+            $("#ctable").append(div);
 
   function populate(ClientInfo){
 
@@ -33,19 +52,26 @@ function openClient() {
           let div = null;
 
             div = $(`
+            <div class = "table-box">
+              <div class = "table-row">
+                <div class="table-cell">
+                  <p>${ClientInfo[i].name}</p>
+                </div>
+                <div class="table-cell">
+                  <p>${ClientInfo[i].surname}</p>
+                </div>
+                <div class="table-cell">
+                  <p>${ClientInfo[i].client_id}</p>
+                </div>
+                <div class="table-cell">
+                  <p><button id="btn-upd" type="button"> <i class="fas fa-user-edit"></i></button></p>
+                </div>
+              </div>
+            </div>
 
-                <div class="card">
-                  <div class="card-body">
-                  <h5 class="card-title"> Customer:  ${ClientInfo[i].name} ${ClientInfo[i].surname}</h5>
-                  <p class="card-text">Customer ID: ${ClientInfo[i].client_id}</p>
-                  <button id="btn-del" type="button" onclick="alert('Are you sure you want to delete this customer?')" >Delete</button>
-                  <button id="btn-upd" type="button" >Update </button>
-                  <button id="btn-pass" type="button">Show password</button>
-                  
-                  </div>
-                </div>`);
-        
-    $("#ctable").append(div);
+            `);
+            $("#ctable2").append(div);
+    
 
 }
 
