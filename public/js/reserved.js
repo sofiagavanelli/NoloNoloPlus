@@ -1,126 +1,78 @@
-//javascript workers
 
-console.log("ciao prova");
+var clientARRAY = 0;
 
 function openClient() {
 
-  //chiamata a get(/allClients)
-    $.get({
-      url: '/allClients', 
-      //data: { source: sourceElem, target: targetElem },
-      success: function( data ){ 
-        $('html').html( data ); 
+    $.ajax({
+      type: 'GET',
+      url: '/allClients' ,
+      success: function (data) {
+
+        clientARRAY = JSON.parse(data);
+
+        populate(clientARRAY);
+
+
+          //console.log(data);
+
+          //console.log("sono dentro success");
+      },
+      //Non è stata trovata la storia
+      error: function (xhr, ajaxOptions, thrownError) {
+          console.log("La storia selezionata non esiste");
       }
-    });
+  });
+  div = $(`
+            <div class = "table-box">
+              <div class = "table-row">
+                <div class="table-cell">
+                  <p>Name</p>
+                </div>
+                <div class="table-cell">
+                  <p>Surname</p>
+                </div>
+                <div class="table-cell">
+                  <p> Customer ID</p>
+                </div>
+                <div class="table-cell">
+                  <p>Actions</p>
+                </div>
+              </div>
+            </div>
 
-    console.log("sono dentro open client");
+            `);
+            $("#ctable").append(div);
 
-    let div = null;
+  function populate(ClientInfo){
 
-    div = $(`
-    <style>
-    #table-wrapper {
-      position: relative;
-    height: 70vh;
-    margin-top: 6vh;
-    }
-    #table-scroll {
-      height:70vh;
-      overflow:auto;  
-    }
-    #table-wrapper table {
-      width:100%;
-        
-    }
-    #table-wrapper table * {
-      background:pink;
-      color:black;
-    }
-    #table-wrapper table thead th .text {
-      position:absolute;   
-      top:-20px;
-      z-index:2;
-      height:20px;
-      width:45%;
-      border:1px solid red;
-    }
-    .btn-add {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
+      console.log("sono dentro populate");
+      console.log(ClientInfo);
+  
+      for (let i in ClientInfo) {
+          let div = null;
 
-      margin:0.5em;
-      padding: 0.5em 2em 0.5em 2em;
-      border-radius: 12px;
-    }
-    .btn-searchIcon {
-      background-color: white;
-      padding: 0.5em;
-      margin-right:0.5em;
-      margin-left:0;
-      border:none;
-    }
-    .btn:active{
-      margin-right:0;
-    }
+            div = $(`
+            <div class = "table-box">
+              <div class = "table-row">
+                <div class="table-cell">
+                  <p>${ClientInfo[i].name}</p>
+                </div>
+                <div class="table-cell">
+                  <p>${ClientInfo[i].surname}</p>
+                </div>
+                <div class="table-cell">
+                  <p>${ClientInfo[i].client_id}</p>
+                </div>
+                <div class="table-cell">
+                  <p><button id="btn-upd" type="button"> <i class="fas fa-user-edit"></i></button></p>
+                </div>
+              </div>
+            </div>
 
-    </style>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn-searchIcon"> <i class="fas fa-search"></i> </button>
-    </form>
-  <button class="btn-add" type="button">Add </button>
-</div>
-
-<div id="table-wrapper">
-  <div id="table-scroll">
-    <table>
-        <thead>
-            <tr>
-                <th><span class="text">Name</span></th>
-                <th><span class="text">Surname</span></th>
-                <th><span class="text">User ID</span></th>
-            </tr>
-        </thead>
-        <tbody>
-
-
-<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
-<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
-<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
-<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
-<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
-<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
-<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
-<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
-<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
-<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
-<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
-<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
-<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
-<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
-<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
-<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
-<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
-<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
-<tr> <td>Mario</td> <td>Rossi</td> <td>MarioRossi</td> </tr>
-<tr> <td>John</td> <td>Doe</td> <td>JDoe</td> </tr>
-<tr> <td>Pietro</td> <td>Verdi</td> <td>PiVerdi</td> </tr>
-<tr> <td>Sasha</td> <td>Wolf</td> <td>Wsasha</td> </tr>
-<tr> <td>Josh</td> <td>Duh</td> <td>  Joshdue</td> </tr>
-<tr> <td>Carol</td> <td>McCarty</td> <td>CarolMc</td> </tr>
-
-
-        </tbody>
-    </table>
-  </div>
-</div>
-  `);
-        
-    $("#inner").append(div);
+            `);
+            $("#ctable2").append(div);
+    
 
 }
+
+    } }

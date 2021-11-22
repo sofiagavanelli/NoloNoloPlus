@@ -24,6 +24,7 @@ db.on("error", (err) => {
 });
 db.once("open", () => console.log("mongoDB connection established"));
 
+
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
@@ -37,6 +38,7 @@ module.exports = {
             password: pass
         }).save();
     },
+    //  function(callback)  
 
     getProds: async (options = {}) => {
         

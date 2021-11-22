@@ -1,7 +1,7 @@
 var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
-
+/// definizione della chiamata get
 module.exports = function (app) {
 
     app.get('/allClients', function (req, res) {
@@ -9,16 +9,17 @@ module.exports = function (app) {
 
         res.writeHead(200);
 
-        db.getClients().then(res => {
-            console.log(res);
+        db.getClients().then(clientsinfo => {
+            //console.log(res);
 
-            for(let i in res) {
-                console.log(res[i].name);
-            }
+            //for(let i in res) {
+                //console.log(res[i].name);
+            //}
 
             //res.write();
+            res.write(JSON.stringify(clientsinfo));
+            res.end();
         });
-
-	});
+        });
 
 };
