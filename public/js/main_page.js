@@ -67,12 +67,7 @@ $(document).ready(function () {
 console.log("ciao ciao"); //questo viene stampato
 
 function change(){
-    console.log("sono dentro main page");
-    var x = document.getElementsByClassName("price");
-    console.log("", x);
-    x.visibility = "visible";
-    var y = document.getElementById("newRegC").style.visibility;
-    y = "visible";
+    document.getElementsByClassName("price_data").style.visibility = "visible";
 }
 
 function openCalc(){

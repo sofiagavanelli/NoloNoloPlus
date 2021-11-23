@@ -38,6 +38,34 @@ module.exports = {
             password: pass
         }).save();
     },
+
+    saveProd: async (_name, _brand, _pow, _len, _guests, _yy, _sum, _price, _id,) => {
+        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
+
+        new Prodotto({
+            name: _name,
+            brand: _brand,
+            power: _pow,
+            length: _len,
+            guests: _guests,
+            year: _yy,
+            summary: _sum,
+            price: _price,
+            prod_id: _id,
+            available: true
+        }).save();
+    },
+
+    saveRental: async (_prod, _client, _start, _end) => {
+        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
+
+        new Noleggio({
+            prod_id: _prod,
+            client_id: _client,
+            start_date: _start,
+            end_date: _end
+        }).save();
+    },
     //  function(callback)  
 
     getProds: async (options = {}) => {
@@ -51,6 +79,12 @@ module.exports = {
     getClients: async (options = {}) => {
         
         return Promise.resolve(Client.find(options));
+
+    },
+
+    getRentals: async (options = {}) => {
+        
+        return Promise.resolve(Noleggio.find(options));
 
     }
 
