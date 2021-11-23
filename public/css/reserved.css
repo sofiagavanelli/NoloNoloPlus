@@ -182,23 +182,25 @@ ul li :hover a{
 
   /*background-color:#EDB5BF;*/
 }
-/*
+
 
 #btn-upd{
   background-color: rgb(52, 189, 93);
   border: #000;
   float: right;
   border-radius: 25px;
-  padding: 12px 25px;
+  padding: 6px 10px;
 }
+
 #btn-del{
   background-color: #eb5248;
   border: #000;
   float: right;
   border-radius: 25px;
-  padding: 12px 27px;
+  padding: 6px 12px;
   margin-left: 5px;
 }
+/*
 #btn-pass{
   background-color: #ffffff;
   border: #000;
@@ -207,24 +209,35 @@ ul li :hover a{
   cursor: not-allowed;
 
 } 
-*/
-.table-row{
-  display: table;
-  width:90%;
-  margin: 10px auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: transparent;
-  padding: 12px 0;
-  color: #555;
-  font-size: 13px;
-  box-shadow: 0 1px 4px 0 rgba(0,0,50,0.3);
-
+*/#styled-tab{
+  position: relative;
+  left: 3.5%;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 95%;
+  overflow: hidden;
 }
-.table-cell{
-  display: table-cell;
-  width:22.5%;
-  text-align: center;
-  padding: 4px 0;
-  border-right: 1px solid #d6d4d4;
-  vertical-align: middle;
-}
+#styled-tab td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    height: 50px;
+    vertical-align: center;
+  }
+  #styled-tab th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    table-layout: auto;
+    width: 40px;
+  }
+  
+#styled-tab tr:nth-child(even){
+    background-color: #f2f2f2;}
+  
+#styled-tab tr:hover {
+    background-color: rgb(213, 236, 247);}
+  
+#styled-tab th {
+    text-align: center;
+    background-color: #86B3D1;
+    color: black;
+  }
