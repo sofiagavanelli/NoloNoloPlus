@@ -1,5 +1,6 @@
 
 var clientARRAY = 0;
+var inventoryARRAY = 0;
 
 function openClient() {
 
@@ -22,6 +23,7 @@ function openClient() {
           console.log("La storia selezionata non esiste");
       }
   });
+
   div = $(`
            <table id="styled-tab">
             <tr>
@@ -33,6 +35,7 @@ function openClient() {
            </table>
             `);
             $("#ctable").append(div);
+
 
   function populate(ClientInfo){
 
@@ -60,4 +63,70 @@ function openClient() {
 
 }
 
-    } }
+} 
+}
+
+/*********************************** */
+
+
+
+function openInventory() {
+
+  $.ajax({
+    type: 'GET',
+      url: '/prods' ,
+        success: function (data) {
+  
+          inventoryARRAY = JSON.parse(data);
+  
+          populateP(inventoryARRAY);
+  
+  
+            console.log(ProdInfo);
+  
+            console.log("sono dentro success");
+        },
+        //Non è stata trovata la storia
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log("La storia selezionata non esiste");
+        }
+    });
+    div = $(`
+             <table id="styled-tab">
+              <tr>
+                <th>Name</th>
+                <th>Product ID</th>
+                <th>Power</th>
+                <th>Available</th>
+              </tr>
+             </table>
+              `);
+              $("#ctable").append(div);
+  
+    function populateP(ProdInfo){
+  
+        console.log("sono dentro populate");
+        console.log(ProdInfo);
+  
+        
+    
+        for (let i in ProdInfo) {
+            let div = null;
+  
+              div = $(`
+                      <table id="styled-tab">
+                        <tr>
+                         <td>${ProdInfo[i].name}</td>
+                         <td>${ProdInfo[i].prod_id}</td>
+                         <td>${ProdInfo[i].power}</td>
+                         <td>${ProdInfo[i].available}</td>
+                         </tr>
+                      </table>
+  
+              `);
+              $("#ctable2").append(div);
+      
+  
+  }
+  
+      } }
