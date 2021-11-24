@@ -95,8 +95,9 @@ function openInventory() {
              <table id="styled-tab">
               <tr>
                 <th>Name</th>
+                <th>Brand</th>
                 <th>Product ID</th>
-                <th>Power</th>
+                <th>Price</th>
                 <th>Available</th>
               </tr>
              </table>
@@ -117,8 +118,9 @@ function openInventory() {
                       <table id="styled-tab">
                         <tr>
                          <td>${ProdInfo[i].name}</td>
+                         <td>${ProdInfo[i].brand}</td>
                          <td>${ProdInfo[i].prod_id}</td>
-                         <td>${ProdInfo[i].power}</td>
+                         <td>${ProdInfo[i].price}</td>
                          <td>${ProdInfo[i].available}</td>
                          </tr>
                       </table>
