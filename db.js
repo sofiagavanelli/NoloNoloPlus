@@ -27,6 +27,10 @@ db.once("open", () => console.log("mongoDB connection established"));
 
 module.exports = {
 
+    searchClient: async (id) => {
+        return Promise.resolve(Prodotto.find({client_id: id}));
+    },
+
     //getUsers: async (options = {}) => User.find(options),
     saveClient: async (username, id, pass) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/

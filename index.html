@@ -98,6 +98,10 @@
             <!--QUI APPAIONO LE COSE!-->
         </div>
 
+        <div id="calcolatrice">
+            <button id="calcBtn" data-toggle="modal" data-target="#calcModal"><i class="fas fa-calculator"></i></button>
+        </div>
+
         <!-- modal for calculating rental -->
         <div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -133,13 +137,13 @@
                         </div>
                         <div class="modal-body mx-3">
                             <div class="md-form mb-5">
-                                <label data-error="wrong" data-success="right" for="defaultForm-email">Username</label>
-                                <input type="email" id="defaultForm-email" class="form-control validate" placeholder="Enter Username">
+                                <label data-error="wrong" data-success="right" for="username">Username</label>
+                                <input type="email" id="username" class="form-control validate" placeholder="Enter Username">
                             </div>
 
                             <div class="md-form mb-4">
-                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-                                <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password">
+                                <label data-error="wrong" data-success="right" for="pass">Password</label>
+                                <input type="password" id="pass" class="form-control validate" placeholder="Enter Password">
                             </div>
 
                             <div>
@@ -198,32 +202,17 @@
             populate();
         });*/
 
-        //document.getElementById("provaBtn").addEventListener("click", client_details);
+        var id = document.getElementById("username").value;
+        var password = document.getElementById("pass").value;
+
+        console.log(id + password);
+
+
+        document.getElementById("logBtn").addEventListener("click", login(id, password));
         document.getElementById("newreg").addEventListener("click", change);
 
     </script>
 
-    <script type="x-template" id="todo-component">
-        <div>
-            <h3>Example vue todo component</h3>
-            <div v-for="item in items" class="form-group" :class="{'has-success': item.completed}">
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <input type="checkbox" v-model="item.completed">
-                    </div>
-                    <input type="text" v-model="item.title" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" v-model="newItem" class="form-control">
-                    <div class="input-group-btn">
-                        <button class="btn" :class="{'btn-primary': newItem}" @click="addItem()">add!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
 
     <!-- script>
         function change(){
