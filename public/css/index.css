@@ -29,11 +29,11 @@
     float: left;
     border: 1px solid #86B3D1;
     /*border-radius: 1rem;*/
-    margin: 4% 0 0 4%;
+    margin: 4% 0 0 4%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     width: 20%;
     overflow: auto;
-    height: 65vh;
+    height: 70vh;
 }
 
 .data, .title{
@@ -90,7 +90,8 @@
     /*margin: 2rem;*/
 }
 
-
+/************************************** */
+/*** piccoli schermi*/
 @media screen and (max-width: 800px) {
 
     .boat-images {
@@ -106,6 +107,31 @@
     }
 }
 
+
+/******************************* *******/
+/*** "mobile first" */
+@media screen and (max-width: 600px) {
+
+    .boat-images {
+        /*background-color: lightgrey;*/
+        float: left;
+        border: 1px solid #86B3D1;
+        /*border-radius: 1rem;*/
+        /*margin: 4% 0 0 4%;*/
+        /*padding: 1rem;*/
+        width: 90%;
+        overflow: auto; 
+        height: 40vh;
+    }
+
+    .post_image {
+        float: right;
+        width: 100%;
+        padding-bottom: 0.2rem;
+        /*border-radius: 0.2rem;*/
+    }
+
+}
 
 
 /************************************************************************/

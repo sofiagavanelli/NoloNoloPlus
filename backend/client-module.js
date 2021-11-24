@@ -54,6 +54,34 @@ module.exports = function (app) {
 
     });
 
+    app.get('/client/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchClient(id).then(clientinfo => {
+
+            res.write(JSON.stringify(clientinfo));
+            res.end();
+        });
+
+        console.log("error");
+
+        /*if (db.searchClient(id)) {
+
+            res.write(JSON.stringify(stories))
+
+            res.end()
+        }
+        else {
+            console.log("error, doesn't exist");
+        }*/
+
+    });
+
 
 };
 

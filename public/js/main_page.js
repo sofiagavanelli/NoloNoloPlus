@@ -24,50 +24,40 @@ $(document).ready(function () {
                     populate(prodARRAY);
 
                 },
-                //Non è stata trovata la storia
                 error: function (xhr, ajaxOptions, thrownError) {
-                    console.log("La storia selezionata non esiste");
+                    console.log("errori con db");
                 }
             });
-        //}
 
-        /*console.log(prodARRAY);
-
-        for(let i in prodARRAY) {
-            console.log("sono nel for");
-
-
-            let div = null;
-    
-                div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
-                            <div class="boat">
-                                <img class="post_image" src="img/yacht2.png"></img>
-                                <div class="boat_info">
-                                    <h3 class="title">${prodARRAY[i].name}</h5>
-                                    <h4 class="title">${prodARRAY[i].brand}</h5>
-                                    <div class="details">
-                                        <ul class="d-flex flex-wrap pl-0">
-                                            <li class="title">Potenza:<h5 class="data"> ${prodARRAY[i].power} </h5> </li>
-                                            <li class="title">Lunghezza:<h5 class="data"> ${prodARRAY[i].lenght} </h5> </li>
-                                            <li class="title">Ospiti:<h5 class="data"> ${prodARRAY[i].guests} </h5> </li>
-                                            <li class="title">Età:<h5 class="data"> ${prodARRAY[i].year} </h5> </li>
-                                            <li class="title">Prezzo: <h5 class="price_data"> ${prodARRAY[i].price} </h5> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>`);
-    
-                $("#main_page").append(div);
-                
-        }*/
 });
 
 
-console.log("ciao ciao"); //questo viene stampato
-
 function change(){
     document.getElementsByClassName("price_data").style.visibility = "visible";
+}
+
+function login(_id, _pass){
+
+    console.log(_id, _pass);
+    
+    if(_id) {
+        $.ajax({
+            type: 'GET',
+            url: '/client/' + _id ,
+            success: function (data) {
+
+                console.log(data);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log("errori con login");
+            }
+        });
+    }
+    else {
+        console.log("not a valid id");
+    }
+
 }
 
 function openCalc(){
@@ -93,7 +83,7 @@ function openCalc(){
                     </div>
             </div> `);
         
-    $("#main_page").append(div);
+    $("#calcolatrice").append(div);
 
 }
 
@@ -113,8 +103,9 @@ function populate(ProductInfo){
                                     <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
                                     <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
                                     <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
-                                    <li class="title">Anno:<h5 class="data">${ProductInfo[i].year} </h5> </li>
-                                    <li class="title">Prezzo: <h5 class="price_data"> ${ProductInfo[i].price} </h5> </li>
+                                    <li class="title">Età:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                                    <div class="price_data"> <li class="title"> Prezzo: 
+                                            <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
                                 </ul>
                             </div>
                         </div>
