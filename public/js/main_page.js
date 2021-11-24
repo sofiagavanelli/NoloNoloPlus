@@ -104,7 +104,8 @@ function populate(ProductInfo){
                                     <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
                                     <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
                                     <li class="title">Età:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
-                                    <li class="title">Prezzo: <h5 class="price_data"> ${ProductInfo[i].price} </h5> </li>
+                                    <div class="price_data"> <li class="title"> Prezzo: 
+                                            <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
                                 </ul>
                             </div>
                         </div>

@@ -54,7 +54,7 @@ module.exports = function (app) {
 
     });
 
-    app.get('/client:id', function (req, res) {
+    app.get('/client/:id', function (req, res) {
 
         res.writeHead(200);
 
