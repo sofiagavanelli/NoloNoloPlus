@@ -1,6 +1,7 @@
 
 var clientARRAY = 0;
 var inventoryARRAY = 0;
+var rentARRAY = 0;
 
 function openClient() {
   $( "#ctable" ).empty();
@@ -15,15 +16,9 @@ function openClient() {
         clientARRAY = JSON.parse(data);
 
         populate(clientARRAY);
-
-
-          //console.log(data);
-
-          //console.log("sono dentro success");
       },
-      //Non è stata trovata la storia
       error: function (xhr, ajaxOptions, thrownError) {
-          console.log("La storia selezionata non esiste");
+          console.log("errore nei clienti");
       }
   });
 
@@ -47,7 +42,7 @@ function openClient() {
 
   function populate(ClientInfo){
 
-      console.log("sono dentro populate");
+      console.log("sono dentro populate clienti");
       console.log(ClientInfo);
 
       
@@ -61,7 +56,7 @@ function openClient() {
                        <td>${ClientInfo[i].name}</td>
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
-                       <td> <button id= "btn-del"><i class="fas fa-trash-alt"></i></button> <button id= "btn-upd"><i class="fas fa-user-edit"></i></button></td>
+                       <td><button id= "btn-upd"><i class="fas fa-user-edit"></i></button><button id= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
                       </tr>
                     </table>
 
@@ -119,7 +114,7 @@ function openInventory() {
   
     function populateP(ProdInfo){
   
-        console.log("sono dentro populate");
+        console.log("sono dentro populate prodotti");
         console.log(ProdInfo);
   
         
@@ -145,3 +140,57 @@ function openInventory() {
   }
   
       } }
+
+/************************************/
+
+function openRents() {
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+        
+      
+    $.ajax({
+      type: 'GET',
+      url: '/allRents' ,
+      success: function (data) {
+      
+      rentARRAY = JSON.parse(data);
+      
+              populate(rentARRAY);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log("errore nei noleggi");
+            }
+    });
+    
+      function populate(RentInfo){
+      
+        console.log("sono dentro populate noleggi");
+        console.log(RentInfo);
+        for (let i in RentInfo) {
+          let div = null;
+      
+            div = $(`
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              `);
+               $("#ctable2").append(div);
+             }
+         } 
+}
+
+
+
+
