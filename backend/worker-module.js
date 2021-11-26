@@ -6,19 +6,23 @@ var db = require('../db');
 module.exports = function (app) {
 
     app.get('/allClients', function (req, res) {
-        //lettura dei clients dal db
 
         res.writeHead(200);
 
         db.getClients().then(clientsinfo => {
-            //console.log(res);
-
-            //for(let i in res) {
-                //console.log(res[i].name);
-            //}
-
-            //res.write();
             res.write(JSON.stringify(clientsinfo));
+            res.end();
+        });
+    });
+
+
+    app.get('/allRents', function (req, res) {
+
+        res.writeHead(200);
+
+        db.getRents().then(rentsinfo => {
+            
+            res.write(JSON.stringify(rentsinfo));
             res.end();
         });
     });

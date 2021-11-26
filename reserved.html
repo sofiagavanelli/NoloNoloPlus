@@ -98,7 +98,7 @@
     <header>Activities</header>
     <ul> 
       <li><a href="#" id="inventoryBtn"><i class="fas fa-archive"></i>Inventory</a></li>  <!--per vedere l'inventario degli ogetti-->
-      <li><a href="#"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
+      <li><a href="#" id="rentBtn"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
       <li><a href="#" id="clientBtn"><i class="far fa-address-card"></i>Clients</a></li> <!--per vedere tutti i clienti -->
       <li><a href="#"><i class="far fa-calendar-alt"></i>Calendar</a></li> <!--per vedere il calendario dei noleggi-->
       <li><a href="#"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
@@ -123,6 +123,7 @@
 
   document.getElementById("clientBtn").addEventListener("click", openClient);
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
+  document.getElementById("rentBtn").addEventListener("click", openRents);
 
 </script>
 	</body>
