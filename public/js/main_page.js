@@ -120,7 +120,7 @@ function populate(ProductInfo){
                         </div>
 
                         <div class="flex-container">
-                            <button class="noleggioBtn">
+                            <button class="noleggioBtn" id="${i}">
                                 NOLEGGIA
                             </button>
                         </div>
@@ -137,4 +137,5 @@ function populate(ProductInfo){
 
 $(document).on('click', '.noleggioBtn', function () {
     console.log("voglio noleggiare");
+    
 });
