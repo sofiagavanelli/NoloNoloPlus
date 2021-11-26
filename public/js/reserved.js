@@ -3,6 +3,9 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 
 function openClient() {
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+  
 
     $.ajax({
       type: 'GET',
@@ -25,6 +28,11 @@ function openClient() {
   });
 
   div = $(`
+            <form class="example">
+            <input type="text" placeholder="Search customer..." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
            <table id="styled-tab">
             <tr>
               <th>Name</th>
@@ -59,10 +67,7 @@ function openClient() {
 
             `);
             $("#ctable2").append(div);
-    
-
 }
-
 } 
 }
 
@@ -71,6 +76,9 @@ function openClient() {
 
 
 function openInventory() {
+ 
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
 
   $.ajax({
     type: 'GET',
@@ -92,11 +100,17 @@ function openInventory() {
         }
     });
     div = $(`
+             <form class="example">
+             <input type="text" placeholder="Search product..." name="search">
+             <button type="submit"><i class="fa fa-search"></i></button>
+             </form>
+
              <table id="styled-tab">
               <tr>
                 <th>Name</th>
+                <th>Brand</th>
                 <th>Product ID</th>
-                <th>Power</th>
+                <th>Price</th>
                 <th>Available</th>
               </tr>
              </table>
@@ -117,8 +131,9 @@ function openInventory() {
                       <table id="styled-tab">
                         <tr>
                          <td>${ProdInfo[i].name}</td>
+                         <td>${ProdInfo[i].brand}</td>
                          <td>${ProdInfo[i].prod_id}</td>
-                         <td>${ProdInfo[i].power}</td>
+                         <td>${ProdInfo[i].price}</td>
                          <td>${ProdInfo[i].available}</td>
                          </tr>
                       </table>
