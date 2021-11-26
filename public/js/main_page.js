@@ -33,7 +33,16 @@ $(document).ready(function () {
 
 
 function change(){
-    document.getElementsByClassName("price_data").style.visibility = "visible";
+    //document.getElementsByClassName("price_data").style.visibility = "visible";
+    //document.getElementsByClassName("price_data").style.display = "inline";
+    //$('.price_data').css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
+
+    var elems = document.getElementsByClassName('price_data');
+    
+    for (var i=0;i<elems.length;i+=1){
+        elems[i].style.display = 'block';
+    }
+
 }
 
 function login(_id, _pass){
@@ -64,7 +73,9 @@ function openCalc(){
 
     console.log("sono dentro open calc"); 
 
-    let div = null;
+    document.getElementById("calcCard").style.display = "block";
+
+    /*let div = null;
 
     div = $(` <div class="modal fade" role="dialog" id="calcModal">
                     <div class="modal-content">    
@@ -83,7 +94,7 @@ function openCalc(){
                     </div>
             </div> `);
         
-    $("#calcolatrice").append(div);
+    $("#calcolatrice").append(div);*/
 
 }
 
