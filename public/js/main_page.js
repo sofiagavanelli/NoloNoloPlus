@@ -48,12 +48,12 @@ function login(){
     if(_id) {
         $.ajax({
             type: 'GET',
-            url: '/client/' + _id ,
+            url: '/client/' + _id,
             success: function (info) {
 
                 CLIENTINFO = JSON.parse(info);
 
-                change();
+                controlInfo(CLIENTINFO, _pass);
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -63,6 +63,30 @@ function login(){
     }
     else {
         console.log("not a valid id");
+    }
+
+}
+
+function controlInfo(data, insertedP) {
+
+    for (let i in data) {
+
+        if(data[i].password == insertedP) {
+            change();
+
+            var found = true;
+        }
+    }
+
+    if (!found) {
+        console.log("non esiste cliente con questa accoppiata pass-nome");
+
+        let div = null;
+
+        div = $(` <div> Username e/o password errati. </div> `);
+
+        $("#loginfo").append(div);
+
     }
 
 }
@@ -90,7 +114,7 @@ function openCalc(){
                             <button class="btn btn-default">Login</button>
                         </div>
                     </div>
-            </div> `);
+            </div>  );
         
     $("#calcolatrice").append(div);*/
 

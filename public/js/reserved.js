@@ -2,6 +2,7 @@
 var clientARRAY = 0;
 var inventoryARRAY = 0;
 var rentARRAY = 0;
+var WORKERINFO = 0;
 
 
 /************************* */
@@ -21,6 +22,8 @@ function login(){
 
               WORKERINFO = JSON.parse(info);
 
+              acceptWorker(WORKERINFO, _pass);
+
               console.log("appartieni ai worker");
 
           },
@@ -32,6 +35,24 @@ function login(){
   else {
       console.log("not a valid id");
   }
+
+}
+
+function acceptWorker(data, insertedP) {
+
+  for (let i in data) {
+
+    if(data[i].password == insertedP) {
+        
+      $('#loginModal').modal('toggle'); 
+
+        var found = true;
+    }
+  }
+
+  if (!found) 
+      console.log("non esiste WORKER con questa accoppiata pass-nome");
+
 
 }
 /***************************** */

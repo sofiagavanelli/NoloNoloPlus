@@ -68,12 +68,12 @@ module.exports = {
         }).save();
     },
 
-    searchClient: async (id, pass) => {
-        return Promise.resolve(Client.find({ name: id, password: pass}));
+    searchClient: async (id) => {
+        return Promise.resolve(Client.find({ name: id }));
     },
 
-    searchWorker: async (id, pass) => {
-        return Promise.resolve(Worker.find({ name: id, password: pass}));
+    searchWorker: async (id) => {
+        return Promise.resolve(Worker.find({ name: id }));
     },
 
     getProds: async (options = {}) => {

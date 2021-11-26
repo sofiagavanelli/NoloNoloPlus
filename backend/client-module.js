@@ -10,47 +10,10 @@ module.exports = function (app) {
         res.writeHead(200);
 
         db.getProds().then(prodsinfo => {
-            /*console.log(res);
-
-            for(let i in res) {
-                console.log(res[i].name);
-            }*/
-
-            //console.log(prodsinfo);
 
             res.write(JSON.stringify(prodsinfo));
             res.end();
         });
-
-        //console.log("post promise");
-        
-        /*.catch((error) => {
-            res.status(500);
-            console.log("sono nel catch");
-        });;*/
-
-        //res.write(JSON.stringify(allProduct));
-        //res.end();
-
-        /*****************************************DARIO 
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        fs.readdir('stories', function(err, files) {
-            let stories = [];
-            if(!err) {            
-                files.forEach(function(f) {
-                    let data = JSON.parse(fs.readFileSync('stories/' + f));
-                    let story = {};
-                    story.name = data.name;
-                    story.id = data.id;
-                    story.accessible = data.accessible;
-                    story.published = data.published;
-                    stories.push(story);
-                });
-            }
-            res.write(JSON.stringify(stories));
-            res.end();
-        });*/
-        
 
     });
 
@@ -64,22 +27,14 @@ module.exports = function (app) {
 
         db.searchClient(id).then(clientinfo => {
 
+            console.log(clientinfo);
+
             res.write(JSON.stringify(clientinfo));
 
             res.end();
         });
 
         console.log("error");
-
-        /*if (db.searchClient(id)) {
-
-            res.write(JSON.stringify(stories))
-
-            res.end()
-        }
-        else {
-            console.log("error, doesn't exist");
-        }*/
 
     });
 
