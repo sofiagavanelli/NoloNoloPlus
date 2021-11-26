@@ -72,6 +72,10 @@ module.exports = {
         return Promise.resolve(Client.find({ name: id, password: pass}));
     },
 
+    searchWorker: async (id, pass) => {
+        return Promise.resolve(Worker.find({ name: id, password: pass}));
+    },
+
     getProds: async (options = {}) => {
         
         //var prods = await Prodotto.find(options);

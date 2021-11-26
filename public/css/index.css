@@ -39,9 +39,14 @@ button:focus{
 }
 
 /***********************************************************/
-#main_page {
+#introduzione { /*(up-right-down-left)*/
     margin-top: 4em;
+    padding: 0.5em 3em 1em 3em;
 }
+
+/*#main_page {
+    margin-top: 1em;
+}*/
 
 .flex-container {
     display: flex;

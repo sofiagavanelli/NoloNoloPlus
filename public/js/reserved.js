@@ -3,6 +3,39 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 var rentARRAY = 0;
 
+
+/************************* */
+//LOGIN DEL WORKER/MANAGER
+function login(){
+
+  _id = document.getElementById("userWorker").value;
+  _pass = document.getElementById("passWorker").value;
+
+  console.log(_id, _pass);
+  
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/worker/' + _id ,
+          success: function (info) {
+
+              WORKERINFO = JSON.parse(info);
+
+              console.log("appartieni ai worker");
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              console.log("errori con login");
+          }
+      });
+  }
+  else {
+      console.log("not a valid id");
+  }
+
+}
+/***************************** */
+
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();

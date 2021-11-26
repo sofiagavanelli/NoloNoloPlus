@@ -63,19 +63,19 @@
                 <img src="public/img/avatar.png" class="avatar">
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button -->
                 </div>
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
                         <label data-error="wrong" data-success="right" for="defaultForm-email">Username</label>
-                        <input type="text" id="defaultForm-email" class="form-control validate" placeholder="Enter Username">
+                        <input type="text" id="userWorker" class="form-control validate" placeholder="Enter Username">
                     </div>
 
                     <div class="md-form mb-4">
                         <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Enter Password"> &nbsp; &nbsp;
+                        <input type="password" id="passWorker" class="form-control validate" placeholder="Enter Password"> &nbsp; &nbsp;
                         <p>Manager</p>
 
                         <label class="switch">
@@ -86,7 +86,7 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-default">Login</button>
+                    <button class="btn btn-default" id="enterWorker">Login</button>
                 </div>
             </div>
         </div>
@@ -124,6 +124,8 @@
   document.getElementById("clientBtn").addEventListener("click", openClient);
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
   document.getElementById("rentBtn").addEventListener("click", openRents);
+
+  document.getElementById("enterWorker").addEventListener("click", login);
 
 </script>
 	</body>

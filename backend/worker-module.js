@@ -20,11 +20,30 @@ module.exports = function (app) {
 
         res.writeHead(200);
 
-        db.getRents().then(rentsinfo => {
+        db.getRentals().then(rentsinfo => {
             
             res.write(JSON.stringify(rentsinfo));
             res.end();
         });
+    });
+
+    app.get('/worker/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchWorker(id).then(workerinfo => {
+
+            res.write(JSON.stringify(workerinfo));
+
+            res.end();
+        });
+
+        console.log("error");
+
     });
 
     //app.get
