@@ -27,10 +27,6 @@ db.once("open", () => console.log("mongoDB connection established"));
 
 module.exports = {
 
-    searchClient: async (id) => {
-        return Promise.resolve(Prodotto.find({client_id: id}));
-    },
-
     //getUsers: async (options = {}) => User.find(options),
     saveClient: async (username, id, pass) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
@@ -43,10 +39,11 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_name, _brand, _pow, _len, _guests, _yy, _sum, _price, _id,) => {
+    saveProd: async (_imageUrl, _name, _brand, _pow, _len, _guests, _yy, _sum, _price, _id,) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Prodotto({
+            image: _imageUrl,
             name: _name,
             brand: _brand,
             power: _pow,
@@ -70,7 +67,10 @@ module.exports = {
             end_date: _end
         }).save();
     },
-    //  function(callback)  
+
+    searchClient: async (id, pass) => {
+        return Promise.resolve(Client.find({ name: id, password: pass}));
+    },
 
     getProds: async (options = {}) => {
         

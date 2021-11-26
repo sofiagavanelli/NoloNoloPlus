@@ -65,6 +65,7 @@ module.exports = function (app) {
         db.searchClient(id).then(clientinfo => {
 
             res.write(JSON.stringify(clientinfo));
+
             res.end();
         });
 

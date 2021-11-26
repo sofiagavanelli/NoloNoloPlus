@@ -76,12 +76,12 @@
                     <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
                 </button>
 
-                <div class="collapse navbar-collapse"  id="navbarCollapse">
-                    <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
+                <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
 
+                <div class="collapse navbar-collapse"  id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav ml-auto">
                         <li class="nav-item" title="Reserved" data-toggle="modal" data-target="#loginModal">
-                            <a class="nav-item" > Login  </a>
+                            Login
                         </li>
                         <li class="nav-item" title="Reserved" onclick="load_new('/worker-module')">
                             <i class="icon fas fa-user-lock"></i>
@@ -155,7 +155,7 @@
                         </div>
 
                         <div class="modal-footer d-flex justify-content-center">
-                            <button class="btn btn-default" id="logBtn">Login</button>
+                            <button class="btn btn-default" id="EnterlogBtn">Login</button>
                         </div>
                         
                     </div>
@@ -205,13 +205,7 @@
             populate();
         });*/
 
-        var id = document.getElementById("username").value;
-        var password = document.getElementById("pass").value;
-
-        console.log(id + password);
-
-        document.getElementById("logBtn").addEventListener("click", login(id, password));
-        document.getElementById("logBtn").addEventListener("click", change);
+        document.getElementById("EnterlogBtn").addEventListener("click", login);
 
     </script>
 
