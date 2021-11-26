@@ -174,7 +174,6 @@ ul li :hover a{
 }
 #ctable2{
   position: relative;
-  top:10vh;
   left: 16vw;
   width: 80vw;
   height: 85vh;
@@ -182,18 +181,16 @@ ul li :hover a{
 
   /*background-color:#EDB5BF;*/
 }
-
-#ptable2{
+#ctable{
   position: relative;
-  top:10vh;
+  top: 10vh;
   left: 16vw;
   width: 80vw;
-  height: 85vh;
+  height: 20vh;
   margin: 3vh;
 
-  /*background-color:#EDB5BF;*/
-}
 
+}
 
 
 #btn-upd{
@@ -225,6 +222,7 @@ ul li :hover a{
 } 
 */#styled-tab{
   position: relative;
+  top: 10px;
   left: 3.5%;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -238,6 +236,7 @@ ul li :hover a{
     vertical-align: center;
   }
   #styled-tab th {
+    
     border: 1px solid #ddd;
     padding: 8px;
     table-layout: auto;
@@ -255,3 +254,40 @@ ul li :hover a{
     background-color: #86B3D1;
     color: black;
   }
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  position: relative;
+  padding: 6px;
+  font-size: 17px;
+  border: 1.5px solid grey;
+  left: 75%;
+  float: left;
+  width: 20%;
+  background: #fffefe;
+}
+
+form.example button {
+  float: right;
+  width: 5%;
+  padding: 6px;
+  background:#86B3D1;
+  color: white;
+  font-size: 17px;
+  border: 1.5px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background:#86B3D1;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}

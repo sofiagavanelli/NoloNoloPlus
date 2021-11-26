@@ -3,6 +3,9 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 
 function openClient() {
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+  
 
     $.ajax({
       type: 'GET',
@@ -25,6 +28,11 @@ function openClient() {
   });
 
   div = $(`
+            <form class="example">
+            <input type="text" placeholder="Search customer..." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
            <table id="styled-tab">
             <tr>
               <th>Name</th>
@@ -59,10 +67,7 @@ function openClient() {
 
             `);
             $("#ctable2").append(div);
-    
-
 }
-
 } 
 }
 
@@ -71,6 +76,9 @@ function openClient() {
 
 
 function openInventory() {
+ 
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
 
   $.ajax({
     type: 'GET',
@@ -92,6 +100,11 @@ function openInventory() {
         }
     });
     div = $(`
+             <form class="example">
+             <input type="text" placeholder="Search product..." name="search">
+             <button type="submit"><i class="fa fa-search"></i></button>
+             </form>
+
              <table id="styled-tab">
               <tr>
                 <th>Name</th>
