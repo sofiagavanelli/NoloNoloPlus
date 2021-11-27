@@ -5,6 +5,10 @@
 
 }
 
+button:focus{
+  outline:none !important;
+}
+
 #app {
     background-color: #4D6D9A;
     position: fixed;

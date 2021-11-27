@@ -57,10 +57,11 @@ module.exports = {
         }).save();
     },
 
-    saveRental: async (_prod, _client, _start, _end) => {
+    saveRental: async (_rent, _prod, _client, _start, _end) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Noleggio({
+            rent_id: _prod + _client,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
@@ -68,12 +69,25 @@ module.exports = {
         }).save();
     },
 
-    searchClient: async (id) => {
-        return Promise.resolve(Client.find({ name: id }));
+    searchClientID: async (id) => {
+        return Promise.resolve(Client.find({ client_id: id }));
+    },
+
+    //search con il nome per il login! così l'ID rimane ""privato""
+    searchClient: async (_name) => {
+        return Promise.resolve(Client.find({ name: _name }));
     },
 
     searchWorker: async (id) => {
-        return Promise.resolve(Worker.find({ name: id }));
+        return Promise.resolve(Worker.find({ work_id: id }));
+    },
+
+    searchProd: async (id) => {
+        return Promise.resolve(Prodotto.find({ prod_id: id}));
+    },
+
+    searchRent: async (id) => {
+        return Promise.resolve(Noleggio.find({ rent_id: id}));
     },
 
     getProds: async (options = {}) => {
@@ -94,135 +108,19 @@ module.exports = {
         
         return Promise.resolve(Noleggio.find(options));
 
-    }
+    },
 
-    //saveClients: async (options = {}) => Client.find(options),
+    //delete functions: Schema.deleteOne(options); Schema.deleteOne(options, function (err) {});
+    deleteClient: async (id) => {
+        Client.deleteOne({client_id: id})
+    },
 
-    /*saveClient: async (options = {}) => {
-        //var myobj = { name: "Company Inc", address: "Highway 37" };
-        await Client.updateOne(options, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
-            //db.close();
-        });
-    },*/
+    deleteProd: async (id) => {
+        Prodotto.deleteOne({prod_id: id})
+    },
+
+    deleteRental: async (id) => {
+        Noleggio.deleteOne({rent_id: id})
+    },
 
 };
-
-//module.export = db;
-
-/*Client.find((err, clients) => {
-    if (err) return console.error(err);
-    if (clients.length) return;
-
-    new Client({
-        name: "Maria",
-        client_id: "123bbn4",
-        password: "blabla",
-    }).save();
-});
-
-/*Manager.find((err, managers) => {
-    if (err) return console.error(err);
-    if (managers.length) return;
-
-    new Manager({
-        name: "Mario",
-        password: "blubla",
-    }).save();
-});
-
-Worker.find((err, workers) => {
-    if (err) return console.error(err);
-    if (workers.length) return;
-
-    new Worker({
-        name: "Marco",
-        password: "tututu",
-    }).save();
-});
-
-Prodotto.find((err, prods) => {
-    if (err) return console.error(err);
-    if (prods.length) return;
-
-    new Prodotto({
-        name: "Apollo",
-        prod_id: "p94035jj",
-        summary: "Bella ciao",
-        power: "120",
-        available: false
-    }).save();
-});
-
-Noleggio.find((err, rentals) => {
-    if (err) return console.error(err);
-    if (rentals.length) return;
-
-    new Noleggio({
-        prod_id: "p93292377g",
-        client_id: "c9384hh",
-        start_date: 2021 - 6 - 6,
-        end_date: 2021 - 7 - 7
-    }).save();
-});*/
-
-//*******************************************/
-/* FILE DI GITHUB */
-
-/*module.exports = {
-  getUsers: async (options = {}) => User.find(options),
-  saveUser: async (username, id) => {
-    await User.updateOne({ id }, { username }, { upsert: true });
-  },
-  getStories: async (options = {}, fields = "") =>
-    NewStory.find(options, fields),
-  saveStory: async (storyname, adj, nodes, css, published) => {
-    await NewStory.updateOne(
-      { title: storyname },
-      { pages: nodes.length + 1, adj, nodes, css, published },
-      { upsert: true }
-    );
-  },
-  deleteStory: async (options = {}) => {
-    NewStory.deleteOne(options, function (err) {});
-  },
-  saveActiveUser: async (username, id, story, activity) => {
-    await ActiveUser.updateOne(
-      { id },
-      { username, story, activity },
-      { upsert: true }
-    );
-  },
-  deleteActiveUser: async (options = {}) => {
-    await ActiveUser.deleteOne(options);
-  },
-};*/
-
-/*async function connessione() {
-    if (!connectionString) {
-        console.error("MongoDB connection string missing!");
-        process.exit(1);
-    }
-    await mongoose.connect(connectionString, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    });
-    db.on("error", (err) => {
-        console.error("MongoDB error: " + err.message);
-        process.exit;
-    });
-    db.once("open", () => {
-        db.collection("NoloNoloDB").find(query);
-        console.log("mongoDB connection established")
-    });
-
-};*/
-
-//console.log(db);
-
-//var query = { address: "12344" };
-
-//const a = db.collection("NoloNoloDB").find(query);
-
-//var myobj = { name: "Company Inc", address: "Highway 37" };

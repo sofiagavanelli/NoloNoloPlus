@@ -44,15 +44,14 @@ button:focus{
     padding: 0.5em 3em 1em 3em;
 }
 
-/*#main_page {
-    margin-top: 1em;
-}*/
+#main_page, #nB {
+    justify-content: center;
+}
 
 .flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .noleggioBtn {
@@ -93,6 +92,18 @@ button:focus{
     border-top: 1px solid #86B3D1;
 }
 
+#leftinfo {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#noleggiocard {
+    justify-content: left;
+
+    padding-left: 3vw;
+}
 
 .post_image {
     width: 100%;
@@ -138,6 +149,26 @@ button:focus{
         font-size: 20px;
     }
 
+    #noleggiocard {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #leftinfo .flex-element {
+        width: 75vw;
+    }
+
+    #calcBtn {
+        float: right;
+        position: fixed;
+        left: 80vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 5rem;
+        height: 5rem;
+    }
+
     .boat-images {
         background-color: red;
         float: left;
@@ -157,6 +188,27 @@ button:focus{
 /*** "mobile first" */
 @media screen and (max-width: 600px) {
 
+    #noleggiocard {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #leftinfo {
+        width: 85vw;
+    }
+
+    #calcBtn {
+        float: right;
+        position: fixed;
+        bottom: 10vh;
+        left: 75vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 4rem;
+        height: 4rem;
+    }
+
     .boat-images {
         background-color: green;
         float: left;
@@ -165,7 +217,7 @@ button:focus{
         /*margin: 4% 0 0 4%;*/
         align-self: center;
         /*padding: 1rem;*/
-        width: 90%;
+        width: 80%;
         overflow: auto; 
         height: 40vh;
     }
