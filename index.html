@@ -40,7 +40,8 @@
                 window.open(url);
             }
 
-            function openMenu() {
+            //da capirne l'utilizzo
+            /*function openMenu() {
 
                 console.log("sta funzionando qualcosa");
 
@@ -55,7 +56,7 @@
                     $('#componentView').show();
                 }
 			
-            }
+            }*/
 
         </script>
 	</head>
@@ -76,7 +77,7 @@
                     <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
                 </button>
 
-                <a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>
+                <a id="logoname" class="nav-item">NoloNoloPlus</a>
 
                 <div class="collapse navbar-collapse"  id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav ml-auto">
@@ -95,10 +96,8 @@
         </div>
 
         <div id="introduzione" class="flex-container">
-            UNA GRANDE SCELTA DI YACHT DI LUSSO A NOLEGGIO </br>
-            NoloNoloPlus, uno delle nuovi broker di noleggio di yacht, è specializzata nel noleggio di yacht nel Mediterraneo. 
-            L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso a noleggio nella sua flotta e di conoscere personalmente 
-            quasi ognuna delle imbarcazioni proposte e gli equipaggi. Sfogliate la nostra ampia selezione di yacht a noleggio con 
+            NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
+            L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
             equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
         </div>
 
@@ -213,9 +212,10 @@
     <script type="text/javascript">
 
         /*$(window).on('load',function() {
-            populate();
+            populate(); onclick="home()"
         });*/
 
+        document.getElementById("logoname").addEventListener("click", home);
         document.getElementById("EnterlogBtn").addEventListener("click", login);
 
     </script>

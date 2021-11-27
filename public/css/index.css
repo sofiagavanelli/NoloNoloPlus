@@ -44,15 +44,14 @@ button:focus{
     padding: 0.5em 3em 1em 3em;
 }
 
-/*#main_page {
-    margin-top: 1em;
-}*/
+#main_page, #nB {
+    justify-content: center;
+}
 
 .flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .noleggioBtn {
@@ -94,9 +93,16 @@ button:focus{
 }
 
 #leftinfo {
+    width: 50vw;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+#noleggiocard {
+    justify-content: left;
+
+    padding-left: 3vw;
 }
 
 .post_image {
@@ -143,6 +149,16 @@ button:focus{
         font-size: 20px;
     }
 
+    #noleggiocard {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #leftinfo .flex-element {
+        width: 75vw;
+    }
+
     #calcBtn {
         float: right;
         position: fixed;
@@ -171,6 +187,16 @@ button:focus{
 /******************************* *******/
 /*** "mobile first" */
 @media screen and (max-width: 600px) {
+
+    #noleggiocard {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #leftinfo {
+        width: 85vw;
+    }
 
     #calcBtn {
         float: right;

@@ -24,6 +24,19 @@ $(document).ready(function () {
 
 });
 
+function home() {
+    /*aggiungere if(loggedIn) per gestire il fatto che un cliente già dentro stia navigando
+    se invece non è dentro else() serve solo il ricaricamento:*/
+
+    $("#main_page").empty();
+
+    //devo rimettere l'introduzione!! $("#introduzione").show(); non funziona 
+
+    document.getElementById("main_page").style.justifyContent = 'center';
+    populate(prodARRAY);
+
+}
+
 
 function change(){
     //document.getElementsByClassName("price_data").style.visibility = "visible";
@@ -88,6 +101,12 @@ function controlInfo(data, insertedP) {
         $("#loginfo").append(div);
 
     }
+    else {
+        //se entri si aggiunge una scritta nella navbar?
+
+        $('#loginModal').modal('toggle'); 
+        document.getElementById("calcBtn").remove();
+    }
 
 }
 
@@ -143,7 +162,7 @@ function populate(ProductInfo){
                             </div>
                         </div>
 
-                        <div class="flex-container">
+                        <div class="flex-container" id="nB">
                             <button class="noleggioBtn" id="${i}">
                                 NOLEGGIA
                             </button>
@@ -169,10 +188,12 @@ $(document).on('click', '.noleggioBtn', function () {
 
     let div = null;
 
+        //forse in questa parte l'immagine si può togliere
+
         div = $(`<div class="flex-container" id="noleggiocard">
                     <div class="flex-container" id="leftinfo">
                         <div class="flex-element">
-                            <img src="${prodARRAY[x].image}"></img>
+                            <img class="post_image" src="${prodARRAY[x].image}"></img>
                         </div>
                         <div class="flex-element">
                             <h3 class="title">${prodARRAY[x].name}</h5>
@@ -192,7 +213,18 @@ $(document).on('click', '.noleggioBtn', function () {
                         tutte le cose per il noleggio !
                     </div>
                                      
-            </div>`);
+            </div>
+            
+            <div class="bg-white border rounded-5">
+                <section class="w-100 p-4 d-flex justify-content-center pb-4">
+                    <!-- datepicker -->
+                </section>
+            </div>
+            
+            
+            `);
+
+    document.getElementById("main_page").style.justifyContent = 'left';
 
     $("#main_page").append(div);
 
