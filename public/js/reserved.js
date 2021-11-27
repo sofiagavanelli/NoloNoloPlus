@@ -149,9 +149,13 @@ function openInventory() {
         }
     });
     div = $(`
+          
              <form class="example">
              <input type="text" placeholder="Search product..." name="search">
              <button type="submit"><i class="fa fa-search"></i></button>
+
+             <button id= "btn-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus-circle"> Add item</i></button>
+
              </form>
 
              <table id="styled-tab">
@@ -183,7 +187,7 @@ function openInventory() {
                          <td>${ProdInfo[i].brand}</td>
                          <td>${ProdInfo[i].prod_id}</td>
                          <td>${ProdInfo[i].price}</td>
-                         <td>${ProdInfo[i].available}</td>
+                         <td><p class="status">${ProdInfo[i].available}<p></td>
                          </tr>
                       </table>
   
@@ -227,7 +231,7 @@ function openRents() {
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
+                    <img src ="https://64.media.tumblr.com/28be0b39aacc0c19864b73925ed1d816/tumblr_np6chblhZ91qe06e0o1_500.jpg"class="img-fluid rounded-start">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -240,7 +244,7 @@ function openRents() {
               </div>
       
               `);
-               $("#ctable2").append(div);
+               $("#ctable").append(div);
              }
          } 
 }

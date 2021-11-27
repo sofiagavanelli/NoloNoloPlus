@@ -33,6 +33,7 @@
     border-radius: 5%;
 }
 
+
 .avatar {
     width: 5em;
     height: 5em ;
@@ -211,6 +212,15 @@ ul li :hover a{
   right: 5px;
 
 }
+#btn-add{
+  position: relative;
+  background-color: #4D6D9A;
+  border: #000;
+  border-radius: 25px;
+  padding: 3px 20px;
+  right: 80%;
+  width: 12%;
+}
 /*
 #btn-pass{
   background-color: #ffffff;
@@ -278,7 +288,7 @@ form.example button {
   float: right;
   width: 5%;
   padding: 6px;
-  background:#86B3D1;
+  background:#a5a5a5;
   color: white;
   font-size: 17px;
   border: 1.5px solid grey;
@@ -294,4 +304,23 @@ form.example::after {
   content: "";
   clear: both;
   display: table;
+}
+
+.modal-content-addproduct{
+  background: #ecced4;
+  color: #000;
+  width: 70%;
+  margin: 9vw;
+  border-radius: 5%;
+}
+
+form.example input[type=text] {
+  position: relative;
+  padding: 6px;
+  font-size: 17px;
+  border: 1.5px solid grey;
+  left: 75%;
+  float: left;
+  width: 20%;
+  background: #fffefe;
 }
