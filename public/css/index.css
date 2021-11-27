@@ -93,6 +93,11 @@ button:focus{
     border-top: 1px solid #86B3D1;
 }
 
+#leftinfo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 
 .post_image {
     width: 100%;
@@ -138,6 +143,16 @@ button:focus{
         font-size: 20px;
     }
 
+    #calcBtn {
+        float: right;
+        position: fixed;
+        left: 80vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 5rem;
+        height: 5rem;
+    }
+
     .boat-images {
         background-color: red;
         float: left;
@@ -157,6 +172,17 @@ button:focus{
 /*** "mobile first" */
 @media screen and (max-width: 600px) {
 
+    #calcBtn {
+        float: right;
+        position: fixed;
+        bottom: 10vh;
+        left: 75vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 4rem;
+        height: 4rem;
+    }
+
     .boat-images {
         background-color: green;
         float: left;
@@ -165,7 +191,7 @@ button:focus{
         /*margin: 4% 0 0 4%;*/
         align-self: center;
         /*padding: 1rem;*/
-        width: 90%;
+        width: 80%;
         overflow: auto; 
         height: 40vh;
     }

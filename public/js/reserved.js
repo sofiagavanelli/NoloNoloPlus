@@ -43,8 +43,15 @@ function acceptWorker(data, insertedP) {
   for (let i in data) {
 
     if(data[i].password == insertedP) {
-        
-      $('#loginModal').modal('toggle'); 
+
+        if(data[i].manager == true) {
+          document.getElementById("managBtn").disabled = false;
+        }
+        else if(document.getElementById("managCheck"))
+          console.log("non sei davvero un manager, stai attento");
+
+        //magari si aggiunge un avviso che non è davvero un manager
+        $('#loginModal').modal('toggle'); 
 
         var found = true;
     }

@@ -160,6 +160,40 @@ function populate(ProductInfo){
 }
 
 $(document).on('click', '.noleggioBtn', function () {
-    console.log("voglio noleggiare");
-    
+    console.log(this.id);
+
+    var x = this.id;
+
+    $("#introduzione").empty();
+    $("#main_page").empty();
+
+    let div = null;
+
+        div = $(`<div class="flex-container" id="noleggiocard">
+                    <div class="flex-container" id="leftinfo">
+                        <div class="flex-element">
+                            <img src="${prodARRAY[x].image}"></img>
+                        </div>
+                        <div class="flex-element">
+                            <h3 class="title">${prodARRAY[x].name}</h5>
+                            <h4 class="title">${prodARRAY[x].brand}</h5>
+                            <div class="details">
+                                <ul class="d-flex flex-wrap pl-0">
+                                    <li class="title">Potenza:<h5 class="data"> ${prodARRAY[x].power} </h5> </li>
+                                    <li class="title">Lunghezza:<h5 class="data"> ${prodARRAY[x].length} </h5> </li>
+                                    <li class="title">Ospiti:<h5 class="data"> ${prodARRAY[x].guests} </h5> </li>
+                                    <li class="title">Anno:<h5 class="data"> ${prodARRAY[x].year} </h5> </li>
+                                    <li class="title"> Prezzo: <h5 class="data"> ${prodARRAY[x].price} </h5> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-element">
+                        tutte le cose per il noleggio !
+                    </div>
+                                     
+            </div>`);
+
+    $("#main_page").append(div);
+
 });

@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 const RentalSchema = new Schema(
   {
+    rent_id: {type: String, required: true},
     prod_id: {type: String, required: true},
     client_id: {type: String, required: true},
     start_date: { type: Date},

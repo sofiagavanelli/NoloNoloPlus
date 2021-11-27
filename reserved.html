@@ -48,7 +48,7 @@
                 <!--<a id="logoname" class="nav-item" href="#">NoloNoloPlus</a>-->
 
                 <ul class="navbar-nav navbar-nav ml-auto"></ul>
-                <!-- (dentro nav-link) disabled --><a class="nav-link" onclick="load('/manager-module')"><i class="fas fa-lock">Dashboard</i></a>
+                <!-- (dentro nav-link) disabled --><button disabled id="managBtn" onclick="load('/manager-module')"><i class="fas fa-lock">Dashboard</i></a>
                 </li>
                 </ul>
             </div>
@@ -79,7 +79,7 @@
                         <p>Manager</p>
 
                         <label class="switch">
-                      <input type="checkbox"> 
+                      <input id="managCheck" type="checkbox"> 
                       <span class="slider round"></span>
                     </label>
                     </div>
