@@ -114,7 +114,7 @@
   <!--prova modale per aggiunta elemento-->
   <div class="modal" tabindex="-1" id="addModal">
     <div class="modal-dialog">
-      <div style='width:90%' class="modal-content">
+      <div style='width:100%; margin:10%; background: #f3cfd5' class="modal-content">
         <div class="modal-header text-center">
           <h4 class="modal-title w-100 font-weight-bold">Add new item</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -123,45 +123,64 @@
       </div>
 
         <div class="modal-body">
+          
         <form class="row g-3">
           <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <label for="inputProdID" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="inputProdID" placeholder="Enter ID">
           </div>
+
           <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword4">
+            <label for="inputProdName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputProdName" placeholder="Enter name">
           </div>
+
           <div class="col-12">
-            <label for="inputAddress" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            <br>
+            <label for="inputProdBrand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="inputProdBrand" placeholder="Enter brand">
           </div>
-          <div class="col-12">
-            <label for="inputAddress2" class="form-label">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-          </div>
+
           <div class="col-md-6">
-            <label for="inputCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="inputCity">
+            <br>
+            <label for="inputProdPow" class="form-label">Power</label>
+            <input type="text" class="form-control" id="inputProdPow" placeholder="...">
           </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdG" class="form-label">Guests</label>
+            <input type="text" class="form-control" id="inputProdG" placeholder="...">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdL" class="form-label">Length</label>
+            <input type="text" class="form-control" id="inputProdL" placeholder="...">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdY" class="form-label">Year</label>
+            <input type="text" class="form-control" id="inputProdY" placeholder="...">
+          </div>
+
           <div class="col-md-4">
+            <br>
+            <label for="inputProdPrice" class="form-label">Price</label>
+            <input type="text" class="form-control" id="inputProdPrice" placeholder="Enter price">
+          </div>
+          
+          <div class="col-md-4">
+            <br>
             <label for="inputState" class="form-label">State</label>
             <select id="inputState" class="form-select">
               <option selected>Choose...</option>
-              <option>...</option>
+              <option>Available</option>
+              <option>Not Available</option>
             </select>
           </div>
-          <div class="col-md-2">
-            <label for="inputZip" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-          </div>
-          <div class="col-12">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label" for="gridCheck">
-                Check me out
-              </label>
-            </div>
+          
           </div>
         </form>
 
