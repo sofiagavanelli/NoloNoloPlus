@@ -3,6 +3,9 @@
 ////
 var prodARRAY = 0;
 var CLIENTINFO = 0;
+var loggedIN = false;
+var idLoggedIn = 0;
+var nameLoggedIn = 0;
 
 $(document).ready(function () {
     // richiesta storia
@@ -34,6 +37,10 @@ function home() {
 
     document.getElementById("main_page").style.justifyContent = 'center';
     populate(prodARRAY);
+
+    if(loggedIN) {
+        change();
+    }
 
 }
 
@@ -88,6 +95,9 @@ function controlInfo(data, insertedP) {
             change();
 
             var found = true;
+            loggedIN = true;
+            idLoggedIn = data[i].client_id;
+            nameLoggedIn = data[i].name;
         }
     }
 
@@ -227,5 +237,7 @@ $(document).on('click', '.noleggioBtn', function () {
     document.getElementById("main_page").style.justifyContent = 'left';
 
     $("#main_page").append(div);
+
+    console.log(nameLoggedIn);
 
 });
