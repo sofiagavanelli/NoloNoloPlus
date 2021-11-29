@@ -64,7 +64,7 @@ button:focus{
 }
 
 /**** gestisce i div con le immagini e i dati degli yacht *****/
-.boat-images {
+.boat-images, .card {
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;
@@ -113,6 +113,8 @@ button:focus{
     width: 100%;
     padding-bottom: 0.2rem;
     /*border-radius: 0.2rem;*/
+    object-fit: cover;
+    height: 20vh;
 }
 
 .price_data  {
@@ -178,7 +180,7 @@ button:focus{
         height: 5rem;
     }
 
-    .boat-images {
+    .boat-images, .card {
         background-color: red;
         float: left;
         border: 1px solid #86B3D1;
@@ -218,7 +220,7 @@ button:focus{
         height: 4rem;
     }
 
-    .boat-images {
+    .boat-images, .card {
         background-color: green;
         float: left;
         border: 1px solid #86B3D1;

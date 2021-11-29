@@ -151,10 +151,19 @@ function openCalc(){
 
 function populate(ProductInfo){
 
+    /*
+        <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    </div>
+*/
+
     for (let i in ProductInfo) {
         let div = null;
 
-            div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
+            /*div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
                     <div class="boat">
                         <img class="post_image" src="${ProductInfo[i].image}"></img>
                         <div class="boat_info">
@@ -179,7 +188,25 @@ function populate(ProductInfo){
                         </div>
 
                     </div>
-            </div>`);
+            </div>`);  class="card-img-top"*/
+
+            div = $(`<div class="card" >
+                        <img class="post_image" src="${ProductInfo[i].image}" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="title">${ProductInfo[i].name}</h5>
+                            <h4 class="title">${ProductInfo[i].brand}</h5>
+                            <div class="details">
+                                <ul class="d-flex flex-wrap pl-0">
+                                    <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
+                                    <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
+                                    <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
+                                    <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                                    <div class="price_data"> <li class="title"> Prezzo: 
+                                            <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
+                                </ul>
+                            </div>
+                        </div>
+                </div>`);
 
         $("#main_page").append(div);
             
