@@ -183,8 +183,6 @@ ul li :hover a{
   width: 80vw;
   height: 85vh;
   margin: 3vh;
-
-  /*background-color:#EDB5BF;*/
 }
 #ctable{
   position: relative;
@@ -193,8 +191,6 @@ ul li :hover a{
   width: 80vw;
   height: 20vh;
   margin: 3vh;
-
-
 }
 
 
@@ -243,7 +239,6 @@ ul li :hover a{
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 95%;
-  overflow: hidden;
 }
 #styled-tab td{
     border: 1px solid #ddd;
@@ -294,7 +289,7 @@ form.example button {
   float: right;
   width: 5%;
   padding: 6px;
-  background:#a5a5a5;
+  background:#4D6D9A;
   color: white;
   font-size: 17px;
   border: 1.5px solid grey;
@@ -312,13 +307,6 @@ form.example::after {
   display: table;
 }
 
-.modal-content-addproduct{
-  background: #ecced4;
-  color: #000;
-  width: 70%;
-  margin: 9vw;
-  border-radius: 5%;
-}
 
 form.example input[type=text] {
   position: relative;
@@ -329,4 +317,20 @@ form.example input[type=text] {
   float: left;
   width: 20%;
   background: #fffefe;
+}
+.img-fluid{
+  object-fit: cover;
+  height: 30vh;
+  width: 50vw;
+}
+
+.card{
+  margin-top: 15px;
+  border-color: #4D6D9A;
+  border: 2px solid;
+  left: 50%;
+  right: 50%;
+}
+.card-title{
+  color: #eb5248;
 }

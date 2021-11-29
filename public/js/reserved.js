@@ -226,6 +226,15 @@ function openRents() {
                 console.log("errore nei noleggi");
             }
     });
+
+    div = $(`
+          
+             <form class="example">
+             <input type="text" placeholder="Search rental..." name="search">
+             <button type="submit"><i class="fa fa-search"></i></button>
+             </form>
+              `);
+              $("#ctable").append(div);
     
       function populate(RentInfo){
       
@@ -235,23 +244,19 @@ function openRents() {
           let div = null;
       
             div = $(`
-              <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src ="https://64.media.tumblr.com/28be0b39aacc0c19864b73925ed1d816/tumblr_np6chblhZ91qe06e0o1_500.jpg"class="img-fluid rounded-start">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                  </div>
+            <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Rental: ${RentInfo[i].rental_id}</h5>
+                  <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}</p>
+                  <p class="card-text">Start date: ${RentInfo[i].start} <br> End date: ${RentInfo[i].end}</p>
                 </div>
               </div>
+            </div>
       
               `);
-               $("#ctable").append(div);
+               $("#ctable2").append(div);
              }
          } 
 }
