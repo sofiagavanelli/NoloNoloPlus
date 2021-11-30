@@ -101,7 +101,7 @@
       <li><a href="#" id="rentBtn"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
       <li><a href="#" id="clientBtn"><i class="far fa-address-card"></i>Clients</a></li> <!--per vedere tutti i clienti -->
       <li><a href="#"><i class="far fa-calendar-alt"></i>Calendar</a></li> <!--per vedere il calendario dei noleggi-->
-      <li><a href="#"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
+      <li><a href="#" id="contactBtn"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
       <li><a href="#"><i class="far fa-id-badge"></i>Personal Area</a></li> <!--per vedere informazioni personali-->
       <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
     </ul>
@@ -191,6 +191,41 @@
     </div>
   </div>
 
+  <!--modale per modifica cliente elemento-->
+  <div class="modal" tabindex="-1" id="modifyModal">
+    <div class="modal-dialog">
+      <div style='width:100%; border-radius: 0px; margin:10%; background: #f3cfd5; overflow-y: auto;' class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Modify</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+
+        <div class="modal-body">
+          
+        <form class="row g-3">
+          <div class="col-md-6">
+            <label for="inputName" class="form-label">New name</label>
+            <input type="text" class="form-control" id="inputProdID" placeholder="Enter name">
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputSurname" class="form-label">New surname</label>
+            <input type="text" class="form-control" id="inputSurname" placeholder="Enter surname">
+          </div>
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script type="text/javascript">
   $(window).on('load',function(){
       $('#loginModal').modal('show');
@@ -199,6 +234,7 @@
   document.getElementById("clientBtn").addEventListener("click", openClient);
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
   document.getElementById("rentBtn").addEventListener("click", openRents);
+  document.getElementById("contactBtn").addEventListener("click", openContacts);
 
   document.getElementById("enterWorker").addEventListener("click", login);
 

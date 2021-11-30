@@ -15,6 +15,10 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/contacts', function (req, res) {
+
+        res.writeHead(200);
+    });
 
     app.get('/allRents', function (req, res) {
 

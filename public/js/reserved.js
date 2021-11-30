@@ -117,10 +117,9 @@ function openClient() {
                        <td>${ClientInfo[i].name}</td>
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
-                       <td><button id= "btn-upd"><i class="fas fa-user-edit"></i></button><button id= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
+                       <td><button id= "btn-upd" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-user-edit"></i></button><button id= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
                       </tr>
                     </table>
-
             `);
             $("#ctable2").append(div);
 }
@@ -212,38 +211,41 @@ function openRents() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
         
-      
-    $.ajax({
-      type: 'GET',
-      url: '/allRents' ,
-      success: function (data) {
-      
-      rentARRAY = JSON.parse(data);
-      
-              populate(rentARRAY);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log("errore nei noleggi");
-            }
+  $.ajax({
+    type: 'GET',
+    url: '/allRents' ,
+    success: function (data) {
+      rentARRAY = JSON.parse(data);       
+      populate(rentARRAY);
+    },
+            
+    error: function (xhr, ajaxOptions, thrownError) {  
+      console.log("errore nei noleggi");       
+    }
     });
-
-    div = $(`
-          
-             <form class="example">
-             <input type="text" placeholder="Search rental..." name="search">
-             <button type="submit"><i class="fa fa-search"></i></button>
-             </form>
-              `);
-              $("#ctable").append(div);
+  div = $(`         
+  <form class="example">
+  <input type="text" placeholder="Search rental..." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+  </form>          
+  `);
+              
+  $("#ctable").append(div);
     
-      function populate(RentInfo){
       
-        console.log("sono dentro populate noleggi");
-        console.log(RentInfo);
-        for (let i in RentInfo) {
-          let div = null;
+  function populate(RentInfo){
       
-            div = $(`
+        
+    console.log("sono dentro populate noleggi");
+        
+    console.log(RentInfo);
+        
+    for (let i in RentInfo) {
+          
+      let div = null;
+      
+            
+      div = $(`
             <div class="row">
             <div class="col-sm-6">
               <div class="card">
@@ -260,6 +262,30 @@ function openRents() {
              }
          } 
 }
+
+function openContacts() {
+
+              
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+                     
+  div = $(`                  
+  <div style='left:0%;'class="card">                   
+    <h5 class="card-header"><b><i class="far fa-envelope">  Gmail</b></i></h5>
+      <div class="card-body">
+        <h5 class="card-title">Mail box</h5>               
+        <p class="card-text">Check the clients email!</p>
+        <button id= "btn-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus-circle"> Add item</i></button>
+                  
+        <a href="https://mail.google.com/mail/u/5/?ogbl#inbox" class="btn btn-primary">Go somewhere</a>
+                        
+      </div>
+  </div>
+`);
+$("#ctable").append(div);
+}
+
+
 
 
 
