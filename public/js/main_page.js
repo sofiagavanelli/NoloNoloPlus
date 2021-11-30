@@ -115,6 +115,13 @@ function controlInfo(data, insertedP) {
         //se entri si aggiunge una scritta nella navbar?
 
         $('#loginModal').modal('toggle'); 
+
+        /*var elems = document.getElementsByClassName('noleggioBtn');
+    
+        for (var i=0;i<elems.length;i+=1){
+            elems[i].style.display = 'block';
+        }*/
+        
         document.getElementById("calcBtn").remove();
     }
 
@@ -151,77 +158,178 @@ function openCalc(){
 
 function populate(ProductInfo){
 
-    /*
-        <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    </div>
-*/
 
-    for (let i in ProductInfo) {
+    if($(window).width() <= 700) {
+        console.log("sei dentro");
+
+        $("#main_page").empty();
+
         let div = null;
 
-            /*div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
-                    <div class="boat">
-                        <img class="post_image" src="${ProductInfo[i].image}"></img>
-                        <div class="boat_info">
-                            <h3 class="title">${ProductInfo[i].name}</h5>
-                            <h4 class="title">${ProductInfo[i].brand}</h5>
-                            <div class="details">
-                                <ul class="d-flex flex-wrap pl-0">
-                                    <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
-                                    <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
-                                    <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
-                                    <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
-                                    <div class="price_data"> <li class="title"> Prezzo: 
-                                            <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="flex-container" id="nB">
-                            <button class="noleggioBtn" id="${i}">
-                                NOLEGGIA
-                            </button>
-                        </div>
-
+        /*questo è il div senza le aggiunte 
+        div = $(`<div id="carousel-deck" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+                    <ol class="carousel-indicators">
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
                     </div>
-            </div>`);  class="card-img-top"*/
-
-            div = $(`<div class="card" >
-                        <img class="post_image" src="${ProductInfo[i].image}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="title">${ProductInfo[i].name}</h5>
-                            <h4 class="title">${ProductInfo[i].brand}</h5>
-                            <div class="details">
-                                <ul class="d-flex flex-wrap pl-0">
-                                    <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
-                                    <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
-                                    <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
-                                    <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
-                                    <div class="price_data"> <li class="title"> Prezzo: 
-                                            <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
-                                </ul>
-                            </div>
-                        </div>
-                </div>`);
+                <a class="left carousel-control" href="#carousel-deck"
+                    data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span><span
+                        class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-deck"
+                    data-slide="next"><span
+                        class="glyphicon glyphicon-chevron-right"></span><span
+                        class="sr-only">Next</span>
+                </a>
+            </div>`);
 
         $("#main_page").append(div);
-            
+
+        //adesso va riempito
+        var markup = '';
+
+        for (let i in ProductInfo) {
+            markup += '<li data-target="#carousel-deck" data-slide-to="' + ProductInfo[i].name + '"></li>';
+        }
+
+        $('#carousel-deck .carousel-indicators').html(markup);
+        markup = '';
+
+        for (let i in ProductInfo) {
+            markup += '<div class="item">';
+            markup += '<img src=" '+ ProductInfo[i].image +' " style="width:100%;">'
+            markup += '</div>';
+        }
+
+        $('#carousel-deck .carousel-inner').html(markup);
+        $('#carousel-deck .item').first().addClass('active');
+        $('#carousel-deck .carousel-indicators > li').first().addClass('active');
+        $('#carousel-deck').carousel({
+            pause: true,
+            interval: false
+        });*/
+
+        div = $(`<div id="myCarousel" class="carousel slide" data-mdb-ride="carousel" >
+                <div class="carousel-inner">
+                </div>
+                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="color:black; font-size=x-large"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>`);
+
+        $("#main_page").append(div);
+
+        var items = [];
+
+        for(let i in ProductInfo) {
+        var item = ''
+            +'<div class="carousel-item">'
+            + `<img class="post_image" `
+            +       ` src="${ProductInfo[i].image}" alt="photo of ${ProductInfo[i].name}">`
+            +  `<div class="carousel-caption">`
+            +    `<h3 class="title">${ProductInfo[i].name}</h5>
+                    <h4 class="title">${ProductInfo[i].brand}</h5>
+                    <div class="details">
+                        <ul class="d-flex flex-wrap pl-0">
+                            <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
+                            <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
+                            <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
+                            <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                            <div class="price_data"> <li class="title"> Prezzo: 
+                                    <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
+                        </ul>
+                    </div>`
+            +  '</div>'
+            +'</div>'
+        items.push(item);
+        }
+        var myCarouselEl = document.getElementById("myCarousel");
+        var carouselInnerEl = myCarouselEl.getElementsByClassName("carousel-inner")[0];
+        carouselInnerEl.innerHTML =items.join("\n");
+        carouselInnerEl.firstElementChild.className += " active";
+        $(myCarouselEl).carousel({interval: false});
+
+    }
+
+    else {
+        for (let i in ProductInfo) {
+            let div = null;
+
+                /*div = $(`<div class="boat-images" data-toggle="modal" data-target="#boatModal">
+                        <div class="boat">
+                            <img class="post_image" src="${ProductInfo[i].image}"></img>
+                            <div class="boat_info">
+                                <h3 class="title">${ProductInfo[i].name}</h5>
+                                <h4 class="title">${ProductInfo[i].brand}</h5>
+                                <div class="details">
+                                    <ul class="d-flex flex-wrap pl-0">
+                                        <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
+                                        <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
+                                        <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
+                                        <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                                        <div class="price_data"> <li class="title"> Prezzo: 
+                                                <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="flex-container" id="nB">
+                                <button class="noleggioBtn" id="${i}">
+                                    NOLEGGIA
+                                </button>
+                            </div>
+
+                        </div>
+                </div>`);  class="card-img-top"*/
+
+                div = $(`<div class="card" >
+                            <img class="post_image" src="${ProductInfo[i].image}" alt="Card image cap">
+                            <div class="card-body">
+                                    <h3 class="title">${ProductInfo[i].name}</h5>
+                                    <h4 class="title">${ProductInfo[i].brand}</h5>
+                                    <div class="details">
+                                        <ul class="d-flex flex-wrap pl-0">
+                                            <li class="title">Potenza:<h5 class="data"> ${ProductInfo[i].power} </h5> </li>
+                                            <li class="title">Lunghezza:<h5 class="data"> ${ProductInfo[i].length} </h5> </li>
+                                            <li class="title">Ospiti:<h5 class="data"> ${ProductInfo[i].guests} </h5> </li>
+                                            <li class="title">Anno:<h5 class="data"> ${ProductInfo[i].year} </h5> </li>
+                                            <div class="price_data"> <li class="title"> Prezzo: 
+                                                    <h5 class="data"> ${ProductInfo[i].price} </h5> </li> </div>
+                                        </ul>
+                                    </div>
+                            </div>
+
+                            <div class="card-footer" >
+                                <button type="button" class="noleggioBtn" id="${i}">
+                                    NOLEGGIA
+                                </button>
+                            </div>
+
+                    </div>`);
+
+            $("#main_page").append(div);
+                
+        }
     }
 
     //$("#main_page").addClass('boat-images');
 }
 
-$(document).on('click', '.noleggioBtn', function () {
+$(document).on('click', ".post_image", function () {
     console.log(this.id);
 
     var x = this.id;
 
     $("#introduzione").empty();
     $("#main_page").empty();
+
+    $('.datepicker').datepicker();
 
     let div = null;
 
@@ -252,10 +360,12 @@ $(document).on('click', '.noleggioBtn', function () {
                                      
             </div>
             
-            <div class="bg-white border rounded-5">
-                <section class="w-100 p-4 d-flex justify-content-center pb-4">
-                    <!-- datepicker -->
-                </section>
+            <div class="flex-container">
+                <div class="flex-element">
+                    <input placeholder="Scegli una data" class="form-control hasDatepicker">
+                        
+                    </input>
+                </div>
             </div>
             
             
@@ -267,4 +377,4 @@ $(document).on('click', '.noleggioBtn', function () {
 
     console.log(nameLoggedIn);
 
-});
+}); 
