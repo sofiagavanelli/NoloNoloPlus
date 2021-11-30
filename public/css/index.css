@@ -5,6 +5,8 @@
     font-size: 15px;
 
     margin: 0;
+
+    border: 1px solid red;
 }
 
 button:focus{
@@ -48,6 +50,10 @@ button:focus{
     justify-content: center;
 }
 
+#main_page {
+    padding-bottom: 4vh;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -63,8 +69,12 @@ button:focus{
     background-color: lightgray;
 }
 
+.card-footer {
+    justify-content: center;
+}
+
 /**** gestisce i div con le immagini e i dati degli yacht *****/
-.boat-images, .card {
+.boat-images, .card, .carousel-item {
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;
@@ -74,6 +84,8 @@ button:focus{
     width: 20%;
     overflow: auto;
     height: 70vh;
+
+    z-index: -1;
 }
 
 .data, .title{
@@ -151,6 +163,18 @@ button:focus{
     padding-top: 10vh;
 }
 
+#footer {
+    /*(up-right-down-left)*/
+    justify-content: space-around;
+
+    background-color: lightcyan;
+    padding: 3vh 5vw 3vh 5vw;
+}
+
+.element {
+    justify-content: center;
+}
+
 /************************************** */
 /*** piccoli schermi*/
 
@@ -199,6 +223,18 @@ button:focus{
 /*** "mobile first" */
 @media screen and (max-width: 600px) {
 
+    #myCarousel {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .carousel-inner {
+        justify-content: center;
+        
+        width: auto;
+    }
+
     #noleggiocard {
         display: flex;
         flex-direction: column;
@@ -220,7 +256,7 @@ button:focus{
         height: 4rem;
     }
 
-    .boat-images, .card {
+    .boat-images, .card, .carousel-item, .carousel-item:active {
         background-color: green;
         float: left;
         border: 1px solid #86B3D1;
@@ -230,7 +266,6 @@ button:focus{
         /*padding: 1rem;*/
         width: 80%;
         overflow: auto; 
-        height: 40vh;
     }
 
     .post_image {
@@ -238,6 +273,14 @@ button:focus{
         width: 100%;
         padding-bottom: 0.2rem;
         /*border-radius: 0.2rem;*/
+    }
+
+    #footer {
+        /*(up-right-down-left)*/
+        justify-content: center; 
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 
 }
