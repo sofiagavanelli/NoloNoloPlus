@@ -156,6 +156,10 @@ function openCalc(){
 
 }
 
+//$(document).on('click', '.click-image', function () {
+//console.log($('.post_image'))
+
+
 function populate(ProductInfo){
 
 
@@ -288,7 +292,7 @@ function populate(ProductInfo){
                         </div>
                 </div>`);  class="card-img-top"*/
 
-                div = $(`<div class="card" >
+                div = $(`<div class="card">
                             <img class="post_image" src="${ProductInfo[i].image}" alt="Card image cap">
                             <div class="card-body">
                                     <h3 class="title">${ProductInfo[i].name}</h5>
@@ -305,7 +309,7 @@ function populate(ProductInfo){
                                     </div>
                             </div>
 
-                            <div class="card-footer" >
+                            <div class="card-footer">
                                 <button type="button" class="noleggioBtn" id="${i}">
                                     NOLEGGIA
                                 </button>
@@ -321,60 +325,66 @@ function populate(ProductInfo){
     //$("#main_page").addClass('boat-images');
 }
 
-$(document).on('click', ".post_image", function () {
-    console.log(this.id);
+//$('.post_image').click(function () {
 
-    var x = this.id;
+function openRentPage() {
+        //function openRent(btnID) {
+        console.log(this.id);
 
-    $("#introduzione").empty();
-    $("#main_page").empty();
-
-    $('.datepicker').datepicker();
-
-    let div = null;
-
-        //forse in questa parte l'immagine si può togliere
-
-        div = $(`<div class="flex-container" id="noleggiocard">
-                    <div class="flex-container" id="leftinfo">
-                        <div class="flex-element">
-                            <img class="post_image" src="${prodARRAY[x].image}"></img>
-                        </div>
-                        <div class="flex-element">
-                            <h3 class="title">${prodARRAY[x].name}</h5>
-                            <h4 class="title">${prodARRAY[x].brand}</h5>
-                            <div class="details">
-                                <ul class="d-flex flex-wrap pl-0">
-                                    <li class="title">Potenza:<h5 class="data"> ${prodARRAY[x].power} </h5> </li>
-                                    <li class="title">Lunghezza:<h5 class="data"> ${prodARRAY[x].length} </h5> </li>
-                                    <li class="title">Ospiti:<h5 class="data"> ${prodARRAY[x].guests} </h5> </li>
-                                    <li class="title">Anno:<h5 class="data"> ${prodARRAY[x].year} </h5> </li>
-                                    <li class="title"> Prezzo: <h5 class="data"> ${prodARRAY[x].price} </h5> </li>
-                                </ul>
+        console.log("sono dentro");
+    
+        var x = this.id;
+    
+        $("#introduzione").empty();
+        $("#main_page").empty();
+    
+        $('.datepicker').datepicker();
+    
+        let div = null;
+    
+            //forse in questa parte l'immagine si può togliere
+    
+            div = $(`<div class="flex-container" id="noleggiocard">
+                        <div class="flex-container" id="leftinfo">
+                            <div class="flex-element">
+                                <img class="post_image" src="${prodARRAY[x].image}"></img>
+                            </div>
+                            <div class="flex-element">
+                                <h3 class="title">${prodARRAY[x].name}</h5>
+                                <h4 class="title">${prodARRAY[x].brand}</h5>
+                                <div class="details">
+                                    <ul class="d-flex flex-wrap pl-0">
+                                        <li class="title">Potenza:<h5 class="data"> ${prodARRAY[x].power} </h5> </li>
+                                        <li class="title">Lunghezza:<h5 class="data"> ${prodARRAY[x].length} </h5> </li>
+                                        <li class="title">Ospiti:<h5 class="data"> ${prodARRAY[x].guests} </h5> </li>
+                                        <li class="title">Anno:<h5 class="data"> ${prodARRAY[x].year} </h5> </li>
+                                        <li class="title"> Prezzo: <h5 class="data"> ${prodARRAY[x].price} </h5> </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex-element">
-                        tutte le cose per il noleggio !
-                    </div>
-                                     
-            </div>
-            
-            <div class="flex-container">
-                <div class="flex-element">
-                    <input placeholder="Scegli una data" class="form-control hasDatepicker">
-                        
-                    </input>
+                        <div class="flex-element">
+                            tutte le cose per il noleggio !
+                        </div>
+                                         
                 </div>
-            </div>
-            
-            
-            `);
-
-    document.getElementById("main_page").style.justifyContent = 'left';
-
-    $("#main_page").append(div);
-
-    console.log(nameLoggedIn);
-
-}); 
+                
+                <div class="flex-container">
+                    <div class="flex-element">
+                        <input placeholder="Scegli una data" class="form-control hasDatepicker">
+                            
+                        </input>
+                    </div>
+                </div>
+                
+                
+                `);
+    
+        document.getElementById("main_page").style.justifyContent = 'left';
+    
+        $("#main_page").append(div);
+    
+        console.log(nameLoggedIn);
+    
+    }
+    //); 
