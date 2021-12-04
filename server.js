@@ -28,13 +28,11 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 /*var client = */require('./backend/client-module.js')(app);
 /*var manager = *require('./backend/manager-module.js')(app);*/
 
-
-
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
 require("./db");
 
 
-/*Home page VERSIONE NO VUE */
+/*Home page VERSIONE NO VUE *
 app.get("/",function (req, res) {
     fs.readFile("index.html", function (err, data) {
         if (err) {
@@ -47,11 +45,15 @@ app.get("/",function (req, res) {
         return res.end();
     }); 
     
-});
+});*/
 
 /********************** versione vue 
+ * app.get("/", (req, res) => {
+  res.sendFile(process.cwd() + '/my-app/dist/index.html');
+});
+*/
 app.get("/",function (req, res) {
-    res.sendFile(path.join(__dirname + "/indexvue.html"));
+    res.sendFile(path.join(__dirname + '/indexvue.html'));
 
     //nella vecchia versione funzionava così:
     /*fs.readFile("indexvue.html", function (err, data) {
@@ -63,9 +65,9 @@ app.get("/",function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
-    }); 
+    }); */
     
-});*/
+});/*/
 
 //Ambiente client
 /*app.get('/client-module', function (req, res) {

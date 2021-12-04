@@ -4,7 +4,7 @@
 
 
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">Twitter Client</b-navbar-brand>
+    <b-navbar-brand href="#">Nolo Nolo Plus</b-navbar-brand>
     <b-col cols='6'>
       <b-input-group class="noborder">
         <b-form-input id="ricerca" placeholder="Search..."></b-form-input>
@@ -13,7 +13,7 @@
         </b-input-group-append>
       </b-input-group>
     </b-col>
-    </b-navbar>
+  </b-navbar>
 
 
 </div>
@@ -30,26 +30,6 @@ export default {
   },
 
   methods: {
-
-    cerca() {
-
-    },
-
-    getUtente(name) {
-      
-    },
-
-    smista() {
-      
-    },
-
-    esempio() {
-     
-    },
-
-    sortArray() {
-      
-    }
 
   },//methods
 }
