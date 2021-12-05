@@ -203,7 +203,7 @@ ul li :hover a{
   right: 15px;
 }
 
-#btn-del{
+.btn-del{
   background-color: #eb5248;
   border: #000;
   border-radius: 25px;

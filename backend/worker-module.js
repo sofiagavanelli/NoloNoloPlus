@@ -14,6 +14,7 @@ module.exports = function (app) {
             res.end();
         });
     });
+    
 
     app.get('/contacts', function (req, res) {
 
@@ -51,5 +52,37 @@ module.exports = function (app) {
     });
 
     //app.get
+
+    app.get('/removeClient/:idDel', function (req, res){
+
+        var id = req.param.id;
+
+        console.log(id);
+        
+        db.deleteClient(id).then(data => {
+
+            console.log(data);
+            
+            res.end();
+        });
+
+
+    });
+
+
+/* app.delete('/allClients/:id', (req, res, next) => {
+    db.deleteClient({_id: req.params.id}).then(
+      () => {
+        res.status(200);
+        console.log("deleted");
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        });
+      }
+    );
+  });*/
 
 };

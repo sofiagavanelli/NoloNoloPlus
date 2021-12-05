@@ -3,6 +3,7 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 var rentARRAY = 0;
 var WORKERINFO = 0;
+var p=0;
 
 
 /************************* */
@@ -117,7 +118,8 @@ function openClient() {
                        <td>${ClientInfo[i].name}</td>
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
-                       <td><button id= "btn-upd" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-user-edit"></i></button><button id= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
+                       <td><button id= "btn-upd" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-user-edit"></i></button>
+                       <button  id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
                       </tr>
                     </table>
             `);
@@ -126,6 +128,30 @@ function openClient() {
 } 
 }
 
+//$(document).on('click', '.btn-del', openAlert(this.id));
+
+function openAlert(idDel) {
+
+  console.log(idDel);
+
+  alert("Are you sure you want to delete this client?");
+
+  if(idDel) {
+    $.ajax({
+    type: 'GET',
+    url: '/removeClient/' + idDel ,
+    success: function (data) {
+      console.log("sono dentro success");
+
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        console.log("errore nell'eliminare");
+    }
+    });
+  }
+
+
+}
 /*********************************** */
 
 
@@ -263,9 +289,7 @@ function openRents() {
          } 
 }
 
-function openContacts() {
-
-              
+function openContacts() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
                      
