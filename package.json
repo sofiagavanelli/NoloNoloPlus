@@ -1,4 +1,7 @@
 {
+  "name": "",
+  "version": "",
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -6,28 +9,28 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap-vue": "^2.21.2",
     "cookie-parser": "^1.4.5",
+    "core-js": "^3.6.5",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
     "express-session": "^1.17.2",
     "formidable": "^1.2.2",
     "fs-extra": "^10.0.0",
-    "googleapis": "^39.2.0",
+    "googleapis": "^92.0.0",
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.11",
     "nodemon": "^2.0.13",
     "react": "^17.0.2",
-    "bootstrap-vue": "^2.21.2",
-    "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "^4.5.15",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^8.4.0",
+    "eslint-plugin-vue": "^8.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -48,5 +51,7 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "_id": "@",
+  "readme": "ERROR: No README data found!"
 }

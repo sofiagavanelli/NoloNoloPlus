@@ -4,7 +4,7 @@ con Javascript e JQuery. Le altre applicazioni con due framework diversi tra Ang
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
-var formidable = require('formidable');
+//var formidable = require('formidable');
 var process = require('process');
 var app = express();
 
@@ -47,16 +47,11 @@ app.get("/",function (req, res) {
     
 });*/
 
-/********************** versione vue 
- * app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + '/my-app/dist/index.html');
-});
-*/
-app.get("/",function (req, res) {
-    res.sendFile(path.join(__dirname + '/indexvue.html'));
+/********************** versione SENZA vue */
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
 
-    //nella vecchia versione funzionava così:
-    /*fs.readFile("indexvue.html", function (err, data) {
+    fs.readFile("index.html", function (err, data) {
         if (err) {
             res.writeHead(404, { 'Content-Type': 'text/html' });
             return res.end("<h1>404 Not Found</h1>");
@@ -65,13 +60,14 @@ app.get("/",function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
-    }); */
-    
-});/*/
+    });
 
-//Ambiente client
-/*app.get('/client-module', function (req, res) {
-    res.sendFile(path.join(__dirname + "/index.html"));
+});
+
+/* VERSIONE CON VUE
+app.get("/",function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+    
 });*/
 
 //Ambiente worker
