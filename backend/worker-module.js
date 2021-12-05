@@ -1,6 +1,7 @@
 var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
+
 /// definizione della chiamata get
 
 module.exports = function (app) {
@@ -53,21 +54,21 @@ module.exports = function (app) {
 
     //app.get
 
-    app.get('/removeClient/:idDel', function (req, res){
+    app.delete('/allClients/:id', async(req, res) => {
 
-        var id = req.param.id;
+        const id = req.params.id;
+         db.deleteClient(id)
+        .exec()
+        .then(
+          () => {
+          res.status(200);
+          console.log("errore nel delete");
+          }
+        )
+        .catch(err => res.status(500).json({message: "Error in delete, error:err"}))
 
-        console.log(id);
-        
-        db.deleteClient(id).then(data => {
-
-            console.log(data);
-            
-            res.end();
         });
 
-
-    });
 
 
 /* app.delete('/allClients/:id', (req, res, next) => {

@@ -111,6 +111,7 @@ module.exports = {
     },
 
     //delete functions: Schema.deleteOne(options); Schema.deleteOne(options, function (err) {});
+
     deleteClient: async (id) => {
         return Promise.resolve(Client.findOneAndDelete({ client_id : id }));
     },

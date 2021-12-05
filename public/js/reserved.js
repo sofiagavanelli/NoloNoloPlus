@@ -138,8 +138,8 @@ function openAlert(idDel) {
 
   if(idDel) {
     $.ajax({
-    type: 'GET',
-    url: '/removeClient/' + idDel ,
+    type: 'DELETE',
+    url: '/allClients/' + idDel ,
     success: function (data) {
       console.log("sono dentro success");
 
