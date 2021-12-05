@@ -49,9 +49,9 @@ app.get("/",function (req, res) {
 
 /********************** versione SENZA vue */
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + "/index.html"));
 
-    fs.readFile("index.html", function (err, data) {
+    /*fs.readFile("index.html", function (err, data) {
         if (err) {
             res.writeHead(404, { 'Content-Type': 'text/html' });
             return res.end("<h1>404 Not Found</h1>");
@@ -60,8 +60,8 @@ app.get("/", (req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
-    });
-
+    });*/
+    
 });
 
 /* VERSIONE CON VUE
