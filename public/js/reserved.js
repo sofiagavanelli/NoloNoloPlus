@@ -149,6 +149,7 @@ function openAlert(idDel) {
     }
     });
   }
+  //location.reload()
 
 
 }

@@ -58,14 +58,11 @@ module.exports = function (app) {
 
         const id = req.params.id;
          db.deleteClient(id)
-        .exec()
         .then(
           () => {
           res.status(200);
-          console.log("errore nel delete");
           }
         )
-        .catch(err => res.status(500).json({message: "Error in delete, error:err"}))
 
         });
 
