@@ -1,7 +1,7 @@
 console.log("sono dentro main");
 
 import Vue from 'vue'
-import App from '../src/App.vue'
+import App from './App.vue'
 
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
