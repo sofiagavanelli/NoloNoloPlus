@@ -1,57 +1,29 @@
 {
-  "name": "",
-  "version": "",
-  "private": true,
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "start": "/server.js --exec 'npm run lint && node'",
+    "lint": "/node_modules/bin/eslint **/*.js"
   },
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "bootstrap-vue": "^2.21.2",
-    "cookie-parser": "^1.4.5",
-    "core-js": "^3.6.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.4",
-    "express-session": "^1.17.2",
-    "formidable": "^1.2.2",
-    "fs-extra": "^10.0.0",
-    "googleapis": "^92.0.0",
+    "nodemon": "^2.0.14",
+    
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.11",
-    "nodemon": "^2.0.13",
     "react": "^17.0.2",
-    "vue": "^2.6.11"
+
+    "formidable": "^1.2.2",
+    "fs-extra": "^10.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-eslint": "^4.5.15",
-    "@vue/cli-service": "^4.5.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^8.4.0",
-    "eslint-plugin-vue": "^8.1.1",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "_id": "@",
-  "readme": "ERROR: No README data found!"
+    "eslint": "^8.1.0",
+    "eslint-plugin-vue": "^8.0.3"
+  }
 }
