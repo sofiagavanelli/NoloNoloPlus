@@ -57,9 +57,7 @@ module.exports = function (app) {
     app.delete('/allClients/:id', async(req, res) => {
 
         const id = req.params.id;
-         db.deleteClient(id)
-        .then(
-          () => {
+         db.deleteClient(id).then(() => {
           res.status(200);
           }
         )
