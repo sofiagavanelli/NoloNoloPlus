@@ -334,3 +334,20 @@ form.example input[type=text] {
 .card-title{
   color: #eb5248;
 }
+.btn-mod{
+  background-color: #5bce7d;
+  border: #000;
+  border-radius: 25px;
+  padding: 6px 20px;
+  float:right;
+
+}
+.btn-d{
+  background-color: #eb5248;
+  border: #000;
+  border-radius: 25px;
+  padding: 6px 20px;
+  margin-left: 5px;
+  right: 5px;
+  float:right;
+}

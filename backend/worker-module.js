@@ -54,13 +54,28 @@ module.exports = function (app) {
 
     //app.get
 
-    app.delete('/allClients/:id', async(req, res) => {
+    app.delete('/allClients/:id', function(req, res){
 
         const id = req.params.id;
          db.deleteClient(id)
         .then(
           () => {
           res.status(200);
+          res.end();
+          }
+        )
+
+        });
+
+    app.delete('/allRents/:id', function(req, res){
+
+        const id = req.params.id;
+        console.log(id);
+         db.deleteRental(id)
+        .then(
+          () => {
+          res.status(200);
+          res.end();
           }
         )
 

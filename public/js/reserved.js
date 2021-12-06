@@ -3,7 +3,6 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 var rentARRAY = 0;
 var WORKERINFO = 0;
-var p=0;
 
 
 /************************* */
@@ -13,7 +12,7 @@ function login(){
   _id = document.getElementById("userWorker").value;
   _pass = document.getElementById("passWorker").value;
 
-  console.log(_id, _pass);
+  //console.log(_id, _pass);
   
   if(_id) {
       $.ajax({
@@ -25,16 +24,16 @@ function login(){
 
               acceptWorker(WORKERINFO, _pass);
 
-              console.log("appartieni ai worker");
+              //console.log("appartieni ai worker");
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
-              console.log("errori con login");
+              //console.log("errori con login");
           }
       });
   }
   else {
-      console.log("not a valid id");
+      //console.log("not a valid id");
   }
 
 }
@@ -49,7 +48,7 @@ function acceptWorker(data, insertedP) {
           document.getElementById("managBtn").disabled = false;
         }
         else if(document.getElementById("managCheck"))
-          console.log("non sei davvero un manager, stai attento");
+          //console.log("non sei davvero un manager, stai attento");
 
         //magari si aggiunge un avviso che non è davvero un manager
         $('#loginModal').modal('toggle'); 
@@ -80,7 +79,7 @@ function openClient() {
         populate(clientARRAY);
       },
       error: function (xhr, ajaxOptions, thrownError) {
-          console.log("errore nei clienti");
+          //console.log("errore nei clienti");
       }
   });
 
@@ -104,8 +103,8 @@ function openClient() {
 
   function populate(ClientInfo){
 
-      console.log("sono dentro populate clienti");
-      console.log(ClientInfo);
+      //console.log("sono dentro populate clienti");
+      //console.log(ClientInfo);
 
       
   
@@ -119,7 +118,7 @@ function openClient() {
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
                        <td><button id= "btn-upd" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-user-edit"></i></button>
-                       <button  id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
+                       <button id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
                       </tr>
                     </table>
             `);
@@ -128,7 +127,6 @@ function openClient() {
 } 
 }
 
-//$(document).on('click', '.btn-del', openAlert(this.id));
 
 function openAlert(idDel) {
 
@@ -141,11 +139,11 @@ function openAlert(idDel) {
     type: 'DELETE',
     url: '/allClients/' + idDel ,
     success: function (data) {
-      console.log("sono dentro success");
+      //console.log("sono dentro success");
 
     },
     error: function (xhr, ajaxOptions, thrownError) {
-        console.log("errore nell'eliminare");
+        //console.log("errore nell'eliminare");
     }
     });
   }
@@ -170,15 +168,13 @@ function openInventory() {
           inventoryARRAY = JSON.parse(data);
   
           populateP(inventoryARRAY);
+
   
-  
-            console.log(ProdInfo);
-  
-            console.log("sono dentro success");
+            //console.log("sono dentro success");
         },
         //Non è stata trovata la storia
         error: function (xhr, ajaxOptions, thrownError) {
-            console.log("La storia selezionata non esiste");
+            //console.log("La storia selezionata non esiste");
         }
     });
     div = $(`
@@ -205,11 +201,9 @@ function openInventory() {
   
     function populateP(ProdInfo){
   
-        console.log("sono dentro populate prodotti");
-        console.log(ProdInfo);
-  
-        
-    
+        //console.log("sono dentro populate prodotti");
+        //console.log(ProdInfo);
+
         for (let i in ProdInfo) {
             let div = null;
   
@@ -220,7 +214,7 @@ function openInventory() {
                          <td>${ProdInfo[i].brand}</td>
                          <td>${ProdInfo[i].prod_id}</td>
                          <td>${ProdInfo[i].price}</td>
-                         <td><p class="status">${ProdInfo[i].available}<p></td>
+                         <td>${ProdInfo[i].available}<p></td>
                          </tr>
                       </table>
   
@@ -231,7 +225,7 @@ function openInventory() {
   }
   
       } }
-
+      
 /************************************/
 
 function openRents() {
@@ -247,7 +241,7 @@ function openRents() {
     },
             
     error: function (xhr, ajaxOptions, thrownError) {  
-      console.log("errore nei noleggi");       
+      //console.log("errore nei noleggi");       
     }
     });
   div = $(`         
@@ -263,9 +257,9 @@ function openRents() {
   function populate(RentInfo){
       
         
-    console.log("sono dentro populate noleggi");
+    //console.log("sono dentro populate noleggi");
         
-    console.log(RentInfo);
+    //console.log(RentInfo);
         
     for (let i in RentInfo) {
           
@@ -280,6 +274,8 @@ function openRents() {
                   <h5 class="card-title">Rental: ${RentInfo[i].rental_id}</h5>
                   <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}</p>
                   <p class="card-text">Start date: ${RentInfo[i].start} <br> End date: ${RentInfo[i].end}</p>
+                  <button id="${RentInfo[i].rental_id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+                  <button class="btn-mod">Modify</button>
                 </div>
               </div>
             </div>
@@ -289,6 +285,31 @@ function openRents() {
              }
          } 
 }
+
+function openAlertRents(idR) {
+
+  console.log(idR);
+
+  alert("Are you sure you want to delete this rental?");
+
+  if(idR) {
+    $.ajax({
+    type: 'DELETE',
+    url: '/allRents/' + idR ,
+    success: function (data) {
+      console.log("sono dentro success dei noleggi");
+
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        console.log("errore nell'eliminare il noleggio");
+    }
+    });
+  }
+  //location.reload()
+
+
+}
+///////////////////////////////////////////////////////////////////////
 
 function openContacts() {           
   $( "#ctable" ).empty();

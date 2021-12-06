@@ -121,7 +121,7 @@ module.exports = {
     },
 
     deleteRental: async (id) => {
-        Noleggio.deleteOne({rent_id: id})
+        return Promise.resolve(Noleggio.findOneAndDelete({ rental_id : id }));
     },
 
 };
