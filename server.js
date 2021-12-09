@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
         return res.end();
     });*
     
-});
+});*/
 
 /* VERSIONE CON VUE
 app.get("/",function (req, res) {
