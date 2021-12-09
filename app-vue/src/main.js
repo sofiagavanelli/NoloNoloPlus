@@ -24,6 +24,5 @@ new Vue({
 }).$mount('#app')
 
 //per poterlo usare nelle get -- questo file deve diventare uguale a main_page
-//import db from 'C:\Users\sofia\nolonolo-worker\db.js'
 
 

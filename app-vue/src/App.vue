@@ -15,13 +15,14 @@
   <div id="main_page" class="flex-container">
       <!--QUI APPAIONO LE COSE!-->
       <!-- e qui poi inserisco i vari componenti diversi-->
+      <IntroPage />
   </div>
 
   <div id="calcolatrice">
     <!--devo far aprire il component al click-->
     <b-button id="calcBtn" data-toggle="modal" data-target="#calcModal">
       <!--non funziona font awesome -->
-      <font-awesome-icon :icon="['fas', 'calculator']" />
+      <font-awesome-icon icon="fas fa-calculator" />
     </b-button>
   </div>
 
@@ -39,7 +40,7 @@
       </div>
       <div class="element">
         <h3 class="title">SOCI </h3> 
-          Francesca Chiriacò <!--come si manda a capo se non va il br?--> Sofia Gavanelli Federica Palestini
+          Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
       </div>
       </div>
   </footer>
@@ -49,11 +50,13 @@
 
 <script>
 import Navbar from './components/Navbar.vue'
+import IntroPage from './components/IntroPage.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
+    IntroPage
   }
 }
 </script>
