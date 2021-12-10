@@ -14,14 +14,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(express.static(process.cwd() + '/my-app/dist'));
+app.use(express.static(process.cwd() + '/dist'));
 
 const db = require("./db");
 
 // simple route
 app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + '/my-app/dist/index.html');
+  res.sendFile(process.cwd() + '/dist/index.html');
 });
+
+
 
 app.get('/prods', function (req, res) {
     //lettura dei clients dal db
@@ -30,8 +32,11 @@ app.get('/prods', function (req, res) {
 
     db.getProds().then(prodsinfo => {
 
-        res.write(JSON.stringify(prodsinfo));
-        res.end();
+      console.log("sono in get prods " + prodsinfo);
+
+      res.write(JSON.stringify(prodsinfo));
+      res.end();
+
     });
 
 });
