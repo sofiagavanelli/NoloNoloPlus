@@ -32,11 +32,7 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 require("./db");
 
 
-<<<<<<< HEAD
-/*Home page VERSIONE VUE */
-=======
 /*Home page VERSIONE VUE *
->>>>>>> 8fc0f4ffd7c1d104edafc3950f9439eb2af0b127
 app.get("/",function (req, res) {
 
     res.sendFile(path.join(__dirname + "/app-vue/dist/index.html"));

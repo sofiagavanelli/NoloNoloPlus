@@ -192,15 +192,6 @@ ul li :hover a{
   height: 20vh;
   margin: 3vh;
 }
-#table{
-  position: relative;
-  top: 10vh;
-  left: 16vw;
-  width: 80vw;
-  height: 20vh;
-  margin: 3vh;
-}
-
 
 #btn-upd{
 
@@ -267,9 +258,6 @@ ul li :hover a{
     background-color: #f2f2f2;
     
   }
-
-#styled-tab tr:hover {
-    background-color: rgb(213, 236, 247);}
   
 #styled-tab th {
     width: 10%;

@@ -62,6 +62,7 @@ function acceptWorker(data, insertedP) {
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
   
 
     $.ajax({
@@ -148,7 +149,8 @@ function openInventory() {
  
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
+  $(".styled-tab").css("-webkit-filter", "blur(0px)");
   $.ajax({
     type: 'GET',
       url: '/prods' ,
@@ -170,7 +172,7 @@ function openInventory() {
              <input type="text" placeholder="Search product..." name="search">
              <button type="submit"><i class="fa fa-search"></i></button>
 
-             <button id= "btn-add" onclick= "openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>
+             <button id= "btn-add" onclick="openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>
 
              </form>
 
@@ -209,15 +211,11 @@ function openInventory() {
               $("#ctable2").append(div);
       
   
-  }
-  
-      
+  }      
 } }
 
 function openModalM(){
-  
-  $( "#ctable2" ).fadeTo( "fast" , 0.5, function() {
-  });
+  $("#ctable2").css("-webkit-filter", "blur(15px)");
   div = $(`   
     <div class="modal-dialog">
       <div style='width:100%; height: 80%; border-radius: 0px; margin:10%; background: #f3cfd5; overflow-y: auto;' class="modal-content">
@@ -298,14 +296,17 @@ function openModalM(){
             
   `);
               
-  $("#table").append(div);  
+  $("#ctable").append(div);  
+  
 }
+
      
 /************************************/
 
 function openRents() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
         
   $.ajax({
     type: 'GET',
@@ -383,6 +384,7 @@ function openAlertRents(idR) {
 function openContacts() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`                  
   <div style='left:0%;'class="card">                   
