@@ -12,7 +12,6 @@ function login(){
   _id = document.getElementById("userWorker").value;
   _pass = document.getElementById("passWorker").value;
 
-  //console.log(_id, _pass);
   
   if(_id) {
       $.ajax({
@@ -24,16 +23,15 @@ function login(){
 
               acceptWorker(WORKERINFO, _pass);
 
-              //console.log("appartieni ai worker");
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
-              //console.log("errori con login");
+
           }
       });
   }
   else {
-      //console.log("not a valid id");
+
   }
 
 }
@@ -48,9 +46,6 @@ function acceptWorker(data, insertedP) {
           document.getElementById("managBtn").disabled = false;
         }
         else if(document.getElementById("managCheck"))
-          //console.log("non sei davvero un manager, stai attento");
-
-        //magari si aggiunge un avviso che non è davvero un manager
         $('#loginModal').modal('toggle'); 
 
         var found = true;
@@ -79,7 +74,7 @@ function openClient() {
         populate(clientARRAY);
       },
       error: function (xhr, ajaxOptions, thrownError) {
-          //console.log("errore nei clienti");
+
       }
   });
 
@@ -103,11 +98,6 @@ function openClient() {
 
   function populate(ClientInfo){
 
-      //console.log("sono dentro populate clienti");
-      //console.log(ClientInfo);
-
-      
-  
       for (let i in ClientInfo) {
           let div = null;
 
@@ -139,11 +129,10 @@ function openAlert(idDel) {
     type: 'DELETE',
     url: '/allClients/' + idDel ,
     success: function (data) {
-      //console.log("sono dentro success");
 
     },
     error: function (xhr, ajaxOptions, thrownError) {
-        //console.log("errore nell'eliminare");
+
     }
     });
   }
@@ -169,12 +158,10 @@ function openInventory() {
   
           populateP(inventoryARRAY);
 
-  
-            //console.log("sono dentro success");
         },
-        //Non è stata trovata la storia
+
         error: function (xhr, ajaxOptions, thrownError) {
-            //console.log("La storia selezionata non esiste");
+
         }
     });
     div = $(`
@@ -183,7 +170,7 @@ function openInventory() {
              <input type="text" placeholder="Search product..." name="search">
              <button type="submit"><i class="fa fa-search"></i></button>
 
-             <button id= "btn-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus-circle"> Add item</i></button>
+             <button id= "btn-add" onclick= "openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>
 
              </form>
 
@@ -200,12 +187,12 @@ function openInventory() {
               $("#ctable").append(div);
   
     function populateP(ProdInfo){
-  
-        //console.log("sono dentro populate prodotti");
-        //console.log(ProdInfo);
 
         for (let i in ProdInfo) {
             let div = null;
+
+            /*if(ProdInfo[i].available)
+            var x='available'*/
   
               div = $(`
                       <table id="styled-tab">
@@ -224,8 +211,96 @@ function openInventory() {
   
   }
   
-      } }
       
+} }
+
+function openModalM(){
+  
+  $( "#ctable2" ).fadeTo( "fast" , 0.5, function() {
+  });
+  div = $(`   
+    <div class="modal-dialog">
+      <div style='width:100%; height: 80%; border-radius: 0px; margin:10%; background: #f3cfd5; overflow-y: auto;' class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Add new item</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+
+        <div class="modal-body">
+          
+        <form class="row g-3">
+          <div class="col-md-6">
+            <label for="inputProdID" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="inputProdID" placeholder="Enter ID">
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputProdName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputProdName" placeholder="Enter name">
+          </div>
+
+          <div class="col-12">
+            <br>
+            <label for="inputProdBrand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="inputProdBrand" placeholder="Enter brand">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdPow" class="form-label">Power</label>
+            <input type="text" class="form-control" id="inputProdPow" placeholder="...">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdG" class="form-label">Guests</label>
+            <input type="text" class="form-control" id="inputProdG" placeholder="...">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdL" class="form-label">Length</label>
+            <input type="text" class="form-control" id="inputProdL" placeholder="...">
+          </div>
+
+          <div class="col-md-6">
+            <br>
+            <label for="inputProdY" class="form-label">Year</label>
+            <input type="text" class="form-control" id="inputProdY" placeholder="...">
+          </div>
+
+          <div class="col-md-4">
+            <br>
+            <label for="inputProdPrice" class="form-label">Price</label>
+            <input type="text" class="form-control" id="inputProdPrice" placeholder="Enter price">
+          </div>
+          
+          <div class="col-md-4">
+            <br>
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-select">
+              <option selected>Choose...</option>
+              <option>Available</option>
+              <option>Not Available</option>
+            </select>
+          </div>
+          
+          </div>
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>     
+            
+  `);
+              
+  $("#table").append(div);  
+}
+     
 /************************************/
 
 function openRents() {
@@ -241,7 +316,7 @@ function openRents() {
     },
             
     error: function (xhr, ajaxOptions, thrownError) {  
-      //console.log("errore nei noleggi");       
+      
     }
     });
   div = $(`         
@@ -255,12 +330,7 @@ function openRents() {
     
       
   function populate(RentInfo){
-      
-        
-    //console.log("sono dentro populate noleggi");
-        
-    //console.log(RentInfo);
-        
+    
     for (let i in RentInfo) {
           
       let div = null;
@@ -288,8 +358,6 @@ function openRents() {
 
 function openAlertRents(idR) {
 
-  console.log(idR);
-
   alert("Are you sure you want to delete this rental?");
 
   if(idR) {
@@ -309,6 +377,7 @@ function openAlertRents(idR) {
 
 
 }
+
 ///////////////////////////////////////////////////////////////////////
 
 function openContacts() {           

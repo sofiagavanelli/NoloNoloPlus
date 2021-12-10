@@ -79,21 +79,4 @@ module.exports = function (app) {
 
         });
 
-
-
-/* app.delete('/allClients/:id', (req, res, next) => {
-    db.deleteClient({_id: req.params.id}).then(
-      () => {
-        res.status(200);
-        console.log("deleted");
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
-  });*/
-
 };

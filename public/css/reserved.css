@@ -192,6 +192,14 @@ ul li :hover a{
   height: 20vh;
   margin: 3vh;
 }
+#table{
+  position: relative;
+  top: 10vh;
+  left: 16vw;
+  width: 80vw;
+  height: 20vh;
+  margin: 3vh;
+}
 
 
 #btn-upd{
