@@ -32,10 +32,14 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 require("./db");
 
 
+<<<<<<< HEAD
 /*Home page VERSIONE VUE */
+=======
+/*Home page VERSIONE VUE *
+>>>>>>> 8fc0f4ffd7c1d104edafc3950f9439eb2af0b127
 app.get("/",function (req, res) {
 
-    res.sendFile(path.join(__dirname + "/app-vue/public/index.html"));
+    res.sendFile(path.join(__dirname + "/app-vue/dist/index.html"));
 
     /*fs.readFile("index.html", function (err, data) {
         if (err) {
@@ -46,7 +50,7 @@ app.get("/",function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
-    }); */
+    }); *
     
 });
 
@@ -65,13 +69,30 @@ app.get("/", (req, res) => {
         return res.end();
     });*
     
-});
+});*/
 
 /* VERSIONE CON VUE
 app.get("/",function (req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
     
 });*/
+
+//SI APRE DIRETTAMENTE IL WORKER
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + "/reserved.html"));
+  
+      /*fs.readFile("index.html", function (err, data) {
+          if (err) {
+              res.writeHead(404, { 'Content-Type': 'text/html' });
+              return res.end("<h1>404 Not Found</h1>");
+          }
+  
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.write(data);
+          return res.end();
+      });*/
+      
+  });
 
 //Ambiente worker
 app.get('/worker-module', function (req, res) {
