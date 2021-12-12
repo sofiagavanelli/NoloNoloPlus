@@ -329,7 +329,7 @@ form.example input[type=text] {
 }
 
 /* Remove extra left and right margins, due to padding */
-.row {
+.row2 {
   display: block;
   float: left;
   padding: 10px 10px;

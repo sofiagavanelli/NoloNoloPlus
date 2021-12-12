@@ -137,9 +137,7 @@ function openAlert(idDel) {
     }
     });
   }
-  //location.reload()
-
-
+  
 }
 /*********************************** */
 
@@ -217,19 +215,18 @@ function openInventory() {
 function openModalM(){
   $("#ctable2").css("-webkit-filter", "blur(15px)");
   div = $(`   
-    <div class="modal-dialog">
-      <div style='width:100%; height: 80%; border-radius: 0px; margin:10%; background: #f3cfd5; overflow-y: auto;' class="modal-content">
+    <div class="modal-dialog" id="modModal" style= 'max-width: 700px'>
+      <div style='z-index:1; width:100%; border-radius: 0px; margin: 0%; background: #f3cfd5;' class="modal-content">
         <div class="modal-header text-center">
           <h4 class="modal-title w-100 font-weight-bold">Add new item</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" id="modModal" onclick="closeModal()"class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
       </div>
 
         <div class="modal-body">
-          
         <form class="row g-3">
-          <div class="col-md-6">
+          <div class="col-md-6" >
             <label for="inputProdID" class="form-label">Product ID</label>
             <input type="text" class="form-control" id="inputProdID" placeholder="Enter ID">
           </div>
@@ -299,6 +296,13 @@ function openModalM(){
   $("#ctable").append(div);  
   
 }
+function closeModal() {
+
+  var x = document.getElementById("modModal");
+    x.style.display = "none";
+    $("#ctable2").css("-webkit-filter", "blur(0px)");
+  }
+    
 
      
 /************************************/
@@ -339,7 +343,7 @@ function openRents() {
             
       div = $(`
 
-          <div class="row">
+          <div class="row2">
             <div class="column">
               <div class="card">
                 <div class="card-body">
