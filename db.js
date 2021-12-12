@@ -61,7 +61,7 @@ module.exports = {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Noleggio({
-            rent_id: _prod + _client,
+            rent_id: _id,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,

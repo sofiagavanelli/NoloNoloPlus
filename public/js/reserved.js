@@ -346,7 +346,7 @@ function openRents() {
                   <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
                   <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}</p>
                   <p class="card-text">Start date: ${RentInfo[i].start} <br> End date: ${RentInfo[i].end}</p>
-                  <button id="${RentInfo[i].rental_id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+                  <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
                   <button class="btn-mod">Modify</button>
                 </div>
               </div>
