@@ -54,17 +54,17 @@ mounted: function() {
       
   })
   
-      .then((response) => {
-          this.prodInfo = response;
-          console.log(response);
+    .then((response) => {
+      this.prodInfo = response;
+      console.log(response);
           //this.sortArray();
           //this.loading = false;
           //document.getElementById('ricerca').value = '';
-          })
-          .catch((error) => {
-            //this.loading = false;
-            console.log(error);
-          });
+    })
+    .catch((error) => {
+      //this.loading = false;
+      console.log(error);
+    });
 
 
 }
