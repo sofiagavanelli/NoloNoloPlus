@@ -319,13 +319,31 @@ form.example input[type=text] {
   height: 30vh;
   width: 50vw;
 }
+/* Float four columns side by side */
+.column {
+  float: left;
+  padding: 0 10px;
+  display: block;
+  height: 30%;
+  
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  display: block;
+  float: left;
+  padding: 10px 10px;
+  width: 30%;
+  margin-left: auto;
+  margin-top: auto;
+}
 
 .card{
   margin-top: 15px;
   border-color: #4D6D9A;
   border: 2px solid;
-  left: 50%;
-  right: 50%;
+  
+
 }
 .card-title{
   color: #eb5248;

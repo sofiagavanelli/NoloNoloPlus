@@ -338,19 +338,20 @@ function openRents() {
       
             
       div = $(`
-            <div class="row">
-            <div class="col-sm-6">
+
+          <div class="row">
+            <div class="column">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Rental: ${RentInfo[i].rental_id}</h5>
+                  <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
                   <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}</p>
                   <p class="card-text">Start date: ${RentInfo[i].start} <br> End date: ${RentInfo[i].end}</p>
                   <button id="${RentInfo[i].rental_id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
                   <button class="btn-mod">Modify</button>
                 </div>
               </div>
-            </div>
-      
+            </div> 
+          <div>    
               `);
                $("#ctable2").append(div);
              }
