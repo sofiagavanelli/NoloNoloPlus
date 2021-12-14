@@ -6,7 +6,7 @@
             <b-navbar class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
                 <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
+                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
                 </b-button>
 
                 <a id="logoname" class="nav-item">NoloNoloPlus</a>

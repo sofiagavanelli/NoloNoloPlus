@@ -12,17 +12,18 @@
   </div>
 
   
-  <div id="main_page" class="flex-container">
-      <!--QUI APPAIONO LE COSE!-->
-      <!-- e qui poi inserisco i vari componenti diversi-->
-      <IntroPage />
+  <div>
+      <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
+      <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" -->
+      <IntroPage v-show="!toggle"  @id-to-rent="captureID" />
+      <RentPage v-show="toggle" />
   </div>
 
   <div id="calcolatrice">
     <!--devo far aprire il component al click-->
     <b-button id="calcBtn" data-toggle="modal" data-target="#calcModal">
       <!--non funziona font awesome -->
-      <font-awesome-icon icon="fas fa-calculator" />
+      <font-awesome-icon icon="calculator" />
     </b-button>
   </div>
 
@@ -32,7 +33,7 @@
     <div class="flex-container" id="footer">
       <div class="element">
         <h3 class="title">CONTATTI </h3> 
-          NoloNoloPlus.Yacht@gmail.com
+          nolonoloplus.yacht@gmail.com
       </div>
       <div class="element">
         <h3 class="title">DOVE TROVARCI </h3> 
@@ -51,13 +52,37 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
+import RentPage from './components/RentPage.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    IntroPage
+    IntroPage,
+    RentPage,
+    toggle: false,
+    rentId: Number
+  },
+
+  mounted: function() {
+
+
+  },
+
+  methods: {
+
+    captureID(_id) {
+      console.log(_id);
+      this.rentId = _id;
+
+      if(rentId)
+        toggle = !toggle;
+        
+    }
+
+    
   }
+
 }
 </script>
 
