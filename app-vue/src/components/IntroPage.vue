@@ -54,15 +54,15 @@
       </template-->  
       
       <!-- a schermo normale v-else-->
-      <template >
+      <template v-if="toggle">
         <!--proviamo il vfor -- cos'è la key? -->
-        <b-card v-for="item in prodInfo" :key="item.prod_id">
+        <b-card v-for="(item, index) in prodInfo" :key="item.prod_id">
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{item.name}} </h3>
             <h4 class="title"> {{item.brand}} </h4>
             <div class="details">
-              <ul class="d-flex flex-wrap pl-0">
+              <ul class="d-flex flex-wrap pl-0" >
                 <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
                 <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
                 <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
@@ -74,13 +74,17 @@
             </div>
           </b-card-body>
 
-          <b-card-footer>
-            <b-button v-on:click="getID(id)" type="button" class="noleggioBtn" :id="item.index">
-              NOLEGGIA
+          <b-card-footer >
+            <b-button v-on:click="getID(index)" type="button" class="noleggioBtn" :id="index">
+              NOLEGGIA {{index}}
             </b-button>
           </b-card-footer>
 
         </b-card>
+      </template>
+
+      <template v-else-if="!toggle">
+        <p> prova </p>
       </template>
 
 
@@ -100,14 +104,15 @@ export default {
       prodInfo: [],
       //slide: 0,
       //sliding: null,
-      boatID,
-      isHidden:true
+      selectedID: null,
+      toggle: true,
     };
   },
 
 mounted: function() {
 
-  this.sendClickedId();
+  //this.sendClickedId();
+
   
   axios.get('/prods', {
       
@@ -132,13 +137,28 @@ methods: {
 
   getID(__id) {
     console.log("sono dentro getID in intropage");
-    boatID = __id;
+    this.selectedID = __id;
+    console.log( __id);
+
+    //this.sendClickedId();
+
+    toggle=!toggle;
+
   },
 
-  sendClickedId() {
-    console.log("sono dentro clicked id di intropage");
-    this.$emit("id-to-rent", this.boatIDid);
+  change() {
+
+    toggle=!toggle;
+
   }
+
+  /*sendClickedId() {
+    console.log("sono dentro clicked id di intropage");
+    this.$emit("id-to-rent", this.selectedID);
+
+    console.log("sono ANCORA dentro clicked id di intropage");
+
+  }*/
 
 }
 

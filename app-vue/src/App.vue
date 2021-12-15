@@ -14,7 +14,7 @@
   
   <div>
       <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-      <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" -->
+      <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
       <IntroPage v-show="!toggle"  @id-to-rent="captureID" />
       <RentPage v-show="toggle" />
   </div>
@@ -61,7 +61,7 @@ export default {
     IntroPage,
     RentPage,
     toggle: false,
-    rentId: Number
+    rentId: null
   },
 
   mounted: function() {
@@ -94,7 +94,8 @@ export default {
 
     font-size: 15px;
 
-    margin: 0;
+    margin-top: 0;
+    margin-left: 0;
 
     border: 1px solid red;
 }
