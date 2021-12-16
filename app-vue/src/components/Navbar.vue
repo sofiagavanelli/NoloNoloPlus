@@ -3,64 +3,28 @@
 
     <div id="app">
 
-            <b-navbar class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
                 <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
+                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
                 </b-button>
 
                 <a id="logoname" class="nav-item">NoloNoloPlus</a>
 
-                <div class="collapse navbar-collapse"  id="navbarCollapse">
-                    <ul class="navbar-nav navbar-nav ml-auto">
+                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+                  <b-collapse id="nav-collapse" is-nav>
+                    <b-navbar-nav class="ml-auto">
                       <!--v-on:click='smista'-->
-                        <li class="nav-item" title="Reserved" data-toggle="modal" data-target="#loginModal">
+                        <b-nav-item title="Reserved" data-toggle="modal" data-target="#loginModal">
                             Login
-                        </li>
-                    </ul>
-                </div>
+                        </b-nav-item>
+                    </b-navbar-nav>
+                  </b-collapse>
 
             </b-navbar>
+
     </div>
-    
-    <!--b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">Twitter Client</b-navbar-brand>
-    <b-col cols='6'>
-      <b-input-group class="noborder">
-        <b-form-input id="ricerca" placeholder="Search..."></b-form-input>
-        <b-input-group-append>
-          <b-button class="bg-primary" v-on:click='smista'>Cerca</b-button>
-        </b-input-group-append>
-      </b-input-group>
-    </b-col>
-
-    <b-col cols='2'>
-      <b-input-group>
-        <b-button class="bg-primary" v-on:click='esempio'>Bologna</b-button>
-      </b-input-group>
-    </b-col>
-
-    <b-col>
-      <div>
-        <b-button :disabled="graphDisabled" class="bg-primary mr-2">Grafico</b-button>
-        <b-button class="bg-primary" v-b-toggle.sidebar-right>Filtri</b-button>
-        <b-sidebar id="sidebar-right" title="Filtri" right shadow>
-          <div class="px-3 py-2">
-            <b-form-group label="Lingua">
-              <b-form-select v-model="lingua" :options="lingue"></b-form-select>
-            </b-form-group>
-            <b-form-group label="Numero di tweet">
-              <b-form-input v-model="numero" type="number" min="1" max="100" step="1"></b-form-input>
-            </b-form-group>
-            <b-form-group label="Ordina per">
-              <b-form-select v-model="ordine" :options="ordini" @change="sortArray"></b-form-select>
-            </b-form-group>
-          </div>
-        </b-sidebar>
-      </div>
-    </b-col>
-
-  </b-navbar-->
 
   </div>
 </template>
@@ -90,6 +54,7 @@ export default {
 .b-navbar {
     list-style: none;
 }
+
 
 .navbar-toggler {
     color: white;

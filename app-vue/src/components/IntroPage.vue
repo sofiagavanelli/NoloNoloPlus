@@ -53,10 +53,8 @@
 
       </template-->  
       
-      <!-- a schermo normale v-else-->
-      <template v-if="toggle">
-        <!--proviamo il vfor -- cos'è la key? -->
-        <b-card v-for="(item, index) in prodInfo" :key="item.prod_id">
+      <!--proviamo il vfor -- cos'è la key? -->
+        <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{item.name}} </h3>
@@ -81,11 +79,6 @@
           </b-card-footer>
 
         </b-card>
-      </template>
-
-      <template v-else-if="!toggle">
-        <p> prova </p>
-      </template>
 
 
     </div>
@@ -183,9 +176,9 @@ methods: {
     /*border-radius: 1rem;*/
     margin: 4% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
-    width: 20%;
+    /*width: 20%;*/
     overflow: auto;
-    height: 70vh;
+    /*height: 70vh;*/
 
     z-index: -1;
 }
@@ -236,18 +229,6 @@ methods: {
         height: 5rem;
     }
 
-    .boat-images, .b-card {
-        background-color: red;
-        float: left;
-        border: 1px solid #86B3D1;
-        /*border-radius: 1rem;*/
-        /*margin: 4% 0 0 4%;*/
-        align-self: center;
-        /*padding: 1rem;*/
-        width: 40%;
-        overflow: auto; 
-        height: 70vh;
-    }
 }
 
 

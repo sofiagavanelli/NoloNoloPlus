@@ -5,18 +5,26 @@
     <Navbar />
   </div>
 
+
   <div id="introduzione" class="flex-container">
     NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
     L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
     equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
   </div>
 
+
+  <button type="button" class="btn" @click="showModal">
+    Open Modal!
+  </button>
+
+  <LoginModal v-show="isModalVisible" @close="closeModal" />
+
   
   <div>
       <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
       <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
-      <IntroPage v-show="!toggle"  @id-to-rent="captureID" />
-      <RentPage v-show="toggle" />
+      <IntroPage />
+      <!--RentPage v-show="toggle" /-->
   </div>
 
   <div id="calcolatrice">
@@ -53,6 +61,8 @@
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
 import RentPage from './components/RentPage.vue'
+import LoginModal from './components/LoginModal.vue';
+
 
 export default {
   name: 'App',
@@ -60,16 +70,25 @@ export default {
     Navbar,
     IntroPage,
     RentPage,
-    toggle: false,
-    rentId: null
+    LoginModal,
+    //toggle: false,
   },
-
-  mounted: function() {
-
-
+  data() {
+    return {
+      isModalVisible: false,
+      rentId: null
+    };
   },
 
   methods: {
+
+    showModal() {
+      this.isModalVisible = true;
+    },
+
+    closeModal() {
+      this.isModalVisible = false;
+    },
 
     captureID(_id) {
       console.log(_id);
@@ -97,7 +116,7 @@ export default {
     margin-top: 0;
     margin-left: 0;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 .b-button:focus{
@@ -130,10 +149,10 @@ export default {
     left: 90vw;;
     /*margin-bottom: 2rem;*/
     background-color: #4D6D9A;
-    box-shadow: 0px 0px 11px white;
+    box-shadow: 0px 0px 13px white;
     color: white;
     outline: none;
-    border: none;
+    border: none; 
     border-radius: 3rem;
     width: 5rem;
     height: 5rem;
@@ -145,6 +164,35 @@ export default {
 
     background-color: lightcyan;
     padding: 3vh 5vw 3vh 5vw;
+}
+
+@media screen and (max-width: 900px) {
+
+    #calcBtn {
+        float: right;
+        position: fixed;
+        left: 80vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 5rem;
+        height: 5rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  #calcBtn {
+        float: right;
+        position: fixed;
+        bottom: 10vh;
+        left: 75vw;
+        right: 10vw ! important;
+        /*margin-bottom: 2rem;*/
+        width: 5rem;
+        height: 5rem;
+  }
+
 }
 
 </style>
