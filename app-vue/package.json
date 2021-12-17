@@ -17,6 +17,8 @@
     "bootstrap-vue": "^2.21.2",
     "consolidate": "^0.16.0",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "mongoose": "^6.1.2",
     "vue": "^2.6.11",
     "vue-axios": "^3.4.0",
     "vue-mq": "^1.0.1"
