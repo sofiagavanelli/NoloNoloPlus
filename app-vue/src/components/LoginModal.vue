@@ -1,7 +1,9 @@
 <template>
-  <transition name="modal-fade">
+  <div>
+
+  <!--transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal" z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+      <b-modal z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <h3 name="header">
             This is the default tile!
@@ -25,9 +27,52 @@
             Close me!
           </button>
         </footer>
-      </div>
+      </b-modal>
     </div>
-  </transition>
+  </transition-->
+
+
+    <b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <img src="public/img/avatar.png" class="avatar">
+
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
+            <b-button type="button" class="btn-close" @click="close" aria-label="Close modal"> x
+            </b-button>
+            <!--b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </b-button-->
+          </div>
+
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+              <label data-error="wrong" data-success="right" for="username">Username</label>
+              <input type="email" id="username" class="form-control validate" placeholder="Enter Username">
+            </div>
+
+            <div class="md-form mb-4">
+              <label data-error="wrong" data-success="right" for="pass">Password</label>
+              <input type="password" id="pass" class="form-control validate" placeholder="Enter Password">
+            </div>
+
+            <div id="loginfo"> </div>
+
+            <div>
+              <i id="newreg" data-toggle="modal" data-target="#newRegModal"> Clicca qui per registrarti </i>
+            </div>
+          </div>
+
+          <div class="modal-footer d-flex justify-content-center">
+            <b-button class="btn btn-default" id="EnterlogBtn">Login</b-button>
+          </div>
+                          
+        </div>
+      </div>
+    </b-modal> 
+
+  </div>
 </template>
 
 <script>
@@ -38,11 +83,59 @@
         this.$emit('close');
       },
     },
+    activated: function() {
+      console.log("sono in logimodal");
+    }
   };
 </script>
 
+
 <style>
-  .modal-backdrop {
+
+.modal-content {
+    background: #EDB5BF;
+    color: #000;
+    /*width: 20em;*/
+    /*margin: 20vw;*/
+    border-radius: 5%;
+}
+
+#loginfo {
+    color: red;
+}
+
+.avatar {
+    width: 5em;
+    height: 5em ;
+    border-radius: 50%;
+    position: absolute;
+    top: -17%;
+    left: calc(50% - 2.5em);
+}
+
+.btn {
+    padding: 0em 2em;
+    border: none;
+    outline: none;
+    height: 2em;
+    background: #ffff;
+    color: #000;
+    font-size: 18px;
+    border-radius: 1em;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+}
+
+  /*.modal-backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -113,5 +206,6 @@
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: opacity .5s ease;
-  }
+  }*/
+  
 </style>

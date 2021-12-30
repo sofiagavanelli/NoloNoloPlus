@@ -16,7 +16,7 @@
                   <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav class="ml-auto">
                       <!--v-on:click='smista'-->
-                        <b-nav-item title="Reserved" data-toggle="modal" data-target="#loginModal">
+                        <b-nav-item title="Reserved" @click="showModal">
                             Login
                         </b-nav-item>
                     </b-navbar-nav>
@@ -26,15 +26,39 @@
 
     </div>
 
+    <LoginModal v-show="isModalVisible" @close="closeModal" />
+
   </div>
 </template>
 
 <script>
+import LoginModal from './LoginModal.vue';
+
 export default {
   name: 'Navbar',
-  props: {
-    msg: String
+  components: {
+    LoginModal
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+
+  methods: {
+
+    showModal() {
+      console.log("dentro show");
+      this.isModalVisible = true;
+    },
+
+    closeModal() {
+      this.isModalVisible = false;
+    }
+
   }
+
+
 }
 </script>
 
