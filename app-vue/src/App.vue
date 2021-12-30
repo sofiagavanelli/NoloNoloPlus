@@ -1,23 +1,57 @@
 <template>
 <div>
 
-  <div>
+  <!--div>
     <Navbar />
-  </div>
+  </div-->
+
+  <div id="app">
+
+            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+
+                <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
+                </b-button>
+
+                <a id="logoname" class="nav-item">NoloNoloPlus</a>
+
+                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+                  <b-collapse id="nav-collapse" is-nav>
+                    <b-navbar-nav class="ml-auto">
+                      <!--v-on:click='smista'-->
+                        <b-nav-item title="Reserved" @click="showModal">
+                            Login
+                        </b-nav-item>
+                    </b-navbar-nav>
+                  </b-collapse>
+
+            </b-navbar>
+
+    </div>
+
+    <div>
+      <template v-if="isModalVisible">
+      <LoginModal @close="closeModal" />
+      </template>
+    </div>
+
+
 
 
   <div id="introduzione" class="flex-container">
+    <br>
     NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
     L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
     equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
   </div>
 
 
-  <button type="button" class="btn" @click="showModal">
+  <!--button type="button" class="btn" @click="showModal">
     Open Modal!
   </button>
 
-  <LoginModal v-show="isModalVisible" @close="closeModal" />
+  <LoginModal v-show="isModalVisible" @close="closeModal" /-->
 
   
   <div>
@@ -75,15 +109,17 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false,
-      rentId: null
+      rentId: null,
+      isModalVisible: false
     };
   },
 
   methods: {
 
     showModal() {
+      console.log("sono dentro show");
       this.isModalVisible = true;
+      console.log(this.isModalVisible);
     },
 
     closeModal() {
@@ -121,6 +157,36 @@ export default {
 
 .b-button:focus{
     outline:none !important;
+}
+
+/**PRIMA PARTE */
+#app {
+  color: white;
+  background-color: #4D6D9A;
+
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+.b-navbar {
+    list-style: none;
+}
+
+
+.navbar-toggler, .b-navbar-toggle {
+    color: white;
+}
+
+.nav-item {
+    color: white;
+    padding: 0.5em;
+}
+
+.nav-item:hover {
+    color: white;
+    font-style: none;
 }
 
 #introduzione { /*(up-right-down-left)*/
