@@ -61,7 +61,7 @@ module.exports = {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Noleggio({
-            rent_id: _id,
+            _id: _id,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
@@ -87,7 +87,7 @@ module.exports = {
     },
 
     searchRent: async (id) => {
-        return Promise.resolve(Noleggio.find({ rent_id: id}));
+        return Promise.resolve(Noleggio.find({ _id: id}));
     },
 
     getProds: async (options = {}) => {
@@ -103,6 +103,7 @@ module.exports = {
         return Promise.resolve(Client.find(options));
 
     },
+    
 
     getRentals: async (options = {}) => {
         
@@ -110,18 +111,18 @@ module.exports = {
 
     },
 
-    //delete functions: Schema.deleteOne(options); Schema.deleteOne(options, function (err) {});
 
     deleteClient: async (id) => {
         return Promise.resolve(Client.findOneAndDelete({ client_id : id }));
     },
 
     deleteProd: async (id) => {
-        Prodotto.deleteOne({prod_id: id})
+        return Promise.resolve(Prodotto.findOneAndDelete({ prod_id : id }));
+
     },
 
     deleteRental: async (id) => {
-        return Promise.resolve(Noleggio.findOneAndDelete({ rental_id : id }));
+        return Promise.resolve(Noleggio.findOneAndDelete({ _id : id }));
     },
 
 };

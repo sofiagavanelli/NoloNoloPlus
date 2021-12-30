@@ -100,9 +100,9 @@
       <li><a href="#" id="inventoryBtn"><i class="fas fa-archive"></i>Inventory</a></li>  <!--per vedere l'inventario degli ogetti-->
       <li><a href="#" id="rentBtn"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
       <li><a href="#" id="clientBtn"><i class="far fa-address-card"></i>Clients</a></li> <!--per vedere tutti i clienti -->
-      <li><a href="#"><i class="far fa-calendar-alt"></i>Calendar</a></li> <!--per vedere il calendario dei noleggi-->
+      <li><a href="#" id="createBtn"><i class="fas fa-cart-plus"></i>Create rent</a></li> <!--per creare noleggio-->
       <li><a href="#" id="contactBtn"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
-      <li><a href="#"><i class="far fa-id-badge"></i>Personal Area</a></li> <!--per vedere informazioni personali-->
+      <li><a href="#" id="personalAreaBtn"><i class="far fa-id-badge"></i>Personal Area</a></li> <!--per vedere informazioni personali-->
       <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
     </ul>
   </div> 
@@ -110,9 +110,6 @@
   <!--div per contenuto della sidebar-->
   <div id="ctable"></div>
   <div id="ctable2"></div>
-
-
-  <!--modale per aggiunta elemento-->
 
   <!--modale per modifica cliente-->
   <div class="modal" tabindex="-1" id="modifyModal">
@@ -159,7 +156,9 @@
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
   document.getElementById("rentBtn").addEventListener("click", openRents);
   document.getElementById("contactBtn").addEventListener("click", openContacts);
+  document.getElementById("createBtn").addEventListener("click", openCreate);
 
+  
   document.getElementById("enterWorker").addEventListener("click", login);
 
 </script>

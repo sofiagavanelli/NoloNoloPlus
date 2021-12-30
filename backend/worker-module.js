@@ -67,11 +67,9 @@ module.exports = function (app) {
 
     app.delete('/allRents/:id', function(req, res){
 
-        const id = req.params.id;
-        console.log(id);
-         db.deleteRental(id)
-        .then(
-          () => {
+        const idR = req.params.id;
+         db.deleteRental(idR).then(() => {
+             console.log(idR);
           res.status(200);
           res.end();
           }

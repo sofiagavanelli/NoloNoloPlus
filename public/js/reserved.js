@@ -109,7 +109,9 @@ function openClient() {
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
                        <td><button id= "btn-upd" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-user-edit"></i></button>
-                       <button id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button></td>
+                       <button id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button>
+                       <button id="${ClientInfo[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
+                       </td>
                       </tr>
                     </table>
             `);
@@ -138,6 +140,25 @@ function openAlert(idDel) {
     });
   }
   
+}
+
+function openNote(idC) {
+
+  console.log(idC);
+/*
+  if(idDel) {
+    $.ajax({
+    type: 'DELETE',
+    url: '/allClients/' + idDel ,
+    success: function (data) {
+
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+
+    }
+    });
+  }
+  */
 }
 /*********************************** */
 
@@ -190,10 +211,6 @@ function openInventory() {
 
         for (let i in ProdInfo) {
             let div = null;
-
-            /*if(ProdInfo[i].available)
-            var x='available'*/
-  
               div = $(`
                       <table id="styled-tab">
                         <tr>
@@ -362,26 +379,26 @@ function openRents() {
          } 
 }
 
+
 function openAlertRents(idR) {
 
-  alert("Are you sure you want to delete this rental?");
+  console.log(idR);
+
+  alert("Are you sure you want to delete this rent?");
 
   if(idR) {
     $.ajax({
     type: 'DELETE',
     url: '/allRents/' + idR ,
     success: function (data) {
-      console.log("sono dentro success dei noleggi");
 
     },
     error: function (xhr, ajaxOptions, thrownError) {
-        console.log("errore nell'eliminare il noleggio");
+
     }
     });
   }
-  //location.reload()
-
-
+  
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -406,6 +423,30 @@ function openContacts() {
 `);
 $("#ctable").append(div);
 }
+
+function openPersonalArea() {           
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
+                     
+  div = $(`    
+  <h1>ciao</h1>
+`);
+$("#ctable").append(div);
+}
+
+function openCreate(){
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
+                     
+  div = $(`    
+          
+  
+`);
+$("#ctable").append(div);
+}
+
 
 
 
