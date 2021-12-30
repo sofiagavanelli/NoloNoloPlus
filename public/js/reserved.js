@@ -132,7 +132,8 @@ function openAlert(idDel) {
     type: 'DELETE',
     url: '/allClients/' + idDel ,
     success: function (data) {
-
+      $( "#ctable2" ).load(window.location.href + " #ctable2" );
+      $( "#clientBtn" ).click();
     },
     error: function (xhr, ajaxOptions, thrownError) {
 
