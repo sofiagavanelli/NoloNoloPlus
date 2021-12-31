@@ -41,7 +41,27 @@ module.exports = function (app) {
 
         console.log(id);
 
-        db.searchWorker(id).then(workerinfo => {
+        db.searchWorker(id).then(rentsinfo => {
+
+            res.write(JSON.stringify(rentsinfo));
+
+            res.end();
+        });
+
+        console.log("error");
+
+    });
+    
+//non funziona :(
+    app.get('/allRents/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchRent(id).then(workerinfo => {
 
             res.write(JSON.stringify(workerinfo));
 
@@ -51,6 +71,7 @@ module.exports = function (app) {
         console.log("error");
 
     });
+
 
     //app.get
 

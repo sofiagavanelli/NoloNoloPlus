@@ -4,7 +4,7 @@
     margin: 0;
 
 }
-html, body {margin: 0; height: 100%;}
+html, body {margin: 0; height: 100%; overflow: auto;}
 button:focus{
   outline:none !important;
 }
@@ -375,4 +375,27 @@ form.example input[type=text] {
   float:right;
 }
 
+.dropdown{
+  position: relative;
+  left: 58%;
+  bottom: 30%;
+}
+.btn-secondary{
+  background-color: #4D6D9A;
+  color: white;
+}
+.btn-secondary:hover{
+  background-color: #4D6D9A;
+  color: white;
+}
+.btn-secondary:after{
+  background-color: #4D6D9A;
+  color: white;
+}
+.dropdown-item:hover{
+  background-color: #e8f0f7;
 
+}
+.dropdown:hover>.dropdown-menu{
+  display: block;
+}

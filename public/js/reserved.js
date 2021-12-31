@@ -187,46 +187,28 @@ function openInventory() {
         }
     });
     div = $(`
+    <form class="example">
+    <input type="text" placeholder="Search product..." name="search">          
+    <button type="submit"><i class="fa fa-search"></i></button>   
+    <button id= "btn-add" onclick="openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>  
+    </form>`);
+    $("#ctable").append(div);
           
-             <form class="example">
-             <input type="text" placeholder="Search product..." name="search">
-             <button type="submit"><i class="fa fa-search"></i></button>
-
-             <button id= "btn-add" onclick="openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>
-
-             </form>
-
-             <table id="styled-tab">
-              <tr>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Product ID</th>
-                <th>Price</th>
-                <th>Available</th>
-              </tr>
-             </table>
-              `);
-              $("#ctable").append(div);
-  
     function populateP(ProdInfo){
-
-        for (let i in ProdInfo) {
-            let div = null;
-              div = $(`
-                      <table id="styled-tab">
-                        <tr>
-                         <td>${ProdInfo[i].name}</td>
-                         <td>${ProdInfo[i].brand}</td>
-                         <td>${ProdInfo[i].prod_id}</td>
-                         <td>${ProdInfo[i].price}</td>
-                         <td>${ProdInfo[i].available}<p></td>
-                         </tr>
-                      </table>
-  
-              `);
-              $("#ctable2").append(div);
-      
-  
+      for (let i in ProdInfo) { 
+        let div = null;
+              
+        div = $(`     
+        <div class="card" style="width: 21rem;">        
+        <img src="${ProdInfo[i].image}" class="card-img-top" alt="...">              
+        <div class="card-body">              
+        <h5 class="card-title">${ProdInfo[i].name}</h5>              
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>              
+        <a href="#" class="btn btn-primary">Go somewhere</a>              
+        </div>             
+        </div>            
+        `);
+        $("#ctable2").append(div);
   }      
 } }
 
@@ -324,6 +306,50 @@ function closeModal() {
 
      
 /************************************/
+// non funziona :(
+  /*
+function searchRent(){
+
+  _id = document.getElementById("rentId").value;
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/allRents/' + _id ,
+          success: function (info) {
+
+            rentARRAY = JSON.parse(info);
+
+            acceptWorker(rentARRAY, _id);
+              
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+          }
+      });
+  }
+  else {
+
+  }
+
+}
+function acceptRent(data, insertedID) {
+
+  for (let i in data) {
+
+    if(data[i].rental_id == insertedID) {
+        console.log("???????");
+
+        var found = true;
+    }
+  }
+
+  if (!found) 
+      console.log("non esiste noleggio");
+
+
+}
+*/
 
 function openRents() {
   $( "#ctable" ).empty();
@@ -344,9 +370,17 @@ function openRents() {
     });
   div = $(`         
   <form class="example">
-  <input type="text" placeholder="Search rental..." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
-  </form>          
+  <input type="text" id="rentId" placeholder="Search rental..." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button> </form> 
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+    <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+  </div>
+</div>
+
   `);
               
   $("#ctable").append(div);
@@ -447,7 +481,25 @@ function openCreate(){
 `);
 $("#ctable").append(div);
 }
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content 
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}*/
 
 
 
