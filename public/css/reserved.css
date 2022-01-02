@@ -346,13 +346,23 @@ form.example input[type=text] {
   margin-left: auto;
   margin-top: auto;
 }
-
+.card-new{
+  margin-right: 0px;
+  border-color: #4D6D9A;
+  background-color: #e7f0ff;
+  border: 3px solid;
+  border-radius: 25px;
+  width: 50%;
+  position: relative;
+  left: 20%;
+}
+.card-title-new{
+  color: #c72a1f;
+}
 .card{
   margin-top: 15px;
   border-color: #4D6D9A;
   border: 2px solid;
-  
-
 }
 .card-title{
   color: #eb5248;
@@ -374,11 +384,21 @@ form.example input[type=text] {
   right: 5px;
   float:right;
 }
+.btn-back{
+  background-color: #7495c4;
+  border: #000;
+  border-radius: 25px;
+  padding: 6px 20px;
+  float:right;
+
+}
 
 .dropdown{
   position: relative;
   left: 58%;
   bottom: 30%;
+  margin: 0px;
+  width: 10%;
 }
 .btn-secondary{
   background-color: #4D6D9A;

@@ -286,7 +286,7 @@ function closeModal() {
      
 /************************************/
 // non funziona :(
-  /*
+
 function searchRent(){
 
   _id = document.getElementById("rentId").value;
@@ -295,12 +295,10 @@ function searchRent(){
           type: 'GET',
           url: '/allRents/' + _id ,
           success: function (info) {
+            console.log(_id);
+            console.log("trovato");
 
-            rentARRAY = JSON.parse(info);
-
-            acceptWorker(rentARRAY, _id);
-              
-
+            acceptRent(rentARRAY, _id);
           },
           error: function (xhr, ajaxOptions, thrownError) {
 
@@ -308,7 +306,7 @@ function searchRent(){
       });
   }
   else {
-
+console.log("errore nell'else");
   }
 
 }
@@ -316,8 +314,33 @@ function acceptRent(data, insertedID) {
 
   for (let i in data) {
 
-    if(data[i].rental_id == insertedID) {
+    if(data[i]._id == insertedID) {
         console.log("???????");
+        $( "#ctable2" ).empty();
+        $( "#ctable" ).empty();
+        console.log("sono dopo il vuoto");
+        div = $(`         
+        <button class="btn-back">ALL RENTS</button>
+  `);
+              
+  $("#ctable").append(div);
+        div = $(` 
+        <div class="card-new">
+          <div class="card-body">
+            <h5 class="card-title-new">RENT: ${data[i]._id}</h5>
+            <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+            <p class="card-text">Start date: ${data[i].start.slice(0,10)} <br> End date: ${data[i].end.slice(0,10)}</p>
+            <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+            <button class="btn-mod">Modify</button>
+                
+          </div>
+        </div>
+        
+        `);
+        $("#ctable2").append(div);
+        console.log("prooooovaaa");
+
+        
 
         var found = true;
     }
@@ -328,7 +351,7 @@ function acceptRent(data, insertedID) {
 
 
 }
-*/
+
 
 function openRents() {
   $( "#ctable" ).empty();
@@ -341,6 +364,7 @@ function openRents() {
     success: function (data) {
       rentARRAY = JSON.parse(data);       
       populate(rentARRAY);
+      
     },
             
     error: function (xhr, ajaxOptions, thrownError) {  
@@ -350,7 +374,7 @@ function openRents() {
   div = $(`         
   <form class="example">
   <input type="text" id="rentId" placeholder="Search rental..." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button> </form> 
+  <button type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> </form> 
   <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort by </button>
