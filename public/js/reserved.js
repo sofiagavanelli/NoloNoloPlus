@@ -3,6 +3,7 @@ var clientARRAY = 0;
 var inventoryARRAY = 0;
 var rentARRAY = 0;
 var WORKERINFO = 0;
+var prova = 0;
 
 
 /************************* */
@@ -142,28 +143,6 @@ function openAlert(idDel) {
   }
   
 }
-
-function openNote(idC) {
-
-  console.log(idC);
-/*
-  if(idDel) {
-    $.ajax({
-    type: 'DELETE',
-    url: '/allClients/' + idDel ,
-    success: function (data) {
-
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-
-    }
-    });
-  }
-  */
-}
-/*********************************** */
-
-
 
 function openInventory() {
  
@@ -400,8 +379,8 @@ function openRents() {
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
-                  <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}</p>
-                  <p class="card-text">Start date: ${RentInfo[i].start} <br> End date: ${RentInfo[i].end}</p>
+                  <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
+                  <p class="card-text">Start date: ${RentInfo[i].start.slice(0,10)} <br> End date: ${RentInfo[i].end.slice(0,10)}</p>
                   <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
                   <button class="btn-mod">Modify</button>
                 </div>
@@ -435,6 +414,118 @@ function openAlertRents(idR) {
   }
   
 }
+
+function SortName(){   //ordine alfabetico dei clienti
+  console.log("prova");
+ /*rentARRAY.sort((a, b) => {
+  return parseFloat(a.price) - parseFloat(b.price);
+});*/
+rentARRAY.sort((a,b) => (a.client_id > b.client_id) ? 1 : ((b.client_id > a.client_id) ? -1 : 0))
+console.log(rentARRAY);
+$( "#ctable" ).empty();
+$( "#ctable2" ).empty();
+$("#ctable2").css("-webkit-filter", "blur(0px)");
+
+div = $(`         
+<form class="example">
+<input type="text" id="rentId" placeholder="Search rental..." name="search">
+<button type="submit"><i class="fa fa-search"></i></button> </form> 
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  Sort by </button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+  <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+</div>
+</div>
+
+`);
+            
+$("#ctable").append(div);
+for (let i in rentARRAY) {
+          
+  let div = null;
+  
+        
+  div = $(`
+
+      <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${rentARRAY[i]._id}</h5>
+              <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}</p>
+              <p class="card-text">Start date: ${rentARRAY[i].start.slice(0,10)} <br> End date: ${rentARRAY[i].end.slice(0,10)}</p>
+              <button id="${rentARRAY[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div>    
+          `);
+           $("#ctable2").append(div);
+         
+     } 
+}
+
+function SortDate(){   //ordina in base alla data
+  console.log("prova");
+  rentARRAY.sort(function compare(a, b) {
+    var dateA = new Date(a.start);
+    var dateB = new Date(b.start);
+    return dateA - dateB;
+  });
+
+
+//rentARRAY.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
+console.log(rentARRAY);
+$( "#ctable" ).empty();
+$( "#ctable2" ).empty();
+$("#ctable2").css("-webkit-filter", "blur(0px)");
+
+div = $(`         
+<form class="example">
+<input type="text" id="rentId" placeholder="Search rental..." name="search">
+<button type="submit"><i class="fa fa-search"></i></button> </form> 
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  Sort by </button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+  <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+</div>
+</div>
+
+`);
+            
+$("#ctable").append(div);
+for (let i in rentARRAY) {
+          
+  let div = null;
+  
+        
+  div = $(`
+
+      <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${rentARRAY[i]._id}</h5>
+              <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+              <p class="card-text">Start date: ${rentARRAY[i].start.slice(0,10)} <br> End date: ${rentARRAY[i].end.slice(0,10)}</p>
+              <button id="${rentARRAY[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div>    
+          `);
+           $("#ctable2").append(div);
+         
+     } 
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////
 
