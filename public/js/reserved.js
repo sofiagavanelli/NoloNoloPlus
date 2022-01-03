@@ -59,7 +59,7 @@ function acceptWorker(data, insertedP) {
 
 }
 /***************************** */
-
+/* CLIENTI */
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
@@ -82,8 +82,8 @@ function openClient() {
 
   div = $(`
             <form class="example">
-            <input type="text" placeholder="Search customer..." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" id="clientId" placeholder="Search client..." name="search">
+            <button type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
             </form>
 
            <table id="styled-tab">
@@ -120,30 +120,8 @@ function openClient() {
 }
 } 
 }
-
-
-function openAlert(idDel) {
-
-  console.log(idDel);
-
-  alert("Are you sure you want to delete this client?");
-
-  if(idDel) {
-    $.ajax({
-    type: 'DELETE',
-    url: '/allClients/' + idDel ,
-    success: function (data) {
-      $( "#ctable2" ).load(window.location.href + " #ctable2" );
-      $( "#clientBtn" ).click();
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-
-    }
-    });
-  }
-  
-}
-
+/***************************** */
+/*INVENTARIO */
 function openInventory() {
  
   $( "#ctable" ).empty();
@@ -164,7 +142,8 @@ function openInventory() {
         error: function (xhr, ajaxOptions, thrownError) {
 
         }
-    });
+  });
+
     div = $(`
     <form class="example">
     <input type="text" placeholder="Search product..." name="search">          
@@ -188,8 +167,76 @@ function openInventory() {
         </div>            
         `);
         $("#ctable2").append(div);
-  }      
-} }
+  
+      }      
+    } 
+}
+/***************************** */
+/*NOLEGGI*/
+function openRents() {
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+  $("#ctable2").css("-webkit-filter", "blur(0px)");
+        
+  $.ajax({
+    type: 'GET',
+    url: '/allRents' ,
+    success: function (data) {
+      rentARRAY = JSON.parse(data);       
+      populate(rentARRAY);
+      
+    },
+            
+    error: function (xhr, ajaxOptions, thrownError) {  
+      
+    }
+    });
+  div = $(`         
+  <form class="example">
+  <input type="text" id="rentId" placeholder="Search rental..." name="search">
+  <button type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> </form> 
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+    <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+  </div>
+</div>
+
+  `);
+              
+  $("#ctable").append(div);
+    
+      
+  function populate(RentInfo){
+    
+    for (let i in RentInfo) {
+          
+      let div = null;
+      
+            
+      div = $(`
+
+          <div class="row2">
+            <div class="column">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
+                  <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
+                  <p class="card-text">Start date: ${RentInfo[i].start.slice(0,10)} <br> End date: ${RentInfo[i].end.slice(0,10)}</p>
+                  <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+                  <button class="btn-mod">Modify</button>
+                </div>
+              </div>
+            </div> 
+          <div>    
+              `);
+               $("#ctable2").append(div);
+             }
+         } 
+}
+
 
 function openModalM(){
   $("#ctable2").css("-webkit-filter", "blur(15px)");
@@ -285,8 +332,9 @@ function closeModal() {
 
      
 /************************************/
-// non funziona :(
+/*FUNZIONI RICERCA */
 
+/* RICERCA NOLEGGIO */
 function searchRent(){
 
   _id = document.getElementById("rentId").value;
@@ -295,8 +343,8 @@ function searchRent(){
           type: 'GET',
           url: '/allRents/' + _id ,
           success: function (info) {
-            console.log(_id);
-            console.log("trovato");
+            //console.log(_id);
+            //console.log("trovato");
 
             acceptRent(rentARRAY, _id);
           },
@@ -306,7 +354,7 @@ function searchRent(){
       });
   }
   else {
-console.log("errore nell'else");
+//console.log("errore nell'else");
   }
 
 }
@@ -315,12 +363,12 @@ function acceptRent(data, insertedID) {
   for (let i in data) {
 
     if(data[i]._id == insertedID) {
-        console.log("???????");
+        //console.log("???????");
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
-        console.log("sono dopo il vuoto");
+        //console.log("sono dopo il vuoto");
         div = $(`         
-        <button class="btn-back">ALL RENTS</button>
+        <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-angle-double-left"></i> ALL RENTS</button>
   `);
               
   $("#ctable").append(div);
@@ -328,17 +376,17 @@ function acceptRent(data, insertedID) {
         <div class="card-new">
           <div class="card-body">
             <h5 class="card-title-new">RENT: ${data[i]._id}</h5>
-            <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-            <p class="card-text">Start date: ${data[i].start.slice(0,10)} <br> End date: ${data[i].end.slice(0,10)}</p>
-            <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
-            <button class="btn-mod">Modify</button>
+            <p class="card-text-new">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+            <p class="card-text-new">Start date: ${data[i].start.slice(0,10)} <br> End date: ${data[i].end.slice(0,10)}</p>
+            <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
                 
           </div>
         </div>
         
         `);
         $("#ctable2").append(div);
-        console.log("prooooovaaa");
+        //console.log("prooooovaaa");
 
         
 
@@ -351,76 +399,87 @@ function acceptRent(data, insertedID) {
 
 
 }
+/* RICERCA CLIENTE */
+function searchClient(){
 
+  _id = document.getElementById("clientId").value;
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/allClients/' + _id ,
+          success: function (info) {
 
-function openRents() {
-  $( "#ctable" ).empty();
-  $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
-        
-  $.ajax({
-    type: 'GET',
-    url: '/allRents' ,
-    success: function (data) {
-      rentARRAY = JSON.parse(data);       
-      populate(rentARRAY);
-      
-    },
-            
-    error: function (xhr, ajaxOptions, thrownError) {  
-      
-    }
-    });
-  div = $(`         
-  <form class="example">
-  <input type="text" id="rentId" placeholder="Search rental..." name="search">
-  <button type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> </form> 
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort by </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
-    <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
-  </div>
-</div>
+            acceptClient(clientARRAY, _id);
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
 
+          }
+      });
+  }
+  else {
+console.log("errore nell'else");
+  }
+
+}
+function acceptClient(data, insertedID) {
+
+  for (let i in data) {
+
+    if(data[i].client_id == insertedID) {
+        $( "#ctable2" ).empty();
+        $( "#ctable" ).empty();
+        div = $(`         
+        <button class="btn-back"onclick= "goBackClients()"><i class="fas fa-angle-double-left"></i> ALL CLIENTS</button>
   `);
               
   $("#ctable").append(div);
+        div = $(` 
+    <div class="wrapper">
+      <div class="container">
+        <img src="${data[i].img}" alt="" class="profile-img">
     
-      
-  function populate(RentInfo){
-    
-    for (let i in RentInfo) {
-          
-      let div = null;
-      
-            
-      div = $(`
+        <div class="content">
+          <div class="sub-content">
+            <h1>${data[i].name}  ${data[i].surname}</h1>
+            <span>${data[i].client_id}</span>
+            <span class="location"><i class="fas fa-map-marker-alt"></i>${data[i].place}</span>
+          </div>
+          <div class="data">
+        
+        </div>
+        <button id="${data[i].client_id}" onclick= "openAlert(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Delete</button>
+        <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
+      </div>
+    </div>
+        
+        `);
+        $("#ctable2").append(div);
 
-          <div class="row2">
-            <div class="column">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
-                  <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
-                  <p class="card-text">Start date: ${RentInfo[i].start.slice(0,10)} <br> End date: ${RentInfo[i].end.slice(0,10)}</p>
-                  <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
-                  <button class="btn-mod">Modify</button>
-                </div>
-              </div>
-            </div> 
-          <div>    
-              `);
-               $("#ctable2").append(div);
-             }
-         } 
+        var found = true;
+    }
+  }
+
+  if (!found) 
+      console.log("non esiste cliente");
+
+
+}
+function goBackClients(){
+  openClient();
+}
+
+function goBackRents(){
+  openRents();
 }
 
 
+/***************************** */
+/*FUNZIONI ALERT PER ELIMINAZIONE */
+
+/*ELIMINAZIONE NOLEGGIO */
 function openAlertRents(idR) {
 
-  console.log(idR);
+  //console.log(idR);
 
   alert("Are you sure you want to delete this rent?");
 
@@ -429,6 +488,7 @@ function openAlertRents(idR) {
     type: 'DELETE',
     url: '/allRents/' + idR ,
     success: function (data) {
+      openRents();
 
     },
     error: function (xhr, ajaxOptions, thrownError) {
@@ -438,14 +498,39 @@ function openAlertRents(idR) {
   }
   
 }
+/*FELIMINAZIONE CLIENTE */
+function openAlert(idDel) {
 
+  //console.log(idDel);
+
+  alert("Are you sure you want to delete this client?");
+
+  if(idDel) {
+    $.ajax({
+    type: 'DELETE',
+    url: '/allClients/' + idDel ,
+    success: function (data) {
+      $( "#ctable2" ).load(window.location.href + " #ctable2" );
+      $( "#clientBtn" ).click();
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+
+    }
+    });
+  }
+  
+}
+/***************************** */
+/*FUNZIONI ORDINAMENTO */
+
+/*ORDINE ALFABETICO */
 function SortName(){   //ordine alfabetico dei clienti
   console.log("prova");
  /*rentARRAY.sort((a, b) => {
   return parseFloat(a.price) - parseFloat(b.price);
 });*/
 rentARRAY.sort((a,b) => (a.client_id > b.client_id) ? 1 : ((b.client_id > a.client_id) ? -1 : 0))
-console.log(rentARRAY);
+//console.log(rentARRAY);
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
@@ -491,9 +576,9 @@ for (let i in rentARRAY) {
          
      } 
 }
-
+/*ORDINE DATA CRESCENTE */
 function SortDate(){   //ordina in base alla data
-  console.log("prova");
+  //console.log("prova");
   rentARRAY.sort(function compare(a, b) {
     var dateA = new Date(a.start);
     var dateB = new Date(b.start);
@@ -502,7 +587,7 @@ function SortDate(){   //ordina in base alla data
 
 
 //rentARRAY.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
-console.log(rentARRAY);
+//console.log(rentARRAY);
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
@@ -596,25 +681,7 @@ function openCreate(){
 `);
 $("#ctable").append(div);
 }
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}*/
 
 
 

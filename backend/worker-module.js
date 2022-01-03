@@ -6,6 +6,7 @@ var db = require('../db');
 
 module.exports = function (app) {
 
+    ///FUNZIONE CHE RITORNA TUTTI I CLIENTI
     app.get('/allClients', function (req, res) {
 
         res.writeHead(200);
@@ -22,6 +23,7 @@ module.exports = function (app) {
         res.writeHead(200);
     });
 
+    ///FUNZIONE CHE RITORNA TUTTI I NOLEGGI 
     app.get('/allRents', function (req, res) {
 
         res.writeHead(200);
@@ -52,7 +54,8 @@ module.exports = function (app) {
 
     });
     
-//non funziona :(
+
+    ///RICERCA NOLEGGIO PER ID
     app.get('/allRents/:id', function (req, res) {
 
         res.writeHead(200);
@@ -72,9 +75,28 @@ module.exports = function (app) {
 
     });
 
+    ///RICERCA CLIENTE PER ID
+    app.get('/allClients/:id', function (req, res) {
 
-    //app.get
+        res.writeHead(200);
 
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchClientID(id).then(clientsinfo => {
+
+            res.write(JSON.stringify(clientsinfo));
+
+            res.end();
+        });
+
+        console.log("error");
+
+    });
+
+
+    ///ELIMINAZIONE CLIENTE PER ID
     app.delete('/allClients/:id', function(req, res){
 
         const id = req.params.id;
@@ -86,6 +108,7 @@ module.exports = function (app) {
 
         });
 
+    ////ELIMINAZIONE NOLEGGIO PER ID
     app.delete('/allRents/:id', function(req, res){
 
         const idR = req.params.id;
