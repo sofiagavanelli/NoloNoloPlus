@@ -1,6 +1,10 @@
+import "../App.css";
+
 function Inventario() {
     return (
-      <h1>Inventario</h1>
+      <div id="inventario">
+        <h1>Inventario</h1>
+      </div>
       );
 }
 

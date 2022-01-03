@@ -1,6 +1,10 @@
+import "../App.css";
+
 function Noleggi() {
     return (
-      <h1>Noleggi</h1>
+      <div id="noleggi">
+        <h1>Noleggi</h1>
+      </div>
       );
 }
 

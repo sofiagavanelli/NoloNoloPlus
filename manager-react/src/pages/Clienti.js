@@ -1,6 +1,10 @@
+import "../App.css";
+
 function Clienti() {
     return (
-      <h1>Clienti</h1>
+      <div id="clienti">
+        <h1>Clienti</h1>
+      </div>
       );
 }
 
