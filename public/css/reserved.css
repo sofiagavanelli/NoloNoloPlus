@@ -502,8 +502,8 @@ form.example input[type=text] {
 }
 
 .content .sub-content p{
-  margin-top: 15px;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: medium;
 }
 
 .content .sub-content span.location{
@@ -519,9 +519,104 @@ form.example input[type=text] {
 .content .sub-content a{
   color: #1da1f2;
 }
-
+/*
 .data{
   width: 100%;
   overflow: hidden;
   margin: 30px 0 20px;
-}
+}*/
+
+
+  h1{
+  margin: 15px 0;
+  font-weight: 400;
+  color: #1a6391;
+  }
+  .testbox {
+  position: relative;
+  left: 10%;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  padding: 3px;
+  width: 75%;
+  bottom: 10%;
+  }
+  .create{
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px #ccc; 
+  }
+  .create2, select, textarea {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;}
+
+  .create2:hover, select:hover, textarea:hover {
+  outline: none;
+  border: 1px solid #095484;
+  }
+  .create2{
+  width: calc(100% - 10px);
+  padding: 5px;
+  }
+  select {
+  width: 100%;
+  padding: 7px 0;
+  background: transparent;
+  }
+  textarea {
+  width: calc(100% - 6px);
+  }
+  .item-2{
+  position: relative;
+  margin: 10px 0;
+  }
+  input{
+    display: block;
+  }
+  input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+  }
+  item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
+  
+  font-size: 20px;
+  color: #a9a9a9;
+  }
+  .item-2 i {
+  position: relative;
+  right: 4%;
+  top: 10px;
+  z-index: 1;
+  color: #c5c5c5;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+  }
+  .btn-block {
+  margin-top: 5%;
+  text-align: center;
+  }
+  .btn-sub{
+  width: 150px;
+  padding: 10px;
+  border: none;
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  background-color: #095484;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  }
+  .btn-sub:hover {
+  background-color: #0666a3;
+  }
+
+
+
+

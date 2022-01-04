@@ -442,12 +442,13 @@ function acceptClient(data, insertedID) {
           <div class="sub-content">
             <h1>${data[i].name}  ${data[i].surname}</h1>
             <span>${data[i].client_id}</span>
-            <span class="location"><i class="fas fa-map-marker-alt"></i>${data[i].place}</span>
+            <span class="location"><i class="fas fa-map-marker-alt"></i> ${data[i].place}
+            <p>${data[i].address}</p></span>
           </div>
           <div class="data">
         
         </div>
-        <button id="${data[i].client_id}" onclick= "openAlert(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Delete</button>
+        <button id="${data[i].client_id}" onclick= "openAlert(id)" class="btn-d2" style="left: 0%;"><i class="fas fa-trash-alt"></i> Delete</button>
         <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
       </div>
     </div>
@@ -676,10 +677,36 @@ function openCreate(){
   $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`    
-          
+  <div class="testbox">
+  <form id="create" action="/">
+    <h1>Create Rent</h1>
+    <div class="item-2">
+      <p>Client ID</p>
+      <div>
+        <input class="create2" type="text" name="name"/>
+      </div>
+    </div>
+    <div class="item-2">
+      <p>Product ID</p>
+      <input class="create2" type="text" name="name"/>
+    </div>
+    <div class="item-2" style="display: flex; justify-content: space-between;">
+      <p>Start date</p>
+      <p style="position: relative; left: -37%;">End date</p></div>
+      <div class="item-2" style=" margin-top: -3%;"> 
+
+      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
+      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
+    </div>
+    
+    <div class="btn-block">
+      <button class="btn-sub" type="submit" href="/">Check</button>
+    </div>
+  </form>
+</div>
   
 `);
-$("#ctable").append(div);
+$("#ctable2").append(div);
 }
 
 

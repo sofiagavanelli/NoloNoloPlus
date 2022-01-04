@@ -41,7 +41,7 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        //console.log(id);
 
         db.searchWorker(id).then(rentsinfo => {
 
@@ -50,7 +50,7 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
+        //console.log("error");
 
     });
     
@@ -62,7 +62,7 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        //console.log(id);
 
         db.searchRent(id).then(workerinfo => {
 
@@ -71,7 +71,7 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
+        //console.log("error");
 
     });
 
@@ -82,7 +82,7 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        //console.log(id);
 
         db.searchClientID(id).then(clientsinfo => {
 
@@ -91,7 +91,7 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
+        //console.log("error");
 
     });
 
@@ -113,7 +113,7 @@ module.exports = function (app) {
 
         const idR = req.params.id;
          db.deleteRental(idR).then(() => {
-             console.log(idR);
+             //console.log(idR);
           res.status(200);
           res.end();
           }
