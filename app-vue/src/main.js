@@ -1,8 +1,6 @@
-console.log("sono dentro main");
-
 import Vue from 'vue'
 import App from './App.vue'
-import VueMq from 'vue-mq'
+//import VueMq from 'vue-mq'
 
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -19,14 +17,14 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(BootstrapVue)
 
-Vue.use(VueMq, {
+/*Vue.use(VueMq, {
   breakpoints: {
     mobile: 455,
     tablet: 900,
     laptop: 1250,
     desktop: Infinity,
   }
-})
+})*/
 
 Vue.config.productionTip = false
 

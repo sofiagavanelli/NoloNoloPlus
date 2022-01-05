@@ -1,7 +1,10 @@
 <template>
   <div>
 
+    <h1> prova </h1>
+
   <!--transition name="modal-fade">
+  
     <div class="modal-backdrop">
       <b-modal z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
@@ -29,7 +32,7 @@
         </footer>
       </b-modal>
     </div>
-  </transition-->
+  </transition--
 
 
     <b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -41,9 +44,9 @@
             <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
             <b-button type="button" class="btn-close" @click="close" aria-label="Close modal"> x
             </b-button>
-            <!--b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
-            </b-button-->
+            </b-button>
           </div>
 
           <div class="modal-body mx-3">
@@ -70,7 +73,7 @@
                           
         </div>
       </div>
-    </b-modal> 
+    </b-modal--> 
 
   </div>
 </template>

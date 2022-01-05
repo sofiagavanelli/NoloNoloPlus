@@ -1,13 +1,13 @@
 <template>
 <div>
 
-  <!--div>
+  <div>
     <Navbar />
-  </div-->
+  </div>
 
-  <div id="app">
+  <!--div id="app">
 
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
 
                 <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
@@ -19,7 +19,7 @@
 
                   <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav class="ml-auto">
-                      <!--v-on:click='smista'-->
+                      <!-v-on:click='smista'->
                         <b-nav-item title="Reserved" @click="showModal">
                             Login
                         </b-nav-item>
@@ -28,16 +28,7 @@
 
             </b-navbar>
 
-    </div>
-
-    <div>
-      <template v-if="isModalVisible">
-      <LoginModal @close="closeModal" />
-      </template>
-    </div>
-
-
-
+  </div-->
 
   <div id="introduzione" class="flex-container">
     <br>
@@ -46,6 +37,10 @@
     equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
   </div>
 
+  <template v-if="isModalVisible">
+    <LoginModal /> <!--@close="closeModal"-->
+  </template>
+
 
   <!--button type="button" class="btn" @click="showModal">
     Open Modal!
@@ -53,21 +48,23 @@
 
   <LoginModal v-show="isModalVisible" @close="closeModal" /-->
 
-  
-  <div>
-      <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-      <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
+  <!--template v-else-->
+    <h1> SONO QUA </h1>
+    <div>
+        <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
+        <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
       <IntroPage />
-      <!--RentPage v-show="toggle" /-->
-  </div>
+        <!--RentPage v-show="toggle" /-->
+    </div>
+  <!--/template-->
 
-  <div id="calcolatrice">
-    <!--devo far aprire il component al click-->
+  <!--div id="calcolatrice">
+    <--devo far aprire il component al click->
     <b-button id="calcBtn" data-toggle="modal" data-target="#calcModal">
-      <!--non funziona font awesome -->
+      <--non funziona font awesome ->
       <font-awesome-icon icon="calculator" />
     </b-button>
-  </div>
+  </div-->
 
 
 
