@@ -121,4 +121,37 @@ module.exports = function (app) {
 
         });
 
+    //PROVA POST 
+
+    app.post('/', function(req, res, next) {
+
+      console.log(req.body.client);
+      console.log(req.body.product); 
+      console.log(req.body.start);
+      console.log(req.body.end); 
+    
+      const client = req.body.client;
+      const prod = req.body.product; 
+      const startdate= req.body.start;
+      const enddate= req.body.end; 
+
+      console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
+    
+    /*rentDetails.saveRental(function(err,req1){
+        if(err) throw err;
+        rent_prova.exec(function(err,data){
+          if(err) throw err;
+          res.render('reserved', { title: 'Rent Records', records:data, success:'Record Inserted Successfully' });
+            });
+      })*/
+      db.saveRental(prod, client, startdate, enddate).then(() => {
+        if (err) throw err;
+        res.render('reserved', { title: 'Rent Records', records:data, success:'Record Inserted Successfully' });
+        console.log("aaaaaaaaaaaaaaaa");
+        //res.status(200);
+        //res.end();
+      }
+    )
+    });
+
 };

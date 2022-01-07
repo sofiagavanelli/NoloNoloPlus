@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+
 const RentalSchema = new Schema(
   {
     rental_id: {type: String, required: true},
@@ -12,6 +13,8 @@ const RentalSchema = new Schema(
   }
 );
 
+//var rentModel = mongoose.model('Rent', RentalSchema);
+//var rentprova =rentModel.find({});
 // Virtual for book's URL
 RentalSchema
 .virtual('url')

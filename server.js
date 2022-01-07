@@ -5,6 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 //var formidable = require('formidable');
+var bodyParser = require('body-parser');
 var process = require('process');
 var app = express();
 
@@ -16,12 +17,13 @@ var port = 8680;
 
 process.chdir(__dirname);
 app.use(express.json());
+//app.use(express.urlencoded({extended: true}))
 
 //che senso ha usare middleware così?
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
 
 //app.use(express.static(`${__dirname}/..`));
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //import the middleware to manage the request of the three different app
 /*var worker = */require('./backend/worker-module.js')(app);

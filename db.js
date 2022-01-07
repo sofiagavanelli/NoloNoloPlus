@@ -57,11 +57,11 @@ module.exports = {
         }).save();
     },
 
-    saveRental: async (_rent, _prod, _client, _start, _end) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Noleggio({
-            _id: _id,
+            //_id: _id,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,

@@ -1,13 +1,12 @@
 <template>
 <div>
 
-  <div>
+  <div> <!--QUESTO LO VEDE -->
     <Navbar />
   </div>
 
-  <!--div id="app">
 
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
+            <!--b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
 
                 <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
@@ -26,11 +25,10 @@
                     </b-navbar-nav>
                   </b-collapse>
 
-            </b-navbar>
+            </b-navbar-->
 
-  </div-->
 
-  <div id="introduzione" class="flex-container">
+  <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
     <br>
     NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
     L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
@@ -40,7 +38,6 @@
   <!--template v-if="isModalVisible">
     <LoginModal /> <--@close="closeModal">
   </template-->
-
 
   <!--button type="button" class="btn" @click="showModal">
     Open Modal!
@@ -196,8 +193,9 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #nB {
+#main_page{
     justify-content: center;
+    background-color: blueviolet;
 }
 
 #main_page {
