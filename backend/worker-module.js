@@ -121,4 +121,30 @@ module.exports = function (app) {
 
         });
 
+    //PROVA POST 
+
+    app.post('/', function(req, res, next) {
+    
+      const client = req.body.client;
+      const prod = req.body.product; 
+      const startdate= req.body.start;
+      const enddate= req.body.end; 
+    
+    /*rentDetails.saveRental(function(err,req1){
+        if(err) throw err;
+        rent_prova.exec(function(err,data){
+          if(err) throw err;
+          res.render('reserved', { title: 'Rent Records', records:data, success:'Record Inserted Successfully' });
+            });
+      })*/
+      db.saveRental(client, prod, startdate, enddate).then(() => {
+        if (err) throw err;
+        res.render('reserved', { title: 'Rent Records', records:data, success:'Record Inserted Successfully' });
+        console.log("aaaaaaaaaaaaaaaa");
+        //res.status(200);
+        //res.end();
+      }
+    )
+    });
+
 };

@@ -678,29 +678,29 @@ function openCreate(){
                      
   div = $(`    
   <div class="testbox">
-  <form id="create" action="/">
+  <form id="create" action="/" method="post" role="form">
     <h1>Create Rent</h1>
     <div class="item-2">
       <p>Client ID</p>
       <div>
-        <input class="create2" type="text" name="name"/>
+        <input class="create2" type="text" name="client" placeholder="Enter client ID">
       </div>
     </div>
     <div class="item-2">
       <p>Product ID</p>
-      <input class="create2" type="text" name="name"/>
+      <input class="create2" type="text" name="product" placeholder="Enter product ID">
     </div>
     <div class="item-2" style="display: flex; justify-content: space-between;">
       <p>Start date</p>
       <p style="position: relative; left: -37%;">End date</p></div>
       <div class="item-2" style=" margin-top: -3%;"> 
 
-      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
-      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
+      <input type="date" name="start" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
+      <input type="date" name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
     </div>
     
     <div class="btn-block">
-      <button class="btn-sub" type="submit" href="/">Check</button>
+      <button class="btn-sub" name="submit" value="submit" href="/">Check</button>
     </div>
   </form>
 </div>

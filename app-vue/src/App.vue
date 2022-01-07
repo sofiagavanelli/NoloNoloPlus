@@ -1,13 +1,12 @@
 <template>
 <div>
 
-  <div>
+  <div> <!--QUESTO LO VEDE -->
     <Navbar />
   </div>
 
-  <!--div id="app">
 
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
+            <!--b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
 
                 <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
@@ -26,11 +25,10 @@
                     </b-navbar-nav>
                   </b-collapse>
 
-            </b-navbar>
+            </b-navbar-->
 
-  </div-->
 
-  <div id="introduzione" class="flex-container">
+  <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
     <br>
     NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
     L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
@@ -42,21 +40,28 @@
   </template>
 
 
+  <div><!--QUESTO NON LO VEDE -->
+    <h1> prova11 prova prova </h1>
+
+    <IntroPage /> </div>
+
   <!--button type="button" class="btn" @click="showModal">
     Open Modal!
   </button>
 
   <LoginModal v-show="isModalVisible" @close="closeModal" /-->
 
-  <!--template v-else-->
+  <!--template v-else
     <h1> SONO QUA </h1>
     <div>
-        <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-        <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
-      <IntroPage />
-        <!--RentPage v-show="toggle" /-->
+
+      <h1>AAAAAAAAAA</h1>
+        <QUI APPAIONO LE COSE!  id="main_page" class="flex-container">
+        <e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
+      <!--<IntroPage />
+        <RentPage v-show="toggle" /
     </div>
-  <!--/template-->
+  </template-->
 
   <!--div id="calcolatrice">
     <--devo far aprire il component al click->
@@ -68,7 +73,7 @@
 
 
 
-  <footer>
+  <footer><!--QUESTO LO VEDE -->
     <div class="flex-container" id="footer">
       <div class="element">
         <h3 class="title">CONTATTI </h3> 
@@ -102,7 +107,7 @@ export default {
     IntroPage,
     RentPage,
     LoginModal,
-    //toggle: false,
+    toggle: false,
   },
   data() {
     return {
@@ -197,8 +202,9 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #nB {
+#main_page{
     justify-content: center;
+    background-color: blueviolet;
 }
 
 #main_page {
