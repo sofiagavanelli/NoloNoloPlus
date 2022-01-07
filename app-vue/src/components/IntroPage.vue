@@ -1,7 +1,10 @@
 <template>
   <div>
 
+    <h1> ciao </h1>
+
     <div id="main_page" class="flex-container">
+      
       <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
@@ -102,14 +105,13 @@ export default {
     };
   },
 
-  mounted: function() {
+  mounted() {
 
   //this.sendClickedId();
 
+    console.log("sono dentro mounted");
   
-    axios.get('/prods', {
-        
-    })
+    axios.get('/prods', )
     
       .then((response) => {
         this.prodInfo = response.data;

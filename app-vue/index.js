@@ -28,7 +28,11 @@ app.get("/", (req, res) => {
 app.get('/prods', function (req, res) {
     //lettura dei clients dal db
 
+    console.log("sono nella get");
+
     res.writeHead(200);
+
+    console.log("riga 35");
 
     db.getProds().then(prodsinfo => {
 

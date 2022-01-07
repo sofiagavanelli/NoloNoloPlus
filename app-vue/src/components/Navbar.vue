@@ -15,8 +15,8 @@
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
-            <!--v-on:click='smista'-->
-              <b-nav-item title="Reserved" @click="showModal">
+            <!--v-on:click='smista' @click="showModal"-->
+              <b-nav-item title="Reserved" >
                 Login
               </b-nav-item>
             </b-navbar-nav>
@@ -39,11 +39,11 @@ export default {
   /*components: {
     LoginModal
   },*/
-  data() {
+  /*data() {
     return {
       isModalVisible: false,
     };
-  },
+  },*/
 
   methods: {
 

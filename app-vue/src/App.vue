@@ -193,11 +193,6 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page{
-    justify-content: center;
-    background-color: blueviolet;
-}
-
 #main_page {
     padding-bottom: 4vh;
 }
