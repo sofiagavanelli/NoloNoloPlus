@@ -37,9 +37,9 @@
     equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
   </div>
 
-  <template v-if="isModalVisible">
-    <LoginModal /> <!--@close="closeModal"-->
-  </template>
+  <!--template v-if="isModalVisible">
+    <LoginModal /> <--@close="closeModal">
+  </template-->
 
 
   <!--button type="button" class="btn" @click="showModal">
@@ -49,13 +49,14 @@
   <LoginModal v-show="isModalVisible" @close="closeModal" /-->
 
   <!--template v-else-->
-    <h1> SONO QUA </h1>
-    <div>
-        <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-        <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
-      <IntroPage />
-        <!--RentPage v-show="toggle" /-->
-    </div>
+  <h1> SONO QUA </h1>
+
+  <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
+  <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
+  <!--RentPage v-show="toggle" /-->
+  <div>
+    <IntroPage />
+  </div>
   <!--/template-->
 
   <!--div id="calcolatrice">
@@ -65,8 +66,6 @@
       <font-awesome-icon icon="calculator" />
     </b-button>
   </div-->
-
-
 
   <footer>
     <div class="flex-container" id="footer">
@@ -91,8 +90,8 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
-import RentPage from './components/RentPage.vue'
-import LoginModal from './components/LoginModal.vue';
+//import RentPage from './components/RentPage.vue'
+//import LoginModal from './components/LoginModal.vue';
 
 
 export default {
@@ -100,20 +99,20 @@ export default {
   components: {
     Navbar,
     IntroPage,
-    RentPage,
-    LoginModal,
+    //RentPage,
+    //LoginModal,
     //toggle: false,
   },
-  data() {
+  /*data() {
     return {
-      rentId: null,
+      //rentId: null,
       isModalVisible: false
     };
-  },
+  },*/
 
   methods: {
 
-    showModal() {
+    /*showModal() {
       console.log("sono dentro show");
       this.isModalVisible = true;
       console.log(this.isModalVisible);
@@ -130,7 +129,7 @@ export default {
       if(rentId)
         toggle = !toggle;
         
-    }
+    }*/
 
     
   }

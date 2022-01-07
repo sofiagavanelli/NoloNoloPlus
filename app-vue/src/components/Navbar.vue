@@ -3,42 +3,42 @@
 
     <div id="app">
 
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+      <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
-                <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-                </b-button>
+        <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
+        </b-button>
 
-                <a id="logoname" class="nav-item">NoloNoloPlus</a>
+        <a id="logoname" class="nav-item">NoloNoloPlus</a>
 
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-                  <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav class="ml-auto">
-                      <!--v-on:click='smista'-->
-                        <b-nav-item title="Reserved" @click="showModal">
-                            Login
-                        </b-nav-item>
-                    </b-navbar-nav>
-                  </b-collapse>
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="ml-auto">
+            <!--v-on:click='smista'-->
+              <b-nav-item title="Reserved" @click="showModal">
+                Login
+              </b-nav-item>
+            </b-navbar-nav>
+          </b-collapse>
 
-            </b-navbar>
+      </b-navbar>
 
     </div>
 
-    <LoginModal v-show="isModalVisible" @close="closeModal" />
+    <!--LoginModal v-show="isModalVisible" @close="closeModal" /-->
 
   </div>
 </template>
 
 <script>
-import LoginModal from './LoginModal.vue';
+//import LoginModal from './LoginModal.vue';
 
 export default {
   name: 'Navbar',
-  components: {
+  /*components: {
     LoginModal
-  },
+  },*/
   data() {
     return {
       isModalVisible: false,
@@ -47,14 +47,14 @@ export default {
 
   methods: {
 
-    showModal() {
+    /*showModal() {
       console.log("dentro show");
       this.isModalVisible = true;
     },
 
     closeModal() {
       this.isModalVisible = false;
-    }
+    }*/
 
   }
 

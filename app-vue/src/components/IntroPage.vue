@@ -2,6 +2,34 @@
   <div>
 
     <div id="main_page" class="flex-container">
+      <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
+          <img class="post_image" :src="item.image" alt="Card image cap">
+          <b-card-body>
+            <h3 class="title"> {{item.name}} </h3>
+            <h4 class="title"> {{item.brand}} </h4>
+            <div class="details">
+              <ul class="d-flex flex-wrap pl-0" >
+                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
+                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
+                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
+                <div class="price_data"> <li class="title"> Prezzo: 
+                  <h5 class="data"> {{item.price}} </h5> </li> 
+                </div>
+              </ul>
+            </div>
+          </b-card-body>
+
+          <b-card-footer >
+            <b-button v-on:click="getID(index)" type="button" class="noleggioBtn" :id="index">
+              NOLEGGIA {{index}}
+            </b-button>
+          </b-card-footer>
+
+        </b-card>
+
+
+    </div>
 
       <!-- con schermo cellulare --
       <template v-if="$mq === 'mobile'">
@@ -54,34 +82,6 @@
       </template-->  
       
       <!--proviamo il vfor -- cos'è la key? -->
-        <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{item.name}} </h3>
-            <h4 class="title"> {{item.brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item.price}} </h5> </li> 
-                </div>
-              </ul>
-            </div>
-          </b-card-body>
-
-          <b-card-footer >
-            <b-button v-on:click="getID(index)" type="button" class="noleggioBtn" :id="index">
-              NOLEGGIA {{index}}
-            </b-button>
-          </b-card-footer>
-
-        </b-card>
-
-
-    </div>
 
     
   </div>
@@ -102,56 +102,55 @@ export default {
     };
   },
 
-mounted: function() {
+  mounted: function() {
 
   //this.sendClickedId();
 
   
-  axios.get('/prods', {
-      
-  })
-  
-    .then((response) => {
-      this.prodInfo = response.data;
-      console.log(this.prodInfo);
-          //this.sortArray();
-          //this.loading = false;
-          //document.getElementById('ricerca').value = '';
+    axios.get('/prods', {
+        
     })
-    .catch((error) => {
-      //this.loading = false;
-      console.log(error);
-    });
-
-
-},
-
-methods: {
-
-  getID(__id) {
-    console.log("sono dentro getID in intropage");
-    this.selectedID = __id;
-    console.log( __id);
-
-    //this.sendClickedId();
-
-    toggle=!toggle;
+    
+      .then((response) => {
+        this.prodInfo = response.data;
+        console.log(this.prodInfo);
+            //this.sortArray();
+            //this.loading = false;
+            //document.getElementById('ricerca').value = '';
+      })
+      .catch((error) => {
+        //this.loading = false;
+        console.log(error);
+      });
 
   },
 
-  change() {
+  methods: {
 
-    toggle=!toggle;
+    getID(__id) {
+      console.log("sono dentro getID in intropage");
+      this.selectedID = __id;
+      console.log( __id);
 
-  }
+      //this.sendClickedId();
 
-  /*sendClickedId() {
-    console.log("sono dentro clicked id di intropage");
-    this.$emit("id-to-rent", this.selectedID);
+      toggle=!toggle;
 
-    console.log("sono ANCORA dentro clicked id di intropage");
+    },
 
-  }*/
+    change() {
+
+      toggle=!toggle;
+
+    }
+
+    /*sendClickedId() {
+      console.log("sono dentro clicked id di intropage");
+      this.$emit("id-to-rent", this.selectedID);
+
+      console.log("sono ANCORA dentro clicked id di intropage");
+
+    }*/
 
 }
 
