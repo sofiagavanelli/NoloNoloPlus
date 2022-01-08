@@ -1,11 +1,10 @@
 <template>
   <div>
 
-    <h1> prova </h1>
+  <!--transition name="modal-fade"-->
 
-  <!--transition name="modal-fade">
+    <div id="modal" class="flex-container">
   
-    <div class="modal-backdrop">
       <b-modal z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <h3 name="header">
@@ -31,8 +30,9 @@
           </button>
         </footer>
       </b-modal>
+
     </div>
-  </transition--
+  <!--/transition--
 
 
     <b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

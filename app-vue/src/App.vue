@@ -179,7 +179,12 @@ export default {
 }
 
 #introduzione { /*(up-right-down-left)*/
-    margin-top: 4em;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+
+    font-size: 14px;
+
+    margin-top: 6em;
     padding: 0.5em 3em 1em 3em;
 }
 
