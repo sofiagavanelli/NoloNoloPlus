@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+var db = require('../db');
 const app = express();
+
 
 app.use(cors());
 
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(process.cwd() + '/dist'));
 
-const db = require("./db");
+//const db = require("./db");
 
 // simple route
 app.get("/", (req, res) => {
@@ -24,24 +25,18 @@ app.get("/", (req, res) => {
 });
 
 
-
 app.get('/prods', function (req, res) {
-    //lettura dei clients dal db
+  //lettura dei prodotti dal db
 
-    console.log("sono nella get");
+  res.writeHead(200);
 
-    res.writeHead(200);
-
-    console.log("riga 35");
-
-    db.getProds().then(prodsinfo => {
-
-      console.log("sono in get prods " + prodsinfo);
+  console.log("sono nella get in index");
+  db.getProds().then(prodsinfo => {
 
       res.write(JSON.stringify(prodsinfo));
+      console.log("prova");
       res.end();
-
-    });
+  });
 
 });
 
@@ -51,3 +46,6 @@ const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+
+

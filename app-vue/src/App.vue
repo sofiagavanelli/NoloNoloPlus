@@ -51,7 +51,8 @@
   <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
   <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
   <!--RentPage v-show="toggle" /-->
-  <div>
+  <div style="background-color: red;">
+    <h1> PROOOOOOVAAAA </h1>
     <IntroPage />
   </div>
   <!--/template-->
