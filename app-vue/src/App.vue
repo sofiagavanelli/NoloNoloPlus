@@ -44,15 +44,10 @@
   </button>
 
   <LoginModal v-show="isModalVisible" @close="closeModal" /-->
-
-  <!--template v-else-->
-  <h1> SONO QUA </h1>
-
   <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
   <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
   <!--RentPage v-show="toggle" /-->
-  <div style="background-color: red;">
-    <h1> PROOOOOOVAAAA </h1>
+  <div>
     <IntroPage />
   </div>
   <!--/template-->
@@ -141,7 +136,7 @@ export default {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 
-    font-size: 15px;
+    font-size: 12px;
 
     margin-top: 0;
     margin-left: 0;
@@ -195,7 +190,8 @@ export default {
 }
 
 #main_page {
-    padding-bottom: 4vh;
+  justify-content: center;
+  padding-bottom: 4vh;
 }
 
 #calcBtn {

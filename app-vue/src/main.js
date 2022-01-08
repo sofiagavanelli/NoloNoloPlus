@@ -10,21 +10,21 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+Vue.use(BootstrapVue)
+
 library.add(faCalculator)
 //library.add(fabars)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-Vue.use(BootstrapVue)
-
-Vue.use(VueMq, {
+/*Vue.use(VueMq, {
   breakpoints: {
     mobile: 455,
     tablet: 900,
     laptop: 1250,
     desktop: Infinity,
   }
-})
+})*/
 
 Vue.config.productionTip = false
 

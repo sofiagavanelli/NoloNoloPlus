@@ -1,12 +1,8 @@
 <template>
   <div>
 
-    <h1> ciao </h1>
-
     <div id="main_page" class="flex-container">
-      <h1> ciao sono nel div</h1>
       <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-         <h1> ciao sono qua</h1>
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{item.name}} </h3>
@@ -115,9 +111,7 @@ export default {
     axios.get('/prods')
     //console.log("sono nella get");
       .then((response) => {
-        console.log(response.data);
-        console.log("sono nella get in IntroPage");
-        console.log(this.prodInfo);
+        this.prodInfo = response.data;
             //this.sortArray();
             //this.loading = false;
             //document.getElementById('ricerca').value = '';
@@ -218,10 +212,6 @@ export default {
 
 @media screen and (max-width: 900px) {
 
-    * {
-        font-size: 20px;
-    }
-
     #calcBtn {
         float: right;
         position: fixed;
@@ -232,21 +222,6 @@ export default {
         height: 5rem;
     }
 
-}
-
-
-/*mobile first*/
-#smallboat {
-  width: 80vw;
-}
-
-.b-carousel-slide {
-  width: 100%;
-}
-
-.carousel-item {
-  display: block;
-  height: 70vh;
 }
 
 
