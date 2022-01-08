@@ -1,12 +1,22 @@
 <template>
   <div>
 
-    <h1> ciao </h1>
+    <!--button type="button" class="btn" @click="change()">
+    Open Modal!
+    </button-->
+
+    <div id="searchBar" class="flex-container">
+      <form class="example">
+        <input type="text" id="clientId" placeholder="Search boat..." name="search">
+        <button type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
 
     <div id="main_page" class="flex-container">
-      <h1> ciao sono nel div</h1>
+
+      <template v-if="normal">
+
       <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-         <h1> ciao sono qua</h1>
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{item.name}} </h3>
@@ -24,16 +34,43 @@
             </div>
           </b-card-body>
 
-          <b-card-footer >
-            <b-button v-on:click="getID(index)" type="button" class="noleggioBtn" :id="index">
+          <!--b-card-footer-->
+            <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
               NOLEGGIA {{index}}
             </b-button>
-          </b-card-footer>
+
+          <!--/b-card-footer-->
 
         </b-card>
 
+      </template>
+
+      <template v-else>
+
+        <b-card class="boat-images">
+          <img class="post_image" :src="item[selectedID].image" alt="Card image cap">
+          <b-card-body>
+            <h3 class="title"> {{item[selectedID].name}} </h3>
+            <h4 class="title"> {{item[selectedID].brand}} </h4>
+            <div class="details">
+              <ul class="d-flex flex-wrap pl-0" >
+                <li class="title">Potenza:<h5 class="data"> {{item[selectedID].power}} </h5> </li>
+                <li class="title">Lunghezza:<h5 class="data"> {{item[selectedID].length}} </h5> </li>
+                <li class="title">Ospiti:<h5 class="data"> {{item[selectedID].guests}} </h5> </li>
+                <li class="title">Anno:<h5 class="data"> {{item[selectedID].year}} </h5> </li>
+                <div class="price_data"> <li class="title"> Prezzo: 
+                  <h5 class="data"> {{item[selectedID].price}} </h5> </li> 
+                </div>
+              </ul>
+            </div>
+          </b-card-body>
+
+        </b-card>
+
+      </template>
 
     </div>
+
 
       <!-- con schermo cellulare --
       <template v-if="$mq === 'mobile'">
@@ -94,6 +131,8 @@
 <script>
 import axios from '../http'
 
+//import RentPage from './components/RentPage.vue'
+
 export default {
   name: 'IntroPage',
   data() {
@@ -101,8 +140,9 @@ export default {
       prodInfo: [],
       //slide: 0,
       //sliding: null,
+      normal:true,
       selectedID: null,
-      toggle: true,
+      //toggle: true,
     };
   },
 
@@ -115,9 +155,7 @@ export default {
     axios.get('/prods')
     //console.log("sono nella get");
       .then((response) => {
-        console.log(response.data);
-        console.log("sono nella get in IntroPage");
-        console.log(this.prodInfo);
+        this.prodInfo = response.data;
             //this.sortArray();
             //this.loading = false;
             //document.getElementById('ricerca').value = '';
@@ -142,9 +180,13 @@ export default {
 
     },
 
-    change() {
+    change(__id) {
 
-      toggle=!toggle;
+      console.log("in change");
+
+      this.normal=!this.normal;
+
+      this.selectedID = __id;
 
     }
 
@@ -207,7 +249,7 @@ export default {
     padding-bottom: 0.2rem;
     /*border-radius: 0.2rem;*/
     object-fit: cover;
-    height: 20vh;
+    height: 30vh;
 }
 
 .price_data  {
@@ -217,10 +259,6 @@ export default {
 
 
 @media screen and (max-width: 900px) {
-
-    * {
-        font-size: 20px;
-    }
 
     #calcBtn {
         float: right;
@@ -232,21 +270,6 @@ export default {
         height: 5rem;
     }
 
-}
-
-
-/*mobile first*/
-#smallboat {
-  width: 80vw;
-}
-
-.b-carousel-slide {
-  width: 100%;
-}
-
-.carousel-item {
-  display: block;
-  height: 70vh;
 }
 
 
