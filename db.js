@@ -65,7 +65,8 @@ module.exports = {
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
-            end_date: _end
+            end_date: _end,
+            //worker_id: _worker
         }).save();
     },
 

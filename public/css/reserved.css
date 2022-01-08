@@ -374,21 +374,25 @@ form.example input[type=text] {
   color: #eb5248;
 }
 .btn-mod{
-  background-color: #5bce7d;
+  background-color: #095484;
+  color: #fff;
   border: #000;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 6px 20px;
   float:right;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
 .btn-d{
-  background-color: #eb5248;
+  background-color: #095484;
+  color: #fff;
   border: #000;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 6px 20px;
   margin-left: 5px;
   right: 5px;
   float:right;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .btn-mod2{
   position: relative;
@@ -409,16 +413,7 @@ form.example input[type=text] {
   margin-left: 5px;
 
 }
-.btn-d2{
-  position: relative;
-  left: 55%;
-  background-color: #eb5248;
-  border: #000;
-  border-radius: 25px;
-  padding: 8px 22px;
-  margin-left: 5px;
 
-}
 .btn-back{
   background-color: #7495c4;
   border: #000;
@@ -519,13 +514,6 @@ form.example input[type=text] {
 .content .sub-content a{
   color: #1da1f2;
 }
-/*
-.data{
-  width: 100%;
-  overflow: hidden;
-  margin: 30px 0 20px;
-}*/
-
 
   h1{
   margin: 15px 0;

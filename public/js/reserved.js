@@ -147,9 +147,17 @@ function openInventory() {
     div = $(`
     <form class="example">
     <input type="text" placeholder="Search product..." name="search">          
-    <button type="submit"><i class="fa fa-search"></i></button>   
-    <button id= "btn-add" onclick="openModalM()"><i class="fas fa-plus-circle"> Add item</i></button>  
-    </form>`);
+    <button type="submit"><i class="fa fa-search"></i></button>    
+    </form>
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+    <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+    <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+    </div>
+    </div>`);
     $("#ctable").append(div);
           
     function populateP(ProdInfo){
@@ -157,12 +165,15 @@ function openInventory() {
         let div = null;
               
         div = $(`     
-        <div class="card" style="width: 21rem;">        
-        <img src="${ProdInfo[i].image}" class="card-img-top" alt="...">              
+        <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
+        <img src="${ProdInfo[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
-        <h5 class="card-title">${ProdInfo[i].name}</h5>              
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>              
-        <a href="#" class="btn btn-primary">Go somewhere</a>              
+        <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
+        <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
+        <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
+        Price: ${ProdInfo[i].price}</p>              
+        <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+        <button class="btn-mod">Modify</button>             
         </div>             
         </div>            
         `);
@@ -224,7 +235,7 @@ function openRents() {
                 <div class="card-body">
                   <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
                   <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
-                  <p class="card-text">Start date: ${RentInfo[i].start.slice(0,10)} <br> End date: ${RentInfo[i].end.slice(0,10)}</p>
+                  <p class="card-text">Start date: ${RentInfo[i].start_date.slice(0,10)} <br> End date: ${RentInfo[i].end_date.slice(0,10)}</p>
                   <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
                   <button class="btn-mod">Modify</button>
                 </div>
@@ -236,100 +247,6 @@ function openRents() {
              }
          } 
 }
-
-
-function openModalM(){
-  $("#ctable2").css("-webkit-filter", "blur(15px)");
-  div = $(`   
-    <div class="modal-dialog" id="modModal" style= 'max-width: 700px'>
-      <div style='z-index:1; width:100%; border-radius: 0px; margin: 0%; background: #f3cfd5;' class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">Add new item</h4>
-          <button type="button" id="modModal" onclick="closeModal()"class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-
-        <div class="modal-body">
-        <form class="row g-3">
-          <div class="col-md-6" >
-            <label for="inputProdID" class="form-label">Product ID</label>
-            <input type="text" class="form-control" id="inputProdID" placeholder="Enter ID">
-          </div>
-
-          <div class="col-md-6">
-            <label for="inputProdName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputProdName" placeholder="Enter name">
-          </div>
-
-          <div class="col-12">
-            <br>
-            <label for="inputProdBrand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="inputProdBrand" placeholder="Enter brand">
-          </div>
-
-          <div class="col-md-6">
-            <br>
-            <label for="inputProdPow" class="form-label">Power</label>
-            <input type="text" class="form-control" id="inputProdPow" placeholder="...">
-          </div>
-
-          <div class="col-md-6">
-            <br>
-            <label for="inputProdG" class="form-label">Guests</label>
-            <input type="text" class="form-control" id="inputProdG" placeholder="...">
-          </div>
-
-          <div class="col-md-6">
-            <br>
-            <label for="inputProdL" class="form-label">Length</label>
-            <input type="text" class="form-control" id="inputProdL" placeholder="...">
-          </div>
-
-          <div class="col-md-6">
-            <br>
-            <label for="inputProdY" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputProdY" placeholder="...">
-          </div>
-
-          <div class="col-md-4">
-            <br>
-            <label for="inputProdPrice" class="form-label">Price</label>
-            <input type="text" class="form-control" id="inputProdPrice" placeholder="Enter price">
-          </div>
-          
-          <div class="col-md-4">
-            <br>
-            <label for="inputState" class="form-label">State</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>Available</option>
-              <option>Not Available</option>
-            </select>
-          </div>
-          
-          </div>
-        </form>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Add</button>
-        </div>
-      </div>
-    </div>     
-            
-  `);
-              
-  $("#ctable").append(div);  
-  
-}
-function closeModal() {
-
-  var x = document.getElementById("modModal");
-    x.style.display = "none";
-    $("#ctable2").css("-webkit-filter", "blur(0px)");
-  }
-    
-
      
 /************************************/
 /*FUNZIONI RICERCA */
@@ -524,14 +441,10 @@ function openAlert(idDel) {
 /***************************** */
 /*FUNZIONI ORDINAMENTO */
 
-/*ORDINE ALFABETICO */
+/*ORDINE ALFABETICO NOLEGGI*/
 function SortName(){   //ordine alfabetico dei clienti
-  console.log("prova");
- /*rentARRAY.sort((a, b) => {
-  return parseFloat(a.price) - parseFloat(b.price);
-});*/
 rentARRAY.sort((a,b) => (a.client_id > b.client_id) ? 1 : ((b.client_id > a.client_id) ? -1 : 0))
-//console.log(rentARRAY);
+
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
@@ -565,7 +478,7 @@ for (let i in rentARRAY) {
             <div class="card-body">
               <h5 class="card-title">Rental: ${rentARRAY[i]._id}</h5>
               <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}</p>
-              <p class="card-text">Start date: ${rentARRAY[i].start.slice(0,10)} <br> End date: ${rentARRAY[i].end.slice(0,10)}</p>
+              <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
               <button id="${rentARRAY[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
               <button class="btn-mod">Modify</button>
             </div>
@@ -577,18 +490,15 @@ for (let i in rentARRAY) {
          
      } 
 }
-/*ORDINE DATA CRESCENTE */
+/*ORDINE DATA CRESCENTE NOLEGGI */
 function SortDate(){   //ordina in base alla data
-  //console.log("prova");
+  console.log("prova data");
   rentARRAY.sort(function compare(a, b) {
-    var dateA = new Date(a.start);
-    var dateB = new Date(b.start);
+    var dateA = new Date(a.start_date);
+    var dateB = new Date(b.start_date);
     return dateA - dateB;
   });
 
-
-//rentARRAY.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
-//console.log(rentARRAY);
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
@@ -622,7 +532,7 @@ for (let i in rentARRAY) {
             <div class="card-body">
               <h5 class="card-title">Rental: ${rentARRAY[i]._id}</h5>
               <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
-              <p class="card-text">Start date: ${rentARRAY[i].start.slice(0,10)} <br> End date: ${rentARRAY[i].end.slice(0,10)}</p>
+              <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
               <button id="${rentARRAY[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
               <button class="btn-mod">Modify</button>
             </div>
@@ -635,7 +545,151 @@ for (let i in rentARRAY) {
      } 
 }
 
+/*ORDINE ALFABETICO INVENTARIO */
+function SortNameR(){   //ordine alfabetico dei prodotti
+inventoryARRAY.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+$( "#ctable" ).empty();
+$( "#ctable2" ).empty();
+$("#ctable2").css("-webkit-filter", "blur(0px)");
 
+div = $(`  
+    <form class="example">
+    <input type="text" placeholder="Search product..." name="search">          
+    <button type="submit"><i class="fa fa-search"></i></button>    
+    </form>
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+    <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+    <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+    </div>
+    </div>       
+`);
+            
+$("#ctable").append(div);
+for (let i in inventoryARRAY) {
+          
+  let div = null;
+  
+        
+  div = $(`
+  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
+  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card-body">              
+  <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
+  <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
+  <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
+  Price: ${inventoryARRAY[i].price}</p>              
+  <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+  <button class="btn-mod">Modify</button>             
+  </div>             
+  </div>  
+        `);
+   $("#ctable2").append(div);
+         
+ } 
+}
+
+/*ORDINE PREZZO CRESCENTE PRODOTTI */
+function SortPriceHigh(){   //ordina in base alla data
+  inventoryARRAY.sort((a, b) => {
+   return parseFloat(b.price) - parseFloat(a.price);
+ });
+
+$( "#ctable" ).empty();
+$( "#ctable2" ).empty();
+$("#ctable2").css("-webkit-filter", "blur(0px)");
+
+div = $(`         
+<form class="example">
+<input type="text" placeholder="Search product..." name="search">          
+<button type="submit"><i class="fa fa-search"></i></button>    
+</form>
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Sort by </button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+<button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+<button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+<button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+</div>
+</div> 
+`);
+            
+$("#ctable").append(div);
+for (let i in inventoryARRAY) {
+          
+  let div = null;
+  
+        
+  div = $(`
+  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
+  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card-body">              
+  <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
+  <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
+  <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
+  Price: ${inventoryARRAY[i].price}</p>              
+  <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+  <button class="btn-mod">Modify</button>              
+  </div>             
+  </div>    
+       `);
+   $("#ctable2").append(div);
+         
+     } 
+}
+
+function SortPriceLow(){   //ordina in base alla data
+  inventoryARRAY.sort((a, b) => {
+   return parseFloat(a.price) - parseFloat(b.price);
+ });
+
+$( "#ctable" ).empty();
+$( "#ctable2" ).empty();
+$("#ctable2").css("-webkit-filter", "blur(0px)");
+
+div = $(`         
+<form class="example">
+<input type="text" placeholder="Search product..." name="search">          
+<button type="submit"><i class="fa fa-search"></i></button>    
+</form>
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Sort by </button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+<button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+<button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+<button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+</div>
+</div> 
+`);
+            
+$("#ctable").append(div);
+for (let i in inventoryARRAY) {
+          
+  let div = null;
+  
+        
+  div = $(`
+  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
+  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card-body">              
+  <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
+  <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
+  <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
+  Price: ${inventoryARRAY[i].price}</p>              
+  <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+  <button class="btn-mod">Modify</button>              
+  </div>             
+  </div>    
+       `);
+   $("#ctable2").append(div);
+         
+     } 
+}
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -678,7 +732,7 @@ function openCreate(){
                      
   div = $(`    
   <div class="testbox">
-  <form id="create" action="/" method="post" role="form">
+  <form id="create" action="/" method="POST" role="form">
     <h1>Create Rent</h1>
     <div class="item-2">
       <p>Client ID</p>
@@ -700,7 +754,7 @@ function openCreate(){
     </div>
     
     <div class="btn-block">
-      <button class="btn-sub" name="submit" value="submit" href="/">Check</button>
+      <button class="btn-sub" onclik="checkRent()">Check</button>
     </div>
   </form>
 </div>
@@ -709,6 +763,11 @@ function openCreate(){
 $("#ctable2").append(div);
 }
 
+function checkRent(){
+  console.log("sono dentro");
+  alert("Rent created with succes!");
+
+}
 
 
 
