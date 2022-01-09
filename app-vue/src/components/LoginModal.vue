@@ -10,7 +10,7 @@
           <h3 name="header">
             This is the default tile!
           </h3>
-          <button type="button" class="btn-close" @click="close" aria-label="Close modal">
+          <button type="button" class="btn-close" v-on:click="close()" aria-label="Close modal">
             x
           </button>
         </header>
@@ -25,7 +25,7 @@
           <h3 name="footer">
             This is the default footer!
           </h3>
-          <button type="button" class="btn-green" @click="close" aria-label="Close modal">
+          <button type="button" class="btn-green" v-on:click="close()" aria-label="Close modal">
             Close me!
           </button>
         </footer>
@@ -93,7 +93,13 @@
 </script>
 
 
-<style>
+<style scoped>
+
+.b-modal {
+  color: red;
+  background-color: red;
+  /*border: 5px solid red ;*/
+}
 
 .modal-content {
     background: #EDB5BF;

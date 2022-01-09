@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+//da inserire in una variabile env:
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./models/client");

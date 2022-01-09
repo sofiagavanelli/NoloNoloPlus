@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueMq from 'vue-mq'
 
-import { BootstrapVue } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -11,6 +11,7 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 library.add(faCalculator)
 //library.add(fabars)

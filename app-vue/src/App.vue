@@ -194,9 +194,8 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page {
+#main_page, #searchBar {
   justify-content: center;
-  padding-bottom: 4vh;
 }
 
 #calcBtn {
@@ -220,6 +219,8 @@ export default {
     justify-content: space-around;
 
     background-color: lightcyan;
+
+    margin-top: 4vh;
     padding: 3vh 5vw 3vh 5vw;
 }
 

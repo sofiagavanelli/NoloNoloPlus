@@ -8,7 +8,7 @@
     <div id="searchBar" class="flex-container">
       <form class="example">
         <input type="text" id="clientId" placeholder="Search boat..." name="search">
-        <button type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
+        <button type="submit" v-on:click="searchClient(id)"><i class="fa fa-search"></i></button>
       </form>
     </div>
 
@@ -35,9 +35,11 @@
           </b-card-body>
 
           <!--b-card-footer-->
+          <b-input-group>
             <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
               NOLEGGIA {{index}}
             </b-button>
+          </b-input-group>
 
           <!--/b-card-footer-->
 
@@ -180,7 +182,7 @@ export default {
 
     },
 
-    change(__id) {
+    change: function(__id) {
 
       console.log("in change");
 

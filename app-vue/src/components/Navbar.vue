@@ -27,7 +27,7 @@
     </div>
 
     <template v-if="isModalVisible">
-      <LoginModal @close="closeModal" />
+      <LoginModal v-on:close="closeModal()" />
     </template>
 
   </div>
