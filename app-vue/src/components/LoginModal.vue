@@ -3,7 +3,15 @@
 
   <!--transition name="modal-fade"-->
 
-    <div id="modal" class="flex-container">
+    <!--div id="modal" class="flex-container"-->
+
+      <p> CIAO </p>
+
+      <div class="modal">
+        <div class="modal-content">
+          <h5> prove </h5>
+        </div>
+      </div>
   
       <b-modal z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
@@ -31,7 +39,7 @@
         </footer>
       </b-modal>
 
-    </div>
+    <!--/div-->
   <!--/transition--
 
 
@@ -87,7 +95,7 @@
       },
     },
     activated: function() {
-      console.log("sono in logimodal");
+      console.log("sono in loginmodal");
     }
   };
 </script>
@@ -95,7 +103,15 @@
 
 <style scoped>
 
-.b-modal {
+.p {
+  font-size: 40px;
+
+  padding: 5em;
+}
+
+#modal {
+  width: 100%;
+  height: 100%;
   color: red;
   background-color: red;
   /*border: 5px solid red ;*/

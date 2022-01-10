@@ -5,37 +5,14 @@
     Open Modal!
     </button-->
 
-    <!--div id="searchBar" class="flex-container">
-      <form class="example">
-        <input type="text" id="clientId" placeholder="Search boat..." name="search">
-        <button type="button" v-on:click="filter()"><i class="fa fa-search"></i></button>
-      </form>
-    </div-->
-
-    <div id="searchBar" class="flex-container">
-      <form class="example">
-        <input type="text" id="rentId" placeholder="Search rental..." name="search">
-        <b-button type="button" v-on:click="filter()"><i class="fa fa-search"></i></b-button>
-      </form> 
-      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
-        <b-dropdown-item v-on:click="filter()">First Action</b-dropdown-item>
-        <b-dropdown-item v-on:click="filter()">Second Action</b-dropdown-item>
-        <b-dropdown-item v-on:click="filter()">Third Action</b-dropdown-item>
-      </b-dropdown>
-      <!--div class="dropdown">
-        <b-button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sort by </b-button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <b-button class="dropdown-item" type="button" id="sortName" v-on:click="filter()">Name</b-button>
-          <b-button class="dropdown-item" type="button" id="sortDate" v-on:click="filter()">Date</b-button>
-        </div>
-      </div-->
+    <div> 
+      <SearchBar />
     </div>
 
     <div id="main_page" class="flex-container">
 
       <template v-if="normal">
-
+        
       <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
@@ -68,27 +45,34 @@
 
       <template v-else>
 
-        <b-card class="boat-images">
-          <img class="post_image" :src="item[selectedID].image" alt="Card image cap">
+        <RentPage />
+        <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
+        
+        <!--b-card class="boat-images">
+          <img class="post_image" :src="prodInfo[selectedID].image" alt="Card image cap">
           <b-card-body>
-            <h3 class="title"> {{item[selectedID].name}} </h3>
-            <h4 class="title"> {{item[selectedID].brand}} </h4>
+            <h3 class="title"> {{prodInfo[selectedID].name}} </h3>
+            <h4 class="title"> {{prodInfo[selectedID].brand}} </h4>
             <div class="details">
               <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item[selectedID].power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item[selectedID].length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item[selectedID].guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item[selectedID].year}} </h5> </li>
+                <li class="title">Potenza:<h5 class="data"> {{prodInfo[selectedID].power}} </h5> </li>
+                <li class="title">Lunghezza:<h5 class="data"> {{prodInfo[selectedID].length}} </h5> </li>
+                <li class="title">Ospiti:<h5 class="data"> {{prodInfo[selectedID].guests}} </h5> </li>
+                <li class="title">Anno:<h5 class="data"> {{prodInfo[selectedID].year}} </h5> </li>
                 <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item[selectedID].price}} </h5> </li> 
+                  <h5 class="data"> {{prodInfo[selectedID].price}} </h5> </li> 
                 </div>
               </ul>
             </div>
           </b-card-body>
 
-        </b-card>
+        </b-card-->
 
       </template>
+
+      <button type="button" v-on:click="change()" class="noleggioBtn" >
+        NOLEGGIA {{}}
+      </button>
 
     </div>
 
@@ -152,10 +136,16 @@
 <script>
 import axios from '../http'
 
-//import RentPage from './components/RentPage.vue'
+import SearchBar from './SearchBar.vue'
+
+import RentPage from './RentPage.vue'
 
 export default {
   name: 'IntroPage',
+  components: {
+    SearchBar,
+    RentPage,
+  },
   data() {
     return {
       prodInfo: [],
@@ -190,13 +180,13 @@ export default {
 
   methods: {
 
-    change(__id) {
+    change() {
 
       console.log("in change");
 
       this.normal=!this.normal;
 
-      this.selectedID = __id;
+      this.selectedID = 4;
 
     },
 
@@ -212,7 +202,7 @@ export default {
 
     }*/
 
-}
+  },
 
 
 //chiude l'export

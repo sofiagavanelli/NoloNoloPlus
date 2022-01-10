@@ -199,7 +199,7 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #searchBar {
+#main_page, #cont1, #rent_page {
   justify-content: center;
 }
 
