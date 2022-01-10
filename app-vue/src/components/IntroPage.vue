@@ -32,14 +32,20 @@
                 </div>
               </ul>
             </div>
+            <div>
+              <b-button>Button</b-button>
+            </div>
+            
+            <!--b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index"-->  <!--/b-button-->
+            
           </b-card-body>
 
-          <!--b-card-footer-->
+          <!--b-card-footer
           <b-input-group>
             <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
               NOLEGGIA {{index}}
             </b-button>
-          </b-input-group>
+          </b-input-group>-->
 
           <!--/b-card-footer-->
 
@@ -257,6 +263,9 @@ export default {
 .price_data  {
     /*visibility: hidden;*/
     display: none;
+}
+.b-button{
+  cursor: pointer;
 }
 
 
