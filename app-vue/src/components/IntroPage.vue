@@ -5,11 +5,31 @@
     Open Modal!
     </button-->
 
-    <div id="searchBar" class="flex-container">
+    <!--div id="searchBar" class="flex-container">
       <form class="example">
         <input type="text" id="clientId" placeholder="Search boat..." name="search">
-        <button type="submit" v-on:click="searchClient(id)"><i class="fa fa-search"></i></button>
+        <button type="button" v-on:click="filter()"><i class="fa fa-search"></i></button>
       </form>
+    </div-->
+
+    <div id="searchBar" class="flex-container">
+      <form class="example">
+        <input type="text" id="rentId" placeholder="Search rental..." name="search">
+        <b-button type="button" v-on:click="filter()"><i class="fa fa-search"></i></b-button>
+      </form> 
+      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+        <b-dropdown-item v-on:click="filter()">First Action</b-dropdown-item>
+        <b-dropdown-item v-on:click="filter()">Second Action</b-dropdown-item>
+        <b-dropdown-item v-on:click="filter()">Third Action</b-dropdown-item>
+      </b-dropdown>
+      <!--div class="dropdown">
+        <b-button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by </b-button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <b-button class="dropdown-item" type="button" id="sortName" v-on:click="filter()">Name</b-button>
+          <b-button class="dropdown-item" type="button" id="sortDate" v-on:click="filter()">Date</b-button>
+        </div>
+      </div-->
     </div>
 
     <div id="main_page" class="flex-container">
@@ -34,14 +54,13 @@
             </div>
           </b-card-body>
 
-          <!--b-card-footer-->
-          <b-input-group>
-            <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
+          <b-card-footer>
+          <!--b-input-group-->
+            <button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
               NOLEGGIA {{index}}
-            </b-button>
-          </b-input-group>
-
-          <!--/b-card-footer-->
+            </button>
+          <!--/b-input-group-->
+          </b-card-footer>
 
         </b-card>
 
@@ -171,18 +190,7 @@ export default {
 
   methods: {
 
-    getID(__id) {
-      console.log("sono dentro getID in intropage");
-      this.selectedID = __id;
-      console.log( __id);
-
-      //this.sendClickedId();
-
-      toggle=!toggle;
-
-    },
-
-    change: function(__id) {
+    change(__id) {
 
       console.log("in change");
 
@@ -190,6 +198,10 @@ export default {
 
       this.selectedID = __id;
 
+    },
+
+    filter() {
+      console.log("hai cliccato su filtra");
     }
 
     /*sendClickedId() {

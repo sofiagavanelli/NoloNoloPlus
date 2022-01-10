@@ -18,14 +18,14 @@ library.add(faCalculator)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-/*Vue.use(VueMq, {
+Vue.use(VueMq, {
   breakpoints: {
     mobile: 455,
     tablet: 900,
     laptop: 1250,
     desktop: Infinity,
   }
-})*/
+})
 
 Vue.config.productionTip = false
 
