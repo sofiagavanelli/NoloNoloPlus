@@ -1,11 +1,11 @@
 <template>
   <div>
 
-    <p> PROVA  </p>
+    
 
     <div id="rent_page" class="flex-container">
 
-    <b-card class="boat-images" v-for="item in prodInfo" :key="item.prod_id">
+      <b-card class="boat-images" v-for="item in prodInfo" :key="item.prod_id">
           <img class="post_image" :src="item.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{item.name}} </h3>
@@ -23,7 +23,19 @@
             </div>
           </b-card-body>
 
-        </b-card>
+      </b-card>
+
+    <!-- scelte multiple per scegliere e calcolare il rent -->
+
+      <div id="calculate" class="flex-container">
+        <label for="start-datepicker">Inizio noleggio</label>
+        <b-form-datepicker id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
+        <label for="end-datepicker">Fine noleggio</label>
+        <b-form-datepicker id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
+      </div>
+
+    </div>
+
 
         <!--b-card class="boat-images">
           <img class="post_image" :src="prodInfo.image" alt="Card image cap">
@@ -44,7 +56,7 @@
           </b-card-body>
 
         </b-card-->
-    </div>
+    
 
     
   </div>
@@ -55,10 +67,17 @@ import axios from '../http'
 
 export default {
   name: 'RentPage',
+  props: {
+    parentData: '',
+  },
   data() {
     return {
       prodInfo: [],
-      tryID: "PROD003",
+      //tryID: "PROD003",
+      startD: '',
+      endD: '',
+
+      //parentData: '',
       //idForRent: Number
       //slide: 0,
       //sliding: null,
@@ -68,8 +87,10 @@ export default {
   },
 
 mounted() {
+
+  //console.log(this.parentData);
   
-  axios.get('/prod/' + this.tryID)
+  axios.get('/prod/' + this.parentData)
   
     .then((response) => {
       this.prodInfo = response.data;
@@ -99,6 +120,10 @@ methods: {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#calculate {
+  padding: 0.5em;
+}
 
 .b-card-footer {
     justify-content: center;

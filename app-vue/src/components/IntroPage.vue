@@ -1,51 +1,58 @@
 <template>
   <div>
 
-    <!--button type="button" class="btn" @click="change()">
-    Open Modal!
-    </button-->
-
-    <div> 
+    <!--div> 
       <SearchBar />
     </div>
 
-    <div id="main_page" class="flex-container">
+    <div id="main_page" class="flex-container"-->
 
       <template v-if="normal">
-        
-      <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{item.name}} </h3>
-            <h4 class="title"> {{item.brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item.price}} </h5> </li> 
+
+        <div> 
+          <SearchBar />
+        </div>
+
+        <div id="main_page" class="flex-container">
+          
+            <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
+              <img class="post_image" :src="item.image" alt="Card image cap">
+              <b-card-body>
+                <h3 class="title"> {{item.name}} </h3>
+                <h4 class="title"> {{item.brand}} </h4>
+                <div class="details">
+                  <ul class="d-flex flex-wrap pl-0" >
+                    <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                    <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
+                    <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
+                    <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
+                    <div class="price_data"> <li class="title"> Prezzo: 
+                      <h5 class="data"> {{item.price}} </h5> </li> 
+                    </div>
+                  </ul>
                 </div>
-              </ul>
-            </div>
-          </b-card-body>
+              </b-card-body>
 
-          <b-card-footer>
-          <!--b-input-group-->
-            <button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
-              NOLEGGIA {{index}}
-            </button>
-          <!--/b-input-group-->
-          </b-card-footer>
+              <b-card-footer>
+              <!--b-input-group-->
+                <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
+                  NOLEGGIA {{index}}
+                </b-button>
+              <!--/b-input-group-->
+              </b-card-footer>
 
-        </b-card>
+            </b-card>
+
+          </div>
 
       </template>
 
       <template v-else>
 
-        <RentPage />
+        <!-- a RENTPAGE si passa selectedID -->
+        <RentPage :parentData="selectedID" />
+
+
         <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
         
         <!--b-card class="boat-images">
@@ -70,11 +77,11 @@
 
       </template>
 
-      <button type="button" v-on:click="change()" class="noleggioBtn" >
+      <!--button type="button" v-on:click="change()" class="noleggioBtn" >
         NOLEGGIA {{}}
-      </button>
+      </button-->
 
-    </div>
+    <!--/div-->
 
 
       <!-- con schermo cellulare --
@@ -137,7 +144,6 @@
 import axios from '../http'
 
 import SearchBar from './SearchBar.vue'
-
 import RentPage from './RentPage.vue'
 
 export default {
@@ -180,13 +186,13 @@ export default {
 
   methods: {
 
-    change() {
+    change(__id) {
 
       console.log("in change");
 
+      this.selectedID = this.prodInfo[__id].prod_id;
+      console.log(this.selectedID);
       this.normal=!this.normal;
-
-      this.selectedID = 4;
 
     },
 
@@ -213,8 +219,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.b-card-footer {
-    justify-content: center;
+#card-footer {
+  justify-content: center;
 }
 
 /**** gestisce i div con le immagini e i dati degli yacht *****/
@@ -222,14 +228,14 @@ export default {
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;
-    /*border-radius: 1rem;*/
+    /*border-radius: 0.5rem;*/
     margin: 4% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
 
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 .data, .title{

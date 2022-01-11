@@ -6,15 +6,19 @@
       <div id="searchBar" class="flex-container">
           <!--b-form-select v-model="selected" :options="options" multiple></b-form-select-->
           <p id="text1"> applica un filtro </p>
-          <b-dropdown id="downB"> 
+          <b-dropdown toggle-class='customDropdown' variant='none'> 
             <h6> Destinazioni </h6>
-            <b-form-checkbox-group v-model="selected" :options="luogo" multiple></b-form-checkbox-group>
-            <h6> Dunghezze </h6>
+            <b-form-checkbox-group v-model="selected" :options="boatD" multiple></b-form-checkbox-group>
+            <h6> Lunghezze </h6>
             <b-form-checkbox-group v-model="selected" :options="boatL" multiple></b-form-checkbox-group>
+            <h6> Anno </h6>
+            <b-form-checkbox-group v-model="selected" :options="boatY" multiple></b-form-checkbox-group>
           </b-dropdown>
+
+          <b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button>
       </div>
 
-      <b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button>
+      <!--b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button-->
 
   </div>
 
@@ -131,7 +135,7 @@ export default {
   data() {
       return {
         selected: [],
-        luogo: [
+        boatD: [ //destinations
           //{ value: null, text: 'Please select an option' },
           { value: 'Sicilia', text: 'Sicilia' },
           { value: 'Sardegna', text: 'Sardegna' },
@@ -143,6 +147,11 @@ export default {
           { value: '40', text: '40-50 metri' },
           { value: '50', text: '50-60 metri' },
           { value: '60', text: '>60 metri' } ],
+        boatY: [
+          { value: '00', text: '2000-2005' },
+          { value: '05', text: '2005-2010' },
+          { value: '10', text: '2010-2015' },
+          { value: '15', text: '>2015' } ],
       }
           //{ value: 'd', text: 'Selected Option', disabled: true },
           /*<b-dropdown id="ddANNO" text="Anno" class="m-md-2">
@@ -172,8 +181,8 @@ export default {
   margin: 0;
 }
 
-#subButton {
-  border-radius: 0;
+.btn {
+  border-radius: 0 !important;
 }
 
 #searchBar {
@@ -184,10 +193,12 @@ export default {
   /*justify-content: space-around;*/
 }
 
-#downB {
+.customDropdown {
   border-radius: 0 !important;
   margin: 0 !important;
   height: 100%;
+
+  z-index: -1;
 }
 
 </style>
