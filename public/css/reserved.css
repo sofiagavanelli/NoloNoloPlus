@@ -193,8 +193,7 @@ ul li :hover a{
   margin: 3vh;
 }
 
-#btn-upd{
-
+.btn-upd{
   background-color: rgb(133, 202, 154);
   border: #000;
   border-radius: 25px;

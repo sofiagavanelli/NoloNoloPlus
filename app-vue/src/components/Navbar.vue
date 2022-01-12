@@ -26,9 +26,9 @@
 
     </div>
 
-    <template v-if="isModalVisible">
-      <LoginModal v-on:close="closeModal()" />
-    </template>
+    <!--template v-if="isModalVisible"-->
+      <LoginModal v-show="isModalVisible" />
+    <!--/template-->
 
   </div>
 </template>
@@ -52,6 +52,7 @@ export default {
     open() {
       console.log("dentro show");
       this.isModalVisible = true;
+      console.log(this.isModalVisible);
     },
 
     closeModal() {

@@ -157,6 +157,8 @@ export default {
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
+
+  z-index: 1;
 }
 
 .b-navbar {
@@ -199,7 +201,7 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #searchBar {
+#main_page, #cont1, #rent_page {
   justify-content: center;
 }
 

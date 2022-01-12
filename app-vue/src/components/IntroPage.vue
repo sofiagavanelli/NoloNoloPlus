@@ -1,103 +1,87 @@
 <template>
   <div>
 
-    <!--button type="button" class="btn" @click="change()">
-    Open Modal!
-    </button-->
-
-    <!--div id="searchBar" class="flex-container">
-      <form class="example">
-        <input type="text" id="clientId" placeholder="Search boat..." name="search">
-        <button type="button" v-on:click="filter()"><i class="fa fa-search"></i></button>
-      </form>
-    </div-->
-
-    <div id="searchBar" class="flex-container">
-      <form class="example">
-        <input type="text" id="rentId" placeholder="Search rental..." name="search">
-        <b-button type="button" v-on:click="filter()"><i class="fa fa-search"></i></b-button>
-      </form> 
-      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
-        <b-dropdown-item v-on:click="filter()">First Action</b-dropdown-item>
-        <b-dropdown-item v-on:click="filter()">Second Action</b-dropdown-item>
-        <b-dropdown-item v-on:click="filter()">Third Action</b-dropdown-item>
-      </b-dropdown>
-      <!--div class="dropdown">
-        <b-button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sort by </b-button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <b-button class="dropdown-item" type="button" id="sortName" v-on:click="filter()">Name</b-button>
-          <b-button class="dropdown-item" type="button" id="sortDate" v-on:click="filter()">Date</b-button>
-        </div>
-      </div-->
+    <!--div> 
+      <SearchBar />
     </div>
 
-    <div id="main_page" class="flex-container">
+    <div id="main_page" class="flex-container"-->
 
       <template v-if="normal">
 
-      <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{item.name}} </h3>
-            <h4 class="title"> {{item.brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item.price}} </h5> </li> 
+        <div> 
+          <SearchBar />
+        </div>
+
+        <div id="main_page" class="flex-container">
+          
+            <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
+              <img class="post_image" :src="item.image" alt="Card image cap">
+              <b-card-body>
+                <h3 class="title"> {{item.name}} </h3>
+                <h4 class="title"> {{item.brand}} </h4>
+                <div class="details">
+                  <ul class="d-flex flex-wrap pl-0" >
+                    <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                    <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
+                    <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
+                    <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
+                    <div class="price_data"> <li class="title"> Prezzo: 
+                      <h5 class="data"> {{item.price}} </h5> </li> 
+                    </div>
+                  </ul>
                 </div>
-              </ul>
-            </div>
-            <div>
-              <b-button>Button</b-button>
-            </div>
-            
-            <!--b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index"-->  <!--/b-button-->
-            
-          </b-card-body>
+              </b-card-body>
 
-          <b-card-footer>
-              <button v-on:click="change(index)">prova</button>
-          <!--b-input-group-->
-            <!--b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
-              NOLEGGIA {{index}}
-            </b-button-->
-          <!--/b-input-group-->
-          </b-card-footer>
+              <b-card-footer>
+              <!--b-input-group-->
+                <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
+                  NOLEGGIA {{index}}
+                </b-button>
+              <!--/b-input-group-->
+              </b-card-footer>
 
-        </b-card>
+            </b-card>
+
+          </div>
 
       </template>
 
       <template v-else>
 
-        <b-card class="boat-images">
-          <img class="post_image" :src="item[selectedID].image" alt="Card image cap">
+        <!-- a RENTPAGE si passa selectedID -->
+        <RentPage :parentData="selectedID" />
+
+
+        <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
+        
+        <!--b-card class="boat-images">
+          <img class="post_image" :src="prodInfo[selectedID].image" alt="Card image cap">
           <b-card-body>
-            <h3 class="title"> {{item[selectedID].name}} </h3>
-            <h4 class="title"> {{item[selectedID].brand}} </h4>
+            <h3 class="title"> {{prodInfo[selectedID].name}} </h3>
+            <h4 class="title"> {{prodInfo[selectedID].brand}} </h4>
             <div class="details">
               <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item[selectedID].power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item[selectedID].length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item[selectedID].guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item[selectedID].year}} </h5> </li>
+                <li class="title">Potenza:<h5 class="data"> {{prodInfo[selectedID].power}} </h5> </li>
+                <li class="title">Lunghezza:<h5 class="data"> {{prodInfo[selectedID].length}} </h5> </li>
+                <li class="title">Ospiti:<h5 class="data"> {{prodInfo[selectedID].guests}} </h5> </li>
+                <li class="title">Anno:<h5 class="data"> {{prodInfo[selectedID].year}} </h5> </li>
                 <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item[selectedID].price}} </h5> </li> 
+                  <h5 class="data"> {{prodInfo[selectedID].price}} </h5> </li> 
                 </div>
               </ul>
             </div>
           </b-card-body>
 
-        </b-card>
+        </b-card-->
 
       </template>
 
-    </div>
+      <!--button type="button" v-on:click="change()" class="noleggioBtn" >
+        NOLEGGIA {{}}
+      </button-->
+
+    <!--/div-->
 
 
       <!-- con schermo cellulare --
@@ -159,10 +143,15 @@
 <script>
 import axios from '../http'
 
-//import RentPage from './components/RentPage.vue'
+import SearchBar from './SearchBar.vue'
+import RentPage from './RentPage.vue'
 
 export default {
   name: 'IntroPage',
+  components: {
+    SearchBar,
+    RentPage,
+  },
   data() {
     return {
       prodInfo: [],
@@ -201,9 +190,9 @@ export default {
 
       console.log("in change");
 
+      this.selectedID = this.prodInfo[__id].prod_id;
+      console.log(this.selectedID);
       this.normal=!this.normal;
-
-      this.selectedID = __id;
 
     },
 
@@ -219,7 +208,7 @@ export default {
 
     }*/
 
-}
+  },
 
 
 //chiude l'export
@@ -230,8 +219,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.b-card-footer {
-    justify-content: center;
+#card-footer {
+  justify-content: center;
 }
 
 /**** gestisce i div con le immagini e i dati degli yacht *****/
@@ -239,14 +228,14 @@ export default {
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;
-    /*border-radius: 1rem;*/
+    /*border-radius: 0.5rem;*/
     margin: 4% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
 
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 .data, .title{

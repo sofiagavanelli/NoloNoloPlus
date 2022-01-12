@@ -40,6 +40,23 @@ app.get('/prods', function (req, res) {
 
 });
 
+app.get('/prod/:id', function (req, res) {
+  //lettura dei prodotti dal db
+
+  let _id = req.params.id;
+
+  res.writeHead(200);
+
+  console.log("sono nella seconda get");
+  db.searchProd(_id).then(prodsinfo => {
+
+      res.write(JSON.stringify(prodsinfo));
+      console.log("prova");
+      res.end();
+  });
+
+});
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;
