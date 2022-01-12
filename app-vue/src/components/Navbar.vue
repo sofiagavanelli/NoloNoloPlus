@@ -5,9 +5,9 @@
 
       <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
-        <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <!--b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-        </b-button>
+        </b-button-->
 
         <a id="logoname" class="nav-item">NoloNoloPlus</a>
 
@@ -26,9 +26,9 @@
 
     </div>
 
-    <!--template v-if="isModalVisible"-->
-      <LoginModal v-show="isModalVisible" />
-    <!--/template-->
+    <template v-if="isModalVisible">
+      <LoginModal v-on:childToParent="onChildBack" />
+    </template>
 
   </div>
 </template>
@@ -55,9 +55,13 @@ export default {
       console.log(this.isModalVisible);
     },
 
-    closeModal() {
+    onChildBack() {
+      this.isModalVisible = !this.isModalVisible;
+    },
+
+    /*closeModal() {
       this.isModalVisible = false;
-    }
+    }*/
 
   }
 

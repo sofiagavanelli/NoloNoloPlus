@@ -5,48 +5,15 @@
     <Navbar />
   </div>
 
+  <!--
+  <LoginModal />
+  -->
 
-            <!--b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <background-color: #31708E;>
-
-                <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-                </b-button>
-
-                <a id="logoname" class="nav-item">NoloNoloPlus</a>
-
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-                  <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav class="ml-auto">
-                      <!-v-on:click='smista'->
-                        <b-nav-item title="Reserved" @click="showModal">
-                            Login
-                        </b-nav-item>
-                    </b-navbar-nav>
-                  </b-collapse>
-
-            </b-navbar-->
-
-
-  <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
-    <br>
-    NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
-    L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
-    equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
-  </div>
-
-  <!--template v-if="isModalVisible">
-    <LoginModal /> <--@close="closeModal">
-  </template-->
-
-  <!--button type="button" class="btn" @click="showModal">
-    Open Modal!
-  </button>
-
-  <LoginModal v-show="isModalVisible" @close="closeModal" /-->
+  <!--LoginModal v-show="isModalVisible" @close="closeModal" /-->
   <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
   <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
   <!--RentPage v-show="toggle" /-->
+
   <div>
     <IntroPage />
   </div>
@@ -63,17 +30,17 @@
   <footer>
     <div class="flex-container" id="footer">
       <div class="element">
-        <h3 class="title">CONTATTI </h3> 
+        <h3 class="title">CONTATTACI </h3> 
           nolonoloplus.yacht@gmail.com
       </div>
-      <div class="element">
+      <!--div class="element">
         <h3 class="title">DOVE TROVARCI </h3> 
           Mura Anteo Zamboni, Bologna
       </div>
       <div class="element">
         <h3 class="title">SOCI </h3> 
           Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
-      </div>
+      </div-->
       </div>
   </footer>
 
@@ -83,7 +50,6 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
-//import RentPage from './components/RentPage.vue'
 //import LoginModal from './components/LoginModal.vue';
 
 
@@ -92,37 +58,11 @@ export default {
   components: {
     Navbar,
     IntroPage,
-    //RentPage,
     //LoginModal,
     //toggle: false,
   },
-  /*data() {
-    return {
-      //rentId: null,
-      isModalVisible: false
-    };
-  },*/
 
   methods: {
-
-    /*showModal() {
-      console.log("sono dentro show");
-      this.isModalVisible = true;
-      console.log(this.isModalVisible);
-    },
-
-    closeModal() {
-      this.isModalVisible = false;
-    },
-
-    captureID(_id) {
-      console.log(_id);
-      this.rentId = _id;
-
-      if(rentId)
-        toggle = !toggle;
-        
-    }*/
 
     
   }
@@ -195,6 +135,10 @@ export default {
     padding: 0.5em 3em 1em 3em;
 }
 
+#rent_page {
+    margin-top: 1.5em;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -223,7 +167,7 @@ export default {
 
 #footer {
     /*(up-right-down-left)*/
-    justify-content: space-around;
+    justify-content: start;
 
     background-color: lightcyan;
 

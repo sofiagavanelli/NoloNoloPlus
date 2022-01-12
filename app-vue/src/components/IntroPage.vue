@@ -1,13 +1,14 @@
 <template>
   <div>
 
-    <!--div> 
-      <SearchBar />
-    </div>
-
-    <div id="main_page" class="flex-container"-->
-
       <template v-if="normal">
+
+        <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
+          <br>
+          NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
+          L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
+          equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
+        </div>
 
         <div> 
           <SearchBar />
@@ -50,38 +51,10 @@
       <template v-else>
 
         <!-- a RENTPAGE si passa selectedID -->
-        <RentPage :parentData="selectedID" />
-
-
+        <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
         <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
-        
-        <!--b-card class="boat-images">
-          <img class="post_image" :src="prodInfo[selectedID].image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{prodInfo[selectedID].name}} </h3>
-            <h4 class="title"> {{prodInfo[selectedID].brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{prodInfo[selectedID].power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{prodInfo[selectedID].length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{prodInfo[selectedID].guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{prodInfo[selectedID].year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{prodInfo[selectedID].price}} </h5> </li> 
-                </div>
-              </ul>
-            </div>
-          </b-card-body>
-
-        </b-card-->
 
       </template>
-
-      <!--button type="button" v-on:click="change()" class="noleggioBtn" >
-        NOLEGGIA {{}}
-      </button-->
-
-    <!--/div-->
 
 
       <!-- con schermo cellulare --
@@ -133,8 +106,6 @@
         </b-card->
 
       </template-->  
-      
-      <!--proviamo il vfor -- cos'è la key? -->
 
     
   </div>
@@ -158,24 +129,18 @@ export default {
       //slide: 0,
       //sliding: null,
       normal:true,
-      selectedID: null,
+      mydata: '',
       //toggle: true,
     };
   },
 
   mounted() {
 
-  //this.sendClickedId();
-
     console.log("sono dentro mounted");
   
     axios.get('/prods')
-    //console.log("sono nella get");
       .then((response) => {
         this.prodInfo = response.data;
-            //this.sortArray();
-            //this.loading = false;
-            //document.getElementById('ricerca').value = '';
       })
       .catch((error) => {
         //this.loading = false;
@@ -186,13 +151,16 @@ export default {
 
   methods: {
 
+    onChildBack() {
+      this.normal = !this.normal;
+    },
+
     change(__id) {
 
-      console.log("in change");
+      this.mydata = this.prodInfo[__id];
+      //this.mydata[1] = this.prodInfo;
 
-      this.selectedID = this.prodInfo[__id].prod_id;
-      console.log(this.selectedID);
-      this.normal=!this.normal;
+      this.normal = !this.normal;
 
     },
 
@@ -200,13 +168,6 @@ export default {
       console.log("hai cliccato su filtra");
     }
 
-    /*sendClickedId() {
-      console.log("sono dentro clicked id di intropage");
-      this.$emit("id-to-rent", this.selectedID);
-
-      console.log("sono ANCORA dentro clicked id di intropage");
-
-    }*/
 
   },
 
@@ -265,21 +226,6 @@ export default {
 .price_data  {
     /*visibility: hidden;*/
     display: none;
-}
-
-
-@media screen and (max-width: 900px) {
-
-    #calcBtn {
-        float: right;
-        position: fixed;
-        left: 80vw;
-        right: 10vw ! important;
-        /*margin-bottom: 2rem;*/
-        width: 5rem;
-        height: 5rem;
-    }
-
 }
 
 

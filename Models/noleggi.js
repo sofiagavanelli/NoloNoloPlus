@@ -10,7 +10,8 @@ const RentalSchema = new Schema(
     client_id: {type: String, required: true},
     start_date: { type: Date},
     end_date: {type: Date},
-    worker_id: {type: String, require: true}
+    worker_id: {type: String, require: true},
+    approved: {type: Boolean, required: true}
   }
 );
 
