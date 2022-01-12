@@ -1,62 +1,46 @@
 <template>
   <div>
 
-    
 
     <div id="rent_page" class="flex-container">
 
-      <b-card class="boat-images" v-for="item in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
+      <b-button v-on:click="emitToParent">
+        <font-awesome-icon icon="arrow-left" /> PRODOTTI
+      </b-button>
+
+      <!-- cambiare estetica? -->
+      <b-card class="boat-images" >
+          <img class="post_image" :src="this.parentData.image" alt="Card image cap">
           <b-card-body>
-            <h3 class="title"> {{item.name}} </h3>
-            <h4 class="title"> {{item.brand}} </h4>
+            <h3 class="title"> {{this.parentData.name}} </h3>
+            <h4 class="title"> {{this.parentData.brand}} </h4>
             <div class="details">
               <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
+                <li class="title">Potenza:<h5 class="data"> {{this.parentData.power}} </h5> </li>
+                <li class="title">Lunghezza:<h5 class="data"> {{this.parentData.length}} </h5> </li>
+                <li class="title">Ospiti:<h5 class="data"> {{this.parentData.guests}} </h5> </li>
+                <li class="title">Anno:<h5 class="data"> {{this.parentData.year}} </h5> </li>
                 <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item.price}} </h5> </li> 
+                  <h5 class="data"> {{this.parentData.price}} </h5> </li> 
                 </div>
               </ul>
             </div>
           </b-card-body>
+
+          <div id="calculate" class="flex-container">
+            <label for="start-datepicker">Inizio noleggio</label>
+            <b-form-datepicker id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
+            <label for="end-datepicker">Fine noleggio</label>
+            <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
+          </div>
 
       </b-card>
 
     <!-- scelte multiple per scegliere e calcolare il rent -->
 
-      <div id="calculate" class="flex-container">
-        <label for="start-datepicker">Inizio noleggio</label>
-        <b-form-datepicker id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
-        <label for="end-datepicker">Fine noleggio</label>
-        <b-form-datepicker id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
-      </div>
+      
 
     </div>
-
-
-        <!--b-card class="boat-images">
-          <img class="post_image" :src="prodInfo.image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{prodInfo.name}} </h3>
-            <h4 class="title"> {{prodInfo.brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{prodInfo.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{prodInfo.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{prodInfo.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{prodInfo.year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{prodInfo.price}} </h5> </li> 
-                </div>
-              </ul>
-            </div>
-          </b-card-body>
-
-        </b-card-->
-    
 
     
   </div>
@@ -72,43 +56,27 @@ export default {
   },
   data() {
     return {
-      prodInfo: [],
-      //tryID: "PROD003",
+      loading: true,
+
       startD: '',
       endD: '',
 
-      //parentData: '',
-      //idForRent: Number
-      //slide: 0,
-      //sliding: null,
+      home: true,
 
-      //isHidden:true
     };
   },
 
 mounted() {
 
-  //console.log(this.parentData);
-  
-  axios.get('/prod/' + this.parentData)
-  
-    .then((response) => {
-      this.prodInfo = response.data;
-      console.log(this.prodInfo);
-          //this.sortArray();
-          //this.loading = false;
-          //document.getElementById('ricerca').value = '';
-    })
-    .catch((error) => {
-      //this.loading = false;
-      console.log(error);
-    });
-
+  scroll(0, 0);
 
 },
 
 methods: {
 
+  emitToParent (event) {
+    this.$emit('childToParent')
+  }
 
 }
 
@@ -120,6 +88,10 @@ methods: {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#rent_page {
+  padding-top: 4em;
+}
 
 #calculate {
   padding: 0.5em;
@@ -141,7 +113,7 @@ methods: {
     overflow: auto;
     /*height: 70vh;*/
 
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 .data, .title{
