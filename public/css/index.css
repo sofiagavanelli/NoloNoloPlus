@@ -64,7 +64,8 @@ button:focus{
     justify-content: center;
 }
 
-.noleggioBtn {
+#noleggioBtn {
+    cursor: pointer;
     border: none;
     background-color: lightgray;
 }

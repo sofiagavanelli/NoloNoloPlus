@@ -95,6 +95,26 @@ module.exports = function (app) {
 
     });
 
+    ///RICERCA PRODOTTO PER ID
+    app.get('/prods/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchProd(id).then(prodsinfo => {
+
+            res.write(JSON.stringify(prodsinfo));
+
+            res.end();
+        });
+
+        //console.log("error");
+
+    });
+
 
     ///ELIMINAZIONE CLIENTE PER ID
     app.delete('/allClients/:id', function(req, res){

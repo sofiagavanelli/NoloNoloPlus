@@ -178,6 +178,11 @@ export default {
     font-style: none;
 }
 
+.element {
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+
 #introduzione { /*(up-right-down-left)*/
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
@@ -226,6 +231,11 @@ export default {
 
 @media screen and (max-width: 900px) {
 
+  #introduzione { /*(up-right-down-left)*/
+    margin-top: 5em;
+    padding: 0.5em 2em 1em 2em;
+  }
+
     #calcBtn {
         float: right;
         position: fixed;
@@ -239,6 +249,11 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
+
+  #introduzione { /*(up-right-down-left)*/
+    margin-top: 4em;
+    padding: 0.5em 1.5em 1em 1.5em;
+  }
 
   #calcBtn {
         float: right;

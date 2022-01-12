@@ -146,8 +146,8 @@ function openInventory() {
 
     div = $(`
     <form class="example">
-    <input type="text" placeholder="Search product..." name="search">          
-    <button type="submit"><i class="fa fa-search"></i></button>    
+    <input type="text" id="prodId" placeholder="Search product..." name="search">          
+    <button type="submit"onclick="searchProd(id)"><i class="fa fa-search"></i></button>    
     </form>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,7 +171,7 @@ function openInventory() {
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
         <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
         <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
-        Price: ${ProdInfo[i].price}</p>              
+        Price: ${ProdInfo[i].price}€</p>              
         <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
         <button class="btn-mod">Modify</button>             
         </div>             
@@ -382,8 +382,61 @@ function acceptClient(data, insertedID) {
 
 
 }
+/* RICERCA PRODOTTO */
+function searchProd(){
+
+  _id = document.getElementById("prodId").value;
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/prods/' + _id ,
+          success: function (info) {
+            //console.log("sono in success");
+            acceptProd(inventoryARRAY, _id);
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+          }
+      });
+  }
+  else {
+  console.log("errore nell'else dell'inventario");
+  }
+
+}
+function acceptProd(data, insertedID) {
+
+  for (let i in data) {
+
+    if(data[i].prod_id == insertedID) {
+        $( "#ctable2" ).empty();
+        $( "#ctable" ).empty();
+        div = $(`         
+        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL CLIENTS</button>
+        `);
+              
+      $("#ctable").append(div);
+      div = $(` 
+       <h1>PROVAAAAAAAAAAAAAAAA</h1>
+        
+      `);
+      $("#ctable2").append(div);
+
+        var found = true;
+    }
+  }
+
+  if (!found) 
+    console.log("non esiste prodotto");
+}
+
+//FUNZIONI PER TORNARE INDIETRO
 function goBackClients(){
   openClient();
+}
+
+function goBackInventory(){
+  openInventory();
 }
 
 function goBackRents(){
@@ -581,7 +634,7 @@ for (let i in inventoryARRAY) {
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}</p>              
+  Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod">Modify</button>             
   </div>             
@@ -631,7 +684,7 @@ for (let i in inventoryARRAY) {
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}</p>              
+  Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod">Modify</button>              
   </div>             
@@ -680,7 +733,7 @@ for (let i in inventoryARRAY) {
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}</p>              
+  Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod">Modify</button>              
   </div>             
