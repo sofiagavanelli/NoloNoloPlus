@@ -9,15 +9,35 @@
           <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
         </b-button-->
 
-        <a id="logoname" class="nav-item">NoloNoloPlus</a>
+        <a id="logoname" class="nav-item">
+          <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
+            NoloNoloPlus
+          </router-link>
+        </a>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
-            <!--v-on:click='smista' @click="showModal"-->
-              <b-nav-item title="Reserved" v-on:click='open()'>
-                Login
+            <!--v-on:click='smista' @click="showModal" v-on:click='open()'-->
+              <template v-if="!loggedIn">
+                <b-nav-item title="Login">
+                  <router-link id="toLogin" tag="nav-item" aria-labelledby="loginLabel" to="/login">
+                    Login
+                  </router-link>
+                </b-nav-item>
+              </template>
+              <template v-else>
+                <b-nav-item title="Profile">
+                  <router-link id="toProfile" tag="nav-item" aria-labelledby="profileLabel" to="/profile">
+                    Profile
+                  </router-link>
+                </b-nav-item>
+              </template>
+              <b-nav-item title="Site by">
+                <router-link id="toAboutUs" tag="nav-item" aria-labelledby="AboutUsLabel" to="/about">
+                  About Us
+                </router-link>
               </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
@@ -25,7 +45,9 @@
       </b-navbar>
 
     </div>
+    
 
+    <!--TODO: INSERIRE DIRETTAMENTE QUI IL MODALE PER UNA GESTIONE MIGLIORE SENZA IF-->
     <template v-if="isModalVisible">
       <LoginModal v-on:childToParent="onChildBack" />
     </template>
@@ -41,15 +63,23 @@ export default {
   components: {
     LoginModal
   },
+  props: ['loggedIn'],
   data() {
     return {
       isModalVisible: false,
+      //loggedIn: false,
     };
+  },
+
+  computed: {
+    msg () {
+      return `Hello, ${ this.loggedIn }!`
+    }
   },
 
   methods: {
 
-    open() {
+    /*open() {
       console.log("dentro show");
       this.isModalVisible = true;
       console.log(this.isModalVisible);
@@ -57,7 +87,7 @@ export default {
 
     onChildBack() {
       this.isModalVisible = !this.isModalVisible;
-    },
+    },*/
 
     /*closeModal() {
       this.isModalVisible = false;
@@ -86,19 +116,8 @@ export default {
     list-style: none;
 }
 
-
-.navbar-toggler {
-    color: white;
-}
-
-.nav-item {
-    color: white;
-    padding: 0.5em;
-}
-
-.nav-item:hover {
-    color: white;
-    font-style: none;
+.b-nav-item {
+  color:white; 
 }
 
 </style>

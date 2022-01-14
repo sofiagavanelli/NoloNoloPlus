@@ -23,11 +23,9 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        db.searchClientID(id).then(clientinfo => {
 
-        db.searchClient(id).then(clientinfo => {
-
-            console.log(clientinfo);
+            //console.log("sono in module " + clientinfo);
 
             res.write(JSON.stringify(clientinfo));
 

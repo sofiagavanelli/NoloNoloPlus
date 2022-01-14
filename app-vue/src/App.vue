@@ -5,27 +5,11 @@
     <Navbar />
   </div>
 
-  <!--
-  <LoginModal />
-  -->
-
-  <!--LoginModal v-show="isModalVisible" @close="closeModal" /-->
-  <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-  <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
-  <!--RentPage v-show="toggle" /-->
-
-  <div>
-    <IntroPage />
-  </div>
-  <!--/template-->
-
-  <!--div id="calcolatrice">
-    <--devo far aprire il component al click->
-    <b-button id="calcBtn" data-toggle="modal" data-target="#calcModal">
-      <--non funziona font awesome ->
-      <font-awesome-icon icon="calculator" />
-    </b-button>
-  </div-->
+  <div role="main" id="componentView">
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
+	</div>
 
   <footer>
     <div class="flex-container" id="footer">
@@ -50,16 +34,22 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
-//import LoginModal from './components/LoginModal.vue';
-
 
 export default {
   name: 'App',
+  //props: ['loggedIn'],
   components: {
     Navbar,
     IntroPage,
-    //LoginModal,
-    //toggle: false,
+  },
+
+  computed: {
+    msg () {
+      let data = this.$router.params.data;
+      console.log("data is", data);
+      //return `Hello, ${ this.loggedIn }!`
+    }
+    
   },
 
   methods: {
@@ -101,24 +91,24 @@ export default {
   z-index: 1;
 }
 
-.b-navbar {
+/*.b-navbar {
     list-style: none;
 }
 
 
 .navbar-toggler, .b-navbar-toggle {
     color: white;
-}
+}*/
 
-.nav-item {
-    color: white;
+.nav-item, .b-nav-item {
+    color: white !important; 
     padding: 0.5em;
 }
 
-.nav-item:hover {
+/*.nav-item:hover {
     color: white;
     font-style: none;
-}
+}*/
 
 .element {
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -135,18 +125,18 @@ export default {
     padding: 0.5em 3em 1em 3em;
 }
 
-#rent_page {
-    margin-top: 1.5em;
-}
-
 .flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-#main_page, #cont1, #rent_page {
+#main_page, #cont1, #rent_page, #modal, #about-us{
   justify-content: center;
+}
+
+#componentView  {
+  margin-top: 6em;
 }
 
 #calcBtn {

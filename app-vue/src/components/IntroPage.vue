@@ -48,7 +48,7 @@
 
       </template>
 
-      <template v-else>
+      <template v-else-if="!normal">
 
         <!-- a RENTPAGE si passa selectedID -->
         <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
@@ -56,57 +56,10 @@
 
       </template>
 
+      <!--TODO: FARE UN ALTRO V-IF CHE GESTISCE LA VISIONE FILTERED-->
+      <template v-if="filtered">
 
-      <!-- con schermo cellulare --
-      <template v-if="$mq === 'mobile'">
-        
-        <-- simple carousel "#ababab"--
-        <b-carousel id="smallboat" controls no-animation :interval="0" background-color="green">
-        <!- v-model="slide" :interval="0" controls indicators--
-
-          <b-carousel-item >
-                <b-carousel-slide v-for="item in prodInfo" :key="item.index">
-                  <b-card>
-                    <img class="post_image" :src="item.image" alt="Card image cap">
-                    <div class="card-body">
-                      <h3 class="title"> {{item.name}} </h3>
-                      <h4 class="title"> {{item.brand}} </h4>
-                      <div class="details">
-                        <ul class="d-flex flex-wrap pl-0">
-                          <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                          <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                          <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                          <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                          <div class="price_data"> <li class="title"> Prezzo: 
-                            <h5 class="data"> {{item.price}} </h5> </li> 
-                          </div>
-                        </ul>
-                      </div>
-                    </div>
-                  </b-card>
-                </b-carousel-slide>
-
-          </b-carousel-item>
-
-        </b-carousel>
-
-        <p class="mt-4">
-        Slide #: {{ slide }}<br>
-        Sliding: {{ sliding }}
-        </p>
-
-        <!-b-card v-for="item in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-
-          <div class="card-body">
-            <h3 class="title"> PROVA </h3>
-            <h4 class="title"> {PROVA2} </h4>
-          </div>
-
-        </b-card->
-
-      </template-->  
-
+      </template>
     
   </div>
 </template>
@@ -130,6 +83,8 @@ export default {
       //sliding: null,
       normal:true,
       mydata: '',
+      filtered: false,
+      filterProd: [],
       //toggle: true,
     };
   },
@@ -228,25 +183,5 @@ export default {
     display: none;
 }
 
-
-<<<<<<< HEAD
-
-@media screen and (max-width: 900px) {
-
-    #calcBtn {
-        float: right;
-        position: fixed;
-        left: 80vw;
-        right: 10vw ! important;
-        /*margin-bottom: 2rem;*/
-        width: 5rem;
-        height: 5rem;
-    }
-
-}
-
-
-=======
->>>>>>> 9859d01458f308557612bff8ed5b173270a77030
 
 </style>
