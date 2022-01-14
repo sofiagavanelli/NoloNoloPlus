@@ -1,10 +1,10 @@
-import {ChartProva} from '../components/provaChart';
 import "../App.css";
+//import {Prova} from '../components/prova';
+
 function Dipendenti() {
   return (
     <div id="dipendenti">
-        <h1>Dipendenti</h1>
-        <ChartProva></ChartProva>
+        <h1>Employees</h1>
     </div>
     );
 }
