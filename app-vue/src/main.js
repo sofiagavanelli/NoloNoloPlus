@@ -1,23 +1,23 @@
-console.log("sono dentro main");
-
 import Vue from 'vue'
 import App from './App.vue'
 import VueMq from 'vue-mq'
 
-import { BootstrapVue } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCalculator } from '@fortawesome/free-solid-svg-icons'
+import { faCalculator, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 library.add(faCalculator)
+library.add(faArrowLeft)
 //library.add(fabars)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.use(BootstrapVue)
 
 Vue.use(VueMq, {
   breakpoints: {

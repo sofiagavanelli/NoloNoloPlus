@@ -3,30 +3,32 @@
 
     <div id="app">
 
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
+      <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
-                <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-                </b-button>
+        <!--b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
+        </b-button-->
 
-                <a id="logoname" class="nav-item">NoloNoloPlus</a>
+        <a id="logoname" class="nav-item">NoloNoloPlus</a>
 
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-                  <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav class="ml-auto">
-                      <!--v-on:click='smista'-->
-                        <b-nav-item title="Reserved" @click="showModal">
-                            Login
-                        </b-nav-item>
-                    </b-navbar-nav>
-                  </b-collapse>
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="ml-auto">
+            <!--v-on:click='smista' @click="showModal"-->
+              <b-nav-item title="Reserved" v-on:click='open()'>
+                Login
+              </b-nav-item>
+            </b-navbar-nav>
+          </b-collapse>
 
-            </b-navbar>
+      </b-navbar>
 
     </div>
 
-    <LoginModal v-show="isModalVisible" @close="closeModal" />
+    <template v-if="isModalVisible">
+      <LoginModal v-on:childToParent="onChildBack" />
+    </template>
 
   </div>
 </template>
@@ -47,14 +49,19 @@ export default {
 
   methods: {
 
-    showModal() {
+    open() {
       console.log("dentro show");
       this.isModalVisible = true;
+      console.log(this.isModalVisible);
     },
 
-    closeModal() {
+    onChildBack() {
+      this.isModalVisible = !this.isModalVisible;
+    },
+
+    /*closeModal() {
       this.isModalVisible = false;
-    }
+    }*/
 
   }
 

@@ -1,7 +1,61 @@
 <template>
   <div>
 
-    <div id="main_page" class="flex-container">
+      <template v-if="normal">
+
+        <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
+          <br>
+          NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
+          L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
+          equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
+        </div>
+
+        <div> 
+          <SearchBar />
+        </div>
+
+        <div id="main_page" class="flex-container">
+          
+            <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
+              <img class="post_image" :src="item.image" alt="Card image cap">
+              <b-card-body>
+                <h3 class="title"> {{item.name}} </h3>
+                <h4 class="title"> {{item.brand}} </h4>
+                <div class="details">
+                  <ul class="d-flex flex-wrap pl-0" >
+                    <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                    <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
+                    <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
+                    <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
+                    <div class="price_data"> <li class="title"> Prezzo: 
+                      <h5 class="data"> {{item.price}} </h5> </li> 
+                    </div>
+                  </ul>
+                </div>
+              </b-card-body>
+
+              <b-card-footer>
+              <!--b-input-group-->
+                <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
+                  NOLEGGIA {{index}}
+                </b-button>
+              <!--/b-input-group-->
+              </b-card-footer>
+
+            </b-card>
+
+          </div>
+
+      </template>
+
+      <template v-else>
+
+        <!-- a RENTPAGE si passa selectedID -->
+        <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
+        <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
+
+      </template>
+
 
       <!-- con schermo cellulare --
       <template v-if="$mq === 'mobile'">
@@ -52,36 +106,6 @@
         </b-card->
 
       </template-->  
-      
-      <!--proviamo il vfor -- cos'è la key? -->
-        <b-card class="boat-images" v-for="(item, index) in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-          <b-card-body>
-            <h3 class="title"> {{item.name}} </h3>
-            <h4 class="title"> {{item.brand}} </h4>
-            <div class="details">
-              <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{item.price}} </h5> </li> 
-                </div>
-              </ul>
-            </div>
-          </b-card-body>
-
-          <b-card-footer >
-            <b-button v-on:click="getID(index)" type="button" class="noleggioBtn" :id="index">
-              NOLEGGIA {{index}}
-            </b-button>
-          </b-card-footer>
-
-        </b-card>
-
-
-    </div>
 
     
   </div>
@@ -90,70 +114,62 @@
 <script>
 import axios from '../http'
 
+import SearchBar from './SearchBar.vue'
+import RentPage from './RentPage.vue'
+
 export default {
   name: 'IntroPage',
+  components: {
+    SearchBar,
+    RentPage,
+  },
   data() {
     return {
       prodInfo: [],
       //slide: 0,
       //sliding: null,
-      selectedID: null,
-      toggle: true,
+      normal:true,
+      mydata: '',
+      //toggle: true,
     };
   },
 
-mounted: function() {
+  mounted() {
 
-  //this.sendClickedId();
-
+    console.log("sono dentro mounted");
   
-  axios.get('/prods', {
-      
-  })
-  
-    .then((response) => {
-      this.prodInfo = response.data;
-      console.log(this.prodInfo);
-          //this.sortArray();
-          //this.loading = false;
-          //document.getElementById('ricerca').value = '';
-    })
-    .catch((error) => {
-      //this.loading = false;
-      console.log(error);
-    });
-
-
-},
-
-methods: {
-
-  getID(__id) {
-    console.log("sono dentro getID in intropage");
-    this.selectedID = __id;
-    console.log( __id);
-
-    //this.sendClickedId();
-
-    toggle=!toggle;
+    axios.get('/prods')
+      .then((response) => {
+        this.prodInfo = response.data;
+      })
+      .catch((error) => {
+        //this.loading = false;
+        console.log(error);
+      });
 
   },
 
-  change() {
+  methods: {
 
-    toggle=!toggle;
+    onChildBack() {
+      this.normal = !this.normal;
+    },
 
-  }
+    change(__id) {
 
-  /*sendClickedId() {
-    console.log("sono dentro clicked id di intropage");
-    this.$emit("id-to-rent", this.selectedID);
+      this.mydata = this.prodInfo[__id];
+      //this.mydata[1] = this.prodInfo;
 
-    console.log("sono ANCORA dentro clicked id di intropage");
+      this.normal = !this.normal;
 
-  }*/
+    },
 
-}
+    filter() {
+      console.log("hai cliccato su filtra");
+    }
+
+
+  },
 
 
 //chiude l'export
@@ -164,8 +180,8 @@ methods: {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.b-card-footer {
-    justify-content: center;
+#card-footer {
+  justify-content: center;
 }
 
 /**** gestisce i div con le immagini e i dati degli yacht *****/
@@ -173,14 +189,14 @@ methods: {
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;
-    /*border-radius: 1rem;*/
+    /*border-radius: 0.5rem;*/
     margin: 4% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
 
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 .data, .title{
@@ -204,7 +220,7 @@ methods: {
     padding-bottom: 0.2rem;
     /*border-radius: 0.2rem;*/
     object-fit: cover;
-    height: 20vh;
+    height: 30vh;
 }
 
 .price_data  {
@@ -213,11 +229,9 @@ methods: {
 }
 
 
-@media screen and (max-width: 900px) {
+<<<<<<< HEAD
 
-    * {
-        font-size: 20px;
-    }
+@media screen and (max-width: 900px) {
 
     #calcBtn {
         float: right;
@@ -232,20 +246,7 @@ methods: {
 }
 
 
-/*mobile first*/
-#smallboat {
-  width: 80vw;
-}
-
-.b-carousel-slide {
-  width: 100%;
-}
-
-.carousel-item {
-  display: block;
-  height: 70vh;
-}
-
-
+=======
+>>>>>>> 9859d01458f308557612bff8ed5b173270a77030
 
 </style>

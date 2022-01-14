@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+//da inserire in una variabile env:
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./Models/client");
@@ -57,15 +58,16 @@ module.exports = {
         }).save();
     },
 
-    saveRental: async (_rent, _prod, _client, _start, _end) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Noleggio({
-            _id: _id,
+            //_id: _id,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
-            end_date: _end
+            end_date: _end,
+            //worker_id: _worker
         }).save();
     },
 

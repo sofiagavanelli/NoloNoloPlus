@@ -1,14 +1,16 @@
 <template>
   <div>
 
-  <!--transition name="modal-fade">
-    <div class="modal-backdrop">
-      <b-modal z-index="1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+  <!--transition name="modal-fade"-->
+
+    <!--div id="modal" class="flex-container"-->
+  
+      <b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <h3 name="header">
             This is the default tile!
           </h3>
-          <button type="button" class="btn-close" @click="close" aria-label="Close modal">
+          <button type="button" class="btn-close" v-on:click="close()" aria-label="Close modal">
             x
           </button>
         </header>
@@ -23,38 +25,38 @@
           <h3 name="footer">
             This is the default footer!
           </h3>
-          <button type="button" class="btn-green" @click="close" aria-label="Close modal">
+          <button type="button" class="btn-green" v-on:click="close()" aria-label="Close modal">
             Close me!
           </button>
         </footer>
       </b-modal>
-    </div>
-  </transition-->
+
+    <!--/div-->
+  <!--/transition-->
 
 
-    <b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
+        
         <div class="modal-content">
-          <img src="public/img/avatar.png" class="avatar">
+          <img src="../../public/avatar.png" class="avatar">
 
-          <div class="modal-header text-center">
+          <header class="modal-header">
             <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-            <b-button type="button" class="btn-close" @click="close" aria-label="Close modal"> x
             </b-button>
-            <!--b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
-            </b-button-->
-          </div>
+          </header>
 
           <div class="modal-body mx-3">
             <div class="md-form mb-5">
               <label data-error="wrong" data-success="right" for="username">Username</label>
-              <input type="email" id="username" class="form-control validate" placeholder="Enter Username">
+              <b-form-input v-model="username" placeholder="Enter Username"></b-form-input>
             </div>
 
             <div class="md-form mb-4">
               <label data-error="wrong" data-success="right" for="pass">Password</label>
-              <input type="password" id="pass" class="form-control validate" placeholder="Enter Password">
+              <b-form-input type="password" v-model="pass" placeholder="Enter Password"></b-form-input>
             </div>
 
             <div id="loginfo"> </div>
@@ -65,39 +67,74 @@
           </div>
 
           <div class="modal-footer d-flex justify-content-center">
-            <b-button class="btn btn-default" id="EnterlogBtn">Login</b-button>
+            <b-button class="btn btn-default" id="EnterlogBtn" v-on:click="login()">Login</b-button>
           </div>
                           
         </div>
       </div>
-    </b-modal> 
+    </b-modal--> 
 
   </div>
 </template>
 
 <script>
+import axios from '../http'
+
   export default {
     name: 'LoginModal',
+    data() {
+      return {
+        username: '',
+        pass: '',
+
+        clientInfo: [],
+      };
+    },
+
+    mounted() {
+      this.$bvModal.show("loginModal");
+    },
+
     methods: {
+
       close() {
         this.$emit('close');
+        this.$emit();
+
       },
+    
+      login() {
+        console.log(this.username + this.pass);
+
+        axios.get('/client/' + this.username)
+          .then((response) => {
+            this.clientInfo = response.data;
+          })
+          .catch((error) => {
+            //this.loading = false;
+            console.log(error);
+          });
+
+
+        //if(this.clientInfo) {
+          console.log(this.clientInfo);
+        //}
+
+      }
+
     },
-    activated: function() {
-      console.log("sono in logimodal");
-    }
+    
+    
   };
 </script>
 
 
-<style>
+<style scoped>
 
-.modal-content {
-    background: #EDB5BF;
-    color: #000;
-    /*width: 20em;*/
-    /*margin: 20vw;*/
-    border-radius: 5%;
+.p {
+  font-size: 40px;
+
+  padding: 5em;
 }
 
 #loginfo {
@@ -135,7 +172,7 @@
     font-size: 16px;
 }
 
-  /*.modal-backdrop {
+  .modal-backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -206,6 +243,6 @@
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: opacity .5s ease;
-  }*/
+  }
   
 </style>

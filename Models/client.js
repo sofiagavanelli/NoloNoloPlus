@@ -4,9 +4,12 @@ var Schema = mongoose.Schema;
 
 var ClientSchema = new Schema(
   {
+    image: {type: String},
     name: {type: String, required: true},
     client_id: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},
+    place: {type: String, required: true},
+    address: {type: String, required: true}
   }
 );
 

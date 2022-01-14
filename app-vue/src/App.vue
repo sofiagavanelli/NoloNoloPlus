@@ -1,90 +1,46 @@
 <template>
 <div>
 
-  <!--div>
+  <div> <!--QUESTO LO VEDE -->
     <Navbar />
-  </div-->
-
-  <div id="app">
-
-            <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
-
-                <b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-                </b-button>
-
-                <a id="logoname" class="nav-item">NoloNoloPlus</a>
-
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-                  <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav class="ml-auto">
-                      <!--v-on:click='smista'-->
-                        <b-nav-item title="Reserved" @click="showModal">
-                            Login
-                        </b-nav-item>
-                    </b-navbar-nav>
-                  </b-collapse>
-
-            </b-navbar>
-
-    </div>
-
-    <div>
-      <template v-if="isModalVisible">
-      <LoginModal @close="closeModal" />
-      </template>
-    </div>
-
-
-
-
-  <div id="introduzione" class="flex-container">
-    <br>
-    NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
-    L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
-    equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
   </div>
 
+  <!--
+  <LoginModal />
+  -->
 
-  <!--button type="button" class="btn" @click="showModal">
-    Open Modal!
-  </button>
+  <!--LoginModal v-show="isModalVisible" @close="closeModal" /-->
+  <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
+  <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
+  <!--RentPage v-show="toggle" /-->
 
-  <LoginModal v-show="isModalVisible" @close="closeModal" /-->
-
-  
   <div>
-      <!--QUI APPAIONO LE COSE!  id="main_page" class="flex-container"-->
-      <!-- e qui poi inserisco i vari componenti diversi    v-show="!toggle" v-show="toggle" v-show="!toggle"  @id-to-rent="captureID" -->
-      <IntroPage />
-      <!--RentPage v-show="toggle" /-->
+    <IntroPage />
   </div>
+  <!--/template-->
 
-  <div id="calcolatrice">
-    <!--devo far aprire il component al click-->
+  <!--div id="calcolatrice">
+    <--devo far aprire il component al click->
     <b-button id="calcBtn" data-toggle="modal" data-target="#calcModal">
-      <!--non funziona font awesome -->
+      <--non funziona font awesome ->
       <font-awesome-icon icon="calculator" />
     </b-button>
-  </div>
-
-
+  </div-->
 
   <footer>
     <div class="flex-container" id="footer">
       <div class="element">
-        <h3 class="title">CONTATTI </h3> 
+        <h3 class="title">CONTATTACI </h3> 
           nolonoloplus.yacht@gmail.com
       </div>
-      <div class="element">
+      <!--div class="element">
         <h3 class="title">DOVE TROVARCI </h3> 
           Mura Anteo Zamboni, Bologna
       </div>
       <div class="element">
         <h3 class="title">SOCI </h3> 
           Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
-      </div>
+      </div-->
       </div>
   </footer>
 
@@ -94,8 +50,7 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
-import RentPage from './components/RentPage.vue'
-import LoginModal from './components/LoginModal.vue';
+//import LoginModal from './components/LoginModal.vue';
 
 
 export default {
@@ -103,37 +58,11 @@ export default {
   components: {
     Navbar,
     IntroPage,
-    RentPage,
-    LoginModal,
+    //LoginModal,
     //toggle: false,
-  },
-  data() {
-    return {
-      rentId: null,
-      isModalVisible: false
-    };
   },
 
   methods: {
-
-    showModal() {
-      console.log("sono dentro show");
-      this.isModalVisible = true;
-      console.log(this.isModalVisible);
-    },
-
-    closeModal() {
-      this.isModalVisible = false;
-    },
-
-    captureID(_id) {
-      console.log(_id);
-      this.rentId = _id;
-
-      if(rentId)
-        toggle = !toggle;
-        
-    }
 
     
   }
@@ -147,7 +76,7 @@ export default {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 
-    font-size: 15px;
+    font-size: 12px;
 
     margin-top: 0;
     margin-left: 0;
@@ -168,6 +97,8 @@ export default {
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
+
+  z-index: 1;
 }
 
 .b-navbar {
@@ -189,9 +120,23 @@ export default {
     font-style: none;
 }
 
+.element {
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+
 #introduzione { /*(up-right-down-left)*/
-    margin-top: 4em;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+
+    font-size: 14px;
+
+    margin-top: 6em;
     padding: 0.5em 3em 1em 3em;
+}
+
+#rent_page {
+    margin-top: 1.5em;
 }
 
 .flex-container {
@@ -200,12 +145,8 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #nB {
-    justify-content: center;
-}
-
-#main_page {
-    padding-bottom: 4vh;
+#main_page, #cont1, #rent_page {
+  justify-content: center;
 }
 
 #calcBtn {
@@ -226,13 +167,20 @@ export default {
 
 #footer {
     /*(up-right-down-left)*/
-    justify-content: space-around;
+    justify-content: start;
 
     background-color: lightcyan;
+
+    margin-top: 4vh;
     padding: 3vh 5vw 3vh 5vw;
 }
 
 @media screen and (max-width: 900px) {
+
+  #introduzione { /*(up-right-down-left)*/
+    margin-top: 5em;
+    padding: 0.5em 2em 1em 2em;
+  }
 
     #calcBtn {
         float: right;
@@ -247,6 +195,11 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
+
+  #introduzione { /*(up-right-down-left)*/
+    margin-top: 4em;
+    padding: 0.5em 1.5em 1em 1.5em;
+  }
 
   #calcBtn {
         float: right;

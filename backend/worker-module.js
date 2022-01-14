@@ -6,6 +6,7 @@ var db = require('../db');
 
 module.exports = function (app) {
 
+    ///FUNZIONE CHE RITORNA TUTTI I CLIENTI
     app.get('/allClients', function (req, res) {
 
         res.writeHead(200);
@@ -22,6 +23,7 @@ module.exports = function (app) {
         res.writeHead(200);
     });
 
+    ///FUNZIONE CHE RITORNA TUTTI I NOLEGGI 
     app.get('/allRents', function (req, res) {
 
         res.writeHead(200);
@@ -39,7 +41,7 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        //console.log(id);
 
         db.searchWorker(id).then(rentsinfo => {
 
@@ -48,18 +50,19 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
+        //console.log("error");
 
     });
     
-//non funziona :(
+
+    ///RICERCA NOLEGGIO PER ID
     app.get('/allRents/:id', function (req, res) {
 
         res.writeHead(200);
 
         let id = req.params.id;
 
-        console.log(id);
+        //console.log(id);
 
         db.searchRent(id).then(workerinfo => {
 
@@ -68,13 +71,52 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
+        //console.log("error");
+
+    });
+
+    ///RICERCA CLIENTE PER ID
+    app.get('/allClients/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        //console.log(id);
+
+        db.searchClientID(id).then(clientsinfo => {
+
+            res.write(JSON.stringify(clientsinfo));
+
+            res.end();
+        });
+
+        //console.log("error");
+
+    });
+
+    ///RICERCA PRODOTTO PER ID
+    app.get('/prods/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        console.log(id);
+
+        db.searchProd(id).then(prodsinfo => {
+
+            res.write(JSON.stringify(prodsinfo));
+
+            res.end();
+        });
+
+        //console.log("error");
 
     });
 
 
-    //app.get
-
+    ///ELIMINAZIONE CLIENTE PER ID
     app.delete('/allClients/:id', function(req, res){
 
         const id = req.params.id;
@@ -86,16 +128,36 @@ module.exports = function (app) {
 
         });
 
+    ////ELIMINAZIONE NOLEGGIO PER ID
     app.delete('/allRents/:id', function(req, res){
 
         const idR = req.params.id;
          db.deleteRental(idR).then(() => {
-             console.log(idR);
+             //console.log(idR);
           res.status(200);
           res.end();
           }
         )
 
         });
+
+    //PROVA POST 
+
+    app.post('/',(req, res)=>{
+
+      const client = req.body.client;
+      const prod = req.body.product; 
+      const startdate= req.body.start;
+      const enddate= req.body.end; 
+
+      //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
+      db.saveRental(prod, client, startdate, enddate).then(() => {
+        //console.log("aaaaaaaaaaaaaaaa");
+        //res.status(200);
+        //res.end();
+        res.redirect(reserved.html);
+      }
+    )
+    });
 
 };

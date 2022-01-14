@@ -2,17 +2,16 @@
 con Javascript e JQuery. Le altre applicazioni con due framework diversi tra Angular, React, Vue e Svelte.*/
 
 var fs = require('fs');
+const cors = require("cors");
 var path = require('path');
 var express = require('express');
 //var formidable = require('formidable');
+var bodyParser = require('body-parser');
 var process = require('process');
+
 var app = express();
 
-var port = 8680;
-
-
-//const app = express(); 
-//const server = http.createServer(app);
+app.use(cors());
 
 process.chdir(__dirname);
 app.use(express.json());
@@ -21,7 +20,8 @@ app.use(express.json());
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
 
 //app.use(express.static(`${__dirname}/..`));
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //import the middleware to manage the request of the three different app
 /*var worker = */require('./backend/worker-module.js')(app);
@@ -31,50 +31,14 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
 require("./db");
 
-
-/*Home page VERSIONE VUE *
+//VERSIONE CON VUE
 app.get("/",function (req, res) {
-
-    res.sendFile(path.join(__dirname + "/app-vue/dist/index.html"));
-
-    /*fs.readFile("index.html", function (err, data) {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            return res.end("<h1>404 Not Found</h1>");
-        }
-
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data);
-        return res.end();
-    }); *
+    res.sendFile(path.join(__dirname + '/app-vue/dist/index.html'));
     
 });
 
-/********************** versione SENZA vue *
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/indexbase.html"));
-
-    /*fs.readFile("index.html", function (err, data) {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            return res.end("<h1>404 Not Found</h1>");
-        }
-
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data);
-        return res.end();
-    });*
-    
-});*/
-
-/* VERSIONE CON VUE
-app.get("/",function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
-    
-});*/
-
 //SI APRE DIRETTAMENTE IL WORKER
-app.get("/", (req, res) => {
+app.get("/worker", (req, res) => {
     res.sendFile(path.join(__dirname + "/reserved.html"));
   
       /*fs.readFile("index.html", function (err, data) {
@@ -88,15 +52,11 @@ app.get("/", (req, res) => {
           return res.end();
       });*/
       
-  });
-
-//Ambiente worker
-app.get('/worker-module', function (req, res) {
-    res.sendFile(path.join(__dirname + "/reserved.html"));
 });
 
+
 //Ambiente manager
-app.get('/manager-module', function (req, res) {
+app.get('/manager', function (req, res) {
     res.sendFile(path.join(__dirname + "/manager.html"));
 });
 
@@ -106,9 +66,7 @@ app.use(function(req, res){
     return res.end("<h1>404 Not Found</h1>");
 });
 
-app.listen(port, function() {});
-console.log("Server Started");
-
-/*server.on('error', (err) => {
-    console.error(err);
-});*/
+const PORT = process.env.PORT || 8680;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
