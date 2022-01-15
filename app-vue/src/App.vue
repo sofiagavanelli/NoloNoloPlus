@@ -104,7 +104,7 @@ export default {
 
     font-size: 14px;
 
-    margin-top: 6em;
+    /*margin-top: 6em;*/
     padding: 0.5em 3em 1em 3em;
 }
 
@@ -119,7 +119,7 @@ export default {
 }
 
 #componentView  {
-  margin-top: 6em;
+  margin-top: 5em;
 }
 
 #footer {

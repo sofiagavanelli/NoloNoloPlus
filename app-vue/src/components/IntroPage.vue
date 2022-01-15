@@ -37,7 +37,7 @@
               <b-card-footer>
               <!--b-input-group-->
                 <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
-                  NOLEGGIA {{index}}
+                  NOLEGGIA
                 </b-button>
               <!--/b-input-group-->
               </b-card-footer>
@@ -152,7 +152,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-#card-footer {
+.b-card-footer {
   justify-content: center;
 }
 
