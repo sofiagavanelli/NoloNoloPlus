@@ -22,7 +22,7 @@ process.chdir(__dirname);
 app.use(express.json());
 
 //che senso ha usare middleware così?
-//app.use("/public", express.static(path.resolve(__dirname, 'public')));
+app.use("/public", express.static(path.resolve(__dirname, 'public')));
 
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
@@ -46,7 +46,7 @@ app.get("/",function (req, res) {
 
 app.get("/worker", (req, res) => {
 
-    app.use("/public", express.static(path.resolve(__dirname, 'public')));
+    //app.use("/public", express.static(path.resolve(__dirname, 'public')));
 
     res.sendFile(path.join(__dirname + "/reserved.html"));
   

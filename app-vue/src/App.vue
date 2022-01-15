@@ -147,6 +147,10 @@ export default {
     font-size: 10px;
   }
 
+  .nav-item {
+    font-size: 12px !important;
+  }
+
   #introduzione { /*(up-right-down-left)*/
     margin-top: 4em;
     padding: 0.5em 1.5em 1em 1.5em;
