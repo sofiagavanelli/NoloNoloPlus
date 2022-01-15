@@ -1,94 +1,46 @@
 <template>
-  <div>
+  <!--div-->
 
-  <!--transition name="modal-fade"-->
-
-    <div z-index="2" id="modal" class="flex-container">
-  
-      <div  id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-        <div class="modal-dialog" role="document">
+    <div id="login" class="flex-container">
         
-        <div class="modal-content">
-          <img src="../../public/avatar.png" class="avatar">
-
-          <header class="modal-header">
-            <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-            <b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </b-button>
-          </header>
-
-          <div class="modal-body mx-3">
-            <div class="md-form mb-5">
-              <label data-error="wrong" data-success="right" for="username">Username</label>
-              <b-form-input v-model="username" placeholder="Enter Username"></b-form-input>
-            </div>
-
-            <div class="md-form mb-4">
-              <label data-error="wrong" data-success="right" for="pass">Password</label>
-              <b-form-input type="password" v-model="pass" placeholder="Enter Password"></b-form-input>
-            </div>
-
-            <div id="loginfo"> </div>
-
-            <div>
-              <i id="newreg" data-toggle="modal" data-target="#newRegModal"> Clicca qui per registrarti </i>
-            </div>
+        <div id="logContent" class="flex-container">
+          
+          <div id="header" class="flex-container">
+            <img src="../../public/avatar.png" class="avatar">
+            <p id="logTitle">Login</p>
           </div>
 
-          <div class="modal-footer d-flex justify-content-center">
-            <b-button class="btn btn-default" id="EnterlogBtn" v-on:click="login()">Login</b-button>
+          <div class="form-input"> <!--class="md-form mb-5"-->
+            <label data-error="wrong" data-success="right" for="username">Username</label>
+            <b-form-input v-model="username" placeholder="Enter Username"></b-form-input>
           </div>
+
+          <div class="form-input">
+            <label data-error="wrong" data-success="right" for="pass">Password</label>
+            <b-form-input type="password" v-model="pass" placeholder="Enter Password"></b-form-input>
+          </div>
+
+          <div id="loginfo"> </div>
+
+          <div id="newReg">
+            <router-link id="toHome" aria-labelledby="newRegLabel" to="/new-client">
+            Clicca qui per registrarti
+            </router-link>
+            <!--<i v-on:click="prova()"> Clicca qui per registrarti </i-->
+          </div>
+
+          <div> <!--class="d-flex justify-content-center"-->
+            <b-button id="EnterlogBtn" v-on:click="login()">Login</b-button>
+          </div>
+
+          <p id="infoFoot"> per qualsiasi problema: nolonolo.plus@gmail.com </p>
                           
         </div>
-      </div>
-
-      </div>
 
     </div>
-  <!--/transition-->
 
-
-    <!--b-modal z-index="1" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        
-        <div class="modal-content">
-          <img src="../../public/avatar.png" class="avatar">
-
-          <header class="modal-header">
-            <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-            </b-button>
-            <b-button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </header>
-
-          <div class="modal-body mx-3">
-            <div class="md-form mb-5">
-              <label data-error="wrong" data-success="right" for="username">Username</label>
-              <b-form-input v-model="username" placeholder="Enter Username"></b-form-input>
-            </div>
-
-            <div class="md-form mb-4">
-              <label data-error="wrong" data-success="right" for="pass">Password</label>
-              <b-form-input type="password" v-model="pass" placeholder="Enter Password"></b-form-input>
-            </div>
-
-            <div id="loginfo"> </div>
-
-            <div>
-              <i id="newreg" data-toggle="modal" data-target="#newRegModal"> Clicca qui per registrarti </i>
-            </div>
-          </div>
-
-          <div class="modal-footer d-flex justify-content-center">
-            <b-button class="btn btn-default" id="EnterlogBtn" v-on:click="login()">Login</b-button>
-          </div>
-                          
-        </div>
-      </div>
-    </b-modal--> 
-
-  </div>
+  
+  <!--/div-->
 </template>
 
 <script>
@@ -109,14 +61,10 @@ import axios from '../http'
       };
     },
 
-    mounted() {
-      //this.show("#loginModal");
-    },
-
     methods: {
 
-      close() {
-        this.$emit('close');
+      prova() {
+        //TODO
       },
     
       login() {
@@ -170,50 +118,73 @@ import axios from '../http'
 
 <style scoped>
 
-.p {
-  font-size: 40px;
-
-  padding: 5em;
+* {
+  font-size: 15px;
 }
 
-/* MODALS */
+#infoFoot {
+  padding-top: 1.5em;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: normal;
+}
 
-.modal-content {
-    background: #EDB5BF;
-    color: #000;
-    /*width: 20em;*/
-    /*margin: 20vw;*/
-    border-radius: 5%;
+#logTitle {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+#login { /*(up-right-down-left)*/
+  margin: 2.5em 0 2.5em 0;
+  /*margin-bottom: 2em;*/
+  justify-content: center;
+}
+
+#header {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#logContent {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #loginfo {
-    color: red;
+  color: red;
 }
 
 .avatar {
     width: 5em;
     height: 5em ;
     border-radius: 50%;
-    position: absolute;
+    /*position: absolute;
     top: -17%;
-    left: calc(50% - 2.5em);
+    left: calc(50% - 2.5em);*/
 }
 
 .btn {
     padding: 0em 2em;
-    border: none;
-    outline: none;
+    /*border: none;
+    outline: none;*/
     height: 2em;
-    background: #ffff;
-    color: #000;
+    background: #4D6D9A;
+    /*background: #ffff;
+    color: #000;*/
     font-size: 18px;
     border-radius: 1em;
 }
 
+.form-input {
+  margin-bottom: 1.5em;
+}
+
 .form-control {
     border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #000;
+    border-radius: 6px;
+    border: 1px solid #000;
     background: transparent;
     outline: none;
     height: 40px;
@@ -222,11 +193,11 @@ import axios from '../http'
 }
 
 /**/
-#newRegC {
-    visibility: hidden;
+#newReg {
+  padding-bottom: 1em;
 }
 
-.btn {
+/*.btn {
     padding: 0em 2em;
     border: none;
     outline: none;
@@ -246,7 +217,7 @@ import axios from '../http'
     height: 40px;
     color: #000;
     font-size: 16px;
-}
+}*/
 
   
   

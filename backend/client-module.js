@@ -36,6 +36,17 @@ module.exports = function (app) {
 
     });
 
+    app.post('/new-client/:data', function (req, res) {
+
+        res.writeHead(200);
+
+        let data = req.params.data;
+        var clientInfo = JSON.parse(data);
+        
+        console.log(data);
+
+    })
+
 
 };
 

@@ -11,12 +11,12 @@ var process = require('process');
 
 var app = express();
 
-var corsOptions = {
+/*var corsOptions = {
     origin: "http://localhost:8080"
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));*/
 
-//app.use(cors());
+app.use(cors());
 
 process.chdir(__dirname);
 app.use(express.json());

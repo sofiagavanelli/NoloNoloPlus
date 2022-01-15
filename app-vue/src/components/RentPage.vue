@@ -16,7 +16,7 @@
             <h4 class="title"> {{this.parentData.brand}} </h4>
             <div class="details">
               <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{this.parentData.power}} </h5> </li>
+                <li class="title">Velocità:<h5 class="data"> {{this.parentData.speed}} </h5> </li>
                 <li class="title">Lunghezza:<h5 class="data"> {{this.parentData.length}} </h5> </li>
                 <li class="title">Ospiti:<h5 class="data"> {{this.parentData.guests}} </h5> </li>
                 <li class="title">Anno:<h5 class="data"> {{this.parentData.year}} </h5> </li>

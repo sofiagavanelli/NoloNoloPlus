@@ -23,7 +23,7 @@
                 <h4 class="title"> {{item.brand}} </h4>
                 <div class="details">
                   <ul class="d-flex flex-wrap pl-0" >
-                    <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                    <li class="title">Velocità:<h5 class="data"> {{item.speed}} </h5> </li>
                     <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
                     <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
                     <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
@@ -60,6 +60,23 @@
       <template v-if="filtered">
 
       </template>
+
+      <footer>
+        <div class="flex-container" id="footer">
+          <div class="element">
+            <h3 class="title">CONTATTACI </h3> 
+              nolonoloplus.yacht@gmail.com
+          </div>
+          <!--div class="element">
+            <h3 class="title">DOVE TROVARCI </h3> 
+              Mura Anteo Zamboni, Bologna
+          </div>
+          <div class="element">
+            <h3 class="title">SOCI </h3> 
+              Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
+          </div-->
+          </div>
+      </footer>
     
   </div>
 </template>

@@ -11,23 +11,6 @@
 		</keep-alive>
 	</div>
 
-  <footer>
-    <div class="flex-container" id="footer">
-      <div class="element">
-        <h3 class="title">CONTATTACI </h3> 
-          nolonoloplus.yacht@gmail.com
-      </div>
-      <!--div class="element">
-        <h3 class="title">DOVE TROVARCI </h3> 
-          Mura Anteo Zamboni, Bologna
-      </div>
-      <div class="element">
-        <h3 class="title">SOCI </h3> 
-          Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
-      </div-->
-      </div>
-  </footer>
-
 </div>
 </template>
 
@@ -131,28 +114,12 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #cont1, #rent_page, #modal, #about-us{
+#main_page, #cont1, #rent_page, #login, #about-us{
   justify-content: center;
 }
 
 #componentView  {
   margin-top: 6em;
-}
-
-#calcBtn {
-    float: right;
-    position: fixed;
-    bottom: 10vh;
-    left: 90vw;;
-    /*margin-bottom: 2rem;*/
-    background-color: #4D6D9A;
-    box-shadow: 0px 0px 13px white;
-    color: white;
-    outline: none;
-    border: none; 
-    border-radius: 3rem;
-    width: 5rem;
-    height: 5rem;
 }
 
 #footer {
@@ -172,34 +139,17 @@ export default {
     padding: 0.5em 2em 1em 2em;
   }
 
-    #calcBtn {
-        float: right;
-        position: fixed;
-        left: 80vw;
-        right: 10vw ! important;
-        /*margin-bottom: 2rem;*/
-        width: 5rem;
-        height: 5rem;
-    }
-
 }
 
 @media screen and (max-width: 500px) {
 
+  * {
+    font-size: 10px;
+  }
+
   #introduzione { /*(up-right-down-left)*/
     margin-top: 4em;
     padding: 0.5em 1.5em 1em 1.5em;
-  }
-
-  #calcBtn {
-        float: right;
-        position: fixed;
-        bottom: 10vh;
-        left: 75vw;
-        right: 10vw ! important;
-        /*margin-bottom: 2rem;*/
-        width: 5rem;
-        height: 5rem;
   }
 
 }
