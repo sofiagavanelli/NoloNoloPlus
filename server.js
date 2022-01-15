@@ -11,6 +11,11 @@ var process = require('process');
 
 var app = express();
 
+/*var corsOptions = {
+    origin: "http://localhost:8080"
+};
+app.use(cors(corsOptions));*/
+
 app.use(cors());
 
 process.chdir(__dirname);
@@ -24,21 +29,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //import the middleware to manage the request of the three different app
-/*var worker = */require('./backend/worker-module.js')(app);
-/*var client = */require('./backend/client-module.js')(app);
-/*var manager = *require('./backend/manager-module.js')(app);*/
+require('./backend/worker-module.js')(app);
+require('./backend/client-module.js')(app);
+require('./backend/manager-module.js')(app);
 
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
 require("./db");
 
-//VERSIONE CON VUE
+/*VERSIONE CON VUE
 app.get("/",function (req, res) {
-    res.sendFile(path.join(__dirname + '/app-vue/dist/index.html'));
-    
-});
+    app.use(express.static(__dirname + '/views'));
 
-//SI APRE DIRETTAMENTE IL WORKER
+    res.sendFile(path.join(__dirname + '/views/index.html'));
+    
+});*/
+
 app.get("/worker", (req, res) => {
+
+    //app.use("/public", express.static(path.resolve(__dirname, 'public')));
+
     res.sendFile(path.join(__dirname + "/reserved.html"));
   
       /*fs.readFile("index.html", function (err, data) {

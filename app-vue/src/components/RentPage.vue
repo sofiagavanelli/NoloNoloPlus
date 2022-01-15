@@ -1,6 +1,4 @@
 <template>
-  <div>
-
 
     <div id="rent_page" class="flex-container">
 
@@ -16,10 +14,11 @@
             <h4 class="title"> {{this.parentData.brand}} </h4>
             <div class="details">
               <ul class="d-flex flex-wrap pl-0" >
-                <li class="title">Potenza:<h5 class="data"> {{this.parentData.power}} </h5> </li>
+                <li class="title">Velocità:<h5 class="data"> {{this.parentData.speed}} </h5> </li>
                 <li class="title">Lunghezza:<h5 class="data"> {{this.parentData.length}} </h5> </li>
                 <li class="title">Ospiti:<h5 class="data"> {{this.parentData.guests}} </h5> </li>
                 <li class="title">Anno:<h5 class="data"> {{this.parentData.year}} </h5> </li>
+                <li class="title">Due parole:<h5 class="data"> {{this.parentData.summary}} </h5> </li>
                 <div class="price_data"> <li class="title"> Prezzo: 
                   <h5 class="data"> {{this.parentData.price}} </h5> </li> 
                 </div>
@@ -32,18 +31,22 @@
             <b-form-datepicker id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
+
+            <b-button v-on:click="calc()">TOTALE: </b-button>
+            <div id="total-price">
+              <h6> {{total}} </h6>
+            </div>
+
           </div>
+
+          
 
       </b-card>
 
     <!-- scelte multiple per scegliere e calcolare il rent -->
 
-      
-
     </div>
 
-    
-  </div>
 </template>
 
 <script>
@@ -63,6 +66,7 @@ export default {
 
       home: true,
 
+      total: '',
     };
   },
 
@@ -73,6 +77,16 @@ mounted() {
 },
 
 methods: {
+
+  calc() {
+    console.log(this.parentData.price + "  " + this.endD + "  " + this.startD);
+
+    const diffInMs   = new Date(this.endD) - new Date(this.startD);
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    console.log(diffInDays);
+
+    this.total = this.parentData.price * (diffInDays);
+  },
 
   emitToParent (event) {
     this.$emit('childToParent')
@@ -89,9 +103,9 @@ methods: {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-#rent_page {
+/*#rent_page {
   padding-top: 4em;
-}
+}*/
 
 #calculate {
   padding: 0.5em;

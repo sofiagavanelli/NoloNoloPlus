@@ -23,11 +23,9 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
+        db.searchClientID(id).then(clientinfo => {
 
-        db.searchClient(id).then(clientinfo => {
-
-            console.log(clientinfo);
+            //console.log("sono in module " + clientinfo);
 
             res.write(JSON.stringify(clientinfo));
 
@@ -37,6 +35,17 @@ module.exports = function (app) {
         console.log("error");
 
     });
+
+    app.post('/new-client/:data', function (req, res) {
+
+        res.writeHead(200);
+
+        let data = req.params.data;
+        var clientInfo = JSON.parse(data);
+        
+        console.log(data);
+
+    })
 
 
 };

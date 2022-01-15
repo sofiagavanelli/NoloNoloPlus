@@ -7,7 +7,7 @@
           <br>
           NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
           L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
-          equipaggio. Contattateci per qualsiasi richiesta – vi garantiamo la risposta più veloce del settore.
+          equipaggio. Contattateci per qualsiasi richiesta - vi garantiamo la risposta più veloce del settore.
         </div>
 
         <div> 
@@ -23,7 +23,7 @@
                 <h4 class="title"> {{item.brand}} </h4>
                 <div class="details">
                   <ul class="d-flex flex-wrap pl-0" >
-                    <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
+                    <li class="title">Velocità:<h5 class="data"> {{item.speed}} </h5> </li>
                     <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
                     <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
                     <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
@@ -37,7 +37,7 @@
               <b-card-footer>
               <!--b-input-group-->
                 <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
-                  NOLEGGIA {{index}}
+                  NOLEGGIA
                 </b-button>
               <!--/b-input-group-->
               </b-card-footer>
@@ -48,7 +48,7 @@
 
       </template>
 
-      <template v-else>
+      <template v-else-if="!normal">
 
         <!-- a RENTPAGE si passa selectedID -->
         <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
@@ -56,57 +56,27 @@
 
       </template>
 
+      <!--TODO: FARE UN ALTRO V-IF CHE GESTISCE LA VISIONE FILTERED-->
+      <template v-if="filtered">
 
-      <!-- con schermo cellulare --
-      <template v-if="$mq === 'mobile'">
-        
-        <-- simple carousel "#ababab"--
-        <b-carousel id="smallboat" controls no-animation :interval="0" background-color="green">
-        <!- v-model="slide" :interval="0" controls indicators--
+      </template>
 
-          <b-carousel-item >
-                <b-carousel-slide v-for="item in prodInfo" :key="item.index">
-                  <b-card>
-                    <img class="post_image" :src="item.image" alt="Card image cap">
-                    <div class="card-body">
-                      <h3 class="title"> {{item.name}} </h3>
-                      <h4 class="title"> {{item.brand}} </h4>
-                      <div class="details">
-                        <ul class="d-flex flex-wrap pl-0">
-                          <li class="title">Potenza:<h5 class="data"> {{item.power}} </h5> </li>
-                          <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
-                          <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
-                          <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                          <div class="price_data"> <li class="title"> Prezzo: 
-                            <h5 class="data"> {{item.price}} </h5> </li> 
-                          </div>
-                        </ul>
-                      </div>
-                    </div>
-                  </b-card>
-                </b-carousel-slide>
-
-          </b-carousel-item>
-
-        </b-carousel>
-
-        <p class="mt-4">
-        Slide #: {{ slide }}<br>
-        Sliding: {{ sliding }}
-        </p>
-
-        <!-b-card v-for="item in prodInfo" :key="item.prod_id">
-          <img class="post_image" :src="item.image" alt="Card image cap">
-
-          <div class="card-body">
-            <h3 class="title"> PROVA </h3>
-            <h4 class="title"> {PROVA2} </h4>
+      <footer>
+        <div class="flex-container" id="footer">
+          <div class="element">
+            <h3 class="title">CONTATTACI </h3> 
+              nolonoloplus.yacht@gmail.com
           </div>
-
-        </b-card->
-
-      </template-->  
-
+          <!--div class="element">
+            <h3 class="title">DOVE TROVARCI </h3> 
+              Mura Anteo Zamboni, Bologna
+          </div>
+          <div class="element">
+            <h3 class="title">SOCI </h3> 
+              Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
+          </div-->
+          </div>
+      </footer>
     
   </div>
 </template>
@@ -130,6 +100,8 @@ export default {
       //sliding: null,
       normal:true,
       mydata: '',
+      filtered: false,
+      filterProd: [],
       //toggle: true,
     };
   },
@@ -180,7 +152,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-#card-footer {
+.b-card-footer {
   justify-content: center;
 }
 
@@ -227,7 +199,6 @@ export default {
     /*visibility: hidden;*/
     display: none;
 }
-
 
 
 </style>

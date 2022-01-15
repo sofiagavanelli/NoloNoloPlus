@@ -7,7 +7,7 @@ const ProdSchema = new Schema(
     image: {type: String, required: true},
     name: {type: String, required: true},
     brand: {type: String, required: true},
-    power: {type: String, required: true},
+    speed: {type: String, required: true},
     length: {type: String, required: true},
     guests: {type: String, required: true},
     year: {type: String, require: true},
