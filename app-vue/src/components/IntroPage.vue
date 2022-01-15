@@ -229,24 +229,5 @@ export default {
 }
 
 
-<<<<<<< HEAD
-
-@media screen and (max-width: 900px) {
-
-    #calcBtn {
-        float: right;
-        position: fixed;
-        left: 80vw;
-        right: 10vw ! important;
-        /*margin-bottom: 2rem;*/
-        width: 5rem;
-        height: 5rem;
-    }
-
-}
-
-
-=======
->>>>>>> 9859d01458f308557612bff8ed5b173270a77030
 
 </style>

@@ -364,14 +364,11 @@ form.example input[type=text] {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 110%;
 }
-.card2{
-  width: 60%;
-  height: 40%;
+.img-1{
+  width: 70%;
+  border-color: #0d2948;
+  height: 70%;
   position: relative;
-  left: 20%;
-  margin-top: 15px;
-  border-color: #4D6D9A;
-  border: 2px solid;
 }
 .card{
   margin-top: 15px;

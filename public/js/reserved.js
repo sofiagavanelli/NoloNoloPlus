@@ -405,6 +405,7 @@ function searchProd(){
 
 }
 function acceptProd(data, insertedID) {
+  var x = 0;
 
   for (let i in data) {
 
@@ -414,21 +415,46 @@ function acceptProd(data, insertedID) {
         div = $(`         
         <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL CLIENTS</button>
         `);
-              
+    if(data[i].available== false){
+      x= 1; x=""
+    }
+    else{
+      x= 2;
+    }
       $("#ctable").append(div);
       div = $(` 
-      <div class="card2 mb-3">
-        <div class="row g-0" >
-          <div class="col-md-4">
-            <img src="${data[i].image}" class="img-fluid rounded-start" alt="...">
+          <div id="img-1">
+            <img src="${data[i].image}" style="width: 40%;height: 30%; margin-left: 5%" alt="...">
+            <div class="col-md-8" style="position: relative; margin-left: 45%; bottom: 40%;">
+              <div class="card-body" style="margin-top: -45%;">
+              <form>
+              <fieldset disabled>
+                <legend>Disabled fieldset example</legend>
+                <div class="mb-3">
+                  <label for="disabledTextInput" class="form-label">Disabled input</label>
+                  <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                </div>
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label">Disabled select menu</label>
+                  <select id="disabledSelect" class="form-select">
+                    <option>Disabled select</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                    <label class="form-check-label" for="disabledFieldsetCheck">
+                      Can't check this
+                    </label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </fieldset>
+            </form>
+              </div>
+            </div>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-            <h5 class="card-title">${data[i].name}</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-        </div>
-      </div>
+          
 
         
       `);
