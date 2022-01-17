@@ -110,7 +110,7 @@ function openClient() {
                        <td>${ClientInfo[i].surname}</td>
                        <td>${ClientInfo[i].client_id}</td>
                        <td><button id= "${ClientInfo[i].client_id}" class="btn-upd" onclick="acceptClient(clientARRAY,id)" ><i class="fas fa-user-edit"></i></button>
-                       <button id="${ClientInfo[i].client_id}" onclick="openAlert(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button>
+                       <button id="${ClientInfo[i].client_id}" onclick="deleteClient(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button>
                        <button id="${ClientInfo[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
                        </td>
                       </tr>
@@ -165,7 +165,7 @@ function openInventory() {
         let div = null;
               
         div = $(`     
-        <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
+        <div class="card" style="width: 18rem; float: left; display: block; margin-left: 5%; height: 26rem;">        
         <img src="${ProdInfo[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
@@ -236,7 +236,7 @@ function openRents() {
                   <h5 class="card-title">Rental: ${RentInfo[i]._id}</h5>
                   <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
                   <p class="card-text">Start date: ${RentInfo[i].start_date.slice(0,10)} <br> End date: ${RentInfo[i].end_date.slice(0,10)}</p>
-                  <button id="${RentInfo[i]._id}" onclick= "openAlertRents(id)" class="btn-d">Delete</button>
+                  <button id="${RentInfo[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
                   <button class="btn-mod">Modify</button>
                 </div>
               </div>
@@ -496,14 +496,10 @@ function goBackRents(){
 
 
 /***************************** */
-/*FUNZIONI ALERT PER ELIMINAZIONE */
+/*FUNZIONI PER ELIMINAZIONE */
 
 /*ELIMINAZIONE NOLEGGIO */
-function openAlertRents(idR) {
-
-  //console.log(idR);
-
-  alert("Are you sure you want to delete this rent?");
+function deleteRents(idR) {
 
   if(idR) {
     $.ajax({
@@ -521,19 +517,14 @@ function openAlertRents(idR) {
   
 }
 /*FELIMINAZIONE CLIENTE */
-function openAlert(idDel) {
-
-  //console.log(idDel);
-
-  alert("Are you sure you want to delete this client?");
+function deleteClient(idDel) {
 
   if(idDel) {
     $.ajax({
     type: 'DELETE',
     url: '/allClients/' + idDel ,
     success: function (data) {
-      $( "#ctable2" ).load(window.location.href + " #ctable2" );
-      $( "#clientBtn" ).click();
+      openClient();
     },
     error: function (xhr, ajaxOptions, thrownError) {
 
@@ -858,7 +849,7 @@ function openCreate(){
     </div>
     
     <div class="btn-block">
-      <button class="btn-sub" onclick="checkRent()">Create</button> <i class="far fa-smile" style="color: green;"></i>
+      <button class="btn-sub" onclick="checkRent()">Create</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
     </div>
   </form>
 </div>
@@ -868,7 +859,8 @@ $("#ctable2").append(div);
 }
 
 function checkRent(){
-  console.log("sono dentro");
+  document.getElementById("smile").style.visibility = "visible";
+ 
   //alert("Rent created with succes!");
 
 }
