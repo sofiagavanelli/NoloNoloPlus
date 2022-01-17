@@ -151,11 +151,11 @@ module.exports = function (app) {
       const enddate= req.body.end; 
 
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
-      db.saveRental(prod, client, startdate, enddate).then(() => {
+      db.saveRental(prod, client, startdate, enddate, true).then(() => {
         //console.log("aaaaaaaaaaaaaaaa");
         //res.status(200);
         //res.end();
-        res.redirect(reserved.html);
+        //res.redirect(reserved.html);
       }
     )
     });

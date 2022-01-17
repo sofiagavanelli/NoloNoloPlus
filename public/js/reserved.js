@@ -173,7 +173,7 @@ function openInventory() {
         <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
         Price: ${ProdInfo[i].price}€</p>              
         <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
-        <button class="btn-mod">Modify</button>             
+        <button class="btn-mod" id="${ProdInfo[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
         </div>             
         </div>            
         `);
@@ -413,7 +413,7 @@ function acceptProd(data, insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
         div = $(`         
-        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL CLIENTS</button>
+        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL PRODUCTS</button>
         `);
     if(data[i].available== false){
       x= 1; x=""
@@ -423,40 +423,53 @@ function acceptProd(data, insertedID) {
     }
       $("#ctable").append(div);
       div = $(` 
-          <div id="img-1">
-            <img src="${data[i].image}" style="width: 40%;height: 30%; margin-left: 5%" alt="...">
-            <div class="col-md-8" style="position: relative; margin-left: 45%; bottom: 40%;">
-              <div class="card-body" style="margin-top: -45%;">
-              <form>
-              <fieldset disabled>
-                <legend>Disabled fieldset example</legend>
-                <div class="mb-3">
-                  <label for="disabledTextInput" class="form-label">Disabled input</label>
-                  <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+        <div id="img-1">
+          <img src="${data[i].image}" style="width: 40%;height: 30%; margin-left: 3% object-fit: fill;" alt="...">
+            <div class="col-md-8" style="position: relative; margin-left: 45%; margin-top: -28%;">
+              <form class="row g-3" style="width: 70%; top: -30%;">
+                <div class="col-md-6">
+                  <label for="inputName" class="form-label">Name </label>
+                  <input type="name" class="form-control" id="inputName" placeholder="${data[i].name}">
                 </div>
-                <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                  <select id="disabledSelect" class="form-select">
-                    <option>Disabled select</option>
+                <div class="col-md-6">
+                  <label for="inputID" class="form-label">Product ID</label>
+                  <input type="productid" class="form-control" id="inputID" placeholder="${data[i].prod_id}">
+                </div>
+                <div class="col-12">
+                  <label for="inputBrand" class="form-label">Brand</label>
+                  <input type="text" class="form-control" id="inputBrand" placeholder="${data[i].brand}">
+                </div>
+                <div class="col-12">
+                  <label for="inputPrice" class="form-label">Price</label>
+                  <input type="text" class="form-control" id="inputPrice" placeholder="${data[i].price}€">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputYear" class="form-label">Year</label>
+                  <input type="text" class="form-control" id="inputYear" placeholder="${data[i].year}">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputSpeed" class="form-label">Speed</label>
+                  <select id="inputSpeed" class="form-select">
+                    <option selected>${data[i].speed}</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-                    <label class="form-check-label" for="disabledFieldsetCheck">
-                      Can't check this
-                    </label>
-                  </div>
+                <div class="col-md-2">
+                  <label for="inputGuests" class="form-label">Guests</label>
+                  <input type="text" class="form-control" id="inputGuests" placeholder="${data[i].guests}">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </fieldset>
-            </form>
-              </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+              </form>
             </div>
-          </div>
-          
-
-        
+        </div>  
       `);
       $("#ctable2").append(div);
 
@@ -674,7 +687,7 @@ for (let i in inventoryARRAY) {
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
   Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
-  <button class="btn-mod">Modify</button>             
+  <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
   </div>             
   </div>  
         `);
@@ -724,7 +737,7 @@ for (let i in inventoryARRAY) {
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
   Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
-  <button class="btn-mod">Modify</button>              
+  <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>              
   </div>             
   </div>    
        `);
@@ -773,7 +786,7 @@ for (let i in inventoryARRAY) {
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
   Price: ${inventoryARRAY[i].price}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
-  <button class="btn-mod">Modify</button>              
+  <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>              
   </div>             
   </div>    
        `);
@@ -845,7 +858,7 @@ function openCreate(){
     </div>
     
     <div class="btn-block">
-      <button class="btn-sub" onclik="checkRent()">Check</button>
+      <button class="btn-sub" onclick="checkRent()">Create</button> <i class="far fa-smile" style="color: green;"></i>
     </div>
   </form>
 </div>
@@ -856,7 +869,7 @@ $("#ctable2").append(div);
 
 function checkRent(){
   console.log("sono dentro");
-  alert("Rent created with succes!");
+  //alert("Rent created with succes!");
 
 }
 
