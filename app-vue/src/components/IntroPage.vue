@@ -158,6 +158,7 @@ export default {
 
 /**** gestisce i div con le immagini e i dati degli yacht *****/
 .boat-images {
+  box-shadow: 0px 0px 4px lightgrey;
     /*background-color: lightgrey;*/
     float: left;
     border: 1px solid #86B3D1;

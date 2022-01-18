@@ -25,8 +25,6 @@ module.exports = function (app) {
 
         db.searchClientID(id).then(clientinfo => {
 
-            //console.log("sono in module " + clientinfo);
-
             res.write(JSON.stringify(clientinfo));
 
             res.end();

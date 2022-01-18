@@ -11,11 +11,11 @@
                 </div>
             </div>
             <div class="flex-container">
+                <img class="shot" src="../../public/avatar.png">
                 <div class="persInfo">
                     <h5 class="title"> Francesca Chiriacò </h5>
                     <h6 class="data"> bla bla bla bla bla </h6>
                 </div>
-                <img class="shot" src="../../public/avatar.png">
             </div>
             <div class="flex-container">
                 <img class="shot" src="../../public/avatar.png">
@@ -49,7 +49,7 @@ export default {
 <style scoped>
 
 .persInfo {
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .data, .title{
@@ -65,14 +65,14 @@ export default {
 
 #aboutdata {
     /*align-items: center;*/
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 }
 
 #about-us {
-    /*align-items: center;
+    align-items: center;
     flex-direction: column;
-    justify-content: center;*/
+    /*justify-content: center;*/
     margin: 1em;
     border: 1px solid red;
     border-radius: 4px;

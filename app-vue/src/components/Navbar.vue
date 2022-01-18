@@ -20,7 +20,7 @@
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
             <!--v-on:click='smista' @click="showModal" v-on:click='open()'-->
-              <template v-if="!loggedIn">
+              <template v-if="!this.$store.state.username">
                 <b-nav-item title="Login">
                   <router-link id="toLogin" tag="nav-item" aria-labelledby="loginLabel" to="/login">
                     Login
@@ -31,6 +31,11 @@
                 <b-nav-item title="Profile">
                   <router-link id="toProfile" tag="nav-item" aria-labelledby="profileLabel" to="/profile">
                     Profile
+                  </router-link>
+                </b-nav-item>
+                <b-nav-item title="Logout" v-on:click="logout()">
+                  <router-link id="toLogout" tag="nav-item" aria-labelledby="loginLabel" to="/home">
+                    Logout
                   </router-link>
                 </b-nav-item>
               </template>
@@ -48,9 +53,9 @@
     
 
     <!--TODO: INSERIRE DIRETTAMENTE QUI IL MODALE PER UNA GESTIONE MIGLIORE SENZA IF-->
-    <template v-if="isModalVisible">
+    <!--template v-if="isModalVisible">
       <LoginModal v-on:childToParent="onChildBack" />
-    </template>
+    </template-->
 
   </div>
 </template>
@@ -58,43 +63,32 @@
 <script>
 import LoginModal from './LoginModal.vue';
 
+import client from '../user-data'
+
 export default {
   name: 'Navbar',
   components: {
     LoginModal
   },
-  props: ['loggedIn'],
+  //props: ['loggedIn'],
   data() {
     return {
-      isModalVisible: false,
-      //loggedIn: false,
+      //username: client.username,
+      //isModalVisible: false,
+      loggedIN: false,
     };
-  },
-
-  computed: {
-    msg () {
-      return `Hello, ${ this.loggedIn }!`
-    }
   },
 
   methods: {
 
-    /*open() {
-      console.log("dentro show");
-      this.isModalVisible = true;
-      console.log(this.isModalVisible);
-    },
+    logout() {
 
-    onChildBack() {
-      this.isModalVisible = !this.isModalVisible;
-    },*/
+      //TODO: inserire alert per il logout!!
 
-    /*closeModal() {
-      this.isModalVisible = false;
-    }*/
+      this.$store.commit("setUsername", false);
+    }
 
   }
-
 
 }
 </script>

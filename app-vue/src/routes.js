@@ -26,7 +26,7 @@ export default new Router({
       {
         path: '/home', alias: '/',
         component: IntroPage,
-        props: true,
+        //props: true,
         //props: params => ({ data: params.query.data })
       },
       {
