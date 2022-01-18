@@ -58,17 +58,22 @@ module.exports = {
         }).save();
     },
 
-    saveRental: async (/*_rent,*/ _prod, _client, _start, _end) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _ok) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
-        new Noleggio({
+        /*const newN =*/ return Promise.resolve(new Noleggio({
             //_id: _id,
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
             end_date: _end,
+            approved: _ok,
             //worker_id: _worker
-        }).save();
+        }).save());
+        
+        //await newN.save();
+
+
     },
 
     searchClientID: async (id) => {

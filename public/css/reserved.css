@@ -364,19 +364,11 @@ form.example input[type=text] {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 110%;
 }
-.card2{
-  width: 60%;
-  height: 40%;
-  position: relative;
-  left: 20%;
-  margin-top: 15px;
-  border-color: #4D6D9A;
-  border: 2px solid;
-}
+
 .card{
   margin-top: 15px;
-  border-color: #4D6D9A;
-  border: 2px solid;
+  border-color: #93b0d8;
+  border: 1px solid;
 }
 .card-title{
   color: #eb5248;
@@ -612,6 +604,7 @@ form.example input[type=text] {
   .btn-sub:hover {
   background-color: #0666a3;
   }
+
 
 
 

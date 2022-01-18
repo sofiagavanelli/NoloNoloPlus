@@ -75,7 +75,7 @@ app.use(function(req, res){
     return res.end("<h1>404 Not Found</h1>");
 });
 
-const PORT = process.env.PORT || 8680;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
