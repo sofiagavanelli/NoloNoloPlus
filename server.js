@@ -62,7 +62,10 @@ app.get("/worker", (req, res) => {
       });*/
       
 });
-
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname + "/login.html"));
+        
+});
 
 //Ambiente manager
 app.get('/manager', function (req, res) {

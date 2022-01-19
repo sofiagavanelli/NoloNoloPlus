@@ -47,7 +47,8 @@ function acceptWorker(data, insertedP) {
           document.getElementById("managBtn").disabled = false;
         }
         else if(document.getElementById("managCheck"))
-        $('#loginModal').modal('toggle'); 
+        console.log("sono dentro");
+        location.href = '/worker';
 
         var found = true;
     }
@@ -58,12 +59,16 @@ function acceptWorker(data, insertedP) {
 
 
 }
+
+function logOut(){
+  location.href = '/login';
+
+}
 /***************************** */
 /* CLIENTI */
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
   
 
     $.ajax({
@@ -126,8 +131,7 @@ function openInventory() {
  
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
-  $(".styled-tab").css("-webkit-filter", "blur(0px)");
+
   $.ajax({
     type: 'GET',
       url: '/prods' ,
@@ -165,7 +169,7 @@ function openInventory() {
         let div = null;
               
         div = $(`     
-        <div class="card" style="width: 18rem; float: left; display: block; margin-left: 5%; height: 26rem;">        
+        <div class="card" style="width: 18rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
         <img src="${ProdInfo[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
@@ -187,7 +191,6 @@ function openInventory() {
 function openRents() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
         
   $.ajax({
     type: 'GET',
@@ -424,8 +427,8 @@ function acceptProd(data, insertedID) {
       $("#ctable").append(div);
       div = $(` 
         <div id="img-1">
-          <img src="${data[i].image}" style="width: 40%;height: 30%; margin-left: 3% object-fit: fill;" alt="...">
-            <div class="col-md-8" style="position: relative; margin-left: 45%; margin-top: -28%;">
+          <img src="${data[i].image}" style="width: 35%;" alt="...">
+            <div class="col-md-8" style=" position: relative; margin-left: 43%; margin-top: -25%;">
               <form class="row g-3" style="width: 70%; top: -30%;">
                 <div class="col-md-6">
                   <label for="inputName" class="form-label">Name </label>
@@ -794,16 +797,9 @@ function openContacts() {
   $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`                  
-  <div style='left:0%;'class="card">                   
-    <h5 class="card-header"><b><i class="far fa-envelope">  Gmail</b></i></h5>
-      <div class="card-body">
-        <h5 class="card-title">Mail box</h5>               
-        <p class="card-text">Check the clients email!</p>
-        <button id= "btn-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus-circle"> Add item</i></button>
-                  
-        <a href="https://mail.google.com/mail/u/5/?ogbl#inbox" class="btn btn-primary">Go somewhere</a>
-                        
-      </div>
+  <div>
+  <h5>DA FARE! </h5>                   
+
   </div>
 `);
 $("#ctable").append(div);
@@ -815,7 +811,7 @@ function openPersonalArea() {
   $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`    
-  <h1>ciao</h1>
+  <h5>DA FARE! </h5>     
 `);
 $("#ctable").append(div);
 }

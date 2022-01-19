@@ -37,7 +37,6 @@ button:focus{
     border-radius: 5%;
 }
 
-
 .avatar {
     width: 5em;
     height: 5em ;
@@ -138,12 +137,10 @@ button:focus{
 }
 .sidebar{
   position: fixed;
-  /*left: -230px;*/
   bottom: 2px;
   width: 230px;
   height: 100%;
   background: #99CED3;
-  /*transition: all .5s ease;*/
 
 }
 
@@ -229,17 +226,7 @@ ul li :hover a{
 
 }
 
-
-/*
-#btn-pass{
-  background-color: #ffffff;
-  border: #000;
-  border-radius: 25px;
-  padding: 10px 23px;
-  cursor: not-allowed;
-
-} 
-*/#styled-tab{
+#styled-tab{
   position: relative;
   top: 12px;
   left: 3.5%;
@@ -341,8 +328,8 @@ form.example input[type=text] {
   display: block;
   float: left;
   padding: 10px 10px;
-  width: 30%;
-  margin-left: auto;
+  width: 33%;
+  margin-left: -1%;
   margin-top: auto;
 }
 .card-new{
@@ -367,20 +354,22 @@ form.example input[type=text] {
 
 .card{
   margin-top: 15px;
-  border-color: #93b0d8;
-  border: 1px solid;
+  border: 1px solid #709dbb;
+  padding: 1%;
 }
 .card-title{
   color: #eb5248;
 }
+
 .btn-mod{
   background-color: #095484;
   color: #fff;
   border: #000;
   border-radius: 5px;
-  padding: 6px 20px;
+  padding: 4px 18px;
   float:right;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 0.8rem;
 
 }
 .btn-d{
@@ -388,7 +377,7 @@ form.example input[type=text] {
   color: #fff;
   border: #000;
   border-radius: 5px;
-  padding: 6px 20px;
+  padding: 4px 18px;
   margin-left: 5px;
   right: 5px;
   float:right;
@@ -604,6 +593,7 @@ form.example input[type=text] {
   .btn-sub:hover {
   background-color: #0666a3;
   }
+
 
 
 
