@@ -18,6 +18,9 @@
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
 
+// .vue file
+//import config from './user-data'
+
 export default {
   name: 'App',
   //props: ['loggedIn'],
@@ -27,11 +30,11 @@ export default {
   },
 
   computed: {
-    msg () {
+    /*msg () {
       let data = this.$router.params.data;
       console.log("data is", data);
       //return `Hello, ${ this.loggedIn }!`
-    }
+    }*/
     
   },
 
@@ -114,7 +117,7 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #cont1, #rent_page, #login, #about-us{
+#main_page, #cont1, #rent_page, #login, #about-us, #profile_page{
   justify-content: center;
 }
 

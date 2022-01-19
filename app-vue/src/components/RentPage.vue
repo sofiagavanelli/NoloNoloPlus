@@ -32,14 +32,22 @@
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
 
-            <b-button v-on:click="calc()">TOTALE: </b-button>
-            <div id="total-price">
-              <h6> {{total}} </h6>
+            <div id="priceTab" class="flex-container">
+              <b-button v-on:click="calc()">TOTALE: </b-button>
+              <div id="total-price">
+                <h5> {{total}} € </h5>
+              </div>
+            </div>
+
+            <div id="disclaimer" class="flex-container">
+              <font-awesome-icon icon="exclamation-circle" />
+              <h6> Avvisiamo che il prezzo calcolato è indicativo e non tiene conto di
+                disponibilità ed eventuali sconti. 
+                Necessario fare login per avere una cifra sicura.</h6>
             </div>
 
           </div>
 
-          
 
       </b-card>
 
@@ -66,7 +74,7 @@ export default {
 
       home: true,
 
-      total: '',
+      total: '//',
     };
   },
 
@@ -79,11 +87,12 @@ mounted() {
 methods: {
 
   calc() {
-    console.log(this.parentData.price + "  " + this.endD + "  " + this.startD);
+    //console.log(this.parentData.price + "  " + this.endD + "  " + this.startD);
 
     const diffInMs   = new Date(this.endD) - new Date(this.startD);
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     console.log(diffInDays);
+    console.log(this.parentData.price);
 
     this.total = this.parentData.price * (diffInDays);
   },
@@ -106,6 +115,21 @@ methods: {
 /*#rent_page {
   padding-top: 4em;
 }*/
+
+#total-price {
+  padding: 0.5em;
+  padding-left: 1.5em;
+
+}
+
+#disclaimer {
+  background-color: rgb(252, 191, 191);
+  border-radius: 4px;
+  padding: 0.5em;
+  margin: 1em;
+
+  font-size: 12px;
+}
 
 #calculate {
   padding: 0.5em;

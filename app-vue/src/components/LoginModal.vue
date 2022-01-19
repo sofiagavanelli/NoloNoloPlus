@@ -46,20 +46,20 @@
 <script>
 import axios from '../http'
 
-  export default {
-    name: 'LoginModal',
+export default {
+  name: 'LoginModal',
     /*props: {
       loggedIN: false,
     },*/
-    data() {
-      return {
-        username: '',
-        pass: '',
+  data() {
+    return {
+      username: '',
+      pass: '',
 
-        clientInfo: [],
-        loggedIN: false,
-      };
-    },
+      clientInfo: [],
+      loggedIN: false,
+    };
+  },
 
     methods: {
 
@@ -72,7 +72,6 @@ import axios from '../http'
         axios.get('/client/' + this.username)
           .then((response) => {
             this.clientInfo = response.data;
-            
             this.controlInfo(this.clientInfo, this.pass);
           })
           .catch((error) => {
@@ -89,18 +88,22 @@ import axios from '../http'
           if(data[i].password == insertedP) {
               var found = true;
               this.loggedIN = true;
-
           }
 
         }
 
+        //console.log("username cambiato in " + config.username);
+
         if(this.loggedIN) {
 
-          data = this.loggedIN;
+          //console.log(this.$store.state);
+          this.$store.commit("setUsername", this.username);
+
+          //data = this.loggedIN;
 
           this.$router.push({
             path: '/home',
-            params: { data } 
+            //params: { data } 
           });
 
         }
