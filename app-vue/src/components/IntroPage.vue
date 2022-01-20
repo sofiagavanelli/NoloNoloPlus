@@ -27,9 +27,9 @@
                     <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
                     <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
                     <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                    <div class="price_data"> <li class="title"> Prezzo: 
-                      <h5 class="data"> {{item.price}} </h5> </li> 
-                    </div>
+                    <!--template v-if="this.$store.state.username"-->
+                      <!--li class="title"> Prezzo: <h5 class="data"> {{item.price}} </h5> </li--> 
+                    <!--/template-->
                   </ul>
                 </div>
               </b-card-body>
@@ -57,9 +57,9 @@
       </template>
 
       <!--TODO: FARE UN ALTRO V-IF CHE GESTISCE LA VISIONE FILTERED-->
-      <template v-if="filtered">
+      <!--template v-if="filtered">
 
-      </template>
+      </template-->
 
       <footer>
         <div class="flex-container" id="footer">
@@ -83,6 +83,7 @@
 
 <script>
 import axios from '../http'
+import client from '../user-data'
 
 import SearchBar from './SearchBar.vue'
 import RentPage from './RentPage.vue'

@@ -18,10 +18,10 @@
                 <li class="title">Lunghezza:<h5 class="data"> {{this.parentData.length}} </h5> </li>
                 <li class="title">Ospiti:<h5 class="data"> {{this.parentData.guests}} </h5> </li>
                 <li class="title">Anno:<h5 class="data"> {{this.parentData.year}} </h5> </li>
+                <!--template v-if="this.$store.state.username"-->
+                  <!--li class="title"> Prezzo: <h5 class="data"> {{this.parentData.price}} </h5> </li--> 
+                <!--/template-->
                 <li class="title">Due parole:<h5 class="data"> {{this.parentData.summary}} </h5> </li>
-                <div class="price_data"> <li class="title"> Prezzo: 
-                  <h5 class="data"> {{this.parentData.price}} </h5> </li> 
-                </div>
               </ul>
             </div>
           </b-card-body>
@@ -39,12 +39,16 @@
               </div>
             </div>
 
+            <!--template v-if="this.$store.state.username"-->
+            <!-- TODO: CAPIRE COSA FARE DEL DISCLAIMER SE LOGIN FATTO -->
             <div id="disclaimer" class="flex-container">
               <font-awesome-icon icon="exclamation-circle" />
               <h6> Avvisiamo che il prezzo calcolato è indicativo e non tiene conto di
                 disponibilità ed eventuali sconti. 
                 Necessario fare login per avere una cifra sicura.</h6>
             </div>
+            <!--/template-->
+
 
           </div>
 
@@ -59,6 +63,9 @@
 
 <script>
 import axios from '../http'
+
+import client from '../user-data'
+
 
 export default {
   name: 'RentPage',

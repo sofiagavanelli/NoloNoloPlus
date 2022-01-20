@@ -11,7 +11,7 @@
 
         <a id="logoname" class="nav-item">
           <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
-            NoloNoloPlus
+            NOLONOLOPLUS
           </router-link>
         </a>
 
@@ -20,30 +20,30 @@
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
             <!--v-on:click='smista' @click="showModal" v-on:click='open()'-->
+              <b-nav-item title="Site by">
+                <router-link id="toAboutUs" tag="nav-item" aria-labelledby="AboutUsLabel" to="/about">
+                  ABOUT US
+                </router-link>
+              </b-nav-item>
               <template v-if="!this.$store.state.username">
                 <b-nav-item title="Login">
                   <router-link id="toLogin" tag="nav-item" aria-labelledby="loginLabel" to="/login">
-                    Login
+                    LOGIN
                   </router-link>
                 </b-nav-item>
               </template>
               <template v-else>
                 <b-nav-item title="Profile">
                   <router-link id="toProfile" tag="nav-item" aria-labelledby="profileLabel" to="/profile">
-                    Profile
+                    PROFILE
                   </router-link>
                 </b-nav-item>
                 <b-nav-item title="Logout" v-on:click="logout()">
                   <router-link id="toLogout" tag="nav-item" aria-labelledby="loginLabel" to="/home">
-                    Logout
+                    <font-awesome-icon icon="sign-out-alt"/> LOGOUT
                   </router-link>
                 </b-nav-item>
               </template>
-              <b-nav-item title="Site by">
-                <router-link id="toAboutUs" tag="nav-item" aria-labelledby="AboutUsLabel" to="/about">
-                  About Us
-                </router-link>
-              </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
 
@@ -95,7 +95,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 #app {
     background-color: #4D6D9A;

@@ -29,14 +29,18 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options),
-    saveClient: async (username, id, pass) => {
-        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
-        console.log(username + "--" + id + "--" + pass);
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address) => {
+        
+        console.log(_username + "--" + _name + "--" + _pass);
 
         new Client({
-            name: username,
-            client_id: id,
-            password: pass
+            image: _img,
+            name: _name,
+            surname: _surname,
+            client_id: _username,
+            password: _pass,
+            place: _place,
+            address: _address
         }).save();
     },
 
@@ -95,6 +99,10 @@ module.exports = {
 
     searchRent: async (id) => {
         return Promise.resolve(Noleggio.find({ _id: id}));
+    },
+
+    searchRentByClient: async (username) => {
+        return Promise.resolve(Noleggio.find({ client_id: username}));
     },
 
     getProds: async (options = {}) => {

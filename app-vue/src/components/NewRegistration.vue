@@ -39,8 +39,9 @@
           </div>
 
 
-          <div> <!--class="d-flex justify-content-center"-->
+          <div id="btncont" class="flex-container"> <!--class="d-flex justify-content-center"-->
             <b-button id="EnterRegBtn" v-on:click="registration()">Registrati</b-button>
+            <h5 id="disclaimer"> {{this.msg}} </h5>
           </div>
                           
         </div>
@@ -56,12 +57,15 @@ export default ({
     name: "NewRegistration",
     data() {
         return {
-            name: '',
-            surname: '', 
-            username: '',
-            city: '',
-            address: '',
-            pass: '',
+            name: null,
+            surname: null, 
+            username: null,
+            city: null,
+            address: null,
+            pass: null,
+            image: null,
+
+            msg: '',
 
             newClient: [],
         };
@@ -70,20 +74,30 @@ export default ({
 
         registration() {
 
-            this.newClient = [ this.name, this.surname, this.username, this.city, this.address, this.pass ];
+          if(!(this.name && this.surname && this.username && this.city && this.address && this.pass)) {
+            this.msg = "è necessario inserire dati in tutti i campi per poter effettuare la registrazione";
+          }
+          else {
+            this.image= "https://photos.google.com/u/9/photo/AF1QipM05fZpA8HK_WMkbjgYtC4-uvlMogB0wJBMciah";
 
-            console.log(this.newClient);
+            this.newClient = [ { a: this.image, b: this.name, c: this.surname, d: this.username, e: this.city, f: this.address, g: this.pass }];
 
-            var data = JSON.stringify(this.newClient); 
+            axios.post('/new-client', this.newClient)
+              .then(() => {
 
-            axios.post('/new-client/' + data)
-                .then((response) => {
+                this.msg = null;
 
+                this.$router.push({
+                path: '/login',
+                });
+                  
                 })
             .catch((error) => {
                 //this.loading = false;
                 console.log(error);
             });
+
+          }
 
         }
 
@@ -110,16 +124,18 @@ export default ({
   justify-content: center;
 }
 
-#header {
+#header, #regContent {
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-#regContent {
+#btncont {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+/*(up-right-down-left)*/
+  padding: 0 2em 0 2em;
 }
 
 .avatar {

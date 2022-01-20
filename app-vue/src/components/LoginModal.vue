@@ -20,7 +20,7 @@
             <b-form-input type="password" v-model="pass" placeholder="Enter Password"></b-form-input>
           </div>
 
-          <div id="loginfo"> </div>
+          <div id="loginfo"> {{this.errorMsg}} </div>
 
           <div id="newReg">
             <router-link id="toHome" aria-labelledby="newRegLabel" to="/new-client">
@@ -58,6 +58,8 @@ export default {
 
       clientInfo: [],
       loggedIN: false,
+
+      errorMsg: '',
     };
   },
 
@@ -98,6 +100,7 @@ export default {
 
           //console.log(this.$store.state);
           this.$store.commit("setUsername", this.username);
+          console.log(this.$store.state.username);
 
           //data = this.loggedIN;
 
@@ -106,6 +109,9 @@ export default {
             //params: { data } 
           });
 
+        }
+        else {
+          this.errorMsg = "Non è stato trovato un utente con questi username/password, controllare e riprovare.";
         }
 
         //console.log(this.loggedIN);
@@ -157,6 +163,8 @@ export default {
 
 #loginfo {
   color: red;
+  font-weight: normal;
+  padding: 0 0.5em 0.5em 0.5em;
 }
 
 .avatar {
@@ -199,29 +207,5 @@ export default {
 #newReg {
   padding-bottom: 1em;
 }
-
-/*.btn {
-    padding: 0em 2em;
-    border: none;
-    outline: none;
-    height: 2em;
-    background: #ffff;
-    color: #000;
-    font-size: 18px;
-    border-radius: 1em;
-}
-
-.form-control {
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #000;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #000;
-    font-size: 16px;
-}*/
-
-  
   
 </style>

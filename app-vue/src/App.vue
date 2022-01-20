@@ -18,29 +18,18 @@
 import Navbar from './components/Navbar.vue'
 import IntroPage from './components/IntroPage.vue'
 
-// .vue file
-//import config from './user-data'
 
 export default {
   name: 'App',
-  //props: ['loggedIn'],
   components: {
     Navbar,
     IntroPage,
   },
 
   computed: {
-    /*msg () {
-      let data = this.$router.params.data;
-      console.log("data is", data);
-      //return `Hello, ${ this.loggedIn }!`
-    }*/
-    
   },
 
   methods: {
-
-    
   }
 
 }
@@ -86,7 +75,7 @@ export default {
     color: white;
 }*/
 
-.nav-item, .b-nav-item {
+.nav-item, .b-nav-item, .nav-link, .navbar-toggler-icon {
     color: white !important; 
     padding: 0.5em;
 }
@@ -119,10 +108,12 @@ export default {
 
 #main_page, #cont1, #rent_page, #login, #about-us, #profile_page{
   justify-content: center;
+  padding: 0 1.5em 0 1.5em;
 }
 
 #componentView  {
   margin-top: 5em;
+  /*(up-right-down-left)*/
 }
 
 #footer {
