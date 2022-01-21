@@ -1,3 +1,4 @@
+const { Int32 } = require('mongodb');
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -10,7 +11,7 @@ var ClientSchema = new Schema(
     client_id: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},
     place: {type: String, required: true},
-    phone: {type: String, required: true},
+    phone: {type: String},
     email: {type: String, required: true},
     note: {type: String},
     deleted: {type: Boolean},
