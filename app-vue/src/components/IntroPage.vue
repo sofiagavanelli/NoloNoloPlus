@@ -5,9 +5,8 @@
 
         <div id="introduzione" class="flex-container"><!--QUESTO LO VEDE -->
           <br>
-          NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di yacht nel Mediterraneo. 
-          L’azienda è orgogliosa di selezionare con cura ogni yacht di lusso e di conoscere ognuna delle imbarcazioni proposte. Sfogliate la nostra ampia selezione di yacht a noleggio con 
-          equipaggio. Contattateci per qualsiasi richiesta - vi garantiamo la risposta più veloce del settore.
+          NoloNoloPlus, fondata nel 2021 a Bologna, è specializzata nel noleggio di imbarcazioni nel Mediterraneo. Sfogliate la nostra ampia selezione di barche a noleggio per 
+          tutti i portafogli. Contattateci per qualsiasi richiesta - vi garantiamo la risposta più veloce del settore.
         </div>
 
         <div> 

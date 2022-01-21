@@ -10,7 +10,7 @@ var ClientSchema = new Schema(
     client_id: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},
     place: {type: String, required: true},
-    phone: {type: Int16Array, required: true},
+    phone: {type: String, required: true},
     email: {type: String, required: true},
     note: {type: String, required: true},
     deleted: {type: Boolean, required: true},

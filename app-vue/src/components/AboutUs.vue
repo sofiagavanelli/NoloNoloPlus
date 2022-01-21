@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <img id="us_pic" src="../../public/picture1.jpg">
 
     <div>
 
@@ -74,12 +75,19 @@ export default {
     flex-direction: column;
     /*justify-content: center;*/
     margin: 1em;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     border-radius: 4px;
 }
 
 .flex-container {
     padding: 1em;
+}
+
+#us_pic {
+    height: 30vh;
+    border-radius: 6px;
+
+    margin-bottom: 2em;
 }
 
 /*#about-us{

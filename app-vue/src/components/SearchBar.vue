@@ -7,15 +7,15 @@
           <!--b-form-select v-model="selected" :options="options" multiple></b-form-select-->
           <p id="text1"> applica un filtro </p>
           <b-dropdown toggle-class='customDropdown' variant='none'> 
-            <h6> Destinazioni </h6>
-            <b-form-checkbox-group v-model="selected" :options="boatD" multiple></b-form-checkbox-group>
+            <h6> Tipologie </h6>
+            <b-form-checkbox-group v-model="selected" :options="type" multiple></b-form-checkbox-group>
             <h6> Lunghezze </h6>
             <b-form-checkbox-group v-model="selected" :options="boatL" multiple></b-form-checkbox-group>
             <h6> Anno </h6>
             <b-form-checkbox-group v-model="selected" :options="boatY" multiple></b-form-checkbox-group>
           </b-dropdown>
 
-          <b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button>
+          <b-button id="subButtom" v-on:click="search()"> SUBMIT </b-button>
       </div>
 
       <!--b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button-->
@@ -135,12 +135,11 @@ export default {
   data() {
       return {
         selected: [],
-        boatD: [ //destinations
+        type: [ //destinations
           //{ value: null, text: 'Please select an option' },
-          { value: 'Sicilia', text: 'Sicilia' },
-          { value: 'Sardegna', text: 'Sardegna' },
-          { value: 'Puglia', text: 'Puglia' },
-          { value: 'Liguria', text: 'Liguria' } ],
+          { value: 'yacht', text: 'Yacht' },
+          { value: 'barca', text: 'Barca a remi' },
+          { value: 'gommoni', text: 'Gommone' } ],
         boatL: [
           { value: '20', text: '20-30 metri' },
           { value: '30', text: '30-40 metri' },
@@ -164,7 +163,7 @@ export default {
   },
   methods: {
     
-    log() {
+    search() {
       console.log(this.selected);
     }
 
