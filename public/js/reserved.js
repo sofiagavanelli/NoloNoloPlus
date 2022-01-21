@@ -175,9 +175,11 @@ function openInventory() {
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
         <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
         <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
-        Price: ${ProdInfo[i].price}€</p>              
+        Price: ${ProdInfo[i].price}€</p>     
+        <div class="card-footer">         
         <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
         <button class="btn-mod" id="${ProdInfo[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
+        </div>    
         </div>             
         </div>            
         `);
