@@ -44,10 +44,11 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_imageUrl, _name, _brand, _pow, _len, _guests, _yy, _sum, _price, _id,) => {
+    saveProd: async (_category,_imageUrl, _name, _brand, _pow, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Prodotto({
+            category: _category,
             image: _imageUrl,
             name: _name,
             brand: _brand,
@@ -56,13 +57,15 @@ module.exports = {
             guests: _guests,
             year: _yy,
             summary: _sum,
-            price: _price,
+            plow_season:_low_season,
+            high_season: _high_season,
             prod_id: _id,
+            status: _status,
             available: true
         }).save();
     },
 
-    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _ok) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _ok) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         /*const newN =*/ return Promise.resolve(new Noleggio({
@@ -71,6 +74,9 @@ module.exports = {
             client_id: _client,
             start_date: _start,
             end_date: _end,
+            worker_id: _worker,
+            price: _price,
+            payment: _payment,
             approved: _ok,
             //worker_id: _worker
         }).save());
