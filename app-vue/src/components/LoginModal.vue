@@ -71,7 +71,7 @@ export default {
     
       login() {
 
-        axios.get('/client/' + this.username)
+        axios.get('/allClients/' + this.username)
           .then((response) => {
             this.clientInfo = response.data;
             this.controlInfo(this.clientInfo, this.pass);

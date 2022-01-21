@@ -38,8 +38,8 @@
                     <br>
                     <div class="rentInfo"> 
                         {{item.prod_id}} <br>
-                        {{item.start_date}} <br>
-                        {{item.end_date}}
+                        {{item.start_date.slice(0,10)}} <br>
+                        {{item.end_date.slice(0,10)}}
                     </div>
                 </div>
 

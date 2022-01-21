@@ -29,9 +29,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //import the middleware to manage the request of the three different app
-require('./backend/worker-module.js')(app);
-require('./backend/client-module.js')(app);
-require('./backend/manager-module.js')(app);
+//require('./backend/worker-module.js')(app);
+//require('./backend/client-module.js')(app);
+//require('./backend/manager-module.js')(app);
+require('./backend/api.js')(app);
+
 
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
 require("./db");
