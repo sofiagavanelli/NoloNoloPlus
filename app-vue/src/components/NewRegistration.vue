@@ -33,6 +33,16 @@
             <b-form-input v-model="address" aria-label="inserire indirizzo"></b-form-input>
           </div>
 
+          <div class="form-input"> <!--class="md-form mb-5"-->
+            <label data-error="wrong" data-success="right" for="phone">Numero di telefono</label>
+            <b-form-input v-model="phone" aria-label="inserire telefono"></b-form-input>
+          </div>
+
+          <div class="form-input"> <!--class="md-form mb-5"-->
+            <label data-error="wrong" data-success="right" for="email">Email</label>
+            <b-form-input v-model="email" aria-label="inserire indirizzo email"></b-form-input>
+          </div>
+
           <div class="form-input">
             <label data-error="wrong" data-success="right" for="pass">Password</label>
             <b-form-input type="password" v-model="pass" aria-label="inserire password"></b-form-input>
@@ -64,6 +74,8 @@ export default ({
             address: null,
             pass: null,
             image: null,
+            phone: null,
+            email: null,
 
             msg: '',
 
@@ -74,13 +86,13 @@ export default ({
 
         registration() {
 
-          if(!(this.name && this.surname && this.username && this.city && this.address && this.pass)) {
+          if(!(this.name && this.surname && this.username && this.city && this.address && this.pass && this.phone && this.email)) {
             this.msg = "è necessario inserire dati in tutti i campi per poter effettuare la registrazione";
           }
           else {
-            this.image= "https://photos.google.com/u/9/photo/AF1QipM05fZpA8HK_WMkbjgYtC4-uvlMogB0wJBMciah";
+            this.image= "https://lh3.googleusercontent.com/AmrQe6e0h6ugF6FtfN1y9BDVpKKiaGHu9xskKJtRMA4lUFDsAwj2Ffy_w2gMIHpD2mKvEw_vLPwiAID09i13OFRsP-33JNaSsjzqGnoPzKxXGQrOSy28k9w4ZSX1C1FDkpbjRkrsSpxW74q7hl2Ghn_1FwV04wVHcCWHqPIOqCxmLLAvc-ycKKA1DNdZh38gsB065Ix44eR5BkQD-1mR04agbID37cHdDWGNkfRBsj9gbJwyARq2-pOk7RD7Fr3XLEl_gO7dhpMnU0rcUpvMSVhm3iyopydacUUmXPOuFfMdvFeTjMx5hh1SD9ptfoGeZ-l8SFU3fBWf9tuT7P2g_sKCONWIKGntWdu7vOmJkRmuaR8mngx8rkJ5Jztp1Gfi47qyrD0upUHlDOzEXskX45HV6lOX7nKFHatwsL5Za1-sjYp-zViXLIj0ADYLzRKheJIdWUXfT5PjHQ92R6zjdBAOaNkQvXGbwzY2DpjHz0iQ4B4u9x_IwpJVoMb6UA8KKZiYgPNB7xalyCD07VCS6D68-drUvWP30o6LYKOIpjcmipJWxEKpfn7KKxzxp-rGOYM5f-ZvgGEhmxJO87tDRw0f6CDes-vzlrCWpSUB4WknzU9_nBKH9aVI_yp5J7eAYMAQ0Emngwn5PcQwe7kYYFAXMn4Ieze8763rptNCG8AXZnLaqnobLmtM8HRBLQavu8mencgGGZZHryY416enILM4=s1000-no?authuser=9";
 
-            this.newClient = [ { a: this.image, b: this.name, c: this.surname, d: this.username, e: this.city, f: this.address, g: this.pass }];
+            this.newClient = [ { a: this.image, b: this.name, c: this.surname, d: this.username, e: this.city, f: this.address, g: this.pass, h: this.phone, i: this.email }];
 
             axios.post('/new-client', this.newClient)
               .then(() => {

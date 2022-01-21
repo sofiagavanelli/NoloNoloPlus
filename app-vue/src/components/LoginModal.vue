@@ -100,7 +100,7 @@ export default {
 
           //console.log(this.$store.state);
           this.$store.commit("setUsername", this.username);
-          console.log(this.$store.state.username);
+          //console.log(this.$store.state.username);
 
           //data = this.loggedIN;
 

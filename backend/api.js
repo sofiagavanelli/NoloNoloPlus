@@ -197,11 +197,13 @@ module.exports = function (app) {
         var city = data[0].e;
         var address = data[0].f;
         var pssw = data[0].g;
+        var tel = data[0].h;
+        var email = data[0].i;
 
         console.log(image + name + surname + user + city + address + pssw);
 
         //_img, _name, _surname, _username, _pass, _place, _address
-        db.saveClient(image, name, surname, user, pssw, city, address).then(result => {
+        db.saveClient(image, name, surname, user, pssw, city, address, tel, email).then(result => {
 
             console.log(result);
 

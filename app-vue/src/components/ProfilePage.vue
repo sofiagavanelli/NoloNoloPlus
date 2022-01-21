@@ -88,7 +88,7 @@ export default({
 
         this.username = this.$store.state.username;
 
-        axios.get('/client/' + this.username)
+        axios.get('/allClients/' + this.username)
           .then((response) => {
             this.profileInfo = response.data;
 
