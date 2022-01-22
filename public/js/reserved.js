@@ -821,9 +821,9 @@ function showYacht(data){
   $("#ctable").append(div);
 
   for (let i in data) {
-    console.log(data.category);
-    if(data.category=="yacht"){
-      console.log(data.name);
+    console.log(data[i].category);
+    if(data[i].category=="yacht"){
+      console.log(data[i].name);
       let div = null;
         div = $(` 
           <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
