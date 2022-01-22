@@ -28,7 +28,7 @@
 
           <div id="calculate" class="flex-container">
             <label for="start-datepicker">Inizio noleggio</label>
-            <b-form-datepicker id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
+            <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
 
@@ -37,23 +37,29 @@
               <div id="total-price">
                 <h5> {{total}} € </h5>
               </div>
+
+              <template v-if="this.payment">
+                <b-button id="payBtn" v-on:click="pay()">procedi con il pagamento</b-button>
+              </template>
             </div>
 
-            <!--template v-if="this.$store.state.username"-->
-            <!-- TODO: CAPIRE COSA FARE DEL DISCLAIMER SE LOGIN FATTO -->
-            <div id="disclaimer" class="flex-container">
-              <font-awesome-icon icon="exclamation-circle" />
-              <h6> Avvisiamo che il prezzo calcolato è indicativo e non tiene conto di
-                disponibilità ed eventuali sconti. 
-                Necessario fare login per avere una cifra sicura.</h6>
-            </div>
-            <!--/template-->
-
+            
 
           </div>
 
 
       </b-card>
+
+      <template v-if="!this.$store.state.username">
+            <!-- TODO: CAPIRE COSA FARE DEL DISCLAIMER SE LOGIN FATTO -->
+            <div id="disclaimer" class="flex-container">
+              <font-awesome-icon icon="exclamation-circle" />
+              <h6> Avvisiamo che il prezzo calcolato è indicativo e non tiene conto delle
+                disponibilià del prodotto. 
+                Necessario fare login per controllare.</h6>
+            </div>
+      </template>
+
 
     <!-- scelte multiple per scegliere e calcolare il rent -->
 
@@ -82,6 +88,12 @@ export default {
       home: true,
 
       total: '//',
+
+      payment: false,
+
+      //disponibile: true,
+
+      foundRents: []
     };
   },
 
@@ -94,18 +106,100 @@ mounted() {
 methods: {
 
   calc() {
-    //console.log(this.parentData.price + "  " + this.endD + "  " + this.startD);
 
-    const diffInMs   = new Date(this.endD) - new Date(this.startD);
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    console.log(diffInDays);
-    console.log(this.parentData.price);
+      const diffInMs   = new Date(this.endD) - new Date(this.startD);
+      const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
 
-    this.total = this.parentData.price * (diffInDays);
+      let highDays = this.defineSeason(diffInDays);
+
+      let temp = (this.parentData.high_season * (highDays)) + (this.parentData.low_season * (diffInDays - highDays));
+
+      if(this.$store.state.username) {
+
+        if(this.parentData.discount) {
+          temp = temp - (temp*this.parentData.discount/100);
+        }
+
+        if(this.controlDate()) {
+          this.total = temp;
+          this.payment = true;
+        }
+        else {
+          this.total = "non disponibile";
+          console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+        }
+
+      }
+      else {
+        this.total = temp;
+      }
+
+  },
+
+  defineSeason(i) {
+
+    let Hdays = 0;
+    var date = new Date(this.startD);
+
+    while (i>0) {
+
+      if (date.getMonth() >= 4 && date.getMonth() <= 8) { 
+        /*NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8*/
+        Hdays = Hdays + 1;
+      }
+
+      date.setDate(date.getDate() + 1);
+
+      i--;
+
+    }
+
+    return(Hdays);
+
   },
 
   emitToParent (event) {
     this.$emit('childToParent')
+  },
+
+  pay() {
+    console.log("inside pay");
+  },
+
+  controlDate() {
+
+    axios.get('/rentByProd/' + this.parentData.prod_id)
+      .then((response) => {
+        this.foundRents = response.data;
+
+        return(this.check(this.foundRents));
+      })
+      .catch((error) => {
+            //this.loading = false;
+        console.log(error);
+      });
+
+  },
+
+  check(noleggi) {
+
+    var myrent_sdate = new Date(this.startD);
+    var myrent_edate = new Date(this.endD);
+
+    var disponibile = true;
+
+    noleggi.forEach(item => {
+
+      if((myrent_sdate >= item.start_date && myrent_sdate <= item.end_date) ||
+        (myrent_edate >= item.start_date && myrent_edate <= item.end_date) ) {
+
+          disponibile = false;
+      }
+
+    })
+
+    return(disponibile);
+
   }
 
 }
@@ -122,6 +216,20 @@ methods: {
 /*#rent_page {
   padding-top: 4em;
 }*/
+
+#payBtn {
+  width: 100%;
+  margin: 1em;
+
+  background-color: transparent !important;
+  color: black !important;
+  /*border: none !important;
+  border-color: transparent !important;*/
+}
+
+#payBtn:hover {
+  background-color: lightgray !important;
+}
 
 #total-price {
   padding: 0.5em;

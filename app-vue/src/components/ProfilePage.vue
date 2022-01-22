@@ -92,7 +92,7 @@ export default({
           .then((response) => {
             this.profileInfo = response.data;
 
-            console.log((this.profileInfo[0]).img);
+            //console.log((this.profileInfo[0]).img);
           })
           .catch((error) => {
             //this.loading = false;

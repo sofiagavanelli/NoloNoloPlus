@@ -88,6 +88,25 @@ module.exports = function (app) {
 
     });
 
+    app.get('/rentByProd/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let id = req.params.id;
+
+        //console.log(id);
+
+        db.searchRentByProdID(id).then(workerinfo => {
+
+            res.write(JSON.stringify(workerinfo));
+
+            res.end();
+        });
+
+        //console.log("error");
+
+    });
+
     //RICERCA NOLEGGIO TRAMITE UTENTE
     app.get('/user-rentals/:id', function (req, res) {
 

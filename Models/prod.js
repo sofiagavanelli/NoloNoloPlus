@@ -1,3 +1,4 @@
+const { Int32 } = require('mongodb');
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -12,9 +13,12 @@ const ProdSchema = new Schema(
     guests: {type: String, required: true},
     year: {type: String, require: true},
     summary: {type: String, required: true},
-    price: {type: String, required: true},
     prod_id: {type: String, required: true},
-    available: {type: Boolean, required: true }
+    available: {type: Boolean, required: true },
+    high_season: {type: String, required: true},
+    low_season: {type: String, required: true},
+    status: {type: String},
+    discount: {type: String}
   }
 );
 

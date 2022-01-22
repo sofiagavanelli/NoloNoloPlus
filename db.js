@@ -109,6 +109,10 @@ module.exports = {
         return Promise.resolve(Noleggio.find({ _id: id}));
     },
 
+    searchRentByProdID: async (id) => {
+        return Promise.resolve(Noleggio.find({ prod_id: id}));
+    },
+
     searchRentByClient: async (username) => {
         return Promise.resolve(Noleggio.find({ client_id: username}));
     },
