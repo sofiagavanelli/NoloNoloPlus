@@ -266,17 +266,13 @@ ul li :hover a{
 }
 
 form.example input[type=text] {
-  position: relative;
   padding: 6px;
   font-size: 17px;
   border: 1.5px solid grey;
-  left: 75%;
-  float: left;
-  width: 20%;
   background: #fffefe;
 }
 
-form.example button {
+.form-btn {
   float: right;
   width: 5%;
   padding: 6px;
@@ -309,6 +305,16 @@ form.example input[type=text] {
   width: 20%;
   background: #fffefe;
 }
+.flex-form-container {
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+}
+.flex-form-btn {
+  float: right;
+  margin-right: 10px;}
+
 .img-fluid{
   object-fit: cover;
   height: 30vh;
@@ -411,13 +417,17 @@ form.example input[type=text] {
   float:right;
 
 }
+.btn-cat{
+  border-radius: 25px;
+  border: 1px solid #709dbb;
+  padding: 8px 22px;
+  background-color: #fff;
+  margin-left: 1%;
 
+}
 .dropdown{
-  position: relative;
-  left: 58%;
-  bottom: 30%;
-  margin: 0px;
-  width: 10%;
+  margin-right: 5%;
+  margin-right: 3%;
 }
 .btn-secondary{
   background-color: #4D6D9A;
@@ -438,7 +448,6 @@ form.example input[type=text] {
 .dropdown:hover>.dropdown-menu{
   display: block;
 }
-
 
 .wrapper{
   position: absolute;

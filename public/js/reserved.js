@@ -88,7 +88,7 @@ function openClient() {
   div = $(`
             <form class="example">
             <input type="text" id="clientId" placeholder="Search client..." name="search">
-            <button type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
+            <button class="form-btn" type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
             </form>
 
            <table id="styled-tab">
@@ -149,19 +149,23 @@ function openInventory() {
   });
 
     div = $(`
-    <form class="example">
-    <input type="text" id="prodId" placeholder="Search product..." name="search">          
-    <button type="submit"onclick="searchProd(id)"><i class="fa fa-search"></i></button>    
-    </form>
-    <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort by </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
-    <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
-    <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+    <div class="flex-form-container"> 
+    <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" onclick="showGomm()" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showBarche()" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+        <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+        <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+        </div>
+      </div>
+      <input type="text" id="prodId" placeholder=" Search product..." name="search">          
+      <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
     </div>
-    </div>`);
+    `);
     $("#ctable").append(div);
           
     function populateP(ProdInfo){
@@ -169,13 +173,13 @@ function openInventory() {
         let div = null;
               
         div = $(`     
-        <div class="card" style="width: 18rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
-        <img src="${ProdInfo[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+        <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+        <img src="${ProdInfo[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
         <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
         <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
-        Price: ${ProdInfo[i].price}€</p>     
+        Price: ${ProdInfo[i].low_season}€ - ${ProdInfo[i].high_season}€</p>     
         <div class="card-footer">         
         <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
         <button class="btn-mod" id="${ProdInfo[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
@@ -207,18 +211,21 @@ function openRents() {
       
     }
     });
-  div = $(`         
-  <form class="example">
-  <input type="text" id="rentId" placeholder="Search rental..." name="search">
-  <button type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> </form> 
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  div = $(`   
+  <div class="flex-form-container">
+  <div class="dropdown" style="margin-left: 30%;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort by </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
     <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
     <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+    </div>
   </div>
+  <input type="text" id="prodId" placeholder=" Search product..." name="search">          
+  <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
 </div>
+        
+
 
   `);
               
@@ -547,19 +554,19 @@ rentARRAY.sort((a,b) => (a.client_id > b.client_id) ? 1 : ((b.client_id > a.clie
 
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
-$("#ctable2").css("-webkit-filter", "blur(0px)");
 
 div = $(`         
-<form class="example">
-<input type="text" id="rentId" placeholder="Search rental..." name="search">
-<button type="submit"><i class="fa fa-search"></i></button> </form> 
-<div class="dropdown">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="flex-form-container">
+<div class="dropdown"style="margin-left: 30%;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   Sort by </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
   <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
   <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+  </div>
 </div>
+<input type="text" id="prodId" placeholder=" Search product..." name="search">          
+<button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
 </div>
 
 `);
@@ -592,7 +599,7 @@ for (let i in rentARRAY) {
 }
 /*ORDINE DATA CRESCENTE NOLEGGI */
 function SortDate(){   //ordina in base alla data
-  console.log("prova data");
+
   rentARRAY.sort(function compare(a, b) {
     var dateA = new Date(a.start_date);
     var dateB = new Date(b.start_date);
@@ -601,19 +608,20 @@ function SortDate(){   //ordina in base alla data
 
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
-$("#ctable2").css("-webkit-filter", "blur(0px)");
+
 
 div = $(`         
-<form class="example">
-<input type="text" id="rentId" placeholder="Search rental..." name="search">
-<button type="submit"><i class="fa fa-search"></i></button> </form> 
-<div class="dropdown">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="flex-form-container">
+<div class="dropdown"style="margin-left: 30%;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   Sort by </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
   <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
   <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+  </div>
 </div>
+<input type="text" id="prodId" placeholder=" Search product..." name="search">          
+<button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
 </div>
 
 `);
@@ -653,19 +661,22 @@ $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
 
 div = $(`  
-    <form class="example">
-    <input type="text" placeholder="Search product..." name="search">          
-    <button type="submit"><i class="fa fa-search"></i></button>    
-    </form>
-    <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort by </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
-    <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
-    <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
-    </div>
-    </div>       
+<div class="flex-form-container"> 
+    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+        <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+        <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+        </div>
+      </div>
+      <input type="text" id="prodId" placeholder=" Search product..." name="search">          
+      <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+    </div>      
 `);
             
 $("#ctable").append(div);
@@ -675,13 +686,13 @@ for (let i in inventoryARRAY) {
   
         
   div = $(`
-  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
-  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">             
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}€</p>              
+  Price: ${inventoryARRAY[i].low_season}€ - ${inventoryARRAY[i].high_season}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
   </div>             
@@ -695,27 +706,30 @@ for (let i in inventoryARRAY) {
 /*ORDINE PREZZO CRESCENTE PRODOTTI */
 function SortPriceHigh(){   //ordina in base alla data
   inventoryARRAY.sort((a, b) => {
-   return parseFloat(b.price) - parseFloat(a.price);
+   return parseFloat(b.low_season) - parseFloat(a.low_season);
  });
 
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
-$("#ctable2").css("-webkit-filter", "blur(0px)");
+
 
 div = $(`         
-<form class="example">
-<input type="text" placeholder="Search product..." name="search">          
-<button type="submit"><i class="fa fa-search"></i></button>    
-</form>
-<div class="dropdown">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Sort by </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-<button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
-<button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
-<button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
-</div>
-</div> 
+<div class="flex-form-container"> 
+    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+        <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+        <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+        </div>
+      </div>
+      <input type="text" id="prodId" placeholder=" Search product..." name="search">          
+      <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+    </div>
 `);
             
 $("#ctable").append(div);
@@ -725,13 +739,13 @@ for (let i in inventoryARRAY) {
   
         
   div = $(`
-  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
-  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}€</p>              
+  Price: ${inventoryARRAY[i].low_season}€ - ${inventoryARRAY[i].high_season}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>              
   </div>             
@@ -744,7 +758,7 @@ for (let i in inventoryARRAY) {
 
 function SortPriceLow(){   //ordina in base alla data
   inventoryARRAY.sort((a, b) => {
-   return parseFloat(a.price) - parseFloat(b.price);
+   return parseFloat(a.low_season) - parseFloat(b.low_season);
  });
 
 $( "#ctable" ).empty();
@@ -752,19 +766,22 @@ $( "#ctable2" ).empty();
 $("#ctable2").css("-webkit-filter", "blur(0px)");
 
 div = $(`         
-<form class="example">
-<input type="text" placeholder="Search product..." name="search">          
-<button type="submit"><i class="fa fa-search"></i></button>    
-</form>
-<div class="dropdown">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Sort by </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-<button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
-<button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
-<button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
-</div>
-</div> 
+<div class="flex-form-container"> 
+    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort by </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" id="sortName" onclick= "SortNameR()">Name</button>
+        <button class="dropdown-item" type="button" id="sortPriceL" onclick= "SortPriceLow()">Price: Low</button>
+        <button class="dropdown-item" type="button" id="sortPriceH" onclick= "SortPriceHigh()">Price: High</button>
+        </div>
+      </div>
+      <input type="text" id="prodId" placeholder=" Search product..." name="search">          
+      <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+    </div> 
 `);
             
 $("#ctable").append(div);
@@ -774,13 +791,13 @@ for (let i in inventoryARRAY) {
   
         
   div = $(`
-  <div class="card" style="width: 20rem; float: left; display: block; margin-left: 3%; height: 26rem;">        
-  <img src="${inventoryARRAY[i].image}" style="height: 13rem;"class="card-img-top" alt="...">              
+  <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
   <p class="card-text">Brand: ${inventoryARRAY[i].brand} <br>
-  Price: ${inventoryARRAY[i].price}€</p>              
+  Price: ${inventoryARRAY[i].low_season}€ - ${inventoryARRAY[i].high_season}€</p>              
   <button id="${inventoryARRAY[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
   <button class="btn-mod"id="${inventoryARRAY[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>              
   </div>             
@@ -792,6 +809,46 @@ for (let i in inventoryARRAY) {
 }
 
 ///////////////////////////////////////////////////////////////////////
+
+function showYacht(data){
+
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL PRODUCTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    if(data.category=="yacht"){
+      console.log(data.name);
+      let div = null;
+        div = $(` 
+          <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <div class="card-body">              
+              <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
+              <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
+              <p class="card-text">Brand: ${data[i].brand} <br>
+              Price: ${data[i].low_season}€ - ${data[i].high_season}€</p>     
+              <div class="card-footer">         
+                <button id="${data[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+                <button class="btn-mod" id="${data[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
+              </div>    
+            </div>             
+          </div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("non esiste prodotto");
+  
+
+}
 
 function openContacts() {           
   $( "#ctable" ).empty();
@@ -862,6 +919,7 @@ function checkRent(){
   //alert("Rent created with succes!");
 
 }
+
 
 
 
