@@ -151,8 +151,8 @@ function openInventory() {
     div = $(`
     <div class="flex-form-container"> 
     <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
-    <button type="button" class="btn-cat" onclick="showGomm()" data-bs-toggle="button">Gommoni</button>
-    <button type="button" class="btn-cat" onclick="showBarche()" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+    <button type="button" class="btn-cat" onclick="showGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showBarche(inventoryARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort by </button>
@@ -297,7 +297,7 @@ function acceptRent(data, insertedID) {
         $( "#ctable" ).empty();
         //console.log("sono dopo il vuoto");
         div = $(`         
-        <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-angle-double-left"></i> ALL RENTS</button>
+        <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i>> ALL RENTS</button>
   `);
               
   $("#ctable").append(div);
@@ -358,7 +358,7 @@ function acceptClient(data, insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
         div = $(`         
-        <button class="btn-back"onclick= "goBackClients()"><i class="fas fa-angle-double-left"></i> ALL CLIENTS</button>
+        <button class="btn-back"onclick= "goBackClients()"><i class="fas fa-home"></i> ALL CLIENTS</button>
   `);
               
   $("#ctable").append(div);
@@ -425,7 +425,7 @@ function acceptProd(data, insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
         div = $(`         
-        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL PRODUCTS</button>
+        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL PRODUCTS</button>
         `);
     if(data[i].available== false){
       x= 1; x=""
@@ -809,21 +809,23 @@ for (let i in inventoryARRAY) {
 }
 
 ///////////////////////////////////////////////////////////////////////
+///FILTRI CATEGORIA
 
+//FILTRO YACHT
 function showYacht(data){
 
   $( "#ctable2" ).empty();
   $( "#ctable" ).empty();
 
   div = $(`         
-    <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-angle-double-left"></i> ALL PRODUCTS</button>
+    <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL PRODUCTS</button>
         `);
   $("#ctable").append(div);
 
   for (let i in data) {
-    console.log(data.category);
-    if(data.category=="yacht"){
-      console.log(data.name);
+    console.log(data[i].category);
+    if(data[i].category=="yacht"){
+      console.log(data[i].name);
       let div = null;
         div = $(` 
           <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
@@ -850,6 +852,89 @@ function showYacht(data){
   
 
 }
+//FILTRO GOMMONI
+function showGomm(data){
+
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL PRODUCTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    console.log(data[i].category);
+    if(data[i].category=="gommoni"){
+      console.log(data[i].name);
+      let div = null;
+        div = $(` 
+          <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <div class="card-body">              
+              <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
+              <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
+              <p class="card-text">Brand: ${data[i].brand} <br>
+              Price: ${data[i].low_season}€ - ${data[i].high_season}€</p>     
+              <div class="card-footer">         
+                <button id="${data[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+                <button class="btn-mod" id="${data[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
+              </div>    
+            </div>             
+          </div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("non esiste prodotto");
+  
+
+}
+//FILTRO BARCHE
+function showBarche(data){
+
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL PRODUCTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    console.log(data[i].category);
+    if(data[i].category=="barca"){
+      console.log(data[i].name);
+      let div = null;
+        div = $(` 
+          <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <div class="card-body">              
+              <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
+              <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
+              <p class="card-text">Brand: ${data[i].brand} <br>
+              Price: ${data[i].low_season}€ - ${data[i].high_season}€</p>     
+              <div class="card-footer">         
+                <button id="${data[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+                <button class="btn-mod" id="${data[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
+              </div>    
+            </div>             
+          </div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("non esiste prodotto");
+  
+
+}
+
 
 function openContacts() {           
   $( "#ctable" ).empty();
