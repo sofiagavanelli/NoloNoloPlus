@@ -1,11 +1,10 @@
-const { Int32 } = require('mongodb');
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
 const ProdSchema = new Schema(
   {
-    image: {type: String, required: true},
+    image: {type: String},
     name: {type: String, required: true},
     brand: {type: String, required: true},
     speed: {type: String, required: true},
@@ -17,8 +16,7 @@ const ProdSchema = new Schema(
     high_season: {type: String, required: true},
     prod_id: {type: String, required: true},
     category: {type: String, required: true},
-    available: {type: Boolean, required: true },
-    discount: {type: String}
+    available: {type: Boolean, required: true }
   }
 );
 

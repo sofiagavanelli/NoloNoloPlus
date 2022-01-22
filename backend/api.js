@@ -250,4 +250,27 @@ module.exports = function (app) {
     )
     });
 
+    app.post('/',(req, res)=>{
+
+        //const image
+        const n = req.body.name;
+        const b = req.body.brand;
+        const s = req.body.speed;
+        const l = req.body.length;
+        const g = req.body.guests;
+        const y = req.body.year;
+        const sum = req.body.summary;
+        const ls= req.body.low_season;
+        const hs = req.body.high_season;
+        const pid = req.body.prod_id;
+        const cat = req.body.category;
+        //available
+        //discount
+
+        db.saveProd(n, b, s, l, g, y, sum, ls, hs, pid, cat,true).then(() => {
+ 
+        }
+      )
+      });
+
 };
