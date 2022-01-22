@@ -12,8 +12,10 @@ const ProdSchema = new Schema(
     guests: {type: String, required: true},
     year: {type: String, require: true},
     summary: {type: String, required: true},
-    price: {type: String, required: true},
+    low_season: {type: String, required: true},
+    high_season: {type: String, required: true},
     prod_id: {type: String, required: true},
+    category: {type: String, required: true},
     available: {type: Boolean, required: true }
   }
 );

@@ -821,6 +821,7 @@ function showYacht(data){
   $("#ctable").append(div);
 
   for (let i in data) {
+    console.log(data.category);
     if(data.category=="yacht"){
       console.log(data.name);
       let div = null;
