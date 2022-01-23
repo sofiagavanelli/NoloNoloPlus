@@ -11,7 +11,7 @@
         address: {type: String, required: true}
         -->
 
-        <img class="profile_pic" :src="(this.profileInfo[0]).img" alt="Card image cap">
+        <img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap">
 
         <b-card class="profile">
             <b-card-body>

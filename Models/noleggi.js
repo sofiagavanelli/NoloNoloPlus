@@ -11,7 +11,9 @@ const RentalSchema = new Schema(
     start_date: { type: Date},
     end_date: {type: Date},
     worker_id: {type: String, require: true},
-    approved: {type: Boolean, required: true}
+    approved: {type: Boolean, required: true},
+    //METODO DI PAGAMENTO!!
+    paymethod: {type: String},
   }
 );
 

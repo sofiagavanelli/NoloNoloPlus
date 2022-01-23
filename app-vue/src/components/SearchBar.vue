@@ -5,8 +5,8 @@
 
       <div id="searchBar" class="flex-container">
           <!--b-form-select v-model="selected" :options="options" multiple></b-form-select-->
-          <p id="text1"> applica un filtro </p>
-          <b-dropdown toggle-class='customDropdown' variant='none'> 
+          <!--p id="text1"> applica un filtro </p-->
+          <b-dropdown toggle-class='customDropdown' text="applica un filtro " variant='none'> 
             <h6> Tipologie </h6>
             <b-form-checkbox-group v-model="selected" :options="type" multiple></b-form-checkbox-group>
             <h6> Lunghezze </h6>

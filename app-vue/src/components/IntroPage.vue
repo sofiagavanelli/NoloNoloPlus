@@ -18,7 +18,7 @@
             <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
               <img class="post_image" :src="item.image" alt="Card image cap">
               <b-card-body>
-                <h3 class="title"> {{item.name}} </h3>
+                <h3 class="title"> {{item.category}}: {{item.name}} </h3>
                 <h4 class="title"> {{item.brand}} </h4>
                 <div class="details">
                   <ul class="d-flex flex-wrap pl-0" >
