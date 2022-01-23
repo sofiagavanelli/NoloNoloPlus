@@ -78,7 +78,7 @@ module.exports = {
             end_date: _end,
             worker_id: _worker,
             price: _price,
-            payment: _payment,
+            paymethod: _payment,
             approved: _ok,
             //worker_id: _worker
         }).save());

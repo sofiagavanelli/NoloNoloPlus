@@ -233,15 +233,16 @@ module.exports = function (app) {
 
     });
 
-    app.post('/',(req, res)=>{
+    app.post('/new-rent',(req, res)=>{
 
       const client = req.body.client;
       const prod = req.body.product; 
       const startdate= req.body.start;
       const enddate= req.body.end; 
+      const paymethod = req.body.pay;
 
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
-      db.saveRental(prod, client, startdate, enddate, true).then(() => {
+      db.saveRental(prod, client, startdate, enddate, false, paymethod).then(() => {
         //console.log("aaaaaaaaaaaaaaaa");
         //res.status(200);
         //res.end();

@@ -39,7 +39,12 @@
               </div>
 
               <template v-if="this.payment">
-                <b-button id="payBtn" v-on:click="pay()">procedi con il pagamento</b-button>
+                <!--b-button id="payBtn" v-on:click="pay()">scegli metodo di pagamento</b-button-->
+                <b-dropdown toggle-class='customDropdown' text="metodo di pagamento" variant='none'> 
+                  <!--b-form-checkbox-group v-on:click="pay()" v-model="selected" :options="type"></b-form-checkbox-group-->
+                  <b-dropdown-item-button v-for="item in this.type" :key="item.value" v-on:click="pay(item.value)"> {{item.text}} </b-dropdown-item-button> 
+                </b-dropdown>
+
               </template>
             </div>
 
@@ -93,7 +98,17 @@ export default {
 
       //disponibile: true,
 
-      foundRents: []
+      foundRents: [],
+
+      newRent: [],
+
+      selected: '',
+        type: [ 
+          //{ value: null, text: 'Please select an option' },
+          { value: 'paypal', text: 'PayPal' },
+          { value: 'carta', text: 'Carta di credito' },
+          { value: 'satispay', text: 'Satispay' },
+          { value: 'bonifico', text: 'Bonifico' } ],
     };
   },
 
@@ -126,7 +141,7 @@ methods: {
         }
         else {
           this.total = "non disponibile";
-          console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+          //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
         }
 
       }
@@ -162,22 +177,52 @@ methods: {
     this.$emit('childToParent')
   },
 
-  pay() {
-    console.log("inside pay");
+  pay(tipo) {
+    console.log("inside pay: " + tipo);
+
+    /*const client = req.body.client;
+      const prod = req.body.product; 
+      const startdate= req.body.start;
+      const enddate= req.body.end; */
+
+    this.newRent = [ { prod: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, pay: tipo}];
+
+    //TODO CREARE NOLEGGIO
+    axios.post('/new-rent', this.newRent)
+      .then(() => {
+
+        this.$router.push({
+          path: '/profile',
+        });
+                  
+      })
+      .catch((error) => {
+                //this.loading = false;
+        console.log(error);
+      });
+
+
   },
 
   controlDate() {
+
+    var prova
 
     axios.get('/rentByProd/' + this.parentData.prod_id)
       .then((response) => {
         this.foundRents = response.data;
 
-        return(this.check(this.foundRents));
+        //return(this.check(this.foundRents));
+        prova = this.check(this.foundRents);
       })
       .catch((error) => {
             //this.loading = false;
         console.log(error);
-      });
+      })
+
+    console.log("fuori dalla get il valore è:" + prova);
+
+    return prova;
 
   },
 
@@ -197,6 +242,8 @@ methods: {
       }
 
     })
+
+    console.log("dentro è:" + disponibile);
 
     return(disponibile);
 
