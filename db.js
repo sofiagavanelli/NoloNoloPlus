@@ -79,7 +79,7 @@ module.exports = {
             worker_id: _worker,
             price: _price,
             paymethod: _payment,
-            approved: _ok,
+            //approved: _ok,
             //worker_id: _worker
         }).save());
         
@@ -168,7 +168,7 @@ module.exports = {
             high_season: _high_season,
             status: _status,
             available: true
-        }));
+        }).save());
     },
     
     

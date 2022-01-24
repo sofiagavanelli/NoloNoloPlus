@@ -91,14 +91,6 @@ function openClient() {
             <button class="form-btn" type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
             </form>
 
-           <table id="styled-tab">
-            <tr>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>Custumer ID</th>
-              <th>Actions</th>
-            </tr>
-           </table>
             `);
             $("#ctable").append(div);
 
@@ -109,17 +101,18 @@ function openClient() {
           let div = null;
 
             div = $(`
-                    <table id="styled-tab">
-                      <tr>
-                       <td>${ClientInfo[i].name}</td>
-                       <td>${ClientInfo[i].surname}</td>
-                       <td>${ClientInfo[i].client_id}</td>
-                       <td><button id= "${ClientInfo[i].client_id}" class="btn-upd" onclick="acceptClient(clientARRAY,id)" ><i class="fas fa-user-edit"></i></button>
-                       <button id="${ClientInfo[i].client_id}" onclick="deleteClient(id)" class= "btn-del"><i class="fas fa-trash-alt"></i></button>
-                       <button id="${ClientInfo[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
-                       </td>
-                      </tr>
-                    </table>
+                <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+                  <img src="${ClientInfo[i].image}" style="height: 13em;"class="card-img-top" alt="...">              
+                  <div class="card-body">              
+                    <h5 class="card-title" style="text-align: center;">${ClientInfo[i].name} ${ClientInfo[i].surname}</h5>              
+                    <p class="card-text" style="text-align: center;">ID: ${ClientInfo[i].client_id}</p>    
+                    <div class="card-footer">         
+                      <button id="${ClientInfo[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
+                      <button class="btn-mod" id="${ClientInfo[i].client_id}" onclick= "acceptClient(clientARRAY,id)">Modify</button>             
+                    </div>    
+                  </div>             
+                </div> 
+
             `);
             $("#ctable2").append(div);
 }
@@ -221,8 +214,8 @@ function openRents() {
     <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
     </div>
   </div>
-  <input type="text" id="prodId" placeholder=" Search product..." name="search">          
-  <button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+  <input type="text" id="rentId" placeholder=" Search product..." name="search">          
+  <button class ="form-btn" type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> 
 </div>
         
 
@@ -306,7 +299,7 @@ function acceptRent(data, insertedID) {
           <div class="card-body">
             <h5 class="card-title-new">RENT: ${data[i]._id}</h5>
             <p class="card-text-new">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-            <p class="card-text-new">Start date: ${data[i].start.slice(0,10)} <br> End date: ${data[i].end.slice(0,10)}</p>
+            <p class="card-text-new">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
             <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Delete</button>
             <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
                 
@@ -363,24 +356,29 @@ function acceptClient(data, insertedID) {
               
   $("#ctable").append(div);
         div = $(` 
-    <div class="wrapper">
-      <div class="container">
-        <img src="${data[i].img}" alt="" class="profile-img">
-    
-        <div class="content">
-          <div class="sub-content">
-            <h1>${data[i].name}  ${data[i].surname}</h1>
-            <span>${data[i].client_id}</span>
-            <span class="location"><i class="fas fa-map-marker-alt"></i> ${data[i].place}
-            <p>${data[i].address}</p></span>
+        <div class="card mb-3" style="max-width: 540px; margin-left: 20%;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="${data[i].image}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${data[i].name} ${data[i].surname}</h5>
+                <p class="card-text"> Client ID: ${data[i].client_id} <br>
+                Address: ${data[i].place}, ${data[i].address} <br>
+                Phone: ${data[i].phone} <br>
+                E-mail: ${data[i].email} 
+                </p>
+                <div class="card-footer">
+                  <button id="${data[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
+                  <button id="${data[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
+                  <button class="btn-mod" id="${data[i].client_id}" onclick= "acceptClient(clientARRAY,id)">Modify</button> 
+                  <button class="btn-a" id="${data[i].client_id}" onclick= "rentsByClient(rentARRAY,id)">Show Rents <i class="fas fa-shopping-cart"></i></button>                         
+                </div>  
+              </div>
+            </div>
           </div>
-          <div class="data">
-        
         </div>
-        <button id="${data[i].client_id}" onclick= "openAlert(id)" class="btn-d2" style="left: 0%;"><i class="fas fa-trash-alt"></i> Delete</button>
-        <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
-      </div>
-    </div>
         
         `);
         $("#ctable2").append(div);
@@ -437,14 +435,14 @@ function acceptProd(data, insertedID) {
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
         <img src="${data[i].image}" alt="" width="380" height="280">
-        <form class="row g-3" action="/" method="POST" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
+        <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="email" class="form-control" id="inputName" placeholder="${data[i].name}">
+            <input type="text" class="form-control" id="inputName" placeholder="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="password" class="form-control" id="inputID" placeholder="${data[i].prod_id}">
+            <input type="text" class="form-control" id="inputID" placeholder="${data[i].prod_id}">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
@@ -454,6 +452,7 @@ function acceptProd(data, insertedID) {
             <label for="inputCat" class="form-label">Category</label>
             <select id="inputCat" class="form-select">
               <option selected>${data[i].category}</option>
+              <option>Yacht</option>
               <option>Gommoni</option>
               <option>Barca</option>
               </select>
@@ -670,7 +669,7 @@ function SortNameR(){   //ordine alfabetico dei prodotti
 inventoryARRAY.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
-$("#ctable2").css("-webkit-filter", "blur(0px)");
+
 
 div = $(`  
 <div class="flex-form-container"> 
@@ -775,7 +774,7 @@ function SortPriceLow(){   //ordina in base alla data
 
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
-$("#ctable2").css("-webkit-filter", "blur(0px)");
+
 
 div = $(`         
 <div class="flex-form-container"> 
@@ -951,7 +950,6 @@ function showBarche(data){
 function openContacts() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`                  
   <div>
@@ -976,7 +974,6 @@ $("#ctable").append(div);
 function openCreate(){
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`    
   <div class="testbox">
@@ -1019,6 +1016,53 @@ function updateProd(){
   document.getElementById("smile").style.visibility = "visible";
 }
 
+
+function rentsByClient(data, clientID) {
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+  //console.log("sono dopo il vuoto");
+  div = $(`         
+  <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i>> ALL RENTS</button>
+`);
+        
+$("#ctable").append(div);
+  for (let i in data) {
+
+    if(data[i].client_id == clientID) {
+        console.log(clientID);
+        console.log(data[i].client_id);
+  let div = null;
+        div = $(` 
+        <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${data[i]._id}</h5>
+              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
+              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div> 
+
+        
+        `);
+        $("#ctable2").append(div);
+        //console.log("prooooovaaa");
+
+        
+
+        var found = true;
+    }
+  }
+
+  if (!found) 
+      console.log("non esiste noleggio");
+
+
+}
 
 
 

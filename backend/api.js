@@ -233,7 +233,7 @@ module.exports = function (app) {
 
     });
 
-    app.post('/new-rent',(req, res)=>{
+    app.post('/',(req, res)=>{
 
       const client = req.body.client;
       const prod = req.body.product; 
@@ -242,17 +242,17 @@ module.exports = function (app) {
       const paymethod = req.body.pay;
 
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
-      db.saveRental(prod, client, startdate, enddate, false, paymethod).then(() => {
-        //console.log("aaaaaaaaaaaaaaaa");
-        //res.status(200);
-        //res.end();
-        //res.redirect(reserved.html);
+      db.saveRental(prod, client, startdate, enddate, paymethod).then(() => {
+
+        res.end();
+        
       }
     )
     });
 
-    app.post('/',(req, res)=>{
+    app.post('/update-prod',(req, res)=>{
 
+        console.log(req.body);
         //const image
         const n = req.body.name;
         const b = req.body.brand;
@@ -268,7 +268,9 @@ module.exports = function (app) {
         //available
         //discount
 
-        db.saveProd(n, b, s, l, g, y, sum, ls, hs, pid, cat,true).then(() => {
+        db.updateProd(n, b, s, l, g, y, sum, ls, hs, pid).then(() => {
+            console.log("sono nella post");
+            res.end();
  
         }
       )
