@@ -233,7 +233,9 @@ module.exports = function (app) {
 
     });
 
-    app.post('/',(req, res)=>{
+    app.post('/new-rent',(req, res)=>{
+
+        console.log("sono dentro la post dal form del worker: " + req.body);
 
       const client = req.body.client;
       const prod = req.body.product; 

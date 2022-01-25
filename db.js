@@ -153,6 +153,7 @@ module.exports = {
     },
 
     updateProd: async (id) => {
+        //ma perché prende solo l'id ma poi ci sono così tante cose nella funzione? cosa viene cambiato?
         return Promise.resolve(Prodotto.findOneAndUpdate({ 
             prod_id : id,
             category: _category,

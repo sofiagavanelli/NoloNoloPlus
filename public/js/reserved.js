@@ -977,7 +977,7 @@ function openCreate(){
                      
   div = $(`    
   <div class="testbox">
-  <form id="create" action="/" method="POST" role="form">
+  <form id="create" action="/new-rent" method="POST" role="form">
     <h1>Create Rent</h1>
     <div class="item-2">
       <p>Client ID</p>
