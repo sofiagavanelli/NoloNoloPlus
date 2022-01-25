@@ -65,7 +65,7 @@
       <li><a href="#" id="rentBtn"><i class="fas fa-truck-loading"></i>Rents</a></li> <!--per vedere tutti i noleggi-->
       <li><a href="#" id="clientBtn"><i class="far fa-address-card"></i>Clients</a></li> <!--per vedere tutti i clienti -->
       <li><a href="#" id="createBtn"><i class="fas fa-cart-plus"></i>Create rent</a></li> <!--per creare noleggio-->
-      <li><a href="#" id="contactBtn"><i class="far fa-envelope"></i></i>Contact</a></li> <!--per contattare il manager-->
+      <li><a href="#" id="addBtn"><i class="far fa-plus-square"></i></i></i>Add Product</a></li> <!--per aggiungere prodotto-->
       <li><a href="#" id="personalAreaBtn"><i class="far fa-id-badge"></i>Personal Area</a></li> <!--per vedere informazioni personali-->
       <li><a href="#" id="logout"><i class="fas fa-home"></i>Log out</a></li> <!--per vedere informazioni personali-->
     </ul>
@@ -87,7 +87,7 @@
   document.getElementById("clientBtn").addEventListener("click", openClient);
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
   document.getElementById("rentBtn").addEventListener("click", openRents);
-  document.getElementById("contactBtn").addEventListener("click", openContacts);
+  document.getElementById("addBtn").addEventListener("click", addProduct);
   document.getElementById("createBtn").addEventListener("click", openCreate);
   document.getElementById("logout").addEventListener("click", logOut);
 

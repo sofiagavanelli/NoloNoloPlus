@@ -72,6 +72,10 @@ app.get("/new-rent", (req, res) => {
     res.sendFile(path.join(__dirname + "/reserved.html"));     
 });
 
+app.get("/new-prod", (req, res) => {
+    res.sendFile(path.join(__dirname + "/reserved.html"));     
+});
+
 app.get("/update-prod", (req, res) => {
     res.sendFile(path.join(__dirname + "/reserved.html"));     
 });

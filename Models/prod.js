@@ -5,17 +5,17 @@ var Schema = mongoose.Schema;
 const ProdSchema = new Schema(
   {
     image: {type: String},
-    name: {type: String, required: true},
-    brand: {type: String, required: true},
-    speed: {type: String, required: true},
-    length: {type: String, required: true},
-    guests: {type: String, required: true},
-    year: {type: String, require: true},
-    summary: {type: String, required: true},
-    low_season: {type: String, required: true},
-    high_season: {type: String, required: true},
-    prod_id: {type: String, required: true},
-    category: {type: String,required: true},
+    name: {type: String},
+    brand: {type: String},
+    speed: {type: String},
+    length: {type: String},
+    guests: {type: String,},
+    year: {type: String},
+    summary: {type: String},
+    low_season: {type: String},
+    high_season: {type: String,},
+    prod_id: {type: String},
+    category: {type: String},
     //available: {type: Boolean, required: true }
   }
 );

@@ -373,7 +373,7 @@ function acceptClient(data, insertedID) {
                   <button id="${data[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
                   <button id="${data[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
                   <button class="btn-mod" id="${data[i].client_id}" onclick= "acceptClient(clientARRAY,id)">Modify</button> 
-                  <button class="btn-a" id="${data[i].client_id}" onclick= "rentsByClient(rentARRAY,id)">Show Rents <i class="fas fa-shopping-cart"></i></button>                         
+                  <button class="btn-a" id="${data[i].client_id}" onclick= "searchClientRents(id)">Show Rents <i class="fas fa-shopping-cart"></i></button>                         
                 </div>  
               </div>
             </div>
@@ -449,13 +449,8 @@ function acceptProd(data, insertedID) {
             <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="${data[i].brand}">
           </div>
           <div class="col-md-6">
-            <label for="inputCat" class="form-label">Category</label>
-            <select id="inputCat" name="category" class="form-select">
-              <option selected>${data[i].category}</option>
-              <option>Yacht</option>
-              <option>Gommoni</option>
-              <option>Barca</option>
-              </select>
+          <label for="inputCat" class="form-label">Category</label>
+          <input type="text" class="form-control" id="inputCat" name="category" placeholder="${data[i].category}" disabled>
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
@@ -947,23 +942,78 @@ function showBarche(data){
 }
 
 
-function openContacts() {           
+function addProduct() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-                     
-  div = $(`                  
-  <div>
-  <h5>DA FARE! </h5>                   
 
-  </div>
-`);
+  div = $(`         
+  <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL PRODUCTS</button>
+  `);
 $("#ctable").append(div);
+
+div = $(` 
+      <div class="flex-container" style=" margin-left: 3%;">
+        <img src="" alt="" width="380" height="280">
+        <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
+          <div class="col-md-6">
+            <label for="inputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputName" name="name" placeholder="aaaa">
+          </div>
+          <div class="col-md-6">
+            <label for="inputID" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="inputID" name="product" placeholder="$aaa">
+          </div>
+          <div class="col-md-6">
+            <label for="inputBrand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="aaaa">
+          </div>
+          <div class="col-md-6">
+          <label for="inputCat" class="form-label">Category</label>
+          <input type="text" class="form-control" id="inputCat" name="category" placeholder="aaaa" disabled>
+          </div>
+          <div class="col-md-6">
+            <label for="inputLow" class="form-label">Price Low Season</label>
+            <input type="text" class="form-control" id="inputLow" name="lowseason" placeholder="aaaa €">
+          </div>
+          <div class="col-md-6">
+            <label for="inputHigh" class="form-label">Price High Season</label>
+            <input type="text" class="form-control" id="inputHigh" name="highseason" placeholder="aaaa €">
+          </div>
+          <div class="col-md-6">
+            <label for="inputStatus" class="form-label">Status</label>
+            <input type="text" class="form-control" id="inputStatus" name="status" placeholder="aaaa">
+          </div>
+          <div class="col-md-2">
+            <label for="inputGuest" class="form-label">Guests</label>
+            <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="aaaa}">
+          </div>
+          <div class="col-md-2">
+            <label for="inputYear" class="form-label">Year</label>
+            <input type="text" class="form-control" id="inputYear" name="year" placeholder="aaa">
+          </div>
+          <div class="col-md-2">
+            <label for="inputSpeed" class="form-label">Speed</label>
+            <input type="text" class="form-control" id="inputSpeed" name="speed" placeholder="aaa">
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="summary" class="form-label">Product description</label>
+              <textarea class="form-control" id="summary" rows="3" name="summary" placeholder="aaaa"></textarea>
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn-sub" onclick="updateProd()">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+          </div>
+        </form>
+      </div>
+       
+      `);
+      $("#ctable2").append(div);
 }
 
 function openPersonalArea() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  $("#ctable2").css("-webkit-filter", "blur(0px)");
                      
   div = $(`    
   <h5>DA FARE! </h5>     
@@ -1017,40 +1067,60 @@ function updateProd(){
   document.getElementById("smile").style.visibility = "visible";
 }
 
+function searchClientRents(_id){
 
-function rentsByClient(data, clientID) {
-  $( "#ctable2" ).empty();
-  $( "#ctable" ).empty();
-  //console.log("sono dopo il vuoto");
-  div = $(`         
-  <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i>> ALL RENTS</button>
-`);
-        
-$("#ctable").append(div);
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/user-rentals/' + _id ,
+          success: function (info) {
+            console.log(_id);
+            console.log("trovato");
+
+            foundRents(rentARRAY, _id);
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+          }
+      });
+  }
+  else {
+//console.log("errore nell'else");
+  }
+
+}
+function foundRents(data, insertedID) {
+  console.log(insertedID);
+
   for (let i in data) {
 
-    if(data[i].client_id == clientID) {
-        console.log(clientID);
-        console.log(data[i].client_id);
-  let div = null;
+    if(data[i].client_id == insertedID) {
+        console.log("???????");
+        $( "#ctable2" ).empty();
+        $( "#ctable" ).empty();
+        console.log("sono dopo il vuoto");
+        div = $(`         
+        <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i>> ALL RENTS</button>
+  `);
+              
+  $("#ctable").append(div);
         div = $(` 
-        <div class="row2">
-        <div class="column">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Rental: ${data[i]._id}</h5>
-              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
-              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
-              <button class="btn-mod">Modify</button>
-            </div>
+        <div class="card-new">
+          <div class="card-body">
+            <h5 class="card-title-new">RENT: ${data[i]._id}</h5>
+            <p class="card-text-new">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+            <p class="card-text-new">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
+            <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button class="btn-mod2"><i class="fas fa-wrench"></i> Modify</button>
+                
           </div>
-        </div> 
-      <div> 
-
+        </div>
         
         `);
         $("#ctable2").append(div);
+        //console.log("prooooovaaa");
+
+        
 
         var found = true;
     }

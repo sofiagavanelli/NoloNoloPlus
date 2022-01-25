@@ -196,6 +196,20 @@ module.exports = function (app) {
 
     
 
+    ////ELIMINAZIONE PRODOTTO PER ID
+    app.delete('/prods/:id', function(req, res){
+
+        const idR = req.params.id;
+         db.deleteProd(idR).then(() => {
+             //console.log(idR);
+          res.status(200);
+          res.end();
+          }
+        )
+
+        });
+
+    
     /*************************APP POST */
 
     //PROVA POST 
@@ -234,11 +248,8 @@ module.exports = function (app) {
     });
 
     app.post('/new-rent',(req, res)=>{
-<<<<<<< HEAD
-=======
 
         console.log("sono dentro la post dal form del worker: " + req.body);
->>>>>>> 709d34327e097be42281c0dc73af99f4199bae26
 
       const client = req.body.client;
       const prod = req.body.product; 
@@ -255,6 +266,31 @@ module.exports = function (app) {
     )
     });
 
+    app.post('/new-prod',(req, res)=>{
+
+        console.log("sono dentro la post ");
+        console.log(req.body);
+
+        const nome = req.body.name;
+        const marca = req.body.brand;
+        const velocita = req.body.speed;
+        const len = req.body.length;
+        const ospiti = req.body.guests;
+        const anno = req.body.year;
+        const desc = req.body.summary;
+        const price_low= req.body.lowseason;
+        const price_high = req.body.highseason;
+        const idprod = req.body.product;
+        const cat = req.body.category;
+
+      //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
+      db.saveProd(nome, marca, velocita, len, ospiti, anno, desc, price_low, price_high, idprod, cat).then(() => {
+          res.end();
+      }
+    )
+    });
+
+    //NON FUNZIONA :(
     app.post('/update-prod',(req, res)=>{
 
         console.log(req.body);

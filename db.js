@@ -152,25 +152,7 @@ module.exports = {
         return Promise.resolve(Noleggio.findOneAndDelete({ _id : id }));
     },
 
-    updateProd: async (id) => {
-        //ma perché prende solo l'id ma poi ci sono così tante cose nella funzione? cosa viene cambiato?
-        return Promise.resolve(Prodotto.findOneAndUpdate({ 
-            prod_id : id,
-            category: category,
-            image: _imageUrl,
-            name: _name,
-            brand: _brand,
-            power: _pow,
-            length: _len,
-            guests: _guests,
-            year: _yy,
-            summary: _sum,
-            low_season:_low_season,
-            high_season: _high_season,
-            status: _status,
-            available: true
-        }).save());
-    },
+    
     
     
 
