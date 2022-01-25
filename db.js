@@ -155,7 +155,7 @@ module.exports = {
     updateProd: async (id) => {
         return Promise.resolve(Prodotto.findOneAndUpdate({ 
             prod_id : id,
-            category: _category,
+            category: category,
             image: _imageUrl,
             name: _name,
             brand: _brand,
@@ -164,7 +164,7 @@ module.exports = {
             guests: _guests,
             year: _yy,
             summary: _sum,
-            plow_season:_low_season,
+            low_season:_low_season,
             high_season: _high_season,
             status: _status,
             available: true

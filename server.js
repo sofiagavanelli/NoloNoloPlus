@@ -68,6 +68,13 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname + "/login.html"));
         
 });
+app.get("/new-rent", (req, res) => {
+    res.sendFile(path.join(__dirname + "/reserved.html"));     
+});
+
+app.get("/update-prod", (req, res) => {
+    res.sendFile(path.join(__dirname + "/reserved.html"));     
+});
 
 //Ambiente manager
 app.get('/manager', function (req, res) {

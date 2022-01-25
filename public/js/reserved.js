@@ -438,19 +438,19 @@ function acceptProd(data, insertedID) {
         <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" placeholder="${data[i].name}">
+            <input type="text" class="form-control" id="inputName" name="name" placeholder="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="text" class="form-control" id="inputID" placeholder="${data[i].prod_id}">
+            <input type="text" class="form-control" id="inputID" name="product" placeholder="${data[i].prod_id}">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="inputBrand" placeholder="${data[i].brand}">
+            <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="${data[i].brand}">
           </div>
           <div class="col-md-6">
             <label for="inputCat" class="form-label">Category</label>
-            <select id="inputCat" class="form-select">
+            <select id="inputCat" name="category" class="form-select">
               <option selected>${data[i].category}</option>
               <option>Yacht</option>
               <option>Gommoni</option>
@@ -459,32 +459,32 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
-            <input type="text" class="form-control" id="inputLow" placeholder="${data[i].low_season} €">
+            <input type="text" class="form-control" id="inputLow" name="lowseason" placeholder="${data[i].low_season} €">
           </div>
           <div class="col-md-6">
             <label for="inputHigh" class="form-label">Price High Season</label>
-            <input type="text" class="form-control" id="inputHigh" placeholder="${data[i].high_season} €">
+            <input type="text" class="form-control" id="inputHigh" name="highseason" placeholder="${data[i].high_season} €">
           </div>
           <div class="col-md-6">
             <label for="inputStatus" class="form-label">Status</label>
-            <input type="text" class="form-control" id="inputStatus" placeholder="${data[i].status}">
+            <input type="text" class="form-control" id="inputStatus" name="status" placeholder="${data[i].status}">
           </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
-            <input type="text" class="form-control" id="inputGuest" placeholder="${data[i].guests}">
+            <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="${data[i].guests}">
           </div>
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputYear" placeholder="${data[i].year}">
+            <input type="text" class="form-control" id="inputYear" name="year" placeholder="${data[i].year}">
           </div>
           <div class="col-md-2">
             <label for="inputSpeed" class="form-label">Speed</label>
-            <input type="text" class="form-control" id="inputSpeed" placeholder="${data[i].speed}">
+            <input type="text" class="form-control" id="inputSpeed" name="speed" placeholder="${data[i].speed}">
           </div>
           <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Product description</label>
-              <textarea class="form-control" id="summary" rows="3" placeholder="${data[i].summary}"></textarea>
+              <textarea class="form-control" id="summary" rows="3" name="summary" placeholder="${data[i].summary}"></textarea>
             </div>
           </div>
           <div class="col-12">
@@ -977,7 +977,7 @@ function openCreate(){
                      
   div = $(`    
   <div class="testbox">
-  <form id="create" action="/" method="POST" role="form">
+  <form id="create" action="/new-rent" method="POST" role="form">
     <h1>Create Rent</h1>
     <div class="item-2">
       <p>Client ID</p>
@@ -1006,6 +1006,7 @@ function openCreate(){
   
 `);
 $("#ctable2").append(div);
+
 }
 
 function checkRent(){
@@ -1050,9 +1051,6 @@ $("#ctable").append(div);
         
         `);
         $("#ctable2").append(div);
-        //console.log("prooooovaaa");
-
-        
 
         var found = true;
     }

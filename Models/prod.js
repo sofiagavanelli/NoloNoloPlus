@@ -15,7 +15,7 @@ const ProdSchema = new Schema(
     low_season: {type: String, required: true},
     high_season: {type: String, required: true},
     prod_id: {type: String, required: true},
-    category: {type: String},
+    category: {type: String,required: true},
     //available: {type: Boolean, required: true }
   }
 );
