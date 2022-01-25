@@ -111,7 +111,7 @@ export default {
 
         }
         else {
-          this.errorMsg = "Non è stato trovato un utente con questi username/password, controllare e riprovare.";
+          this.errorMsg = "non è stato trovato un utente con questi username/password, controllare e riprovare.";
         }
 
         //console.log(this.loggedIN);
@@ -162,9 +162,11 @@ export default {
 }
 
 #loginfo {
+  text-align: center;
   color: red;
   font-weight: normal;
-  padding: 0 0.5em 0.5em 0.5em;
+  padding-bottom: 0.5em;
+  /*padding: 0 0.5em 0.5em 0.5em;*/
 }
 
 .avatar {

@@ -120,6 +120,48 @@ mounted() {
 
 methods: {
 
+  controlDate() {
+
+    var prova
+
+    axios.get('/rentByProd/' + this.parentData.prod_id)
+      .then((response) => {
+        //this.foundRents = response.data;
+        var noleggi = response.data;
+
+        //return(this.check(this.foundRents));
+        //return(this.check(this.foundRents));
+
+        var myrent_sdate = new Date(this.startD);
+        var myrent_edate = new Date(this.endD);
+
+        var disponibile = true;
+
+        noleggi.forEach(item => {
+
+          if((myrent_sdate >= item.start_date && myrent_sdate <= item.end_date) ||
+            (myrent_edate >= item.start_date && myrent_edate <= item.end_date) ) {
+
+              disponibile = false;
+          }
+
+        })
+
+        console.log("dentro è:" + disponibile);
+
+        return(disponibile);
+      });
+      /*.catch((error) => {
+            //this.loading = false;
+        console.log(error);
+      })
+
+    /*console.log("fuori dalla get il valore è:" + prova);
+
+    return prova;*/
+
+  },
+
   calc() {
 
       const diffInMs   = new Date(this.endD) - new Date(this.startD);
@@ -135,14 +177,32 @@ methods: {
           temp = temp - (temp*this.parentData.discount/100);
         }
 
-        if(this.controlDate()) {
+        /*if(this.controlDate()) { 
           this.total = temp;
           this.payment = true;
-        }
-        else {
+          else {
           this.total = "non disponibile";
           //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
         }
+          */
+
+          /*.then((valid) => {
+                if (valid) // do something
+              // other validations here
+              //  save
+            })*/
+
+        this.controlDate()
+          .then((valid) => {
+            if(valid) {
+              this.total = temp;
+              this.payment = true;
+            }
+            else {
+              this.total = "non disponibile";
+            //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+            }
+          })
 
       }
       else {
@@ -201,28 +261,6 @@ methods: {
         console.log(error);
       });
 
-
-  },
-
-  controlDate() {
-
-    var prova
-
-    axios.get('/rentByProd/' + this.parentData.prod_id)
-      .then((response) => {
-        this.foundRents = response.data;
-
-        //return(this.check(this.foundRents));
-        prova = this.check(this.foundRents);
-      })
-      .catch((error) => {
-            //this.loading = false;
-        console.log(error);
-      })
-
-    console.log("fuori dalla get il valore è:" + prova);
-
-    return prova;
 
   },
 

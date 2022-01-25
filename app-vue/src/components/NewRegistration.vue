@@ -8,44 +8,56 @@
             <p id="regTitle">Registrazione</p>
           </div>
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="name">Nome</label>
-            <b-form-input v-model="name" aria-label="inserire nome"></b-form-input>
+          <div class="flex-container" id="firstRow">
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="name">Nome</label>
+              <b-form-input v-model="name" aria-label="inserire nome"></b-form-input>
+            </div>
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="surname">Cognome</label>
+              <b-form-input v-model="surname" aria-label="inserire cognome"></b-form-input>
+            </div>
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="username">Username</label>
+              <b-form-input v-model="username" aria-label="inserire username"></b-form-input>
+            </div>
+
           </div>
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="surname">Cognome</label>
-            <b-form-input v-model="surname" aria-label="inserire cognome"></b-form-input>
+          <div class="flex-container" id="secondRow">
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="city">Città di provenienza</label>
+              <b-form-input v-model="city" aria-label="inserire città"></b-form-input>
+            </div>
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="address">Indirizzo</label>
+              <b-form-input v-model="address" aria-label="inserire indirizzo"></b-form-input>
+            </div>
+
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="phone">Numero di telefono</label>
+              <b-form-input v-model="phone" aria-label="inserire telefono"></b-form-input>
+            </div>
+
           </div>
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="username">Username</label>
-            <b-form-input v-model="username" aria-label="inserire username"></b-form-input>
-          </div>
+          <div class="flex-container" id="thirdRow">
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="city">Città di provenienza</label>
-            <b-form-input v-model="city" aria-label="inserire città"></b-form-input>
-          </div>
+            <div class="form-input"> <!--class="md-form mb-5"-->
+              <label data-error="wrong" data-success="right" for="email">Email</label>
+              <b-form-input v-model="email" aria-label="inserire indirizzo email"></b-form-input>
+            </div>
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="address">Indirizzo</label>
-            <b-form-input v-model="address" aria-label="inserire indirizzo"></b-form-input>
-          </div>
+            <div class="form-input">
+              <label data-error="wrong" data-success="right" for="pass">Password</label>
+              <b-form-input type="password" v-model="pass" aria-label="inserire password"></b-form-input>
+            </div>
 
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="phone">Numero di telefono</label>
-            <b-form-input v-model="phone" aria-label="inserire telefono"></b-form-input>
-          </div>
-
-          <div class="form-input"> <!--class="md-form mb-5"-->
-            <label data-error="wrong" data-success="right" for="email">Email</label>
-            <b-form-input v-model="email" aria-label="inserire indirizzo email"></b-form-input>
-          </div>
-
-          <div class="form-input">
-            <label data-error="wrong" data-success="right" for="pass">Password</label>
-            <b-form-input type="password" v-model="pass" aria-label="inserire password"></b-form-input>
           </div>
 
 
@@ -125,6 +137,19 @@ export default ({
     font-size: 14px;
 }
 
+#firstRow, #secondRow, #thirdRow {
+  /*border: 1px solid red;*/
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 1em 0 1em 0;/*(up-right-down-left)*/
+}
+
+.form-input {
+  padding: 0.5em;
+}
+
 #regTitle {
     font-size: 40px;
     font-weight: normal;
@@ -185,5 +210,16 @@ export default ({
     color: #000;
     font-size: 16px;
 }
+
+
+@media screen and (max-width: 500px) {
+
+  #firstRow, #secondRow, #thirdRow {
+    padding: 0;/*(up-right-down-left)*/
+  }
+
+
+}
+
 
 </style>

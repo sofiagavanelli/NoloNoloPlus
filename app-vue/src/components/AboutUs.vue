@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <img id="us_pic" src="../../public/picture1.jpg">
+        <!--img id="us_pic" src="../../public/picture1.jpg"-->
 
     <div>
 
