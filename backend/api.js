@@ -88,25 +88,6 @@ module.exports = function (app) {
 
     });
 
-    app.get('/rentByProd/:id', function (req, res) {
-
-        res.writeHead(200);
-
-        let id = req.params.id;
-
-        //console.log(id);
-
-        db.searchRentByProdID(id).then(workerinfo => {
-
-            res.write(JSON.stringify(workerinfo));
-
-            res.end();
-        });
-
-        //console.log("error");
-
-    });
-
     //RICERCA NOLEGGIO TRAMITE UTENTE
     app.get('/user-rentals/:id', function (req, res) {
 
@@ -196,20 +177,6 @@ module.exports = function (app) {
 
     
 
-    ////ELIMINAZIONE PRODOTTO PER ID
-    app.delete('/prods/:id', function(req, res){
-
-        const idR = req.params.id;
-         db.deleteProd(idR).then(() => {
-             //console.log(idR);
-          res.status(200);
-          res.end();
-          }
-        )
-
-        });
-
-    
     /*************************APP POST */
 
     //PROVA POST 
@@ -249,27 +216,27 @@ module.exports = function (app) {
 
     app.post('/new-rent',(req, res)=>{
 
-        console.log("sono dentro la post dal form del worker: " + req.body);
-
       const client = req.body.client;
       const prod = req.body.product; 
       const startdate= req.body.start;
       const enddate= req.body.end; 
-      const paymethod = req.body.pay;
 
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
-      db.saveRental(prod, client, startdate, enddate, paymethod).then(() => {
-          res.end();
-
-        
+      db.saveRental(prod, client, startdate, enddate, true).then(() => {
+        //console.log("aaaaaaaaaaaaaaaa");
+        //res.status(200);
+        //res.end();
+        //res.redirect(reserved.html);
       }
     )
     });
 
-    app.post('/new-prod',(req, res)=>{
+    /* //JOIN TRA CLIENTS E RENTAL PER GRAFICI MANAGER
+    app.get('/clientsRental', function (req, res) {
+        db.joinClientsRentals().then(prodsinfo => {*/
 
-        console.log("sono dentro la post ");
-        console.log(req.body);
+
+    app.post('/new-prod',(req, res)=>{
 
         const cat = req.body.category;
         const nome = req.body.name;
@@ -287,13 +254,14 @@ module.exports = function (app) {
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
      
       db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, stato).then(() => {
-          res.end();
+          (//res.end();
       }
 
       
     )
     });
 
+    /*S
     //NON FUNZIONA :(
     app.post('/update-prod',(req, res)=>{
 
@@ -316,9 +284,8 @@ module.exports = function (app) {
         db.updateProd(n, b, s, l, g, y, sum, ls, hs, pid, cat).then(() => {
             console.log("sono nella post");
             res.end();
- 
-        }
-      )
-      });
+        });
 
+    }); */
+    
 };
