@@ -175,6 +175,17 @@ module.exports = function (app) {
 
         });
 
+    ///ELIMINAZIONE CLIENTE PER ID
+    app.delete('/prods/:id', function(req, res){
+
+        const id = req.params.id;
+         db.deleteProd(id).then(() => {
+          res.status(200);
+          res.end();
+          }
+            )
+    
+    });
     
 
     /*************************APP POST */
@@ -221,12 +232,7 @@ module.exports = function (app) {
       const startdate= req.body.start;
       const enddate= req.body.end; 
 
-      //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
       db.saveRental(prod, client, startdate, enddate, true).then(() => {
-        //console.log("aaaaaaaaaaaaaaaa");
-        //res.status(200);
-        //res.end();
-        //res.redirect(reserved.html);
       }
     )
     });
@@ -251,13 +257,9 @@ module.exports = function (app) {
         const idprod = req.body.product;
         const stato = req.body.status;
 
-      //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
      
-      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, stato).then(() => {
-          (//res.end();
-      }
+      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, stato).then(() => {}
 
-      
     )
     });
 
