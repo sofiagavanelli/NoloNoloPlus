@@ -271,9 +271,10 @@ module.exports = function (app) {
         console.log("sono dentro la post ");
         console.log(req.body);
 
+        const cat = req.body.category;
         const nome = req.body.name;
         const marca = req.body.brand;
-        const velocita = req.body.speed;
+        const vel = req.body.speed;
         const len = req.body.length;
         const ospiti = req.body.guests;
         const anno = req.body.year;
@@ -281,12 +282,15 @@ module.exports = function (app) {
         const price_low= req.body.lowseason;
         const price_high = req.body.highseason;
         const idprod = req.body.product;
-        const cat = req.body.category;
+        const stato = req.body.status;
 
       //console.log(client +" "+ prod  +" "+ startdate  +" "+ enddate);
-      db.saveProd(nome, marca, velocita, len, ospiti, anno, desc, price_low, price_high, idprod, cat).then(() => {
+     
+      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, stato).then(() => {
           res.end();
       }
+
+      
     )
     });
 

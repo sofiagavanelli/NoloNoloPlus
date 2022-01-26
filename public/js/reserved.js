@@ -174,7 +174,7 @@ function openInventory() {
         <p class="card-text">Brand: ${ProdInfo[i].brand} <br>
         Price: ${ProdInfo[i].low_season}€ - ${ProdInfo[i].high_season}€</p>     
         <div class="card-footer">         
-        <button id="${ProdInfo[i].prod_id}" onclick= "openAlertProd(id)" class="btn-d">Delete</button>
+        <button id="${ProdInfo[i].prod_id}" onclick= "deleteProd(id)" class="btn-d">Delete</button>
         <button class="btn-mod" id="${ProdInfo[i].prod_id}" onclick= "acceptProd(inventoryARRAY,id)">Modify</button>             
         </div>    
         </div>             
@@ -450,7 +450,7 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-6">
           <label for="inputCat" class="form-label">Category</label>
-          <input type="text" class="form-control" id="inputCat" name="category" placeholder="${data[i].category}" disabled>
+          <input type="text" class="form-control" id="inputCat" name="category" placeholder="${data[i].category}" >
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
@@ -460,10 +460,13 @@ function acceptProd(data, insertedID) {
             <label for="inputHigh" class="form-label">Price High Season</label>
             <input type="text" class="form-control" id="inputHigh" name="highseason" placeholder="${data[i].high_season} €">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="inputStatus" class="form-label">Status</label>
             <input type="text" class="form-control" id="inputStatus" name="status" placeholder="${data[i].status}">
           </div>
+          <div class="col-md-2">
+            <label for="inputYear" class="form-label">Year</label>
+            <input type="text" class="form-control" id="inputYear" name="year" placeholder="${data[i].length}">
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
             <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="${data[i].guests}">
@@ -534,7 +537,7 @@ function deleteRents(idR) {
   }
   
 }
-/*FELIMINAZIONE CLIENTE */
+/*ELIMINAZIONE CLIENTE */
 function deleteClient(idDel) {
 
   if(idDel) {
@@ -543,6 +546,25 @@ function deleteClient(idDel) {
     url: '/allClients/' + idDel ,
     success: function (data) {
       openClient();
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+
+    }
+    });
+  }
+  
+}
+
+/*ELIMINAZIONE PRODOTTO */
+function deleteProd(idP) {
+
+  if(idP) {
+    $.ajax({
+    type: 'DELETE',
+    url: '/prods/' + idP ,
+    success: function (data) {
+      openInventory();
+
     },
     error: function (xhr, ajaxOptions, thrownError) {
 
@@ -957,48 +979,52 @@ div = $(`
         <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" name="name" placeholder="aaaa">
+            <input type="text" class="form-control" id="inputName" name="name">
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="text" class="form-control" id="inputID" name="product" placeholder="$aaa">
+            <input type="text" class="form-control" id="inputID" name="product">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="aaaa">
+            <input type="text" class="form-control" id="inputBrand" name="brand">
           </div>
           <div class="col-md-6">
           <label for="inputCat" class="form-label">Category</label>
-          <input type="text" class="form-control" id="inputCat" name="category" placeholder="aaaa" disabled>
+          <input type="text" class="form-control" id="inputCat" name="category">
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
-            <input type="text" class="form-control" id="inputLow" name="lowseason" placeholder="aaaa €">
+            <input type="text" class="form-control" id="inputLow" name="lowseason">
           </div>
           <div class="col-md-6">
             <label for="inputHigh" class="form-label">Price High Season</label>
-            <input type="text" class="form-control" id="inputHigh" name="highseason" placeholder="aaaa €">
+            <input type="text" class="form-control" id="inputHigh" name="highseason">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="inputStatus" class="form-label">Status</label>
-            <input type="text" class="form-control" id="inputStatus" name="status" placeholder="aaaa">
+            <input type="text" class="form-control" id="inputStatus" name="status">
+          </div>
+          <div class="col-md-2">
+            <label for="inputLen" class="form-label">Length</label>
+            <input type="text" class="form-control" id="inputLen" name="length">
           </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
-            <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="aaaa}">
+            <input type="text" class="form-control" id="inputGuest" name="guests">
           </div>
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputYear" name="year" placeholder="aaa">
+            <input type="text" class="form-control" id="inputYear" name="year">
           </div>
           <div class="col-md-2">
             <label for="inputSpeed" class="form-label">Speed</label>
-            <input type="text" class="form-control" id="inputSpeed" name="speed" placeholder="aaa">
+            <input type="text" class="form-control" id="inputSpeed" name="speed">
           </div>
           <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Product description</label>
-              <textarea class="form-control" id="summary" rows="3" name="summary" placeholder="aaaa"></textarea>
+              <textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Add a short description"></textarea>
             </div>
           </div>
           <div class="col-12">
