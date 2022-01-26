@@ -152,7 +152,24 @@ module.exports = {
         return Promise.resolve(Noleggio.findOneAndDelete({ _id : id }));
     },
 
-    
+    /* joinClientsRentals: async (options = {}) =>{
+        db.collection('rentals').aggregate([
+            {
+                $lookup:
+                {
+                    from: 'clients',
+                    localField: 'client_id',
+                    foreignField: 'client_id',
+                    as: 'clientRentals'
+                }
+            }
+        ]).toArray(function(err, resp) {
+            if (err) throw err;
+            console.log("join function");
+            console.log(JSON.stringify(resp));
+            return JSON.stringify(resp);
+        });
+    } */
     
     
 
