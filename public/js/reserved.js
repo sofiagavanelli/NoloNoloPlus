@@ -467,6 +467,7 @@ function acceptProd(data, insertedID) {
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
             <input type="text" class="form-control" id="inputYear" name="year" placeholder="${data[i].length}">
+            </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
             <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="${data[i].guests}">
@@ -1028,7 +1029,7 @@ div = $(`
             </div>
           </div>
           <div class="col-12">
-            <button class="btn-sub" onclick="updateProd()">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="updateProd()">Add</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </form>
       </div>

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //da inserire in una variabile env:
-const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
+const connectionStringOld = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
+const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -46,7 +47,7 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,/*_imageUrl,*/ _name, _brand, _pow, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,/*_imageUrl,*/ _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Prodotto({
@@ -54,7 +55,7 @@ module.exports = {
             //image: _imageUrl,
             name: _name,
             brand: _brand,
-            power: _pow,
+            speed: _speed,
             length: _len,
             guests: _guests,
             year: _yy,
@@ -84,9 +85,12 @@ module.exports = {
         }).save());
         
         //await newN.save();
-
-
     },
+
+    updateProd: async (id) => {
+        return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}).save());
+    },
+
 
     searchClientID: async (id) => {
         return Promise.resolve(Client.find({ client_id: id }));
