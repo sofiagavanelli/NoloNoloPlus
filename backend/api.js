@@ -146,6 +146,24 @@ module.exports = function (app) {
 
     });
 
+    //TROVA RENT TRAMITE L'ID DEL PRODOTTO
+    app.get('/rentByProd/:id', function (req, res) {
+
+        res.writeHead(200);
+
+        let _id = req.params.id;
+
+        db.searchRentByProdID(_id).then(prodsinfo => {
+
+            res.write(JSON.stringify(prodsinfo));
+
+            res.end();
+        });
+
+        //console.log("error");
+
+    });
+
 
 
     /******************************APP DELETE */
@@ -229,11 +247,19 @@ module.exports = function (app) {
 
       const client = req.body.client;
       const prod = req.body.product; 
-      const startdate= req.body.start;
-      const enddate= req.body.end; 
+      const startdate = req.body.start;
+      const enddate = req.body.end; 
+      const price = req.body.price;
+      const paymethod = req.body.pay;
 
-      db.saveRental(prod, client, startdate, enddate, true).then(() => {
+      //non dobbiamo mettere che approved parte da false?
+
+      /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
+                                                worker: null              approved: false*/
+      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, false).then((result) => {
+        console.log(result);
       }
+
     )
     });
 

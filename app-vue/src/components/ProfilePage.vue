@@ -14,7 +14,10 @@
         profileInfo[0]
         -->
 
-        <img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap">
+        <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"-->
+        <div id="pic_container">
+            <img class="profile_pic" src="../../public/avatar.png" alt="Card image cap">
+        </div>
 
         <b-card class="profile">
             <b-card-body>
@@ -147,7 +150,7 @@ export default({
             showRents: []
         };
     },
-    mounted() {
+    created() { //diverso da mounted!!
 
         this.username = this.$store.state.username;
 
@@ -155,8 +158,6 @@ export default({
           .then((response) => {
             //console.log(response.data);
             this.profileInfo = response.data;
-
-            //console.log((this.profileInfo[0]).img);
           })
           .catch((error) => {
             //this.loading = false;
@@ -166,8 +167,6 @@ export default({
         axios.get('/user-rentals/' + this.username)
           .then((response) => {
             this.rentInfo = response.data;
-
-            //console.log(this.rentInfo);
 
             this.sortRents(this.rentInfo);
           })
@@ -181,18 +180,13 @@ export default({
     methods: {
 
         changeView(_type) {
-
-            /*if(_type == 'p')
-                this.showRents = this.pastRent;*/
             if(_type == 'a') {
                 this.showRents = this.activeRent;
-                console.log("sono dentro a");
             }
             else if(_type == 'f')
                 this.showRents = this.futureRent;
             else
                 console.log("error");
-
         },
 
         sortRents(noleggi) {
@@ -207,7 +201,6 @@ export default({
 
                 if(end_date <= today) {
                     this.pastRent[i] = elem;
-                    console.log("sto riempiendo pastRent");
                     i++;
                 }
                 else if(start_date >= today) {
@@ -281,13 +274,18 @@ export default({
 }
 
 .profile_pic {
-    width: 20%;
+    width: 100%;
     border-radius: 100%;
     padding-bottom: 0.2rem;
+    margin-top: 2em;
     /*border-radius: 0.2rem;*/
     /*object-fit: cover;*/
     /*height: 30vh;*/
 }
+
+/*#pic_container {
+    border: 1px solid red;
+}*/
 
 .rentInfo {
     padding: 0.5em;
@@ -329,7 +327,13 @@ export default({
 @media screen and (max-width: 500px) {
 
     .profile_pic {
+        margin: 0;
         width: 50%;
+    }
+
+    #pic_container {
+        display: flex;
+        justify-content: center;
     }
 
 }
