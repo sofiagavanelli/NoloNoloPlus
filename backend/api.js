@@ -254,13 +254,11 @@ module.exports = function (app) {
 
       //non dobbiamo mettere che approved parte da false?
 
-      /*_prod, _client, _start, _end, _worker, _price, _payment, _ok*/
+      /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
+                                                worker: null              approved: false*/
       db.saveRental(prod, client, startdate, enddate, null, price, paymethod, false).then((result) => {
-
         console.log(result);
-        
       }
-
 
     )
     });
