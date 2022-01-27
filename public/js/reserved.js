@@ -977,6 +977,7 @@ $("#ctable").append(div);
 div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
         <img src="" alt="" width="380" height="280">
+        <input type="file" id="myFile" name="filename">
         <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>

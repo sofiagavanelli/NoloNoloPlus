@@ -244,6 +244,7 @@ module.exports = function (app) {
 
     app.post('/new-prod',(req, res)=>{
 
+        const imm = req.body.filename;
         const cat = req.body.category;
         const nome = req.body.name;
         const marca = req.body.brand;
@@ -257,7 +258,7 @@ module.exports = function (app) {
         const idprod = req.body.product;
         const state = req.body.status;
 
-      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
+      db.saveProd(cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
 
     )
     });
