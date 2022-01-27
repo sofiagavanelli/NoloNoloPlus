@@ -255,39 +255,31 @@ module.exports = function (app) {
         const price_low= req.body.lowseason;
         const price_high = req.body.highseason;
         const idprod = req.body.product;
-        const stato = req.body.status;
+        const state = req.body.status;
 
-     
-      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, stato).then(() => {}
+      db.saveProd(cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
 
     )
     });
-
-    /*S
-    //NON FUNZIONA :(
+    
     app.post('/update-prod',(req, res)=>{
+        const newvalues = { $set: {
+             cat: req.body.category,
+             nome: req.body.name,
+             marca: req.body.brand,
+             vel: req.body.speed,
+             len: req.body.length,
+             ospiti: req.body.guests,
+             anno: req.body.year,
+             desc: req.body.summary,
+             price_low: req.body.lowseason,
+             price_high: req.body.highseason,
+             idprod: req.body.product,
+             state: req.body.status } };
+        const idprod = req.body.product;
+      db.updateProd(idprod, newvalues).then(() => {}
+      )
+    });
 
-        console.log(req.body);
-        //const image
-        const n = req.body.name;
-        const b = req.body.brand;
-        const s = req.body.speed;
-        const l = req.body.length;
-        const g = req.body.guests;
-        const y = req.body.year;
-        const sum = req.body.summary;
-        const ls= req.body.lowseason;
-        const hs = req.body.highseason;
-        const pid = req.body.product;
-        const cat = req.body.category;
-        //available
-        //discount
-
-        db.updateProd(n, b, s, l, g, y, sum, ls, hs, pid, cat).then(() => {
-            console.log("sono nella post");
-            res.end();
-        });
-
-    }); */
     
 };
