@@ -37,18 +37,18 @@
               <div id="total-price">
                 <h5> {{total}} € </h5>
               </div>
-
-              <template v-if="this.payment">
-                <!--b-button id="payBtn" v-on:click="pay()">scegli metodo di pagamento</b-button-->
-                <b-dropdown toggle-class='customDropdown' text="metodo di pagamento" variant='none'> 
-                  <!--b-form-checkbox-group v-on:click="pay()" v-model="selected" :options="type"></b-form-checkbox-group-->
-                  <b-dropdown-item-button v-for="item in this.type" :key="item.value" v-on:click="pay(item.value)"> {{item.text}} </b-dropdown-item-button> 
-                </b-dropdown>
-
-              </template>
             </div>
 
-            
+              <template v-if="this.payment">
+                <div id="payTab">
+                  <!--b-button id="payBtn" v-on:click="pay()">scegli metodo di pagamento</b-button  toggle-class='customDropdown'   variant='none'-->
+                  <b-form-group  label="METODO DI PAGAMENTO"> 
+                    <!--b-form-checkbox-group v-on:click="pay()" v-model="selected" :options="type"></b-form-checkbox-group
+                    v-for="item in this.type" :key="item.value" -->
+                    <b-form-checkbox-group v-model="checked" :options="type" v-on:change="pay(checked)"> {{type.text}} </b-form-checkbox-group> 
+                  </b-form-group>
+                </div>
+              </template>
 
           </div>
 
@@ -64,6 +64,24 @@
                 Necessario fare login per controllare.</h6>
             </div>
       </template>
+
+      <!-- The modal -->
+      <div id="modal-container" class="flex-container">
+        <b-modal ok-title="Conferma" id="recapModal" v-on:ok="createRent()">
+          <h2> Il tuo noleggio </h2>
+
+              <div class="details">
+                <ul class="d-flex flex-wrap pl-0" >
+                  <li class="title">Imbarcazione:<h5 class="data"> {{this.parentData.name}} </h5> </li>
+                  <li class="title">Data di inizio:<h5 class="data"> {{this.startD}} </h5> </li>
+                  <li class="title">Data di fine:<h5 class="data"> {{this.endD}} </h5> </li>
+                  <li class="title">Prezzo:<h5 class="data"> {{this.total}} </h5> </li>
+                  <li class="title">Metodo di pagamento:<h5 class="data"> {{this.paymethod}} </h5> </li>
+                </ul>
+              </div>
+        
+        </b-modal> 
+      </div>
 
 
     <!-- scelte multiple per scegliere e calcolare il rent -->
@@ -98,11 +116,14 @@ export default {
 
       //disponibile: true,
 
-      foundRents: [],
+      //foundRents: [],
+
+      noleggi: [],
 
       newRent: [],
+      paymethod: null,
 
-      selected: '',
+      checked: '',
         type: [ 
           //{ value: null, text: 'Please select an option' },
           { value: 'paypal', text: 'PayPal' },
@@ -116,21 +137,20 @@ mounted() {
 
   scroll(0, 0);
 
+  axios.get('/rentByProd/' + this.parentData.prod_id)
+    .then((response) => {
+        this.noleggi = response.data;
+  });
+
 },
 
 methods: {
 
   controlDate() {
 
-    var prova
+        console.log("sono dentro controldate");
 
-    axios.get('/rentByProd/' + this.parentData.prod_id)
-      .then((response) => {
-        //this.foundRents = response.data;
-        var noleggi = response.data;
-
-        //return(this.check(this.foundRents));
-        //return(this.check(this.foundRents));
+        var noleggi = this.noleggi;
 
         var myrent_sdate = new Date(this.startD);
         var myrent_edate = new Date(this.endD);
@@ -139,8 +159,12 @@ methods: {
 
         noleggi.forEach(item => {
 
-          if((myrent_sdate >= item.start_date && myrent_sdate <= item.end_date) ||
-            (myrent_edate >= item.start_date && myrent_edate <= item.end_date) ) {
+          var checked_start = new Date(item.start_date);
+          var checked_end = new Date(item.end_date);
+
+          if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
+            (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
+            (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
 
               disponibile = false;
           }
@@ -150,16 +174,7 @@ methods: {
         console.log("dentro è:" + disponibile);
 
         return(disponibile);
-      });
-      /*.catch((error) => {
-            //this.loading = false;
-        console.log(error);
-      })
-
-    /*console.log("fuori dalla get il valore è:" + prova);
-
-    return prova;*/
-
+      
   },
 
   calc() {
@@ -192,9 +207,9 @@ methods: {
               //  save
             })*/
 
-        this.controlDate()
-          .then((valid) => {
-            if(valid) {
+        /*this.controlDate()
+          .then((valid) => {*/
+            if(this.controlDate()) {
               this.total = temp;
               this.payment = true;
             }
@@ -202,7 +217,7 @@ methods: {
               this.total = "non disponibile";
             //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
             }
-          })
+          //})
 
       }
       else {
@@ -218,7 +233,7 @@ methods: {
 
     while (i>0) {
 
-      if (date.getMonth() >= 4 && date.getMonth() <= 8) { 
+      if (date.getMonth() >= 5 && date.getMonth() <= 9) { 
         /*NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8*/
         Hdays = Hdays + 1;
       }
@@ -244,10 +259,34 @@ methods: {
       const prod = req.body.product; 
       const startdate= req.body.start;
       const enddate= req.body.end; */
+    
+    this.paymethod = tipo;
 
-    this.newRent = [ { prod: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, pay: tipo}];
+    this.$bvModal.show("recapModal");
+    /*TODO CREARE NOLEGGIO
+    axios.post('/new-rent', this.newRent)
+      .then(() => {
 
-    //TODO CREARE NOLEGGIO
+        this.$router.push({
+          path: '/profile',
+        });
+                  
+      })
+      .catch((error) => {
+                //this.loading = false;
+        console.log(error);
+      });*/
+
+
+  },
+
+  createRent() {
+    console.log("ciao");
+
+    this.newRent = [ { product: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod}];
+
+    console.log(this.newRent);
+
     axios.post('/new-rent', this.newRent)
       .then(() => {
 
@@ -260,11 +299,9 @@ methods: {
                 //this.loading = false;
         console.log(error);
       });
+  }
 
-
-  },
-
-  check(noleggi) {
+  /*check(noleggi) {
 
     var myrent_sdate = new Date(this.startD);
     var myrent_edate = new Date(this.endD);
@@ -285,7 +322,7 @@ methods: {
 
     return(disponibile);
 
-  }
+  }*/
 
 }
 
@@ -319,7 +356,13 @@ methods: {
 #total-price {
   padding: 0.5em;
   padding-left: 1.5em;
+}
 
+#payTab {
+  padding: 1em;
+  margin-top: 1em;
+  background-color: rgb(252, 191, 191);
+  border-radius: 4px;
 }
 
 #disclaimer {
@@ -383,5 +426,16 @@ methods: {
     display: none;
 }
 
+.b-modal {
+    background: #EDB5BF !important;
+    color: #000 !important;
+    /*width: 20em;*/
+    /*margin: 20vw;*/
+    border-radius: 5% !important;
+}
+
+#modal-container {
+  justify-content: center;
+}
 
 </style>
