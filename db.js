@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const client = require("./Models/client");
 //da inserire in una variabile env:
 const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 //const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
@@ -30,12 +31,12 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email) => {
+    saveClient: async (/*_img, */_name, _surname, _username, _pass, _place, _address, tel, email) => {
         
         console.log(_username + "--" + _name + "--" + _pass);
 
         new Client({
-            image: _img,
+            //image: _img,
             name: _name,
             surname: _surname,
             client_id: _username,
@@ -88,12 +89,26 @@ module.exports = {
     },
 
     updateProd: async (id) => {
-        return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}).save());
+        return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}));
+    },
+
+    updateClient: async (id) => {
+        return Promise.resolve(Client.findOneAndUpdate({client_id: id}));
     },
 
 
     searchClientID: async (id) => {
-        return Promise.resolve(Client.find({ client_id: id }));
+        console.log("prova");
+        return Promise.resolve(Client.find({ client_id: id }, { $set: {
+            name: nome,
+            surname: cognome,
+            client_id: user,
+            place: city,
+            address: add,
+            phone: cell,
+            email: mail,
+            note: note }}
+            ));
     },
 
     //search con il nome per il login! così l'ID rimane ""privato""

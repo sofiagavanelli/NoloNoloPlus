@@ -108,7 +108,7 @@ function openClient() {
                     <p class="card-text" style="text-align: center;">ID: ${ClientInfo[i].client_id}</p>    
                     <div class="card-footer">         
                       <button id="${ClientInfo[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
-                      <button class="btn-mod" id="${ClientInfo[i].client_id}" onclick= "acceptClient(clientARRAY,id)">Modify</button>             
+                      <button class="btn-mod" id="${ClientInfo[i].client_id}" onclick= "modifyClient(clientARRAY, id)">Modify</button>             
                     </div>    
                   </div>             
                 </div> 
@@ -331,7 +331,7 @@ function searchClient(){
           url: '/allClients/' + _id ,
           success: function (info) {
 
-            acceptClient(clientARRAY, _id);
+            modifyClient(clientARRAY, _id);
           },
           error: function (xhr, ajaxOptions, thrownError) {
 
@@ -343,55 +343,7 @@ console.log("errore nell'else");
   }
 
 }
-function acceptClient(data, insertedID) {
 
-  for (let i in data) {
-
-    if(data[i].client_id == insertedID) {
-        $( "#ctable2" ).empty();
-        $( "#ctable" ).empty();
-        div = $(`         
-        <button class="btn-back"onclick= "goBackClients()"><i class="fas fa-home"></i> ALL CLIENTS</button>
-  `);
-              
-  $("#ctable").append(div);
-        div = $(` 
-        <div class="card mb-3" style="max-width: 540px; margin-left: 20%;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="${data[i].image}" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${data[i].name} ${data[i].surname}</h5>
-                <p class="card-text"> Client ID: ${data[i].client_id} <br>
-                Address: ${data[i].place}, ${data[i].address} <br>
-                Phone: ${data[i].phone} <br>
-                E-mail: ${data[i].email} 
-                </p>
-                <div class="card-footer">
-                  <button id="${data[i].client_id}" onclick="openNote(id)" class= "btn-note"><i class="far fa-sticky-note"></i></button>
-                  <button id="${data[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
-                  <button class="btn-mod" id="${data[i].client_id}" onclick= "acceptClient(clientARRAY,id)">Modify</button> 
-                  <button class="btn-a" id="${data[i].client_id}" onclick= "searchClientRents(id)">Show Rents <i class="fas fa-shopping-cart"></i></button>                         
-                </div>  
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        `);
-        $("#ctable2").append(div);
-
-        var found = true;
-    }
-  }
-
-  if (!found) 
-      console.log("non esiste cliente");
-
-
-}
 /* RICERCA PRODOTTO */
 function searchProd(){
 
@@ -1093,6 +1045,10 @@ function checkRent(){
 
 function updateProd(){
   document.getElementById("smile").style.visibility = "visible";
+} 
+
+function updateClient(){
+  document.getElementById("smile").style.visibility = "visible";
 }
 
 function searchClientRents(_id){
@@ -1160,6 +1116,73 @@ function foundRents(data, insertedID) {
 
 }
 
+function modifyClient(data, insertedID){
+  for (let i in data) {
+
+    if(data[i].client_id == insertedID) {
+        $( "#ctable2" ).empty();
+        $( "#ctable" ).empty();
+  $( "#ctable" ).empty();
+  $( "#ctable2" ).empty();
+
+  div = $(`         
+  <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL CLIENTS</button>
+  `);
+$("#ctable").append(div);
+
+div = $(` 
+      <div class="flex-container" style=" margin-left: 4%;">
+        <img src="${data[i].image}" alt="" width="280" height="300">
+        <form class="row g-3" action="/update-client" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 5%; margin-bottom: 30%;">
+          <div class="col-md-6">
+            <label for="inputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputName" name="nome" placeholder="${data[i].name}">
+          </div>
+          <div class="col-md-6">
+            <label for="inputSurname" class="form-label">Surname</label>
+            <input type="text" class="form-control" id="inputSurname" name="surname" placeholder="${data[i].surname}">
+          </div>
+          <div class="col-12">
+            <label for="inputId" class="form-label">Client ID</label>
+            <input type="text" class="form-control" id="inputId" name="clientID" placeholder="${data[i].client_id}">
+          </div>
+          <div class="col-md-6">
+          <label for="inputPlace" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputPlace" name="place" placeholder="${data[i].place}">
+          </div>
+          <div class="col-md-6">
+            <label for="inputAdd" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAdd" name="Address" placeholder="${data[i].address}">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="${data[i].email}">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCell" class="form-label">Phone number</label>
+            <input type="text" class="form-control" id="inputCell" name="phone" placeholder="${data[i].phone}">
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="note" class="form-label">Note</label>
+              <textarea class="form-control" id="note" rows="3" name="note" placeholder="${data[i].note}"></textarea>
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn-sub" onclick="updateClient()">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+          </div>
+        </form>
+      </div>
+       
+      `);
+      $("#ctable2").append(div);
+      var found = true;
+    }
+
+}
+if (!found) 
+console.log("non esiste cliente");
+}
 
 
 

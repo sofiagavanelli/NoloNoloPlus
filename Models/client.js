@@ -14,7 +14,7 @@ var ClientSchema = new Schema(
     phone: {type: String},
     email: {type: String, required: true},
     note: {type: String},
-    deleted: {type: Boolean},
+    //deleted: {type: Boolean},
     address: {type: String, required: true}
   }
 );

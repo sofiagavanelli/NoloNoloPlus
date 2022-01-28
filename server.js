@@ -22,8 +22,11 @@ process.chdir(__dirname);
 app.use(express.json());
 
 //che senso ha usare middleware così?
+app.use("/js", express.static(path.resolve(__dirname, 'public/js')));
+app.use("/css", express.static(path.resolve(__dirname, 'public/css')));
+app.use("/html", express.static(path.resolve(__dirname, 'public/html')));
+app.use("/img", express.static(path.resolve(__dirname, 'public/img')));
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
-
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,13 +41,11 @@ require('./backend/api.js')(app);
 //QUANDO SI USA ALMAWIFI COMMENTARE QUESTA RIGA
 require("./db");
 
-/*VERSIONE CON VUE
+// Versione con Vue
 app.get("/",function (req, res) {
-    app.use(express.static(__dirname + '/views'));
-
-    res.sendFile(path.join(__dirname + '/views/index.html'));
+    res.sendFile(path.join(__dirname + '/public/html/index.html'));
     
-});*/
+});
 
 app.get("/worker", (req, res) => {
 

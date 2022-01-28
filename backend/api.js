@@ -308,5 +308,23 @@ module.exports = function (app) {
       )
     });
 
+    app.post('/update-client',(req, res)=>{
+        console.log("sono qua");
+
+        const newvalues = { $set: {
+             nome: req.body.nome,
+             cognome: req.body.surname,
+             user: req.body.clientID,
+             city: req.body.place,
+             add: req.body.address,
+             cell: req.body.phone,
+             mail: req.body.emails,
+             note: req.body.note } };
+        const idcliente = req.body.clientID;
+        console.log(newvalues);
+      db.updateClient(idcliente).then(() => {}
+      )
+    });
+
     
 };
