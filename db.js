@@ -47,12 +47,12 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,/*_imageUrl,*/ _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Prodotto({
             category: _category,
-            //image: _imageUrl,
+            image: _imageUrl,
             name: _name,
             brand: _brand,
             speed: _speed,
