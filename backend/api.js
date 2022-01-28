@@ -291,28 +291,9 @@ module.exports = function (app) {
 
     )
     });
-    
-    app.post('/update-prod',(req, res)=>{
-        const newvalues = { $set: {
-             cat: req.body.category,
-             nome: req.body.name,
-             marca: req.body.brand,
-             vel: req.body.speed,
-             len: req.body.length,
-             ospiti: req.body.guests,
-             anno: req.body.year,
-             desc: req.body.summary,
-             price_low: req.body.lowseason,
-             price_high: req.body.highseason,
-             idprod: req.body.product,
-             state: req.body.status } };
-        const idprod = req.body.product;
-      db.updateProd(idprod, newvalues).then(() => {}
-      )
-    });
-
+ 
     app.post('/update-client',async (req, res)=>{
-        console.log("sono qua");
+        console.log("sono nell'update dei clienti ");
         
             const idcliente = req.body.clientID;
             var nome = req.body.name;
@@ -326,6 +307,26 @@ module.exports = function (app) {
 
         console.log(idcliente);
        await db.updateClient(idcliente, nome, cognome, city, add, cell, mail, note)
+    });
+
+    app.post('/update-prod',async (req, res)=>{
+        console.log("sono nell'update dei prodotti");
+
+        const idprod = req.body.product;
+        var cat= req.body.category;
+        var nome = req.body.name;
+        var marca = req.body.brand;
+        var vel = req.body.speed;
+        var len = req.body.length;
+        var ospiti = req.body.guests;
+        var anno = req.body.year;
+        var desc = req.body.summary;
+        var price_low = req.body.lowseason;
+        var price_high = req.body.highseason;
+        var state = req.body.status;  
+
+        console.log(idprod);
+       await db.updateProd(idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 
     

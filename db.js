@@ -89,8 +89,26 @@ module.exports = {
         //await newN.save();
     },
 
-    updateProd: async (id) => {
-        return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}));
+    updateProd: async (id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+        console.log("prova per modifica prodotto");
+        await Prodotto.findOneAndUpdate(
+            {prod_id: id},
+            { $set: {category: categ,
+                name: n,
+                brand: m,
+                speed: v,
+                length: leng,
+                guests: osp,
+                year: aa,
+                summary: description,
+                low_season: p_low,
+                high_season: p_high,
+                status: stat, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
     updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
@@ -115,16 +133,6 @@ module.exports = {
     searchClientID: async (id) => {
         console.log("prova");
         return Promise.resolve(Client.find({ client_id: id }));
-        /*return Promise.resolve(Client.find({ client_id: id }, { $set: {
-            name: nome,
-            surname: cognome,
-            client_id: user,
-            place: city,
-            address: add,
-            phone: cell,
-            email: mail,
-            note: note }}
-            ));*/
     },
 
     //search con il nome per il login! così l'ID rimane ""privato""
