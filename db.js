@@ -44,7 +44,8 @@ module.exports = {
             place: _place,
             address: _address,
             phone: tel, 
-            email: email
+            email: email,
+            note: _note
         }).save();
     },
 
@@ -92,8 +93,22 @@ module.exports = {
         return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}));
     },
 
-    updateClient: async (id) => {
-        return Promise.resolve(Client.findOneAndUpdate({client_id: id}));
+    updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
+        console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
+        console.log("prova");
+        await Client.findOneAndUpdate(
+            {client_id: id},
+            { $set: {name: n,
+                    surname: s,
+                    place: citta,
+                    address: indirizzo,
+                    phone: telefono,
+                    email: mail,
+                    note: notes, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
 
