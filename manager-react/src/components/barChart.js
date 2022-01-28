@@ -29,3 +29,4 @@ export function BarCharT(props){
       </div>
   );
 }
+
