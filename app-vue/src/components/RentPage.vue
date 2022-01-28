@@ -120,7 +120,7 @@ export default {
 
       noleggi: [],
 
-      newRent: [],
+      newRent: {},
       paymethod: null,
 
       checked: '',
@@ -283,23 +283,25 @@ methods: {
   createRent() {
     console.log("ciao");
 
-    this.newRent = [ { product: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod}];
+    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
 
     console.log(this.newRent);
 
     axios.post('/new-rent', this.newRent)
       .then(() => {
 
-        this.$router.push({
-          path: '/profile',
-        });
+        
                   
       })
       .catch((error) => {
         //this.loading = false;
         console.log(error);
       });
-      
+
+      this.$router.push({
+          path: '/profile',
+        });
+
   }
 
   /*check(noleggi) {

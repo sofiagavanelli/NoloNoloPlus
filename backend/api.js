@@ -216,18 +216,17 @@ module.exports = function (app) {
 
         console.log("sono nella post");
 
-        let data = req.body;
         //var newClientInfo = JSON.parse(data);
 
-        var image = data[0].a;
-        var name = data[0].b;
-        var surname = data[0].c; 
-        var user = data[0].d;
-        var city = data[0].e;
-        var address = data[0].f;
-        var pssw = data[0].g;
-        var tel = data[0].h;
-        var email = data[0].i;
+        var image = req.body.a;
+        var name = req.body.b;
+        var surname = req.body.c; 
+        var user = req.body.d;
+        var city = req.body.e;
+        var address = req.body.f;
+        var pssw = req.body.g;
+        var tel = req.body.h;
+        var email = req.body.i;
 
         console.log(image + name + surname + user + city + address + pssw);
 
@@ -248,15 +247,13 @@ module.exports = function (app) {
         console.log("sono nella post");
         console.log(req.body);
 
-        var data = req.body;
-
-      var client = data[0].client;
+      const client = req.body.client;
       console.log(client);
-      var prod = data[0].product; 
-      var startdate = data[0].start;
-      var enddate = data[0].end; 
-      var price = data[0].price;
-      var paymethod = data[0].pay;
+      const prod = req.body.product; 
+      const startdate = req.body.start;
+      const enddate = req.body.end; 
+      const price = req.body.price;
+      const paymethod = req.body.pay;
 
       //non dobbiamo mettere che approved parte da false?
 

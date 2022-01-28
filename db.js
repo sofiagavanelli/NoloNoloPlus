@@ -31,7 +31,7 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (/*_img, */_name, _surname, _username, _pass, _place, _address, tel, email) => {
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email) => {
         
         console.log(_username + "--" + _name + "--" + _pass);
 
