@@ -6,7 +6,7 @@
         <div id="logContent" class="flex-container">
           
           <div id="header" class="flex-container">
-            <img src="../../public/avatar.png" class="avatar">
+            <img src="../assets/avatar.png" class="avatar">
             <p id="logTitle">Login</p>
           </div>
 

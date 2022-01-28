@@ -112,7 +112,7 @@ export default ({
                 this.msg = null;
 
                 this.$router.push({
-                path: '/login',
+                  path: '/login',
                 });
                   
                 })

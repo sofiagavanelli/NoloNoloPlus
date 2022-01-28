@@ -245,6 +245,8 @@ module.exports = function (app) {
 
     app.post('/new-rent',(req, res)=>{
 
+        console.log("sono nella post");
+
       const client = req.body.client;
       const prod = req.body.product; 
       const startdate = req.body.start;

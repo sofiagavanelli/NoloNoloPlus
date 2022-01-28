@@ -4,21 +4,21 @@
         <h3> NoloNoloPlus </h3>
         <div id="aboutdata" class="flex-container">
             <div class="flex-container">
-                <img class="shot" src="../../public/avatar.png">
+                <img class="shot" src="../assets/avatar.png">
                 <div class="persInfo">
                     <h5 class="title"> Sofia Gavanelli </h5>
                     <h6 class="data"> bla bla bla bla bla </h6>
                 </div>
             </div>
             <div class="flex-container">
-                <img class="shot" src="../../public/avatar.png">
+                <img class="shot" src="../assets/avatar.png">
                 <div class="persInfo">
                     <h5 class="title"> Francesca Chiriacò </h5>
                     <h6 class="data"> bla bla bla bla bla </h6>
                 </div>
             </div>
             <div class="flex-container">
-                <img class="shot" src="../../public/avatar.png">
+                <img class="shot" src="../assets/avatar.png">
                 <div class="persInfo">
                     <h5 class="title"> Federica Palestini </h5>
                     <h6 class="data"> bla bla bla bla bla </h6>

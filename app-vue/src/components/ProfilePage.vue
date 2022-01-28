@@ -16,7 +16,7 @@
 
         <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"-->
         <div id="pic_container">
-            <img class="profile_pic" src="../../public/avatar.png" alt="Card image cap">
+            <img class="profile_pic" src="../assets/avatar.png" alt="Card image cap">
         </div>
 
         <b-card class="profile">
