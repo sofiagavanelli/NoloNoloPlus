@@ -299,6 +299,7 @@ methods: {
         //this.loading = false;
         console.log(error);
       });
+      
   }
 
   /*check(noleggi) {

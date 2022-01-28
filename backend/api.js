@@ -246,13 +246,17 @@ module.exports = function (app) {
     app.post('/new-rent',(req, res)=>{
 
         console.log("sono nella post");
+        console.log(req.body);
 
-      const client = req.body.client;
-      const prod = req.body.product; 
-      const startdate = req.body.start;
-      const enddate = req.body.end; 
-      const price = req.body.price;
-      const paymethod = req.body.pay;
+        var data = req.body;
+
+      var client = data[0].client;
+      console.log(client);
+      var prod = data[0].product; 
+      var startdate = data[0].start;
+      var enddate = data[0].end; 
+      var price = data[0].price;
+      var paymethod = data[0].pay;
 
       //non dobbiamo mettere che approved parte da false?
 

@@ -99,7 +99,8 @@ module.exports = {
 
     searchClientID: async (id) => {
         console.log("prova");
-        return Promise.resolve(Client.find({ client_id: id }, { $set: {
+        return Promise.resolve(Client.find({ client_id: id }));
+        /*return Promise.resolve(Client.find({ client_id: id }, { $set: {
             name: nome,
             surname: cognome,
             client_id: user,
@@ -108,7 +109,7 @@ module.exports = {
             phone: cell,
             email: mail,
             note: note }}
-            ));
+            ));*/
     },
 
     //search con il nome per il login! così l'ID rimane ""privato""
