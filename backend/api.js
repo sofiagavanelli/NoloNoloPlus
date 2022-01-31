@@ -328,6 +328,7 @@ module.exports = function (app) {
 
         const idprod = req.body.product;
         var cat= req.body.category;
+        var imm= req.body.image;
         var nome = req.body.name;
         var marca = req.body.brand;
         var vel = req.body.speed;
@@ -340,7 +341,7 @@ module.exports = function (app) {
         var state = req.body.status;  
 
         console.log(idprod);
-       await db.updateProd(idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+       await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 
     

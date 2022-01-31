@@ -25,7 +25,7 @@ app.use(express.json());
 app.use("/js", express.static(path.resolve(__dirname, 'public/js')));
 app.use("/css", express.static(path.resolve(__dirname, 'public/css')));
 app.use("/html", express.static(path.resolve(__dirname, 'public/html')));
-app.use("/img", express.static(path.resolve(__dirname, 'public/img')));
+app.use('/img' , express.static(__dirname  +'/public/img'));
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
