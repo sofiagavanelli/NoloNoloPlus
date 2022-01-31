@@ -34,7 +34,6 @@ module.exports = {
     saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, _note) => {
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
-        //if(! User.find(client_id: _username)) {
             new Client({
                 //image: _img,
                 name: _name,
@@ -47,10 +46,7 @@ module.exports = {
                 email: email,
                 note: _note
             }).save();
-        /* }
-        else
-            return error? */
-
+            
         /*new Client({
             //image: _img,
             name: _name,

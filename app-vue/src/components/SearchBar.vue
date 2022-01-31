@@ -16,7 +16,7 @@
           </b-dropdown>
 
           <b-button id="subButtom" v-on:click="emitToParent"> SUBMIT </b-button>
-          <b-button id="resetButtom" v-on:click="emitToParent"> RESET </b-button>
+          <b-button id="resetButtom" v-on:click="resetFilter"> RESET </b-button>
 
       </div>
 
@@ -172,6 +172,18 @@ export default {
       var filters = [ this.boat, this.lenght, this.year ];
 
       this.$emit('childToParent', filters);
+    },
+
+    resetFilter(event) {
+
+      console.log("ciao");
+      var reset = "reset";
+
+      /*this.boat = null;
+      this.lenght = null;
+      this.year = null;*/
+
+      this.$emit('childToParent', reset);
     },
     
     search() {

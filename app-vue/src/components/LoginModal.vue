@@ -33,7 +33,7 @@
             <b-button id="EnterlogBtn" v-on:click="login()">Login</b-button>
           </div>
 
-          <p id="infoFoot"> per qualsiasi problema: nolonolo.plus@gmail.com </p>
+          <p id="infoFoot"> per qualsiasi problema: nolonoloplus.yacht@gmail.com </p>
                           
         </div>
 

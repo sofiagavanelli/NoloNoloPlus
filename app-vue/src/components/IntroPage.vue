@@ -142,15 +142,12 @@ export default {
 
     filter(data) {
 
-      console.log("data[0] " + data[0] + "data[0][0] " + data[0][0]);
-
-      if(data[0] == "reset") {
+      if(data == "reset") {
 
         this.showInfo = this.prodInfo;
 
       }
       else {
-        console.log(data[0][0]);
         var temp = [];
         var j = 0;
 
@@ -159,7 +156,6 @@ export default {
           console.log(elem.category);
 
           if(elem.category == data[0][0] || elem.category == data[0][1] || elem.category == data[0][2]) {
-            console.log("sono dentro l'if");
             temp[j] = elem;
 
             j++;
