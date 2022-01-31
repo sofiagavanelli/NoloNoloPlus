@@ -1,9 +1,16 @@
-import "../App.css";
 import {BarCharT} from '../components/barChart';
+import {CardComponentClient} from '../components/cardComponentClient';
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../App.css";
+
+var _ = require('lodash');
+
 
 function Dipendenti() {
-  let [numClientRent, setData]=React.useState([]);//contiene l'id del cliente e il numero di rent
+  const [numClientRent, setData]=React.useState([]);
+  const [valueClientRent, setValue]= React.useState([]);
+  const [infoClient, setInfo]=React.useState([]);
     React.useEffect(() =>{
       setData([]);
     fetch('http://localhost:8000/allRents')

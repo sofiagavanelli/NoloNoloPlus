@@ -390,52 +390,52 @@ function acceptProd(data, insertedID) {
         <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" name="name" placeholder="${data[i].name}">
+            <input type="text" class="form-control" id="inputName" name="name" value="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="text" class="form-control" id="inputID" name="product" placeholder="${data[i].prod_id}">
+            <input type="text" class="form-control" id="inputID" name="product" value="${data[i].prod_id}"  readonly="readonly">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="inputBrand" name="brand" placeholder="${data[i].brand}">
+            <input type="text" class="form-control" id="inputBrand" name="brand" value="${data[i].brand}">
           </div>
           <div class="col-md-6">
           <label for="inputCat" class="form-label">Category</label>
-          <input type="text" class="form-control" id="inputCat" name="category" placeholder="${data[i].category}" >
+          <input type="text" class="form-control" id="inputCat" name="category" value="${data[i].category}" >
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
-            <input type="text" class="form-control" id="inputLow" name="lowseason" placeholder="${data[i].low_season} €">
+            <input type="text" class="form-control" id="inputLow" name="lowseason" value="${data[i].low_season} €">
           </div>
           <div class="col-md-6">
             <label for="inputHigh" class="form-label">Price High Season</label>
-            <input type="text" class="form-control" id="inputHigh" name="highseason" placeholder="${data[i].high_season} €">
+            <input type="text" class="form-control" id="inputHigh" name="highseason" value="${data[i].high_season} €">
           </div>
           <div class="col-md-4">
             <label for="inputStatus" class="form-label">Status</label>
-            <input type="text" class="form-control" id="inputStatus" name="status" placeholder="${data[i].status}">
+            <input type="text" class="form-control" id="inputStatus" name="status" value="${data[i].status}">
           </div>
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputYear" name="year" placeholder="${data[i].length}">
+            <input type="text" class="form-control" id="inputYear" name="length" value="${data[i].length}">
             </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
-            <input type="text" class="form-control" id="inputGuest" name="guests" placeholder="${data[i].guests}">
+            <input type="text" class="form-control" id="inputGuest" name="guests" value="${data[i].guests}">
           </div>
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputYear" name="year" placeholder="${data[i].year}">
+            <input type="text" class="form-control" id="inputYear" name="year" value="${data[i].year}">
           </div>
           <div class="col-md-2">
             <label for="inputSpeed" class="form-label">Speed</label>
-            <input type="text" class="form-control" id="inputSpeed" name="speed" placeholder="${data[i].speed}">
+            <input type="text" class="form-control" id="inputSpeed" name="speed" value="${data[i].speed}">
           </div>
           <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Product description</label>
-              <textarea class="form-control" id="summary" rows="3" name="summary" placeholder="${data[i].summary}"></textarea>
+              <textarea class="form-control" id="summary" rows="3" name="summary" value="${data[i].summary}"></textarea>
             </div>
           </div>
           <div class="col-12">
@@ -1120,13 +1120,12 @@ function modifyClient(data, insertedID){
   for (let i in data) {
 
     if(data[i].client_id == insertedID) {
+      console.log(insertedID);
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
-  $( "#ctable" ).empty();
-  $( "#ctable2" ).empty();
 
   div = $(`         
-  <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> ALL CLIENTS</button>
+  <button class="btn-back"onclick= "goBackClients()"><i class="fas fa-home"></i> ALL CLIENTS</button>
   `);
 $("#ctable").append(div);
 
@@ -1136,36 +1135,36 @@ div = $(`
         <form class="row g-3" action="/update-client" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 5%; margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputName" name="nome" placeholder="${data[i].name}">
+            <input type="text" class="form-control" id="inputName" name="name" value="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="inputSurname" class="form-label">Surname</label>
-            <input type="text" class="form-control" id="inputSurname" name="surname" placeholder="${data[i].surname}">
+            <input type="text" class="form-control" id="inputSurname" name="surname" value="${data[i].surname}">
           </div>
           <div class="col-12">
             <label for="inputId" class="form-label">Client ID</label>
-            <input type="text" class="form-control" id="inputId" name="clientID" placeholder="${data[i].client_id}">
+            <input type="text" class="form-control" id="inputId" name="clientID" value="${data[i].client_id}"  readonly="readonly">
           </div>
           <div class="col-md-6">
           <label for="inputPlace" class="form-label">City</label>
-          <input type="text" class="form-control" id="inputPlace" name="place" placeholder="${data[i].place}">
+          <input type="text" class="form-control" id="inputPlace" name="place" value="${data[i].place}">
           </div>
           <div class="col-md-6">
             <label for="inputAdd" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAdd" name="Address" placeholder="${data[i].address}">
+            <input type="text" class="form-control" id="inputAdd" name="address" value="${data[i].address}">
           </div>
           <div class="col-md-6">
             <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="${data[i].email}">
+            <input type="email" class="form-control" id="inputEmail" name="email" value="${data[i].email}">
           </div>
           <div class="col-md-6">
             <label for="inputCell" class="form-label">Phone number</label>
-            <input type="text" class="form-control" id="inputCell" name="phone" placeholder="${data[i].phone}">
+            <input type="text" class="form-control" id="inputCell" name="telefono" value="${data[i].phone}">
           </div>
           <div class="col-12">
             <div class="mb-3">
               <label for="note" class="form-label">Note</label>
-              <textarea class="form-control" id="note" rows="3" name="note" placeholder="${data[i].note}"></textarea>
+              <textarea class="form-control" id="note" rows="3" name="note" value="${data[i].note}"></textarea>
             </div>
           </div>
           <div class="col-12">

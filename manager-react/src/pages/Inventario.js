@@ -1,25 +1,63 @@
 import "../App.css";
 import {BarCharT} from '../components/barChart';
+import {CardComponentProd} from '../components/cardComponentProd';
 import React from "react";
+var _ = require('lodash');
+
 
 function Inventario() {
-    let [numClientRent, setData]=React.useState([]);//contiene l'id del cliente e il numero di rent
-    React.useEffect(() =>{
-      setData([]);
-    fetch('http://localhost:8000/allRents')
+    const [numClientRent, setData]=React.useState([]);//contiene l'id del prodotto e il numero di rent
+    const [valueProdRent, setValue]= React.useState([]);//contiene il ricavato totale dei noleggi per ogni prodotto
+    const [infoProd, setInfo]=React.useState([]);//contiene le informazioni di ogni prodotto
+    function getNumRent(){
+      fetch('http://localhost:8000/allRents')
       .then(results => results.json())
       .then(data => {
-        const name = data //filtra i duplicati
-          .map(dataItem => dataItem.prod_id) 
-          .filter((prod_id, index, array) => array.indexOf(prod_id) === index);
-
-        const counts = name //conta il numero di noleggi per ogni cliente
-         .map(prod_id => ({
-           prod_id: prod_id,
-           value: data.filter(item => item.prod_id === prod_id).length//.filter crea un nuovo array con solo gli oggetti che hanno lo stesso id e restituisce la lunghezza dell'array
-         }));
-        setData(counts);
+        setData( _.chain(data)
+        .groupBy("prod_id")
+        .map((value, key) => ({prod_id: key, value: value.length})) 
+        .value()
+        );
+        getValue(data);
       });
+    }
+    
+
+    function getValue(data){
+      let valueRent=[];
+      const rentForProd=
+      _.chain(data)
+      .groupBy("prod_id")
+      .map((value, key) => ({prod_id: key, rents: value})) 
+      .value();
+      //console.log(rentForProd);
+      for(var i of rentForProd){
+        valueRent.push({prod_id: i.prod_id, value: 0});
+      }
+      
+      for(var i in rentForProd){
+        var tot=0;
+        for(var j in rentForProd[i].rents){
+          if(rentForProd[i].rents[j].approved){//manca da controllare se il noleggio è finito
+            tot+=rentForProd[i].rents[j].price;
+          }
+          valueRent[i].value = tot; 
+        }
+      }
+      setValue(valueRent);
+    }
+
+    function getInfo(){
+      fetch('http://localhost:8000/prods')
+        .then(results => results.json())
+        .then(info => {
+          setInfo(info);
+        });
+    }
+
+    React.useEffect(() =>{
+      getNumRent();
+      getInfo();
     }, []);
 
     return (
@@ -27,6 +65,10 @@ function Inventario() {
         <h1>Statistiche inventario</h1>
         <h5>Numero di noleggi per prodotto</h5>
         <BarCharT dati={numClientRent} name={"numero di noleggi per prodotto"} etichetta={"prod_id"}/>
+        <h5>Fatturato per ogni prodotto</h5>
+        <BarCharT dati={valueProdRent} name={"fatturato per ogni prodotto"} etichetta={"prod_id"}/>
+        <h2>Informazioni prodotti</h2>
+        <CardComponentProd info={infoProd} divName={"cardProdDiv"} keyDiv={"cardProd"}/>
       </div>
       );
 }

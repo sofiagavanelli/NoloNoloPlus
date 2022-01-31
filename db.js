@@ -31,7 +31,7 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email) => {
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, _note) => {
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
         //if(! User.find(client_id: _username)) {
@@ -44,12 +44,24 @@ module.exports = {
                 place: _place,
                 address: _address,
                 phone: tel, 
-                email: email
+                email: email,
+                note: _note
             }).save();
         /* }
         else
             return error? */
 
+        /*new Client({
+            //image: _img,
+            name: _name,
+            surname: _surname,
+            client_id: _username,
+            password: _pass,
+            place: _place,
+            address: _address,
+            phone: tel, 
+            email: email,
+        }).save();*/
     },
 
     saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
@@ -92,28 +104,50 @@ module.exports = {
         //await newN.save();
     },
 
-    updateProd: async (id) => {
-        return Promise.resolve(Prodotto.findOneAndUpdate({prod_id: id}));
+    updateProd: async (id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+        console.log("prova per modifica prodotto");
+        await Prodotto.findOneAndUpdate(
+            {prod_id: id},
+            { $set: {category: categ,
+                name: n,
+                brand: m,
+                speed: v,
+                length: leng,
+                guests: osp,
+                year: aa,
+                summary: description,
+                low_season: p_low,
+                high_season: p_high,
+                status: stat, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
-    updateClient: async (id) => {
-        return Promise.resolve(Client.findOneAndUpdate({client_id: id}));
+    updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
+        console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
+        console.log("prova");
+        await Client.findOneAndUpdate(
+            {client_id: id},
+            { $set: {name: n,
+                    surname: s,
+                    place: citta,
+                    address: indirizzo,
+                    phone: telefono,
+                    email: mail,
+                    note: notes, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
 
     searchClientID: async (id) => {
         console.log("prova");
         return Promise.resolve(Client.find({ client_id: id }));
-        /*return Promise.resolve(Client.find({ client_id: id }, { $set: {
-            name: nome,
-            surname: cognome,
-            client_id: user,
-            place: city,
-            address: add,
-            phone: cell,
-            email: mail,
-            note: note }}
-            ));*/
     },
 
     //search con il nome per il login! così l'ID rimane ""privato""
