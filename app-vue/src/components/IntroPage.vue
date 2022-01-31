@@ -10,12 +10,12 @@
         </div>
 
         <div> 
-          <SearchBar />
+          <SearchBar v-on:childToParent="filter"  />
         </div>
 
         <div id="main_page" class="flex-container">
           
-            <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
+            <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images">
               <img class="post_image" :src="item.image" alt="Card image cap">
               <b-card-body>
                 <h3 class="title"> {{item.category}}: {{item.name}} </h3>
@@ -96,6 +96,7 @@ export default {
   data() {
     return {
       prodInfo: [],
+      showInfo: [],
       //slide: 0,
       //sliding: null,
       normal:true,
@@ -113,6 +114,9 @@ export default {
     axios.get('/prods')
       .then((response) => {
         this.prodInfo = response.data;
+
+        this.showInfo = response.data;
+
       })
       .catch((error) => {
         //this.loading = false;
@@ -136,8 +140,36 @@ export default {
 
     },
 
-    filter() {
-      console.log("hai cliccato su filtra");
+    filter(data) {
+
+      console.log("data[0] " + data[0] + "data[0][0] " + data[0][0]);
+
+      if(data[0] == "reset") {
+
+        this.showInfo = this.prodInfo;
+
+      }
+      else {
+        console.log(data[0][0]);
+        var temp = [];
+        var j = 0;
+
+        this.showInfo.forEach(elem => {
+
+          console.log(elem.category);
+
+          if(elem.category == data[0][0] || elem.category == data[0][1] || elem.category == data[0][2]) {
+            console.log("sono dentro l'if");
+            temp[j] = elem;
+
+            j++;
+          }
+
+        });
+
+        this.showInfo = temp;
+      }
+
     }
 
 
