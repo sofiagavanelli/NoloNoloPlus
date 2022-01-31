@@ -167,7 +167,7 @@ function openInventory() {
               
         div = $(`     
         <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-        <img src="${ProdInfo[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+        <img src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
         <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
@@ -406,11 +406,11 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
-            <input type="text" class="form-control" id="inputLow" name="lowseason" value="${data[i].low_season} €">
+            <input type="text" class="form-control" id="inputLow" name="lowseason" value="${data[i].low_season}">
           </div>
           <div class="col-md-6">
             <label for="inputHigh" class="form-label">Price High Season</label>
-            <input type="text" class="form-control" id="inputHigh" name="highseason" value="${data[i].high_season} €">
+            <input type="text" class="form-control" id="inputHigh" name="highseason" value="${data[i].high_season}">
           </div>
           <div class="col-md-4">
             <label for="inputStatus" class="form-label">Status</label>
@@ -433,9 +433,13 @@ function acceptProd(data, insertedID) {
             <input type="text" class="form-control" id="inputSpeed" name="speed" value="${data[i].speed}">
           </div>
           <div class="col-12">
+          <label for="inputImg" class="form-label">Image</label>
+          <input type="text" class="form-control" id="inputImg" name="image" value="${data[i].image}">
+        </div>
+          <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Product description</label>
-              <textarea class="form-control" id="summary" rows="3" name="summary" value="${data[i].summary}"></textarea>
+              <input type="text" class="form-control" style="height: 5em; rows: 3;" id="summary"  name="summary" value="${data[i].summary}"></textarea>
             </div>
           </div>
           <div class="col-12">
@@ -1164,7 +1168,7 @@ div = $(`
           <div class="col-12">
             <div class="mb-3">
               <label for="note" class="form-label">Note</label>
-              <textarea class="form-control" id="note" rows="3" name="note" value="${data[i].note}"></textarea>
+              <input type="text" class="form-control" id="note" rows="3" name="note" value="${data[i].note}"></textarea>
             </div>
           </div>
           <div class="col-12">

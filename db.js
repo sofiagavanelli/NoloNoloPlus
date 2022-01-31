@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
 //da inserire in una variabile env:
-const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
-const connectionStringOld = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
+const connectionStringOld= "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
+const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -89,12 +89,13 @@ module.exports = {
         //await newN.save();
     },
 
-    updateProd: async (id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+    updateProd: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
             {prod_id: id},
             { $set: {category: categ,
+                image: im,
                 name: n,
                 brand: m,
                 speed: v,
