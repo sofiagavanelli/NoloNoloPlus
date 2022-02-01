@@ -102,6 +102,8 @@ export default {
           this.$store.commit("setUsername", this.username);
           //console.log(this.$store.state.username);
 
+          localStorage.setItem('CurrentUser', JSON.stringify(this.username));
+
           //data = this.loggedIN;
 
           this.$router.push({

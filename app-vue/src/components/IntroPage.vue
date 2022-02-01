@@ -16,9 +16,12 @@
         <div id="main_page" class="flex-container">
           
             <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images">
-              <img class="post_image" :src="item.image" alt="Card image cap">
+              <!-- PER LA SRC DELL'IMAGE: src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" 
+              PRIMA: :src="item.image"
+              PROVA: :src="this.url + item.category + '/' + item.prod_id + this.ex"-->
+              <img class="post_image" :src="this.url + item.category + '/' + item.prod_id + this.ex" alt="Card image cap">
               <b-card-body>
-                <h3 class="title"> {{item.category}}: {{item.name}} </h3>
+                <h3 class="title"> {{item.name}} </h3>
                 <h4 class="title"> {{item.brand}} </h4>
                 <div class="details">
                   <ul class="d-flex flex-wrap pl-0" >
@@ -95,6 +98,9 @@ export default {
   },
   data() {
     return {
+      url: "https://site202133.tw.cs.unibo.it/img/",
+      ex: ".jpg",
+
       prodInfo: [],
       showInfo: [],
       //slide: 0,
@@ -109,6 +115,12 @@ export default {
 
   mounted() {
 
+    if(localStorage.getItem('CurrentUser')) {
+      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+    }
+
+    console.log(JSON.parse(localStorage.getItem('CurrentUser')));
+
     console.log("sono dentro mounted");
   
     axios.get('/prods')
@@ -116,6 +128,8 @@ export default {
         this.prodInfo = response.data;
 
         this.showInfo = response.data;
+
+        console.log(this.url + this.prodInfo[0].category + '/' + this.prodInfo[0].prod_id + this.ex);
 
       })
       .catch((error) => {

@@ -152,7 +152,14 @@ export default({
     },
     created() { //diverso da mounted!!
 
-        this.username = this.$store.state.username;
+        if(localStorage.getItem('CurrentUser')) {
+            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+
+            this.username = this.$store.state.username;
+        }
+        else {
+            this.username = this.$store.state.username;
+        }
 
         axios.get('/allClients/' + this.username)
           .then((response) => {
@@ -176,6 +183,16 @@ export default({
           });
         
     },
+
+    /*mounted() {
+
+        if(localStorage.getItem('CurrentUser')) {
+            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+
+            this.username = this.$store.state.username;
+        }
+
+    },*/
 
     methods: {
 
