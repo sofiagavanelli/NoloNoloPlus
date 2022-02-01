@@ -33,7 +33,7 @@
             <b-button id="EnterlogBtn" v-on:click="login()">Login</b-button>
           </div>
 
-          <p id="infoFoot"> per qualsiasi problema: nolonolo.plus@gmail.com </p>
+          <p id="infoFoot"> per qualsiasi problema: nolonoloplus.yacht@gmail.com </p>
                           
         </div>
 
@@ -101,6 +101,8 @@ export default {
           //console.log(this.$store.state);
           this.$store.commit("setUsername", this.username);
           //console.log(this.$store.state.username);
+
+          localStorage.setItem('CurrentUser', JSON.stringify(this.username));
 
           //data = this.loggedIN;
 

@@ -79,6 +79,14 @@ export default {
     };
   },
 
+  mounted() {
+
+    if(localStorage.getItem('CurrentUser')) {
+      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+    }
+
+  },
+
   methods: {
 
     logout() {
@@ -86,6 +94,8 @@ export default {
       //TODO: inserire alert per il logout!!
 
       this.$store.commit("setUsername", false);
+
+      localStorage.removeItem('CurrentUser');
     }
 
   }

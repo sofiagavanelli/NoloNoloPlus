@@ -10,15 +10,18 @@
         </div>
 
         <div> 
-          <SearchBar />
+          <SearchBar v-on:childToParent="filter"  />
         </div>
 
         <div id="main_page" class="flex-container">
           
-            <b-card v-for="(item, index) in prodInfo" :key="item.prod_id" class="boat-images">
-              <img class="post_image" :src="item.image" alt="Card image cap">
+            <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images">
+              <!-- PER LA SRC DELL'IMAGE: src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" 
+              PRIMA: :src="item.image"
+              PROVA: :src="this.url + item.category + '/' + item.prod_id + this.ex"-->
+              <img class="post_image" :src="this.url + item.category + '/' + item.prod_id + this.ex" alt="Card image cap">
               <b-card-body>
-                <h3 class="title"> {{item.category}}: {{item.name}} </h3>
+                <h3 class="title"> {{item.name}} </h3>
                 <h4 class="title"> {{item.brand}} </h4>
                 <div class="details">
                   <ul class="d-flex flex-wrap pl-0" >
@@ -95,7 +98,11 @@ export default {
   },
   data() {
     return {
+      url: "https://site202133.tw.cs.unibo.it/img/",
+      ex: ".jpg",
+
       prodInfo: [],
+      showInfo: [],
       //slide: 0,
       //sliding: null,
       normal:true,
@@ -108,11 +115,22 @@ export default {
 
   mounted() {
 
+    if(localStorage.getItem('CurrentUser')) {
+      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+    }
+
+    console.log(JSON.parse(localStorage.getItem('CurrentUser')));
+
     console.log("sono dentro mounted");
   
     axios.get('/prods')
       .then((response) => {
         this.prodInfo = response.data;
+
+        this.showInfo = response.data;
+
+        console.log(this.url + this.prodInfo[0].category + '/' + this.prodInfo[0].prod_id + this.ex);
+
       })
       .catch((error) => {
         //this.loading = false;
@@ -136,8 +154,32 @@ export default {
 
     },
 
-    filter() {
-      console.log("hai cliccato su filtra");
+    filter(data) {
+
+      if(data == "reset") {
+
+        this.showInfo = this.prodInfo;
+
+      }
+      else {
+        var temp = [];
+        var j = 0;
+
+        this.showInfo.forEach(elem => {
+
+          console.log(elem.category);
+
+          if(elem.category == data[0][0] || elem.category == data[0][1] || elem.category == data[0][2]) {
+            temp[j] = elem;
+
+            j++;
+          }
+
+        });
+
+        this.showInfo = temp;
+      }
+
     }
 
 

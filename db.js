@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
 //da inserire in una variabile env:
-const connectionString= "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
+const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 const connectionStringOld = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
 
 const Client = require("./Models/client");
@@ -31,11 +31,23 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email) => {
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, _note) => {
         
-        console.log(_username + "--" + _name + "--" + _pass);
-
-        new Client({
+        //TODO CONTROLLARE DUPLICATO DELL'USERNAME
+            new Client({
+                //image: _img,
+                name: _name,
+                surname: _surname,
+                client_id: _username,
+                password: _pass,
+                place: _place,
+                address: _address,
+                phone: tel, 
+                email: email,
+                note: _note
+            }).save();
+            
+        /*new Client({
             //image: _img,
             name: _name,
             surname: _surname,
@@ -45,8 +57,7 @@ module.exports = {
             address: _address,
             phone: tel, 
             email: email,
-            note: _note
-        }).save();
+        }).save();*/
     },
 
     saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {

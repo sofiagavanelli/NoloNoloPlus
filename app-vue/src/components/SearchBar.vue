@@ -8,14 +8,16 @@
           <!--p id="text1"> applica un filtro </p-->
           <b-dropdown toggle-class='customDropdown' text="applica un filtro " variant='none'> 
             <h6> Tipologie </h6>
-            <b-form-checkbox-group v-model="selected" :options="type" multiple></b-form-checkbox-group>
+            <b-form-checkbox-group v-model="boat" :options="type" multiple></b-form-checkbox-group>
             <h6> Lunghezze </h6>
-            <b-form-checkbox-group v-model="selected" :options="boatL" multiple></b-form-checkbox-group>
+            <b-form-checkbox-group v-model="lenght" :options="boatL" multiple></b-form-checkbox-group>
             <h6> Anno </h6>
-            <b-form-checkbox-group v-model="selected" :options="boatY" multiple></b-form-checkbox-group>
+            <b-form-checkbox-group v-model="year" :options="boatY" multiple></b-form-checkbox-group>
           </b-dropdown>
 
-          <b-button id="subButtom" v-on:click="search()"> SUBMIT </b-button>
+          <b-button id="subButtom" v-on:click="emitToParent"> SUBMIT </b-button>
+          <b-button id="resetButtom" v-on:click="resetFilter"> RESET </b-button>
+
       </div>
 
       <!--b-button id="subButtom" v-on:click="log()"> SUBMIT </b-button-->
@@ -134,7 +136,9 @@ export default {
   name: 'SearchBar',
   data() {
       return {
-        selected: [],
+        boat: [],
+        lenght: [],
+        year: [],
         type: [ //destinations
           //{ value: null, text: 'Please select an option' },
           { value: 'yacht', text: 'Yacht' },
@@ -162,6 +166,25 @@ export default {
           
   },
   methods: {
+
+    emitToParent(event) {
+      
+      var filters = [ this.boat, this.lenght, this.year ];
+
+      this.$emit('childToParent', filters);
+    },
+
+    resetFilter(event) {
+
+      console.log("ciao");
+      var reset = "reset";
+
+      /*this.boat = [];
+      this.lenght = [];
+      this.year = [];*/
+
+      this.$emit('childToParent', reset);
+    },
     
     search() {
       console.log(this.selected);

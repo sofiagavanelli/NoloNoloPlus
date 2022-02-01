@@ -228,16 +228,30 @@ module.exports = function (app) {
         var tel = req.body.h;
         var email = req.body.i;
 
-        console.log(image + name + surname + user + city + address + pssw);
+        db.searchClientID(user).then(proof => {
 
-        //_img, _name, _surname, _username, _pass, _place, _address
-        db.saveClient(image, name, surname, user, pssw, city, address, tel, email).then(result => {
+            var prova = JSON.stringify(proof);
 
-            console.log(result);
+            console.log("risultato:" + prova + " lunghezza: " + prova.length + " :era qui");
 
-            res.end();
-        })
+            if(prova.length > 2) {
+                console.log("sono entrato in proof");
+                res.write(JSON.stringify(false));
+
+                res.end();
+            }
+            else {
+                //_img, _name, _surname, _username, _pass, _place, _address
+                db.saveClient(image, name, surname, user, pssw, city, address, tel, email).then(result => {
+
+                    res.write(JSON.stringify(true));
+                    console.log(result);
+
+                    res.end();
+                })
+            }
         
+        })
         //console.log(data);
 
     });

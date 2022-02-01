@@ -107,13 +107,25 @@ export default ({
             this.newClient = { a: this.image, b: this.name, c: this.surname, d: this.username, e: this.city, f: this.address, g: this.pass, h: this.phone, i: this.email };
 
             axios.post('/new-client', this.newClient)
-              .then(() => {
+              .then((result) => {
 
                 this.msg = null;
 
-                this.$router.push({
-                  path: '/login',
-                });
+                console.log(result.data);
+
+                if(result.data == false) {
+                  this.msg = "USERNAME NON DISPONIBILE - MODIFICARE";
+
+                  this.newClient = null;
+
+                }
+                else {
+
+                  this.$router.push({
+                    path: '/login',
+                  });
+
+                }
                   
                 })
             .catch((error) => {
