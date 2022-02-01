@@ -386,7 +386,7 @@ function acceptProd(data, insertedID) {
       $("#ctable").append(div);
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
-        <img src="${data[i].image}" alt="" width="380" height="280">
+        <img src="https://site202133.tw.cs.unibo.it/img/${data[i].category}/${data[i].prod_id}.jpg" alt="" width="380" height="280">
         <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
@@ -394,7 +394,7 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="text" class="form-control" id="inputID" name="product" value="${data[i].prod_id}"  readonly="readonly">
+            <input type="text" class="form-control" id="inputID" name="product" value="${data[i].prod_id}" >
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
@@ -647,9 +647,9 @@ $( "#ctable2" ).empty();
 
 div = $(`  
 <div class="flex-form-container"> 
-    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
-    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
-    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+    <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" onclick="showGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showBarche(inventoryARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort by </button>
@@ -672,7 +672,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">             
+  <img src="https://site202133.tw.cs.unibo.it/img/${inventoryARRAY[i].category}/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">             
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -700,9 +700,9 @@ $( "#ctable2" ).empty();
 
 div = $(`         
 <div class="flex-form-container"> 
-    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
-    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
-    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+    <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" onclick="showYGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showBarche(inventoryARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort by </button>
@@ -725,7 +725,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+  <img src="https://site202133.tw.cs.unibo.it/img/${inventoryARRAY[i].category}/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -752,9 +752,9 @@ $( "#ctable2" ).empty();
 
 div = $(`         
 <div class="flex-form-container"> 
-    <button type="button" class="btn-cat" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
-    <button type="button" class="btn-cat" data-bs-toggle="button">Gommoni</button>
-    <button type="button" class="btn-cat" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
+    <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
+    <button type="button" class="btn-cat" onclick="showGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showBarche(inventoryARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort by </button>
@@ -777,7 +777,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+  <img src="https://site202133.tw.cs.unibo.it/img/${inventoryARRAY[i].category}/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -814,7 +814,7 @@ function showYacht(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="https://site202133.tw.cs.unibo.it/img/${data[i].category}/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -855,7 +855,7 @@ function showGomm(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="https://site202133.tw.cs.unibo.it/img/${data[i].category}/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -896,7 +896,7 @@ function showBarche(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
-            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="https://site202133.tw.cs.unibo.it/img/${data[i].category}/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -932,8 +932,6 @@ $("#ctable").append(div);
 
 div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
-        <img src="" alt="" width="380" height="280">
-        <input type="file" id="myFile" name="filename">
         <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
