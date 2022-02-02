@@ -438,7 +438,9 @@ form.example input[type=text] {
   padding: 8px 22px;
   background-color: #fff;
   margin-left: 1%;
-
+}
+.btn-cat:hover{
+  background-color:#709dbb ;
 }
 .dropdown{
   margin-right: 5%;

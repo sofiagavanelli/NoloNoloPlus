@@ -166,7 +166,7 @@ function openInventory() {
         let div = null;
               
         div = $(`     
-        <div class="card" style="width: auto; float: left; display: block; margin-left: 3%;">        
+        <div class="card" style="width: auto; float: left; display: block; margin-left: 3%; margin-bottom: auto;">        
         <img src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
@@ -205,20 +205,21 @@ function openRents() {
     }
     });
   div = $(`   
-  <div class="flex-form-container">
-  <div class="dropdown" style="margin-left: 30%;">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort by </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+  <div class="flex-form-container"> 
+  <button type="button" class="btn-cat" onclick="pastRents(rentARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Closed</button>
+  <button type="button" class="btn-cat" onclick="activeRents(rentARRAY)" data-bs-toggle="button">Active</button>
+  <button type="button" class="btn-cat" onclick="futureRents(rentARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Future</button>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort by </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
     <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+      </div>
     </div>
+    <input type="text" id="rentId" placeholder=" Search product..." name="search">          
+  <button class ="form-btn" type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button>
   </div>
-  <input type="text" id="rentId" placeholder=" Search product..." name="search">          
-  <button class ="form-btn" type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button> 
-</div>
-        
-
 
   `);
               
@@ -1028,7 +1029,7 @@ $("#ctable").append(div);
       <div class="item-2" style=" margin-top: -3%;"> 
 
       <input type="date" name="start" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
-      <input type="date" name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
+      <input type="date" min=""  name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
     </div>
     
     <div class="btn-block">
@@ -1039,7 +1040,6 @@ $("#ctable").append(div);
   
 `);
 $("#ctable2").append(div);
-
 }
 
 function checkRent(){
@@ -1184,6 +1184,140 @@ div = $(`
 }
 if (!found) 
 console.log("non esiste cliente");
+}
+
+function pastRents(data){
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+
+  console.log(date);
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> RENTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    var dateA = new Date(data[i].end_date);
+    var dateB = new Date(date);
+    console.log(dateA);
+    if(dateA.getTime() < dateB.getTime()){
+      let div = null;
+        div = $(` 
+        <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${data[i]._id}</h5>
+              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
+              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("errore");
+  
+
+}
+
+function futureRents(data){
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+
+  console.log(date);
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> RENTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    var dateA = new Date(data[i].end_date);
+    var dateB = new Date(date);
+    console.log(dateA);
+    if(dateA.getTime() > dateB.getTime()){
+      let div = null;
+        div = $(` 
+        <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${data[i]._id}</h5>
+              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
+              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("errore");
+
+}
+
+function activeRents(data){
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+
+  console.log(date);
+  $( "#ctable2" ).empty();
+  $( "#ctable" ).empty();
+
+  div = $(`         
+    <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> RENTS</button>
+        `);
+  $("#ctable").append(div);
+
+  for (let i in data) {
+    var dateA = new Date(data[i].end_date);
+    var dateB = new Date(date);
+    console.log(dateA);
+    if(dateA.getTime() == dateB.getTime()){
+      let div = null;
+        div = $(` 
+        <div class="row2">
+        <div class="column">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rental: ${data[i]._id}</h5>
+              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
+              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
+              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+              <button class="btn-mod">Modify</button>
+            </div>
+          </div>
+        </div> 
+      <div>  `);
+         $("#ctable2").append(div);
+
+         var found = true;
+    }
+
+  }
+  if (!found) 
+    console.log("errore");
+  
+
 }
 
 
