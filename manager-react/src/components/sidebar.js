@@ -55,10 +55,10 @@ export const Header = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<RiCustomerService2Fill />}><Link to="/"> Employees</Link></MenuItem>
-              <MenuItem active={true} icon={< AiOutlineTeam/>} ><Link to="/clienti">Customers</Link></MenuItem>
-              <MenuItem active={true} icon={<AiOutlineShoppingCart />}><Link to="/noleggi">Rentals</Link></MenuItem>
-              <MenuItem active={true} icon={<BsBoxSeam />}><Link to="/inventario">Products</Link></MenuItem>
+              <MenuItem active={true} icon={<RiCustomerService2Fill />}><Link to="/"> Impiegati</Link></MenuItem>
+              <MenuItem active={true} icon={< AiOutlineTeam/>} ><Link to="/clienti">Clienti</Link></MenuItem>
+              <MenuItem active={true} icon={<AiOutlineShoppingCart />}><Link to="/noleggi">Noleggi</Link></MenuItem>
+              <MenuItem active={true} icon={<BsBoxSeam />}><Link to="/inventario">Prodotti</Link></MenuItem>
             </Menu>
           </SidebarContent>
           

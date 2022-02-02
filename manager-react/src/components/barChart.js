@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export function BarCharT(props){
   
@@ -19,11 +19,11 @@ export function BarCharT(props){
             barSize={40}
             >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={props.etichetta} />
+            <XAxis dataKey={props.xValue} />
             <YAxis />
             <Tooltip />
             <Legend verticalAlign="top" margin={{top: 5, left: 0, right: 0, bottom: 0}}/>
-            <Bar name={props.name} dataKey="value" fill="#8884d8" />
+            <Bar name={props.name} dataKey={props.yValue} fill="#9aa5c3" />
             </BarChart>
         </ResponsiveContainer>
       </div>
