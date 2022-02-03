@@ -19,7 +19,7 @@
               <!-- PER LA SRC DELL'IMAGE: src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" 
               PRIMA: :src="item.image"
               PROVA: :src="this.url + item.category + '/' + item.prod_id + this.ex"-->
-              <img class="post_image" :src="this.url + item.category + '/' + item.prod_id + this.ex" alt="Card image cap">
+              <img class="post_image" :src="item.image" alt="Card image cap">
               <b-card-body>
                 <h3 class="title"> {{item.name}} </h3>
                 <h4 class="title"> {{item.brand}} </h4>
@@ -127,9 +127,12 @@ export default {
       .then((response) => {
         this.prodInfo = response.data;
 
-        this.showInfo = response.data;
+        //TODO: SECONDO ME SI PUO CARICARE NEL DB DIRETTAMENTE COSI FIN DALL'INIZIO: SI GENERA L'URL
+        this.prodInfo.forEach(elem => {
+          elem.image = this.url + elem.category + '/' + elem.prod_id + this.ex;
+        });
 
-        console.log(this.url + this.prodInfo[0].category + '/' + this.prodInfo[0].prod_id + this.ex);
+        this.showInfo = response.data;
 
       })
       .catch((error) => {

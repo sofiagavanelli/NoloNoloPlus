@@ -38,31 +38,32 @@
 
                 <template v-if="this.edit">
                     <h3 class="title">
-                        <b-form-input v-model="name" placeholder="Modifica Nome"></b-form-input>
-                        <b-form-input v-model="surname" placeholder="Modifica Cognome"></b-form-input>
+                        <b-form-input v-model="newInfo[0]" placeholder="Modifica Nome"></b-form-input>
+                        <b-form-input v-model="newInfo[1]" placeholder="Modifica Cognome"></b-form-input>
                     </h3> 
                     <div class="details">
                     <ul class="d-flex flex-wrap pl-0" >
-                        <li class="title"> USERNAME: 
-                            <!--div class="form-input"--> <!--class="md-form mb-5"-->
-                                <!--label data-error="wrong" data-success="right" for="username">Username</label-->
+                        <!-- NON SI PUO CAMBIARE L'USERNAME PERCHE UNICO -->
+                        <!--li class="title"> USERNAME: 
+                            <--div class="form-input"--> <!--class="md-form mb-5">
+                                <--label data-error="wrong" data-success="right" for="username">Username</label>
                             <b-form-input v-model="username" placeholder="Modifica Username"></b-form-input>
-                            <!--/div-->
-                        </li>
+                            </div>
+                        </li-->
                         <li class="title"> CITTÀ: 
-                            <b-form-input v-model="city" placeholder="Modifica Città"></b-form-input>
+                            <b-form-input v-model="newInfo[2]" placeholder="Modifica Città"></b-form-input>
                         </li>
                         <li class="title"> INDIRIZZO:
-                            <b-form-input v-model="address" placeholder="Modifica Indirizzo"></b-form-input>
+                            <b-form-input v-model="newInfo[3]" placeholder="Modifica Indirizzo"></b-form-input>
                         </li>
                         <li class="title"> PASSWORD:
-                            <b-form-input type="password" v-model="pass" placeholder="Modifica Password"></b-form-input>
+                            <b-form-input type="password" v-model="newInfo[4]" placeholder="Modifica Password"></b-form-input>
                         </li>
                         <li class="title"> TELEFONO:
-                            <b-form-input v-model="tel" placeholder="Modifica Telefono"></b-form-input>
+                            <b-form-input v-model="newInfo[5]" placeholder="Modifica Telefono"></b-form-input>
                         </li>
                         <li class="title"> EMAIL:
-                            <b-form-input v-model="email" placeholder="Modifica Email"></b-form-input>
+                            <b-form-input v-model="newInfo[6]" placeholder="Modifica Email"></b-form-input>
                         </li>
                     </ul>
                     </div>
@@ -79,16 +80,16 @@
                         <b-button class="viewBtn" aria-label="button noleggi passati" v-on:click="changeView('f')">futuri</b-button>
                     </div>
 
-                    <div class="rents" v-for="item in showRents" :key="item._id">
+                    <div class="rents" v-for="(item, index) in showRents" :key="item._id">
                         <!-- green light -->
                         <template v-if="item.approved"> 
                             <font-awesome-icon icon="circle" style="color:green"/> approvato
-                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" v-on:click="editRent(item._id)" />
+                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" v-on:click="editRent(index, item._id)" />
                         </template>
                         <!-- red light -->
                         <template v-else> 
                             <font-awesome-icon icon="circle" style="color:red"/> non approvato
-                            <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(item._id)" />
+                            <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(index, item._id)" />
                         </template>
                         <br>
                         <div class="rentInfo">
@@ -103,9 +104,9 @@
                 <div id="pastRents">
                     <h5 class="title"> FATTURE PER NOLEGGI PASSATI: </h5>
 
-                    <div class="rents" v-for="elem in pastRent" :key="elem._id">
+                    <div class="rents" v-for="(elem, index) in pastRent" :key="elem._id">
                         <div class="rentInfo">
-                            {{elem.prod_id}} <font-awesome-icon icon="print" v-on:click="print(item._id)" /> <br>
+                            {{elem.prod_id}} <font-awesome-icon icon="print" v-on:click="print(index, item._id)" /> <br>
                             {{elem.start_date.slice(0,10)}} <br> 
                             {{elem.end_date.slice(0,10)}}
                         </div>
@@ -114,6 +115,28 @@
 
             </b-card-body>
         </b-card>
+
+
+        <!-- The modal -->
+      <!--div id="modal-container" class="flex-container">
+        <b-modal ok-title="Conferma" id="recapRentModal" v-on:ok="updateRent()">
+          <h2> Il tuo noleggio </h2>
+
+              <div class="details">
+                <ul class="d-flex flex-wrap pl-0" >
+                  <li class="title">Imbarcazione:
+                    <b-form-input v-model="newRent" :placeholder="this.rentToEdit.prod_id"></b-form-input>
+
+                       <h5 class="data"> {{this.showRents.prod_id}} </h5> </li>
+                  <li class="title">Data di inizio:<h5 class="data"> {{this.rentToEdit.start_date.slice(0, 10)}} </h5> </li>
+                  <li class="title">Data di fine:<h5 class="data"> {{this.rentToEdit.end_date.slice(0, 10)}} </h5> </li>
+                  <li class="title">Prezzo:<h5 class="data"> {{this.rentToEdit.price}} € </h5> </li>
+                  <li class="title">Metodo di pagamento:<h5 class="data"> {{this.rentToEdit.paymethod}} </h5> </li>
+                </ul>
+              </div>
+        
+        </b-modal> 
+      </div-->
 
     </div>
 
@@ -137,6 +160,8 @@ export default({
             pastRent: [],
             activeRent: [],
 
+            newInfo: [null],
+
             //per profile edit
             name: null,
             surname: null, 
@@ -147,7 +172,12 @@ export default({
             tel: null,
             email: null,
 
-            showRents: []
+            showRents: [],
+
+            rentToEdit: [],
+            id: '',
+
+            newRent: [],
         };
     },
     created() { //diverso da mounted!!
@@ -216,11 +246,11 @@ export default({
                 var start_date = new Date(elem.start_date);
                 var end_date = new Date(elem.end_date);
 
-                if(end_date <= today) {
+                if(end_date < today) {
                     this.pastRent[i] = elem;
                     i++;
                 }
-                else if(start_date >= today) {
+                else if(start_date > today) {
                     this.futureRent[j] = elem;
                     j++;
                 }
@@ -239,15 +269,74 @@ export default({
 
         },
 
-        save() {
-            console.log(this.name + this.surname + this.username + this.city + this.address + this.pass);
+        /*app.post('/update-client',async (req, res)=>{
+        console.log("sono nell'update dei clienti ");
+        
+            const idcliente = req.body.clientID;
+            var nome = req.body.name;
+            var cognome = req.body.surname;
+            //var user = req.body.clientID;
+            var city = req.body.place;
+            var add = req.body.address; 
+            var cell = req.body.telefono;
+            var mail = req.body.email;
+            var note = req.body.note;
 
+        console.log(idcliente);
+       await db.updateClient(idcliente, nome, cognome, city, add, cell, mail, note)
+    });*/
+
+        save() {
+
+            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email};
+
+            var changed = [];
+
+            for(let i=0; i<6; i++) {
+                if(this.newInfo[i] && this.newInfo[i].length > 3)
+                    changed[i] = true;
+            }
+
+            if(changed[0]) update.name = this.newInfo[0];
+            if(changed[1]) update.surname = this.newInfo[1];
+            if(changed[2]) update.place = this.newInfo[2];
+            if(changed[3]) update.address = this.newInfo[3];
+            //ci andrebbe il cambio password!
+            //if(changed[4]) update.pass = this.newInfo[4];
+            if(changed[5]) update.phone = this.newInfo[5];
+            if(changed[6]) update.email = this.newInfo[6];
+
+            axios.post('/update-client/', update)
+                .then((response) => {
+                    //console.log(response.data);
+                    console.log(response);
+
+                })
+                .catch((error) => {
+                    //this.loading = false;
+                    console.log(error);
+                });
+
+            //oppure facciamo una reload direttamente
+            //il cliente deve fare refresh
             this.edit = !this.edit;
+
         },
 
-        editRent(rent_id) {
+        editRent(_index, rent_id) {
 
+            //modale per l'edit
+            this.id = _index;
+            //this.rentToEdit = this.showRents[_index];
 
+            console.log(this.rentToEdit);
+
+            this.$bvModal.show("recapRentModal");
+
+        },
+
+        updateRent() {
+            console.log("dovrei fare la post");
         },
 
         print(rent_id) {

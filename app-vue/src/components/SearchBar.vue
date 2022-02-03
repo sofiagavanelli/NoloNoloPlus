@@ -179,9 +179,9 @@ export default {
       console.log("ciao");
       var reset = "reset";
 
-      /*this.boat = [];
+      this.boat = [];
       this.lenght = [];
-      this.year = [];*/
+      this.year = [];
 
       this.$emit('childToParent', reset);
     },
