@@ -161,6 +161,13 @@
   z-index: -1;
 }  
 
+#buttonInventario{
+  display: flex;
+  justify-content: center;
+}
 
-
-
+#arcobaleno{
+  background-image: linear-gradient(to left, violet, indigo, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

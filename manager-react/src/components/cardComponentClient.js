@@ -20,9 +20,10 @@ export function CardComponentClient(props){
                         </Card.Body>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem><h6>client id:</h6> {cliente.client_id}</ListGroupItem>
-                            <ListGroupItem><h6>address:</h6> {cliente.address}</ListGroupItem>
-                            <ListGroupItem><h6>place:</h6> {cliente.place}</ListGroupItem>
-                            <ListGroupItem><h6>number of rent:</h6> {cliente.value}</ListGroupItem>
+                            <ListGroupItem><h6>Indirizzo:</h6> {cliente.address}</ListGroupItem>
+                            <ListGroupItem><h6>Città:</h6> {cliente.place}</ListGroupItem>
+                            <ListGroupItem><h6>Numero di noleggi:</h6> {cliente.number}</ListGroupItem>
+                            <ListGroupItem><h6>Ricavi noleggi:</h6> {cliente.value}</ListGroupItem>
                         </ListGroup>
                         </Card>
                     </Col>

@@ -1,5 +1,5 @@
 import {BarCharT} from '../components/barChart';
-import {CardComponentClient} from '../components/cardComponentClient';
+//import {CardComponentClient} from '../components/cardComponentClient';
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
@@ -8,32 +8,59 @@ var _ = require('lodash');
 
 
 function Dipendenti() {
-  const [numClientRent, setData]=React.useState([]);
-  const [valueClientRent, setValue]= React.useState([]);
-  const [infoClient, setInfo]=React.useState([]);
-    React.useEffect(() =>{
-      setData([]);
+  const [numDipRent, setData]=React.useState([]);
+  const [valueDipRent, setValue]= React.useState([]);
+    
+  function getNumRent(){
     fetch('http://localhost:8000/allRents')
       .then(results => results.json())
       .then(data => {
-        const name = data //filtra i duplicati
-          .map(dataItem => dataItem.worker_id) 
-          .filter((worker_id, index, array) => array.indexOf(worker_id) === index);
-
-        const counts = name //conta il numero di noleggi per ogni cliente
-         .map(worker_id => ({
-           worker_id: worker_id,
-           value: data.filter(item => item.worker_id === worker_id).length//.filter crea un nuovo array con solo gli oggetti che hanno lo stesso id e restituisce la lunghezza dell'array
-         }));
-        setData(counts);
+        setData( _.chain(data)//creao un oggetto che contiene il client id e il numero di noleggi
+        .groupBy("worker_id")
+        .map((value, key) => ({worker_id: key, value: value.length})) 
+        .value()
+        );
+        getValue(data);
       });
+  }
+
+
+  function getValue(data){
+    const rentForDip=
+      _.chain(data)//creao un oggetto che contiene il client id e tutti i suoi noleggi 
+      .groupBy("worker_id")
+      .map((value, key) => ({worker_id: key, rents: value}))  //per avere il numero di noleggi basta sostituire con 'rents: value.lenght'
+      .value();
+    let valueRent=[];
+    for(var i of rentForDip){
+      valueRent.push({worker_id: i.worker_id, value: 0});
+    }
+    
+    for(var i in rentForDip){
+      var tot=0;
+      for(var j in rentForDip[i].rents){
+        if(rentForDip[i].rents[j].approved){//manca da controllare se il noleggio è finito
+          tot+=rentForDip[i].rents[j].price;
+        }
+        
+      }
+      valueRent[i].value = tot; 
+    }
+    console.log(valueRent);
+    setValue(valueRent);
+  }
+
+  React.useEffect(() =>{
+     getNumRent();
     }, []);
 
   return (
     <div id="dipendenti">
         <h1>Statistiche degli impiegati</h1>
-        <h5>Numero di noleggi per prodotto</h5>
-        <BarCharT dati={numClientRent} name={"numero di noleggi per impiegato"} etichetta={"worker_id"}/>
+        <h5>Numero di noleggi per impiegato</h5>
+        <BarCharT dati={numDipRent} name={"numero di noleggi per impiegato"} xValue={"worker_id"} yValue={"value"}/>
+        <h5>Fatturato per ogni dipendente</h5>
+        <BarCharT dati={valueDipRent} name={"fatturato per ogni impiegato"} xValue={"worker_id"} yValue={"value"}/>
     </div>
     );
 }
