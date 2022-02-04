@@ -2,12 +2,13 @@
 
     <div id="rent_page" class="flex-container">
 
-      <b-button v-on:click="emitToParent">
+      <b-button id="backBtn" v-on:click="emitToParent">
         <font-awesome-icon icon="arrow-left" /> PRODOTTI
       </b-button>
 
       <!-- cambiare estetica? -->
       <b-card class="boat-images" >
+
           <img class="post_image" :src="this.parentData.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{this.parentData.name}} </h3>
@@ -342,6 +343,12 @@ methods: {
   padding-top: 4em;
 }*/
 
+#backBtn {
+  height: 3em;
+  width: 7em;
+  padding: 0.5em;
+}
+
 #payBtn {
   width: 100%;
   margin: 1em;
@@ -391,11 +398,13 @@ methods: {
     float: left;
     border: 1px solid #86B3D1;
     /*border-radius: 1rem;*/
-    margin: 4% 2% 0 2%; /*(up-right-down-left)*/
+    margin: 2% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
+
+    width: 70%;
 
     /*z-index: -1;*/
 }
@@ -440,5 +449,19 @@ methods: {
 #modal-container {
   justify-content: center;
 }
+
+#rent_page {
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+
+  .boat-images {
+    width: auto;
+  }
+
+}
+
 
 </style>
