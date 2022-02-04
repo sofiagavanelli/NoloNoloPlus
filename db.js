@@ -120,8 +120,7 @@ module.exports = {
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log("Errore"))
-    },
+            .catch(x => console.log("Errore"))},
 
     updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
