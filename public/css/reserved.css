@@ -404,26 +404,6 @@ form.example input[type=text] {
   float:right;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.btn-mod2{
-  position: relative;
-  background-color: #5bce7d;
-  border: #000;
-  border-radius: 25px;
-  padding: 8px 22px;
-  float:right;
-
-}
-.btn-d2{
-  position: relative;
-  left: 50%;
-  background-color: #eb5248;
-  border: #000;
-  border-radius: 25px;
-  padding: 8px 22px;
-  margin-left: 5px;
-
-}
-
 .btn-back{
   background-color: #7495c4;
   border: #000;

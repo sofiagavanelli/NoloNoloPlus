@@ -338,7 +338,7 @@ module.exports = function (app) {
         var desc = req.body.summary;
         var price_low = req.body.lowseason;
         var price_high = req.body.highseason;
-        var state = req.body.status;  
+        var state = req.body.stato;  
 
         console.log(idprod);
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
