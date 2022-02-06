@@ -1,4 +1,5 @@
 <template>
+<div>
 
     <div id="profile_page" class="flex-container">
 
@@ -14,9 +15,9 @@
         profileInfo[0]
         -->
 
-        <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"-->
+        <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"   src="../assets/avatar.png"-->
         <div id="pic_container">
-            <img class="profile_pic" src="../assets/avatar.png" alt="Card image cap">
+            <img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap">
         </div>
 
         <b-card class="profile">
@@ -32,6 +33,7 @@
                         <li class="title"> INDIRIZZO: <h5 class="data"> {{this.profileInfo[0].address}} </h5> </li>
                         <li class="title"> TELEFONO: <h5 class="data"> {{this.profileInfo[0].phone}} </h5> </li>
                         <li class="title"> EMAIL: <h5 class="data"> {{this.profileInfo[0].email}} </h5> </li>
+                        <li class="title"> COMPLEANNO: <h5 class="data"> {{this.profileInfo[0].birth}} </h5> </li>
                     </ul>
                     </div>
                 </template>
@@ -65,31 +67,72 @@
                         <li class="title"> EMAIL:
                             <b-form-input v-model="newInfo[6]" placeholder="Modifica Email"></b-form-input>
                         </li>
+                        <li class="title"> DATA DI NASCITA:
+                            <b-form-input v-model="newInfo[7]" placeholder="Modifica Compleanno"></b-form-input>
+                        </li>
                     </ul>
                     </div>
                     <b-button id="saveBtn" v-on:click="save()">save</b-button>
                 </template>
-                
-                <div id="noleggiTab">
 
-                    <h5 class="title"> NOLEGGI: </h5> 
+                <template v-if="!this.loading">
+                <div class="noleggiTab">
 
                     <div id="btnTab" class="flex-container">
-                        <!--b-button class="viewBtn" v-on:click="changeView('p')">passati</b-button-->
-                        <b-button class="viewBtn" aria-label="button noleggi attivi" v-on:click="changeView('a')">attivi</b-button>
-                        <b-button class="viewBtn" aria-label="button noleggi passati" v-on:click="changeView('f')">futuri</b-button>
+                        <b-button class="viewBtn" v-on:click="changeView('a')">noleggi attivi</b-button>
                     </div>
 
-                    <div class="rents" v-for="(item, index) in showRents" :key="item._id">
+                    <!--h5 class="title"> NOLEGGI ATTIVI: </h5--> 
+
+                    <!--div id="btnTab" class="flex-container">
+                        <b-button class="viewBtn" v-on:click="changeView('p')">passati</b-button>
+                        <b-button class="viewBtn" aria-label="button noleggi attivi" v-on:click="changeView('a')">attivi</b-button>
+                        <b-button class="viewBtn" aria-label="button noleggi passati" v-on:click="changeView('f')">futuri</b-button>
+                    </div-->
+                    
+                    <template v-if="this.active">
+                    <div class="rents" v-for="(item, index) in activeRent" :key="item._id">
+                        <!-- green light -->
+                        <template v-if="!item.approved && controlApproved(index)"> 
+                            
+                            <!--router-link id="toProblem" aria-labelledby="problemLabel" to="/edit-rent"-->
+                                <b-button v-on:click="openAlert()" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
+                            <!--/router-link-->
+
+                        </template>
+
+                        <template v-else>
+
+                            <font-awesome-icon icon="circle" style="color:green"/> approvato
+
+                            <div class="rentInfo">
+                                {{item.prod_id}} <br>
+                                {{item.start_date.slice(0,10)}} <br>
+                                {{item.end_date.slice(0,10)}}
+                            </div>
+                        </template>
+
+                    </div>
+                    </template>
+                </div>
+
+                <div class="noleggiTab">
+
+                    <div id="btnTab" class="flex-container">
+                        <b-button class="viewBtn" v-on:click="changeView('f')">noleggi futuri</b-button>
+                    </div>
+
+                    <template v-if="this.future">
+                    <div class="rents" v-for="(item, index) in futureRent" :key="item._id">
                         <!-- green light -->
                         <template v-if="item.approved"> 
                             <font-awesome-icon icon="circle" style="color:green"/> approvato
-                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" v-on:click="editRent(index, item._id)" />
+                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" v-on:click="editRent(index)" />
                         </template>
                         <!-- red light -->
                         <template v-else> 
                             <font-awesome-icon icon="circle" style="color:red"/> non approvato
-                            <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(index, item._id)" />
+                            <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(index)" />
                         </template>
                         <br>
                         <div class="rentInfo">
@@ -98,57 +141,64 @@
                             {{item.end_date.slice(0,10)}}
                         </div>
                     </div>
+                    </template>
 
                 </div>
 
-                <div id="pastRents">
+                <div class="noleggiTab">
                     <h5 class="title"> FATTURE PER NOLEGGI PASSATI: </h5>
 
-                    <div class="rents" v-for="(elem, index) in pastRent" :key="elem._id">
+                    <div class="rents" v-for="elem in pastRent" :key="elem._id">
                         <div class="rentInfo">
-                            {{elem.prod_id}} <font-awesome-icon icon="print" v-on:click="print(index, item._id)" /> <br>
-                            {{elem.start_date.slice(0,10)}} <br> 
-                            {{elem.end_date.slice(0,10)}}
+                            {{elem.prod_id}} <br>
+                            dal {{elem.start_date.slice(0,10)}} al {{elem.end_date.slice(0,10)}} <br>
+                            costo: {{elem.price}} € <br>
+                            sconti applicati: {{elem.discount}} <br>
+                            metodo di pagamento: {{elem.paymethod}}
                         </div>
                     </div>   
                 </div>
 
+                </template>
+
             </b-card-body>
         </b-card>
 
-
+        
         <!-- The modal -->
-      <!--div id="modal-container" class="flex-container">
-        <b-modal ok-title="Conferma" id="recapRentModal" v-on:ok="updateRent()">
-          <h2> Il tuo noleggio </h2>
+      <div id="modal-container" class="flex-container">
+        <b-modal ok-title="Presa visione" id="alertModal" v-on:ok="updateRent()">
 
-              <div class="details">
-                <ul class="d-flex flex-wrap pl-0" >
-                  <li class="title">Imbarcazione:
-                    <b-form-input v-model="newRent" :placeholder="this.rentToEdit.prod_id"></b-form-input>
-
-                       <h5 class="data"> {{this.showRents.prod_id}} </h5> </li>
-                  <li class="title">Data di inizio:<h5 class="data"> {{this.rentToEdit.start_date.slice(0, 10)}} </h5> </li>
-                  <li class="title">Data di fine:<h5 class="data"> {{this.rentToEdit.end_date.slice(0, 10)}} </h5> </li>
-                  <li class="title">Prezzo:<h5 class="data"> {{this.rentToEdit.price}} € </h5> </li>
-                  <li class="title">Metodo di pagamento:<h5 class="data"> {{this.rentToEdit.paymethod}} </h5> </li>
-                </ul>
-              </div>
+            <div id="disclaimer" class="flex-container">
+                <font-awesome-icon icon="exclamation-circle" />
+                <h6> Chiediamo scusa per il disagio, ma il noleggio che doveva iniziare oggi non sarà più possibile
+                per indisponibilità dell'imbarcazione. 
+                Per lei a disposizione uno sconto del 15% su uno dei prossimi noleggi! 
+                </h6>
+            </div>
         
         </b-modal> 
-      </div-->
+      </div>
 
     </div>
 
+</div>
 </template>
 
 <script>
 import axios from '../http'
+import EditRent from './EditRent.vue'
 
 export default({
     name: 'ProfilePage',
     data() {
         return {
+            active: false,
+            future: false,
+
+            loading: true, 
+
+            editing: false,
             edit: false,
 
             username: null,
@@ -170,17 +220,29 @@ export default({
             address: null,
             pass: null,
             tel: null,
+            birth: null,
             email: null,
 
             showRents: [],
 
-            rentToEdit: [],
             id: '',
 
             newRent: [],
+            today: new Date(),
+
+
+            //PER STAMPA
+            myUrl: '#',
+            myFilename: ''
         };
     },
-    created() { //diverso da mounted!!
+    components: {
+        EditRent,
+    },
+    props: {
+        rentToEdit: [],
+    },
+    mounted() { //diverso da mounted!!
 
         if(localStorage.getItem('CurrentUser')) {
             this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
@@ -226,14 +288,18 @@ export default({
 
     methods: {
 
+        onChildBack() {
+            
+            this.editing = !this.editing;
+
+        },
+
         changeView(_type) {
             if(_type == 'a') {
-                this.showRents = this.activeRent;
+                this.active = !this.active;
             }
-            else if(_type == 'f')
-                this.showRents = this.futureRent;
-            else
-                console.log("error");
+            else 
+                this.future = !this.future;
         },
 
         sortRents(noleggi) {
@@ -260,6 +326,47 @@ export default({
                 }
 
             });
+
+            console.log("sto per entrare in control approved");
+
+            this.loading = !this.loading;
+
+        },
+
+        controlApproved(_id) {
+
+            /*activeR.forEach(elem => {
+
+                var start = new Date(elem.start_date);
+                console.log(this.today);
+                console.log(start.getDay() + " " + this.today.getDay());
+                console.log(start.getMonth() + " " + this.today.getMonth());
+                console.log(start.getYear() + " " + this.today.getYear());
+                console.log(elem.approved);
+
+                if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
+                    start.getYear() == this.today.getYear() && elem.approved == false) {
+
+                    this.editing = true;
+
+                    console.log("sono dentro control approved");
+
+                }
+
+            });*/
+
+            var start = new Date(this.activeRent[_id].start_date);
+                
+
+            if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
+                start.getYear() == this.today.getYear()) {
+
+                return true;
+
+            }
+            else
+                return false;
+
 
         },
 
@@ -288,11 +395,11 @@ export default({
 
         save() {
 
-            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email};
+            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
 
             var changed = [];
 
-            for(let i=0; i<6; i++) {
+            for(let i=0; i<8; i++) {
                 if(this.newInfo[i] && this.newInfo[i].length > 3)
                     changed[i] = true;
             }
@@ -302,20 +409,25 @@ export default({
             if(changed[2]) update.place = this.newInfo[2];
             if(changed[3]) update.address = this.newInfo[3];
             //ci andrebbe il cambio password!
-            //if(changed[4]) update.pass = this.newInfo[4];
-            if(changed[5]) update.phone = this.newInfo[5];
+            if(changed[4]) update.pass = this.newInfo[4];
+            if(changed[5]) update.telefono = this.newInfo[5];
             if(changed[6]) update.email = this.newInfo[6];
+            if(changed[7]) update.birth = this.newInfo[7];
 
-            axios.post('/update-client/', update)
-                .then((response) => {
-                    //console.log(response.data);
-                    console.log(response);
+            if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7]) {
 
-                })
-                .catch((error) => {
-                    //this.loading = false;
-                    console.log(error);
-                });
+                axios.post('/update-client/', update)
+                    .then((response) => {
+                        //console.log(response.data);
+                        console.log(response);
+
+                        //reload!!
+                    })
+                    .catch((error) => {
+                        //this.loading = false;
+                        console.log(error);
+                    });
+            }
 
             //oppure facciamo una reload direttamente
             //il cliente deve fare refresh
@@ -323,15 +435,25 @@ export default({
 
         },
 
-        editRent(_index, rent_id) {
+        openAlert(/*_index, rent_id*/) {
 
             //modale per l'edit
-            this.id = _index;
+            //this.id = _index;
             //this.rentToEdit = this.showRents[_index];
+
+            this.$bvModal.show("alertModal");
+
+        },
+
+        editRent(_id) {
+
+            this.rentToEdit = this.futureRent[_id];
 
             console.log(this.rentToEdit);
 
-            this.$bvModal.show("recapRentModal");
+            this.$router.push({
+                path: '/EditRent',
+            })
 
         },
 
@@ -341,6 +463,11 @@ export default({
 
         print(rent_id) {
 
+            var rentToPrint = this.pastRent[rent_id];
+
+            const jsonData = encodeURIComponent('{"is_valid": true}');
+            this.myUrl = `data:text/plain;charset=utf-8,${jsonData}`;
+            this.myFilename = 'example.json';
 
         }
 
@@ -352,6 +479,15 @@ export default({
 
 * {
     /*border: 1px solid red;*/
+}
+
+#disclaimer {
+  background-color: rgb(252, 191, 191);
+  border-radius: 4px;
+  padding: 0.5em;
+  margin: 1em;
+
+  font-size: 12px;
 }
 
 .viewBtn {
@@ -406,7 +542,7 @@ export default({
     padding: 0.5em;
 }
 
-#noleggiTab, #pastRents {
+.noleggiTab{
     border: 1.5px solid #86B3D1;
     padding: 1em;
     border-radius: 4px;

@@ -96,6 +96,11 @@ export default {
       this.$store.commit("setUsername", false);
 
       localStorage.removeItem('CurrentUser');
+
+      this.$router.push({
+          path: '/home',
+      });
+
     }
 
   }

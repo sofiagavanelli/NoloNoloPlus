@@ -193,24 +193,28 @@ methods: {
           temp = temp - (temp*this.parentData.discount/100);
         }
 
-        /*if(this.controlDate()) { 
-          this.total = temp;
-          this.payment = true;
-          else {
-          this.total = "non disponibile";
-          //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+        if(this.parentData.status == "buono") {
+          temp = temp - (temp*5/100);
         }
-          */
+        else if(this.parentData.status == "rovinato") {
+          temp = temp - (temp*10/100);
+        }
 
-          /*.then((valid) => {
-                if (valid) // do something
-              // other validations here
-              //  save
-            })*/
+        //TODO AGGIUNGERE QUESTIONE DEL MESE DI NASCITA CON LO SCONTO 
+        /* data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
+          var start_date = new Date(this.startD);
+          var start_month = start_date.getMonth();
+          var birth_month = birth_date.getMonth();
+
+          if (start_month == birth_month) {
+            temp = temp - (temp*15/100);
+          }
+
+        */
 
         /*this.controlDate()
           .then((valid) => {*/
-            if(this.controlDate()) {
+            if(this.parentData.status != "rotto" && this.controlDate()) {
               this.total = temp;
               this.payment = true;
             }

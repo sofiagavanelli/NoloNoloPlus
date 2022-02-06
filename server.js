@@ -50,7 +50,7 @@ app.get("/",function (req, res) {
 app.get("/worker", (req, res) => {
 
     //app.use("/public", express.static(path.resolve(__dirname, 'public')));
-
+    
     res.sendFile(path.join(__dirname + "/reserved.html"));
   
       /*fs.readFile("index.html", function (err, data) {

@@ -31,7 +31,7 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, _note) => {
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, bday, _note) => {
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
             new Client({
@@ -44,6 +44,7 @@ module.exports = {
                 address: _address,
                 phone: tel, 
                 email: email,
+                birth: bday,
                 note: _note
             }).save();
             
@@ -93,7 +94,7 @@ module.exports = {
             worker_id: _worker,
             price: _price,
             paymethod: _payment,
-            //approved: _ok,
+            approved: _ok,
             //worker_id: _worker
         }).save());
         
@@ -122,17 +123,19 @@ module.exports = {
             .then(x => console.log("ok"))
             .catch(x => console.log("Errore"))},
 
-    updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
+    updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
         console.log("prova");
         await Client.findOneAndUpdate(
             {client_id: id},
             { $set: {name: n,
                     surname: s,
+                    password: pass,
                     place: citta,
                     address: indirizzo,
                     phone: telefono,
                     email: mail,
+                    birth: bday,
                     note: notes, }},
             {returnOriginal: false}
             ).exec()
