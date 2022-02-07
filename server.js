@@ -1,6 +1,8 @@
 /* Le tre applicazioni sono fatte con tre modelli applicativi diversi: il back-office deve essere realizzato 
 con Javascript e JQuery. Le altre applicazioni con due framework diversi tra Angular, React, Vue e Svelte.*/
 
+require("dotenv").config(/*{path: __dirname + '/.env'}*/);
+
 var fs = require('fs');
 const cors = require("cors");
 var path = require('path');
