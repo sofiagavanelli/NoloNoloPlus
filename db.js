@@ -86,6 +86,8 @@ module.exports = {
     saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _ok) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
+        if(!_ok) _ok=false;
+
         /*const newN =*/ return Promise.resolve(new Noleggio({
             //_id: _id,
             prod_id: _prod,
@@ -96,6 +98,8 @@ module.exports = {
             price: _price,
             paymethod: _payment,
             approved: _ok,
+            deleted: false,
+            delivered: false
             //worker_id: _worker
         }).save());
         
@@ -208,6 +212,26 @@ module.exports = {
 
     deleteRental: async (id) => {
         return Promise.resolve(Noleggio.findOneAndDelete({ _id : id }));
+    },
+
+    deleteBoolRent: async (id) => {
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {deleted: true, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
+    deliverBoolRent: async (id) => {
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {delivered: true, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
     /* joinClientsRentals: async (options = {}) =>{

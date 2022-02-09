@@ -107,7 +107,7 @@ export default {
           //data = this.loggedIN;
 
           this.$router.push({
-            path: '/home',
+            path: '/profile',
             //params: { data } 
           });
 

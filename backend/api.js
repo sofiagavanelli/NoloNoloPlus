@@ -191,7 +191,7 @@ module.exports = function (app) {
           }
         )
 
-        });
+        });    
 
     ///ELIMINAZIONE CLIENTE PER ID
     app.delete('/prods/:id', function(req, res){
@@ -274,7 +274,7 @@ module.exports = function (app) {
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, false).then((result) => {
+      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, null).then((result) => {
         console.log(result);
       }
 
@@ -344,6 +344,23 @@ module.exports = function (app) {
 
         console.log(idprod);
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+    });
+
+    //UPDATE RENT PER L'ELIMINAZIONE
+    app.post('/delete-rent',async (req, res)=>{
+
+        var rent_id = req.body.id;
+        console.log(req.params.id);
+
+        await db.deleteBoolRent(rent_id)
+    });
+
+    app.post('/deliver-rent',async (req, res)=>{
+
+        var rent_id = req.body.id;
+        console.log(req.params.id);
+
+        await db.deliverBoolRent(rent_id)
     });
 
     

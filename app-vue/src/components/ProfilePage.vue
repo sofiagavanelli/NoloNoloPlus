@@ -68,7 +68,7 @@
                             <b-form-input v-model="newInfo[6]" placeholder="Modifica Email"></b-form-input>
                         </li>
                         <li class="title"> DATA DI NASCITA:
-                            <b-form-input v-model="newInfo[7]" placeholder="Modifica Compleanno"></b-form-input>
+                            <b-form-input type="date" v-model="newInfo[7]" placeholder="Modifica Compleanno"></b-form-input>
                         </li>
                     </ul>
                     </div>
@@ -134,6 +134,7 @@
                             <font-awesome-icon icon="circle" style="color:red"/> non approvato
                             <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(index)" />
                         </template>
+                        <font-awesome-icon icon="trash" aria-label="button elimina noleggio" v-on:click="deleteRent(index)" />
                         <br>
                         <div class="rentInfo">
                             {{item.prod_id}} <br>
@@ -148,14 +149,22 @@
                 <div class="noleggiTab">
                     <h5 class="title"> FATTURE PER NOLEGGI PASSATI: </h5>
 
-                    <div class="rents" v-for="elem in pastRent" :key="elem._id">
+                    <div class="rents" v-for="(elem, index) in pastRent" :key="elem._id">
                         <div class="rentInfo">
+                            <template v-if="elem.deleted">
+                                <p style="background-color:red;color:white;"> CANCELLATO </p>
+                            </template>
                             {{elem.prod_id}} <br>
                             dal {{elem.start_date.slice(0,10)}} al {{elem.end_date.slice(0,10)}} <br>
                             costo: {{elem.price}} € <br>
                             sconti applicati: {{elem.discount}} <br>
-                            metodo di pagamento: {{elem.paymethod}}
+                            metodo di pagamento: {{elem.paymethod}} <br>
+
+                            <template v-if="!elem.delivered && !elem.deleted">
+                                <b-button v-on:click="deliver(index)"> CONSEGNA </b-button>
+                            </template>
                         </div>
+                        
                     </div>   
                 </div>
 
@@ -242,7 +251,7 @@ export default({
     props: {
         rentToEdit: [],
     },
-    mounted() { //diverso da mounted!!
+    mounted() { 
 
         if(localStorage.getItem('CurrentUser')) {
             this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
@@ -312,7 +321,7 @@ export default({
                 var start_date = new Date(elem.start_date);
                 var end_date = new Date(elem.end_date);
 
-                if(end_date < today) {
+                if(end_date < today || elem.deleted) {
                     this.pastRent[i] = elem;
                     i++;
                 }
@@ -422,6 +431,7 @@ export default({
                         console.log(response);
 
                         //reload!!
+                        
                     })
                     .catch((error) => {
                         //this.loading = false;
@@ -452,7 +462,7 @@ export default({
             console.log(this.rentToEdit);
 
             this.$router.push({
-                path: '/EditRent',
+                path: '/edit-rent',
             })
 
         },
@@ -461,13 +471,54 @@ export default({
             console.log("dovrei fare la post");
         },
 
-        print(rent_id) {
+        /*print(rent_id) {
 
             var rentToPrint = this.pastRent[rent_id];
 
             const jsonData = encodeURIComponent('{"is_valid": true}');
             this.myUrl = `data:text/plain;charset=utf-8,${jsonData}`;
             this.myFilename = 'example.json';
+
+        },*/
+
+        deleteRent(_ind) {
+            console.log(this.futureRent[_ind]);
+
+            var rent_to_delete = {};
+            rent_to_delete = {id: this.futureRent[_ind]._id}
+
+            axios.post('/delete-rent', rent_to_delete)
+                .then((response) => {
+                    //console.log(response.data);
+                    console.log(response);
+
+                        //reload!!
+                })
+                .catch((error) => {
+                        //this.loading = false;
+                    console.log(error);
+                });
+        },
+
+        deliver(_ind) {
+            //TODO UPDATE 
+            //elem.deliverd = true
+
+            var rent_to_deliver = {};
+            rent_to_deliver = {id: this.pastRent[_ind]._id}
+
+            axios.post('/deliver-rent', rent_to_deliver)
+                .then((response) => {
+                    //console.log(response.data);
+                    console.log(response);
+
+                        //reload!!
+                })
+                .catch((error) => {
+                        //this.loading = false;
+                    console.log(error);
+                });
+            
 
         }
 

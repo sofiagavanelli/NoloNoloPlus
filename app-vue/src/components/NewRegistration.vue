@@ -109,7 +109,7 @@ export default ({
           }
           else {
             //TODO MODIFICARE IMG PROFILO
-            this.image= "https://lh3.googleusercontent.com/AmrQe6e0h6ugF6FtfN1y9BDVpKKiaGHu9xskKJtRMA4lUFDsAwj2Ffy_w2gMIHpD2mKvEw_vLPwiAID09i13OFRsP-33JNaSsjzqGnoPzKxXGQrOSy28k9w4ZSX1C1FDkpbjRkrsSpxW74q7hl2Ghn_1FwV04wVHcCWHqPIOqCxmLLAvc-ycKKA1DNdZh38gsB065Ix44eR5BkQD-1mR04agbID37cHdDWGNkfRBsj9gbJwyARq2-pOk7RD7Fr3XLEl_gO7dhpMnU0rcUpvMSVhm3iyopydacUUmXPOuFfMdvFeTjMx5hh1SD9ptfoGeZ-l8SFU3fBWf9tuT7P2g_sKCONWIKGntWdu7vOmJkRmuaR8mngx8rkJ5Jztp1Gfi47qyrD0upUHlDOzEXskX45HV6lOX7nKFHatwsL5Za1-sjYp-zViXLIj0ADYLzRKheJIdWUXfT5PjHQ92R6zjdBAOaNkQvXGbwzY2DpjHz0iQ4B4u9x_IwpJVoMb6UA8KKZiYgPNB7xalyCD07VCS6D68-drUvWP30o6LYKOIpjcmipJWxEKpfn7KKxzxp-rGOYM5f-ZvgGEhmxJO87tDRw0f6CDes-vzlrCWpSUB4WknzU9_nBKH9aVI_yp5J7eAYMAQ0Emngwn5PcQwe7kYYFAXMn4Ieze8763rptNCG8AXZnLaqnobLmtM8HRBLQavu8mencgGGZZHryY416enILM4=s1000-no?authuser=9";
+            this.image= "https://site202133.tw.cs.unibo.it/img/default-pic.jpg";
 
             //TODO AGGIUNGERE DATA DI NASCITA
             this.newClient = { a: this.image, b: this.name, c: this.surname, d: this.username, e: this.city, f: this.address, g: this.pass, h: this.phone, i: this.email, j: this.birth };

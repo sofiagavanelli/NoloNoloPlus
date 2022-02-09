@@ -28,7 +28,8 @@
           </b-card-body>
 
           <div id="calculate" class="flex-container">
-            <label for="start-datepicker">Inizio noleggio</label>
+            <label for="start-datepicker" style="padding-right:0.2em;">Inizio noleggio</label>
+            <font-awesome-icon icon="question-circle" title="RICORDA: un noleggio che ha inizio nel mese del proprio compleanno fa guadagnare uno sconto del 15%!" />
             <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
@@ -160,14 +161,18 @@ methods: {
 
         noleggi.forEach(item => {
 
-          var checked_start = new Date(item.start_date);
-          var checked_end = new Date(item.end_date);
+          if(!item.deleted) { //se il noleggio che si sta guardando è stato eliminato allora le sue date NON vanno considerate come occupate
 
-          if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
-            (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
-            (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
+            var checked_start = new Date(item.start_date);
+            var checked_end = new Date(item.end_date);
 
-              disponibile = false;
+            if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
+              (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
+              (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
+
+                disponibile = false;
+            }
+
           }
 
         })
@@ -408,7 +413,7 @@ methods: {
     overflow: auto;
     /*height: 70vh;*/
 
-    width: 70%;
+    width: 50%;
 
     /*z-index: -1;*/
 }
@@ -442,6 +447,11 @@ methods: {
     display: none;
 }
 
+#priceTab {
+  height: 3em;
+  vertical-align: center;
+}
+
 .b-modal {
     background: #EDB5BF !important;
     color: #000 !important;
@@ -457,6 +467,14 @@ methods: {
 #rent_page {
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+
+  .boat-images {
+    width: auto;
+  }
+
 }
 
 @media screen and (max-width: 500px) {

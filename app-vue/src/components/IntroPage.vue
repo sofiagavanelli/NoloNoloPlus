@@ -270,7 +270,6 @@ export default {
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
-
     /*z-index: -1;*/
 }
 

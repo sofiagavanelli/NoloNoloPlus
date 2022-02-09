@@ -1,14 +1,9 @@
 <template>
 <div>
 
-    <div id="disclaimer" class="flex-container">
-        <font-awesome-icon icon="exclamation-circle" />
-        <h6> Chiediamo scusa per il disagio, ma il noleggio che doveva iniziare oggi non sarà più possibile
-        per indisponibilità dell'imbarcazione. 
-        Per lei a disposizione uno sconto del 40% sul prossimo noleggio! 
-        </h6>
-    </div>
+    <div> {{this.myprop}} </div>
 
+    <b-button v-on:click="prova()"> prova </b-button>
 
     <div class="flex-container">
 
@@ -35,7 +30,6 @@ export default {
 
   mounted() {
 
-    console.log(this.$router.props);
 
   },
 
@@ -43,6 +37,10 @@ export default {
 
     emitToParent (event) {
         this.$emit('childToParent');
+    },
+
+    prova() {
+        console.log(this.$router.props);
     },
 
   }
