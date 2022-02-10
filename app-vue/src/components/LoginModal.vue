@@ -109,6 +109,9 @@ export default {
 
           //data = this.loggedIN;
 
+          this.username = null;
+          this.pass = null;
+
           this.$router.push({
             path: '/profile',
             //params: { data } 

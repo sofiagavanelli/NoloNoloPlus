@@ -5,7 +5,7 @@
 
   <!--div> {{rentToEdit}} </div-->
 
-      <img class="post_image" :src="this.product[0].image" alt="Card image cap">
+      <img class="post_image" :src="this.url + 'prodotti/' + rentToEdit.prod_id + this.ex" alt="Card image cap">
 
       <h3 class="title"> PRODOTTO: {{rentToEdit.prod_id}} </h3> 
       <div class="details">
@@ -56,7 +56,7 @@ export default {
 
   mounted() {
 
-    axios.get('/prods/' + this.rentToEdit.prod_id)
+    /*axios.get('/prods/' + this.rentToEdit.prod_id)
       .then((response) => {
         this.product = response.data;
 
@@ -69,7 +69,7 @@ export default {
       .catch((error) => {
         //this.loading = false;
         console.log(error);
-      });
+      });*/
 
   },
 

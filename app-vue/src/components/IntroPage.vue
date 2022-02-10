@@ -134,7 +134,7 @@ export default {
 
         //TODO: SECONDO ME SI PUO CARICARE NEL DB DIRETTAMENTE COSI FIN DALL'INIZIO: SI GENERA L'URL
         this.prodInfo.forEach(elem => {
-          elem.image = this.url + elem.category + '/' + elem.prod_id + this.ex;
+          elem.image = this.url + 'prodotti/' + elem.prod_id + this.ex;
         });
 
         this.showInfo = response.data;

@@ -17,7 +17,7 @@
 
         <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"   src="../assets/avatar.png"-->
         <div id="pic_container">
-            <img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap">
+            <img class="profile_pic" src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="Card image cap">
         </div>
 
         <b-card class="profile">
@@ -93,17 +93,22 @@
                     <template v-if="this.active">
                     <div class="rents" v-for="(item, index) in activeRent" :key="item._id">
                         <!-- green light -->
-                        <template v-if="!item.approved && controlApproved(index)"> 
+                        <template v-if="controlStart(index)"> 
                             
                             <!--router-link id="toProblem" aria-labelledby="problemLabel" to="/edit-rent"-->
-                                <b-button v-on:click="openAlert(item._id)" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
+                            <b-button v-on:click="openAlert(item._id)" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
                             <!--/router-link-->
 
                         </template>
 
                         <template v-else>
 
-                            <font-awesome-icon icon="circle" style="color:green"/> approvato
+                            <template v-if="!item.approved">
+                                in attesa di approvazione 
+                            </template>
+                            <template v-else>
+                                <font-awesome-icon icon="circle" style="color:green"/> approvato
+                            </template>
 
                             <div class="rentInfo">
                                 {{item.prod_id}} <br>
@@ -257,12 +262,12 @@ export default({
     mounted() { 
 
         if(localStorage.getItem('CurrentUser')) {
-            this.$store.state.username = (JSON.parse(localStorage.getItem('CurrentUser'))).user || JSON.parse(localStorage.getItem('CurrentUser'));
+            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
 
             this.username = this.$store.state.username;
 
-            if( JSON.parse(localStorage.getItem('CurrentUser')).discount )
-                this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;
+            /*if( JSON.parse(localStorage.getItem('CurrentUser')).discount )
+                this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;*/
 
             //console.log();
         }
@@ -274,6 +279,10 @@ export default({
           .then((response) => {
             //console.log(response.data);
             this.profileInfo = response.data;
+
+            if(this.profileInfo[0].discount)
+                this.$store.state.discount = this.profileInfo[0].discount;
+
           })
           .catch((error) => {
             //this.loading = false;
@@ -350,7 +359,7 @@ export default({
 
         },
 
-        controlApproved(_id) {
+        controlStart(_id) {
 
             /*activeR.forEach(elem => {
 
@@ -371,19 +380,57 @@ export default({
                 }
 
             });*/
+            var prodToRent = [];
+            var rotto = null;
 
-            var start = new Date(this.activeRent[_id].start_date);
-                
+            axios.get('/prods/' + this.activeRent[_id].prod_id)
+                .then((response) => {
+                    //console.log(response.data);
+                    prodToRent = response.data;
+
+                    /*console.log(prodToRent);
+                    console.log(prodToRent[0].status == "rotto");*/
+
+                    if(prodToRent[0].status == "rotto")
+                        rotto = true;
+                    else
+                        rotto = false;
+
+                    var start = new Date(this.activeRent[_id].start_date);
+                    var today = null;
+
+                    if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
+                        start.getYear() == this.today.getYear()) {
+
+                        today = true;
+                    }
+                    else
+                        today = false;
+
+                    //console.log(rotto && today);
+                    return(rotto && today);
+
+                })
+                .catch((error) => {
+                    //this.loading = false;
+                    console.log(error);
+                });
+
+
+            /*var start = new Date(this.activeRent[_id].start_date);
+            var today = null;
 
             if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
                 start.getYear() == this.today.getYear()) {
 
-                return true;
-
+                today = true;
             }
             else
-                return false;
+                today = false;
 
+            console.log(rotto && today);
+            return(rotto && today);*/
+            
 
         },
 
@@ -612,9 +659,9 @@ export default({
     /*height: 30vh;*/
 }
 
-/*#pic_container {
-    border: 1px solid red;
-}*/
+#pic_container {
+    width: 10%;
+}
 
 .rentInfo {
     padding: 0.5em;
@@ -653,6 +700,14 @@ export default({
     border-top: 1px solid /*#4D6D9A*/ #86B3D1;
 }
 
+@media screen and (max-width: 800px) {
+
+    #pic_container {
+        width: 20%;
+    }
+
+}
+
 @media screen and (max-width: 500px) {
 
     .profile_pic {
@@ -661,6 +716,7 @@ export default({
     }
 
     #pic_container {
+        width: 40%;
         display: flex;
         justify-content: center;
     }
