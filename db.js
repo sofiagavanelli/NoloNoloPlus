@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
-//da inserire in una variabile env:
-const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
-const connectionStringOld = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
+
+//PER USARE QUELLO NON IN LOCALE:
+//const connectionString = process.env.DATABASE_STRING;
+const connectionString = process.env.DATABASELOCAL_STRING;
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -31,7 +32,7 @@ db.once("open", () => console.log("mongoDB connection established"));
 module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
-    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, _note) => {
+    saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, bday, _note) => {
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
             new Client({
@@ -44,6 +45,7 @@ module.exports = {
                 address: _address,
                 phone: tel, 
                 email: email,
+                birth: bday,
                 note: _note
             }).save();
             
@@ -72,6 +74,8 @@ module.exports = {
     saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _ok) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
+        if(!_ok) _ok=false;
+
         /*const newN =*/ return Promise.resolve(new Noleggio({
             //_id: _id,
             prod_id: _prod,
@@ -81,7 +85,9 @@ module.exports = {
             worker_id: _worker,
             price: _price,
             paymethod: _payment,
-            //approved: _ok,
+            approved: _ok,
+            deleted: false,
+            delivered: false
             //worker_id: _worker
         }).save());
         
@@ -110,17 +116,19 @@ module.exports = {
             .then(x => console.log("ok"))
             .catch(x => console.log("Errore"))},
 
-    updateClient: async (id, n, s, citta, indirizzo, telefono, mail, notes) => {
+    updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
         console.log("prova");
         await Client.findOneAndUpdate(
             {client_id: id},
             { $set: {name: n,
                     surname: s,
+                    password: pass,
                     place: citta,
                     address: indirizzo,
                     phone: telefono,
                     email: mail,
+                    birth: bday,
                     note: notes, }},
             {returnOriginal: false}
             ).exec()
@@ -192,6 +200,26 @@ module.exports = {
 
     deleteRental: async (id) => {
         return Promise.resolve(Noleggio.findOneAndDelete({ _id : id }));
+    },
+
+    deleteBoolRent: async (id) => {
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {deleted: true, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
+    deliverBoolRent: async (id) => {
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {delivered: true, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
     },
 
     /* joinClientsRentals: async (options = {}) =>{

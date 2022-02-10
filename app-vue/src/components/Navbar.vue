@@ -93,9 +93,14 @@ export default {
 
       //TODO: inserire alert per il logout!!
 
-      this.$store.commit("setUsername", false);
+      this.$store.commit("setUsername", null);   
 
       localStorage.removeItem('CurrentUser');
+
+      this.$router.push({
+          path: '/home',
+      });
+
     }
 
   }

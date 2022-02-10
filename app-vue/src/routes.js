@@ -9,6 +9,7 @@ import LoginModal from "./components/LoginModal.vue"
 import ProfilePage from "./components/ProfilePage.vue"
 import RentPage from "./components/RentPage.vue"
 import NewRegistration from "./components/NewRegistration.vue"
+import EditRent from "./components/EditRent.vue"
 //const AboutUs = () => import("./components/AboutUs.vue")
 //const LoginModal = () => import("./components/LoginModal.vue")
 
@@ -44,6 +45,12 @@ export default new Router({
       {
         path: '/new-client',
         component: NewRegistration
+      },
+      {
+        path: '/edit-rent',
+        name: 'editRent',
+        component: EditRent,
+        props: true
       },
       /*{
         path: '/rent',

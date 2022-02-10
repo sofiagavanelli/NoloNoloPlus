@@ -2,12 +2,13 @@
 
     <div id="rent_page" class="flex-container">
 
-      <b-button v-on:click="emitToParent">
+      <b-button id="backBtn" v-on:click="emitToParent">
         <font-awesome-icon icon="arrow-left" /> PRODOTTI
       </b-button>
 
       <!-- cambiare estetica? -->
       <b-card class="boat-images" >
+
           <img class="post_image" :src="this.parentData.image" alt="Card image cap">
           <b-card-body>
             <h3 class="title"> {{this.parentData.name}} </h3>
@@ -27,7 +28,8 @@
           </b-card-body>
 
           <div id="calculate" class="flex-container">
-            <label for="start-datepicker">Inizio noleggio</label>
+            <label for="start-datepicker" style="padding-right:0.2em;">Inizio noleggio</label>
+            <font-awesome-icon icon="question-circle" title="RICORDA: un noleggio che ha inizio nel mese del proprio compleanno fa guadagnare uno sconto del 15%!" />
             <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="startD" class="mb-2"></b-form-datepicker>
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
@@ -37,6 +39,9 @@
               <div id="total-price">
                 <h5> {{total}} € </h5>
               </div>
+              <template v-if="this.$store.state.discount && this.$store.state.username">
+                <input type="checkbox" v-on:click="useDiscount()"> voglio usare il mio sconto 
+              </template>
             </div>
 
               <template v-if="this.payment">
@@ -159,14 +164,18 @@ methods: {
 
         noleggi.forEach(item => {
 
-          var checked_start = new Date(item.start_date);
-          var checked_end = new Date(item.end_date);
+          if(!item.deleted) { //se il noleggio che si sta guardando è stato eliminato allora le sue date NON vanno considerate come occupate
 
-          if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
-            (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
-            (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
+            var checked_start = new Date(item.start_date);
+            var checked_end = new Date(item.end_date);
 
-              disponibile = false;
+            if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
+              (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
+              (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
+
+                disponibile = false;
+            }
+
           }
 
         })
@@ -192,24 +201,28 @@ methods: {
           temp = temp - (temp*this.parentData.discount/100);
         }
 
-        /*if(this.controlDate()) { 
-          this.total = temp;
-          this.payment = true;
-          else {
-          this.total = "non disponibile";
-          //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+        if(this.parentData.status == "buono") {
+          temp = temp - (temp*5/100);
         }
-          */
+        else if(this.parentData.status == "rovinato") {
+          temp = temp - (temp*10/100);
+        }
 
-          /*.then((valid) => {
-                if (valid) // do something
-              // other validations here
-              //  save
-            })*/
+        //TODO AGGIUNGERE QUESTIONE DEL MESE DI NASCITA CON LO SCONTO 
+        /* data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
+          var start_date = new Date(this.startD);
+          var start_month = start_date.getMonth();
+          var birth_month = birth_date.getMonth();
+
+          if (start_month == birth_month) {
+            temp = temp - (temp*15/100);
+          }
+
+        */
 
         /*this.controlDate()
           .then((valid) => {*/
-            if(this.controlDate()) {
+            if(this.parentData.status != "rotto" && this.controlDate()) {
               this.total = temp;
               this.payment = true;
             }
@@ -342,6 +355,12 @@ methods: {
   padding-top: 4em;
 }*/
 
+#backBtn {
+  height: 3em;
+  width: 7em;
+  padding: 0.5em;
+}
+
 #payBtn {
   width: 100%;
   margin: 1em;
@@ -391,11 +410,13 @@ methods: {
     float: left;
     border: 1px solid #86B3D1;
     /*border-radius: 1rem;*/
-    margin: 4% 2% 0 2%; /*(up-right-down-left)*/
+    margin: 2% 2% 0 2%; /*(up-right-down-left)*/
     /*padding: 1rem;*/
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
+
+    width: 50%;
 
     /*z-index: -1;*/
 }
@@ -429,6 +450,11 @@ methods: {
     display: none;
 }
 
+#priceTab {
+  height: 3em;
+  vertical-align: center;
+}
+
 .b-modal {
     background: #EDB5BF !important;
     color: #000 !important;
@@ -440,5 +466,27 @@ methods: {
 #modal-container {
   justify-content: center;
 }
+
+#rent_page {
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+
+  .boat-images {
+    width: auto;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .boat-images {
+    width: auto;
+  }
+
+}
+
 
 </style>

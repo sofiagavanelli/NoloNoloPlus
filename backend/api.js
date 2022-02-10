@@ -131,8 +131,6 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
-
         db.searchProd(id).then(prodsinfo => {
 
             res.write(JSON.stringify(prodsinfo));
@@ -189,7 +187,7 @@ module.exports = function (app) {
           }
         )
 
-        });
+        });    
 
     ///ELIMINAZIONE CLIENTE PER ID
     app.delete('/prods/:id', function(req, res){
@@ -225,6 +223,7 @@ module.exports = function (app) {
         var pssw = req.body.g;
         var tel = req.body.h;
         var email = req.body.i;
+        var bday = req.body.j;
 
         db.searchClientID(user).then(proof => {
 
@@ -240,7 +239,7 @@ module.exports = function (app) {
             }
             else {
                 //_img, _name, _surname, _username, _pass, _place, _address
-                db.saveClient(image, name, surname, user, pssw, city, address, tel, email).then(result => {
+                db.saveClient(image, name, surname, user, pssw, city, address, tel, email, bday).then(result => {
 
                     res.write(JSON.stringify(true));
                     console.log(result);
@@ -271,7 +270,7 @@ module.exports = function (app) {
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, false).then((result) => {
+      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, null).then((result) => {
         console.log(result);
       }
 
@@ -310,15 +309,16 @@ module.exports = function (app) {
             const idcliente = req.body.clientID;
             var nome = req.body.name;
             var cognome = req.body.surname;
-            //var user = req.body.clientID;
+            var pass = req.body.pass;
             var city = req.body.place;
             var add = req.body.address; 
             var cell = req.body.telefono;
             var mail = req.body.email;
+            var bday = req.body.birth;
             var note = req.body.note;
 
         console.log(idcliente);
-       await db.updateClient(idcliente, nome, cognome, city, add, cell, mail, note)
+       await db.updateClient(idcliente, nome, cognome, pass, city, add, cell, mail, bday, note)
     });
 
     app.post('/update-prod',async (req, res)=>{
@@ -340,6 +340,23 @@ module.exports = function (app) {
 
         console.log(idprod);
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+    });
+
+    //UPDATE RENT PER L'ELIMINAZIONE
+    app.post('/delete-rent',async (req, res)=>{
+
+        var rent_id = req.body.id;
+        console.log(req.params.id);
+
+        await db.deleteBoolRent(rent_id)
+    });
+
+    app.post('/deliver-rent',async (req, res)=>{
+
+        var rent_id = req.body.id;
+        console.log(req.params.id);
+
+        await db.deliverBoolRent(rent_id)
     });
 
     

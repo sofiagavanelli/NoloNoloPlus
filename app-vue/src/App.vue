@@ -106,7 +106,7 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #cont1, #rent_page, #login, #about-us, #profile_page{
+#main_page, #cont1, #rent_page, #contedit, #login, #about-us, #profile_page{
   justify-content: center;
   padding: 0 1.5em 0 1.5em;
 }
@@ -129,7 +129,7 @@ export default {
 @media screen and (max-width: 900px) {
 
   #introduzione { /*(up-right-down-left)*/
-    margin-top: 5em;
+    margin-top: 3em;
     padding: 0.5em 2em 1em 2em;
   }
 
@@ -146,7 +146,7 @@ export default {
   }
 
   #introduzione { /*(up-right-down-left)*/
-    margin-top: 4em;
+    margin-top: 2em;
     padding: 0.5em 1.5em 1em 1.5em;
   }
 

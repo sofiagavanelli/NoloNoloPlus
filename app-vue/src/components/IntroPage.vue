@@ -13,9 +13,19 @@
           <SearchBar v-on:childToParent="filter"  />
         </div>
 
+        <template v-if="!this.showInfo[0]">
+
+          <div id="disclaimer" class="flex-container">
+            <font-awesome-icon icon="exclamation-circle" />
+            <h6> NON ESISTE IMBARCAZIONE CHE RISPETTI I CRITERI DI RICERCA </h6>
+          </div>
+
+        </template>
+        
+        <template v-else>
         <div id="main_page" class="flex-container">
           
-            <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images">
+            <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images" v-on:click="change(index)">
               <!-- PER LA SRC DELL'IMAGE: src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" 
               PRIMA: :src="item.image"
               PROVA: :src="this.url + item.category + '/' + item.prod_id + this.ex"-->
@@ -36,17 +46,16 @@
                 </div>
               </b-card-body>
 
-              <b-card-footer>
-              <!--b-input-group-->
+              <!--b-card-footer>
                 <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
                   NOLEGGIA
                 </b-button>
-              <!--/b-input-group-->
-              </b-card-footer>
+              </b-card-footer-->
 
             </b-card>
 
           </div>
+        </template>
 
       </template>
 
@@ -118,10 +127,6 @@ export default {
     if(localStorage.getItem('CurrentUser')) {
       this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
     }
-
-    console.log(JSON.parse(localStorage.getItem('CurrentUser')));
-
-    console.log("sono dentro mounted");
   
     axios.get('/prods')
       .then((response) => {
@@ -159,28 +164,76 @@ export default {
 
     filter(data) {
 
+      console.log(data);
+
       if(data == "reset") {
 
         this.showInfo = this.prodInfo;
 
       }
       else {
-        var temp = [];
+        var ok_category = [];
         var j = 0;
+        
+        if(data[0][0]) {
+          this.showInfo.forEach(elem => {
 
-        this.showInfo.forEach(elem => {
+            if( elem.category == data[0][0] || elem.category == data[0][1] || elem.category == data[0][2] ) {
+              ok_category[j] = elem;
 
-          console.log(elem.category);
+              j++;
+            }
 
-          if(elem.category == data[0][0] || elem.category == data[0][1] || elem.category == data[0][2]) {
-            temp[j] = elem;
+          });
+        }
+        else  ok_category = this.showInfo;
 
-            j++;
-          }
+        var second_control = [];
+        var k = 0;
 
-        });
+        if(data[1][0]) {
 
-        this.showInfo = temp;
+          console.log(data[1]);
+
+          ok_category.forEach(elem => {
+
+            if( (data[1][0]-5 <= elem.guests && elem.guests <= data[1][0]) ||  (data[1][1]-5 <= elem.guests && elem.guests <= data[1][1])
+            || (data[1][2]-5 <= elem.guests && elem.guests <= data[1][2]) || (data[1][3]-5 <= elem.guests && elem.guests <= data[1][3]) ) {
+
+              second_control[k] = elem;
+
+              k++;
+
+            }
+
+          });
+        }
+        else  second_control = ok_category;
+
+        var third_control = [];
+        var l = 0;
+
+        if(data[2][0]) {
+
+          second_control.forEach(elem => {
+
+            if( (data[2][0]-10 <= elem.year && elem.year <= data[2][0]) ||  (data[2][1]-10 <= elem.year && elem.year <= data[2][1])
+            || (data[2][2]-10 <= elem.year && elem.year <= data[2][2]) || (data[2][3]-10 <= elem.year && elem.year <= data[2][3]) ) {
+
+              third_control[l] = elem;
+
+              l++;
+
+            }
+
+          });
+
+        }
+        else  third_control = second_control;
+
+        //( data[1][0]-5 >= elem.guests && elem.guests <= data[1][0]) ||  (data[1][1]-5 >= elem.guests && elem.guests <= data[1][1]) || (data[1][2]-5 >= elem.guests && elem.guests <= data[1][2]) || (data[1][3]-5 >= elem.guests && elem.guests <= data[1][3])
+
+        this.showInfo = third_control;
       }
 
     }
@@ -213,8 +266,11 @@ export default {
     /*width: 20%;*/
     overflow: auto;
     /*height: 70vh;*/
-
     /*z-index: -1;*/
+}
+
+.boat-images:hover {
+  transform: scale(1.1);
 }
 
 .data, .title{
@@ -244,6 +300,23 @@ export default {
 .price_data  {
     /*visibility: hidden;*/
     display: none;
+}
+
+#disclaimer {
+  background-color: rgb(252, 191, 191);
+  border-radius: 4px;
+  padding: 0.5em;
+  margin: 1em;
+
+  font-size: 12px;
+}
+
+@media screen and (max-width: 500px) {
+
+  .boat-images:hover {
+    transform: none;
+  }
+
 }
 
 

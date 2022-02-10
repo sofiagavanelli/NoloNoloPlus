@@ -9,7 +9,7 @@ export function CardComponentProd(props){
     //Card key indica la chiave per identificare ogni singola card
     return(
        <div key={props.keyDiv} className={props.divName}>
-            <Row xs={1} md={3} className="g-7" >
+            <Row xs={1} md={4} className="g-7" >
             {
                 props.info.map(prodotto =>(
                     <Col key={prodotto._id}>

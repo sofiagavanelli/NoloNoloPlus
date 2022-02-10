@@ -9,10 +9,10 @@
           <b-dropdown toggle-class='customDropdown' text="applica un filtro " variant='none'> 
             <h6> Tipologie </h6>
             <b-form-checkbox-group v-model="boat" :options="type" multiple></b-form-checkbox-group>
-            <h6> Lunghezze </h6>
-            <b-form-checkbox-group v-model="lenght" :options="boatL" multiple></b-form-checkbox-group>
-            <h6> Anno </h6>
-            <b-form-checkbox-group v-model="year" :options="boatY" multiple></b-form-checkbox-group>
+            <h6> Ospiti </h6>
+            <b-form-checkbox-group v-model="people" :options="guests" multiple></b-form-checkbox-group>
+            <h6> Anno di produzione </h6>
+            <b-form-checkbox-group v-model="age" :options="year" multiple></b-form-checkbox-group>
           </b-dropdown>
 
           <b-button id="subButtom" v-on:click="emitToParent"> SUBMIT </b-button>
@@ -137,24 +137,23 @@ export default {
   data() {
       return {
         boat: [],
-        lenght: [],
-        year: [],
+        people: [],
+        age: [],
         type: [ //destinations
           //{ value: null, text: 'Please select an option' },
           { value: 'yacht', text: 'Yacht' },
           { value: 'barca', text: 'Barca a remi' },
           { value: 'gommoni', text: 'Gommone' } ],
-        boatL: [
-          { value: '20', text: '20-30 metri' },
-          { value: '30', text: '30-40 metri' },
-          { value: '40', text: '40-50 metri' },
-          { value: '50', text: '50-60 metri' },
-          { value: '60', text: '>60 metri' } ],
-        boatY: [
-          { value: '00', text: '2000-2005' },
-          { value: '05', text: '2005-2010' },
-          { value: '10', text: '2010-2015' },
-          { value: '15', text: '>2015' } ],
+        guests: [
+          { value: '5', text: '<= 5' },
+          { value: '10', text: '5-10' },
+          { value: '15', text: '10-15' },
+          { value: '20', text: '> 15' } ],
+        year: [
+          { value: '1995', text: '<= 1995' },
+          { value: '2005', text: '1995-2005' },
+          { value: '2015', text: '2005-2015' },
+          { value: '2020', text: '>2015' } ],
       }
           //{ value: 'd', text: 'Selected Option', disabled: true },
           /*<b-dropdown id="ddANNO" text="Anno" class="m-md-2">
@@ -169,7 +168,10 @@ export default {
 
     emitToParent(event) {
       
-      var filters = [ this.boat, this.lenght, this.year ];
+      var filters = []
+      filters[0] = this.boat;
+      filters[1] = this.people;
+      filters[2] = this.age;
 
       this.$emit('childToParent', filters);
     },
@@ -180,8 +182,8 @@ export default {
       var reset = "reset";
 
       this.boat = [];
-      this.lenght = [];
-      this.year = [];
+      this.age = [];
+      this.people = [];
 
       this.$emit('childToParent', reset);
     },
