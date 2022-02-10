@@ -133,8 +133,6 @@ module.exports = function (app) {
 
         let id = req.params.id;
 
-        console.log(id);
-
         db.searchProd(id).then(prodsinfo => {
 
             res.write(JSON.stringify(prodsinfo));

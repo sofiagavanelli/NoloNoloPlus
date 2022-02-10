@@ -39,6 +39,9 @@
               <div id="total-price">
                 <h5> {{total}} € </h5>
               </div>
+              <template v-if="this.$store.state.discount && this.$store.state.username">
+                <input type="checkbox" v-on:click="useDiscount()"> voglio usare il mio sconto 
+              </template>
             </div>
 
               <template v-if="this.payment">

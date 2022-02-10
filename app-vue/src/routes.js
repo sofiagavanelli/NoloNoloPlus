@@ -48,6 +48,7 @@ export default new Router({
       },
       {
         path: '/edit-rent',
+        name: 'editRent',
         component: EditRent,
         props: true
       },

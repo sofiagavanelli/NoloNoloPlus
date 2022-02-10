@@ -96,7 +96,7 @@
                         <template v-if="!item.approved && controlApproved(index)"> 
                             
                             <!--router-link id="toProblem" aria-labelledby="problemLabel" to="/edit-rent"-->
-                                <b-button v-on:click="openAlert()" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
+                                <b-button v-on:click="openAlert(item._id)" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
                             <!--/router-link-->
 
                         </template>
@@ -127,13 +127,14 @@
                         <!-- green light -->
                         <template v-if="item.approved"> 
                             <font-awesome-icon icon="circle" style="color:green"/> approvato
-                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" v-on:click="editRent(index)" />
                         </template>
                         <!-- red light -->
                         <template v-else> 
                             <font-awesome-icon icon="circle" style="color:red"/> non approvato
-                            <font-awesome-icon icon="edit" aria-label="button stampa fattura" v-on:click="editRent(index)" />
                         </template>
+                        <router-link id="toEdit" aria-labelledby="editLabel" :to="{ name: 'editRent', params: { rentToEdit: futureRent[index] }}" >
+                            <font-awesome-icon icon="edit" aria-label="button modifica noleggio" />
+                        </router-link>
                         <font-awesome-icon icon="trash" aria-label="button elimina noleggio" v-on:click="deleteRent(index)" />
                         <br>
                         <div class="rentInfo">
@@ -176,7 +177,7 @@
         
         <!-- The modal -->
       <div id="modal-container" class="flex-container">
-        <b-modal ok-title="Presa visione" id="alertModal" v-on:ok="updateRent()">
+        <b-modal ok-title="Presa visione" id="alertModal" v-on:ok="getDiscount()">
 
             <div id="disclaimer" class="flex-container">
                 <font-awesome-icon icon="exclamation-circle" />
@@ -202,6 +203,8 @@ export default({
     name: 'ProfilePage',
     data() {
         return {
+            indisponibile: '',
+
             active: false,
             future: false,
 
@@ -248,15 +251,20 @@ export default({
     components: {
         EditRent,
     },
-    props: {
+    /*props: {
         rentToEdit: [],
-    },
+    },*/
     mounted() { 
 
         if(localStorage.getItem('CurrentUser')) {
-            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+            this.$store.state.username = (JSON.parse(localStorage.getItem('CurrentUser'))).user || JSON.parse(localStorage.getItem('CurrentUser'));
 
             this.username = this.$store.state.username;
+
+            if( JSON.parse(localStorage.getItem('CurrentUser')).discount )
+                this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;
+
+            //console.log();
         }
         else {
             this.username = this.$store.state.username;
@@ -445,17 +453,19 @@ export default({
 
         },
 
-        openAlert(/*_index, rent_id*/) {
+        openAlert(/*_index, */ rent_id) {
 
             //modale per l'edit
             //this.id = _index;
             //this.rentToEdit = this.showRents[_index];
 
+            this.indisponibile = rent_id;
+
             this.$bvModal.show("alertModal");
 
         },
 
-        editRent(_id) {
+        /*editRent(_id) {
 
             this.rentToEdit = this.futureRent[_id];
 
@@ -469,7 +479,7 @@ export default({
 
         updateRent() {
             console.log("dovrei fare la post");
-        },
+        },*/
 
         /*print(rent_id) {
 
@@ -519,6 +529,32 @@ export default({
                     console.log(error);
                 });
             
+
+        },
+
+        getDiscount() {
+
+            console.log(this.indisponibile);
+
+            axios.delete('/allRents/' + this.indisponibile)
+                .then((response) => {
+                    //console.log(response.data);
+                    console.log(response);
+
+                        //reload!!
+                })
+                .catch((error) => {
+                        //this.loading = false;
+                    console.log(error);
+                });
+
+            var user_discount = {user: this.username, discount: 15};
+
+            localStorage.setItem('CurrentUser', JSON.stringify(user_discount));
+
+            var prova = JSON.parse(localStorage.getItem('CurrentUser'));
+
+            console.log(prova);
 
         }
 

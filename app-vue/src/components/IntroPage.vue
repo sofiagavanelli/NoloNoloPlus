@@ -127,10 +127,6 @@ export default {
     if(localStorage.getItem('CurrentUser')) {
       this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
     }
-
-    console.log(JSON.parse(localStorage.getItem('CurrentUser')));
-
-    console.log("sono dentro mounted");
   
     axios.get('/prods')
       .then((response) => {
