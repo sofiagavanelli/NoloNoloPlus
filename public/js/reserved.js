@@ -65,7 +65,7 @@ function logOut(){
 
 }
 /***************************** */
-/* CLIENTI */
+/*SIDEBAR -> CLIENTI */
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
@@ -108,7 +108,7 @@ function openClient() {
                     <p class="card-text" style="text-align: center;">ID: ${ClientInfo[i].client_id}</p>    
                     <div class="card-footer">         
                       <button id="${ClientInfo[i].client_id}" onclick= "deleteClient(id)" class="btn-d">Delete</button>
-                      <button class="btn-mod" id="${ClientInfo[i].client_id}" onclick= "modifyClient(clientARRAY, id)">Modify</button>             
+                      <button class="btn-mod" id="${ClientInfo[i].client_id}" onclick= "modifyClient(id)">Modify</button>             
                     </div>    
                   </div>             
                 </div> 
@@ -119,7 +119,7 @@ function openClient() {
 } 
 }
 /***************************** */
-/*INVENTARIO */
+/* SIDEBAR -> INVENTARIO */
 function openInventory() {
  
   $( "#ctable" ).empty();
@@ -187,7 +187,7 @@ function openInventory() {
     } 
 }
 /***************************** */
-/*NOLEGGI*/
+/*SIDEBAR -> NOLEGGI*/
 function openRents() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
@@ -237,10 +237,11 @@ function openRents() {
       div = $(`
 
       <div class="flex-container">
-        <div class="card" style="width: 22em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Rental number: ${RentInfo[i]._id}</h5>
-            <p class="card-text">Client ID: ${RentInfo[i].client_id} <br> Product ID: ${RentInfo[i].prod_id}<br></p>
+            <p class="card-text">Client ID: ${RentInfo[i].client_id}  <button type="button" id="${RentInfo[i].client_id}" class="btn-postit" onclick="Notes(id)"><i class="far fa-sticky-note fa-lg"></i></button>
+             <br> Product ID: ${RentInfo[i].prod_id}<br></p>
             <p class="card-text">Start date: ${RentInfo[i].start_date.slice(0,10)} <br> End date: ${RentInfo[i].end_date.slice(0,10)}</p>
             <button id="${RentInfo[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
             <button class="btn-mod">Modify</button>
@@ -253,7 +254,6 @@ function openRents() {
 }
      
 /************************************/
-/*FUNZIONI RICERCA */
 
 /* RICERCA NOLEGGIO */
 function searchRent(){
@@ -295,7 +295,7 @@ function acceptRent(data, insertedID) {
   $("#ctable").append(div);
         div = $(` 
         <div class="flex-container">
-          <div class="card" style="width: 22em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+          <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
             <h5 class="card-title-new">RENT: ${data[i]._id}</h5>
             <p class="card-text-new">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
             <p class="card-text-new">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
@@ -376,12 +376,6 @@ function acceptProd(data, insertedID) {
         div = $(`         
         <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> PRODUCTS</button>
         `);
-    if(data[i].available== false){
-      x= 1; x=""
-    }
-    else{
-      x= 2;
-    }
       $("#ctable").append(div);
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
@@ -444,7 +438,7 @@ function acceptProd(data, insertedID) {
             </div>
           </div>
           <div class="col-12">
-            <button class="btn-sub" onclick="updateProd()" style="margin-left: 14em;">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="approveProd()" style="margin-left: 14em;">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </form>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Delete</button>
@@ -461,20 +455,6 @@ function acceptProd(data, insertedID) {
   if (!found) 
     console.log("non esiste prodotto");
 }
-
-//FUNZIONI PER TORNARE INDIETRO
-function goBackClients(){
-  openClient();
-}
-
-function goBackInventory(){
-  openInventory();
-}
-
-function goBackRents(){
-  openRents();
-}
-
 
 /***************************** */
 /*FUNZIONI PER ELIMINAZIONE */
@@ -533,28 +513,32 @@ function deleteProd(idP) {
   }
   
 }
+
 /***************************** */
 /*FUNZIONI ORDINAMENTO */
 
-/*ORDINE ALFABETICO NOLEGGI*/
-function SortName(){   //ordine alfabetico dei clienti
+/*ORDINE ALFABETICO PER ID CLIENTE DEI NOLEGGI*/
+function SortName(){   
 rentARRAY.sort((a,b) => (a.client_id > b.client_id) ? 1 : ((b.client_id > a.client_id) ? -1 : 0))
 
 $( "#ctable" ).empty();
 $( "#ctable2" ).empty();
 
 div = $(`         
-<div class="flex-form-container">
-<div class="dropdown"style="margin-left: 30%;">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  Sort by </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-  <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+<div class="flex-form-container"> 
+<button type="button" class="btn-cat" onclick="pastRents(rentARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Closed</button>
+<button type="button" class="btn-cat" onclick="activeRents(rentARRAY)" data-bs-toggle="button">Active</button>
+<button type="button" class="btn-cat" onclick="futureRents(rentARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Future</button>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
   <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+    </div>
   </div>
-</div>
-<input type="text" id="prodId" placeholder=" Search product..." name="search">          
-<button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+  <input type="text" id="rentId" placeholder=" Search product..." name="search">          
+<button class ="form-btn" type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button>
 </div>
 
 `);
@@ -567,12 +551,12 @@ for (let i in rentARRAY) {
         
   div = $(`
   <div class="flex-container">
-  <div class="card" style="width: 22em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+  <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
     <div class="card-body">
-      <h5 class="card-title">Rental number: ${inventoryARRAY[i]._id}</h5>
-      <p class="card-text">Client ID: ${inventoryARRAY[i].client_id} <br> Product ID: ${inventoryARRAY[i].prod_id}<br></p>
-      <p class="card-text">Start date: ${inventoryARRAY[i].start_date.slice(0,10)} <br> End date: ${inventoryARRAY[i].end_date.slice(0,10)}</p>
-      <button id="${inventoryARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+      <h5 class="card-title">Rental number: ${rentARRAY[i]._id}</h5>
+      <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+      <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
+      <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
       <button class="btn-mod">Modify</button>
     </div>
   </div> 
@@ -596,17 +580,20 @@ $( "#ctable2" ).empty();
 
 
 div = $(`         
-<div class="flex-form-container">
-<div class="dropdown"style="margin-left: 30%;">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  Sort by </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-  <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
+<div class="flex-form-container"> 
+<button type="button" class="btn-cat" onclick="pastRents(rentARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Closed</button>
+<button type="button" class="btn-cat" onclick="activeRents(rentARRAY)" data-bs-toggle="button">Active</button>
+<button type="button" class="btn-cat" onclick="futureRents(rentARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Future</button>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id="sortName" onclick= "SortName()">Name</button>
   <button class="dropdown-item" type="button" id="sortDate" onclick= "SortDate()">Date</button>
+    </div>
   </div>
-</div>
-<input type="text" id="prodId" placeholder=" Search product..." name="search">          
-<button class ="form-btn" type="submit" onclick="searchProd(id)"><i class="fa fa-search"></i></button> 
+  <input type="text" id="rentId" placeholder=" Search product..." name="search">          
+<button class ="form-btn" type="submit" onclick="searchRent(id)"><i class="fa fa-search"></i></button>
 </div>
 
 `);
@@ -619,12 +606,12 @@ for (let i in rentARRAY) {
         
   div = $(`
   <div class="flex-container">
-  <div class="card" style="width: 22em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+  <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
     <div class="card-body">
-      <h5 class="card-title">Rental number: ${inventoryARRAY[i]._id}</h5>
-      <p class="card-text">Client ID: ${inventoryARRAY[i].client_id} <br> Product ID: ${inventoryARRAY[i].prod_id}<br></p>
-      <p class="card-text">Start date: ${inventoryARRAY[i].start_date.slice(0,10)} <br> End date: ${inventoryARRAY[i].end_date.slice(0,10)}</p>
-      <button id="${inventoryARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+      <h5 class="card-title">Rental number: ${rentARRAY[i]._id}</h5>
+      <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+      <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
+      <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
       <button class="btn-mod">Modify</button>
     </div>
   </div> 
@@ -634,7 +621,7 @@ for (let i in rentARRAY) {
      } 
 }
 
-/*ORDINE ALFABETICO INVENTARIO */
+/*ORDINE ALFABETICO DEI PRODOTTI NELL'INVENTARIO */
 function SortNameR(){   //ordine alfabetico dei prodotti
 inventoryARRAY.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
 $( "#ctable" ).empty();
@@ -696,7 +683,7 @@ $( "#ctable2" ).empty();
 div = $(`         
 <div class="flex-form-container"> 
     <button type="button" class="btn-cat" onclick="showYacht(inventoryARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Yacht</button>
-    <button type="button" class="btn-cat" onclick="showYGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
+    <button type="button" class="btn-cat" onclick="showGomm(inventoryARRAY)" data-bs-toggle="button">Gommoni</button>
     <button type="button" class="btn-cat" onclick="showBarche(inventoryARRAY)" style="margin-right: 20%;"data-bs-toggle="button">Barche a remi</button>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -734,7 +721,7 @@ for (let i in inventoryARRAY) {
          
      } 
 }
-
+/*ORDINE PREZZO DECRESCENTE PRODOTTI */
 function SortPriceLow(){   //ordina in base alla data
   inventoryARRAY.sort((a, b) => {
    return parseFloat(a.low_season) - parseFloat(b.low_season);
@@ -910,7 +897,7 @@ function showBarche(data){
 
 }
 
-
+///AGGIUNTA DI UN NUOVO PRODOTTO
 function addProduct() {           
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
@@ -926,47 +913,52 @@ div = $(`
         <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 85%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
-            <input type="text" class="create2" id="inputName" name="name">
+            <input type="text" class="create2" id="inputName" name="name" placeholder="Enter product name">
           </div>
           <div class="col-md-6">
             <label for="inputID" class="form-label">Product ID</label>
-            <input type="text" class="create2" id="inputID" name="product">
+            <input type="text" class="create2" id="inputID" name="product" placeholder="Enter product id">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
-            <input type="text" class="create2" id="inputBrand" name="brand">
+            <input type="text" class="create2" id="inputBrand" name="brand" placeholder="Enter product brand">
           </div>
           <div class="col-md-6">
           <label for="inputCat" class="form-label">Category</label>
-          <input type="text" class="create2" id="inputCat" name="category">
+          <input type="text" class="create2" id="inputCat" name="category" placeholder="Enter category">
           </div>
           <div class="col-md-6">
             <label for="inputLow" class="form-label">Price Low Season</label>
-            <input type="text" class="create2" id="inputLow" name="lowseason">
+            <input type="text" class="create2" id="inputLow" name="lowseason" placeholder="Enter price low season">
           </div>
           <div class="col-md-6">
             <label for="inputHigh" class="form-label">Price High Season</label>
-            <input type="text" class="create2" id="inputHigh" name="highseason">
+            <input type="text" class="create2" id="inputHigh" name="highseason" placeholder="Enter price high season">
           </div>
           <div class="col-md-4">
-            <label for="inputStatus" class="form-label">Status</label>
-            <input type="text" class="create2" id="inputStatus" name="status">
-          </div>
+          <label for="inputStatus" class="form-label">Status</label>
+          <select class="create2" id="inputStatus" name="stato" aria-label="Select status" >
+            <option value="ottimo">ottimo</option>
+            <option value="buono">buono</option>
+            <option value="rovinato">rovinato</option>
+            <option value="rotto">rotto</option>
+          </select>
+        </div>
           <div class="col-md-2">
             <label for="inputLen" class="form-label">Length</label>
-            <input type="text" class="create2" id="inputLen" name="length">
+            <input type="text" class="create2" id="inputLen" name="length" placeholder="Enter length">
           </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Guests</label>
-            <input type="text" class="create2" id="inputGuest" name="guests">
+            <input type="text" class="create2" id="inputGuest" name="guests" placeholder="Enter guests">
           </div>
           <div class="col-md-2">
             <label for="inputYear" class="form-label">Year</label>
-            <input type="text" class="create2" id="inputYear" name="year">
+            <input type="text" class="create2" id="inputYear" name="year" placeholder="Enter year">
           </div>
           <div class="col-md-2">
             <label for="inputSpeed" class="form-label">Speed</label>
-            <input type="text" class="create2" id="inputSpeed" name="speed">
+            <input type="text" class="create2" id="inputSpeed" name="speed" placeholder="Enter speed">
           </div>
           <div class="col-12">
             <div class="mb-3">
@@ -975,7 +967,10 @@ div = $(`
             </div>
           </div>
           <div class="col-12">
-            <button class="btn-sub" onclick="updateProd()">Add</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="approveProd()" style="position: relative; float: right; right: 15em;">Add</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; position: relative; float: right; margin-right: 1em; "></i>
+            <div id ="alert_img" class="alert alert-danger" role="alert" style="width: 30em; position: relative; float: left;">
+            REMINDER: to add a new product, load first the image  
+            </div>
           </div>
         </form>
       </div>
@@ -983,17 +978,7 @@ div = $(`
       `);
       $("#ctable2").append(div);
 }
-
-function openPersonalArea() {           
-  $( "#ctable" ).empty();
-  $( "#ctable2" ).empty();
-                     
-  div = $(`    
-  <h5>DA FARE! </h5>     
-`);
-$("#ctable").append(div);
-}
-
+////AGGIUNTA NUOVO NOLEGGIO
 function openCreate(){
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
@@ -1026,7 +1011,7 @@ $("#ctable").append(div);
     </div>
     
     <div class="btn-block">
-      <button class="btn-sub" onclick="checkRent()">Create</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+      <button class="btn-sub" onclick="approveRent()">Create</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
     </div>
   </form>
 </div>
@@ -1035,18 +1020,10 @@ $("#ctable").append(div);
 $("#ctable2").append(div);
 }
 
-function checkRent(){
-  document.getElementById("smile").style.visibility = "visible";
-}
+///MODIFICA CLIENTE
 
-function updateProd(){
-  document.getElementById("smile").style.visibility = "visible";
-} 
 
-function updateClient(){
-  document.getElementById("smile").style.visibility = "visible";
-}
-
+///NOLEGGI PER CLIENTE
 function searchClientRents(_id){
 
   if(_id) {
@@ -1111,7 +1088,7 @@ function foundRents(data, insertedID) {
 
 
 }
-
+//MODIFICA CLIENTE
 function modifyClient(data, insertedID){
   for (let i in data) {
 
@@ -1164,7 +1141,7 @@ div = $(`
             </div>
           </div>
           <div class="col-12">
-            <button class="btn-sub" onclick="updateClient()">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="approveClient()">Update</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </form>
       </div>
@@ -1179,6 +1156,7 @@ if (!found)
 console.log("non esiste cliente");
 }
 
+//FILTRO PER NOLEGGI CONCLUSI
 function pastRents(data){
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
@@ -1199,19 +1177,17 @@ function pastRents(data){
     if(dateA.getTime() < dateB.getTime()){
       let div = null;
         div = $(` 
-        <div class="row2">
-        <div class="column">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Rental: ${data[i]._id}</h5>
-              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
-              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
-              <button class="btn-mod">Modify</button>
-            </div>
+        <div class="flex-container">
+        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+          <div class="card-body">
+            <h5 class="card-title">Rental number: ${rentARRAY[i]._id}</h5>
+            <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+            <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
+            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+            <button class="btn-mod">Modify</button>
           </div>
         </div> 
-      <div>  `);
+      </div>  `);
          $("#ctable2").append(div);
 
          var found = true;
@@ -1223,7 +1199,7 @@ function pastRents(data){
   
 
 }
-
+//FILTRO NOLEGGI ATTIVI
 function futureRents(data){
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
@@ -1244,19 +1220,17 @@ function futureRents(data){
     if(dateA.getTime() > dateB.getTime()){
       let div = null;
         div = $(` 
-        <div class="row2">
-        <div class="column">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Rental: ${data[i]._id}</h5>
-              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
-              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
-              <button class="btn-mod">Modify</button>
-            </div>
+        <div class="flex-container">
+        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+          <div class="card-body">
+            <h5 class="card-title">Rental number: ${rentARRAY[i]._id}</h5>
+            <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+            <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
+            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+            <button class="btn-mod">Modify</button>
           </div>
         </div> 
-      <div>  `);
+      </div>  `);
          $("#ctable2").append(div);
 
          var found = true;
@@ -1267,7 +1241,7 @@ function futureRents(data){
     console.log("errore");
 
 }
-
+//FILTRO NOLEGGI FUTURI
 function activeRents(data){
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
@@ -1288,19 +1262,17 @@ function activeRents(data){
     if(dateA.getTime() == dateB.getTime()){
       let div = null;
         div = $(` 
-        <div class="row2">
-        <div class="column">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Rental: ${data[i]._id}</h5>
-              <p class="card-text">Client ID: ${data[i].client_id} <br> Product ID: ${data[i].prod_id}<br></p>
-              <p class="card-text">Start date: ${data[i].start_date.slice(0,10)} <br> End date: ${data[i].end_date.slice(0,10)}</p>
-              <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
-              <button class="btn-mod">Modify</button>
-            </div>
+        <div class="flex-container">
+        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+          <div class="card-body">
+            <h5 class="card-title">Rental number: ${rentARRAY[i]._id}</h5>
+            <p class="card-text">Client ID: ${rentARRAY[i].client_id} <br> Product ID: ${rentARRAY[i].prod_id}<br></p>
+            <p class="card-text">Start date: ${rentARRAY[i].start_date.slice(0,10)} <br> End date: ${rentARRAY[i].end_date.slice(0,10)}</p>
+            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Delete</button>
+            <button class="btn-mod">Modify</button>
           </div>
         </div> 
-      <div>  `);
+      </div>  `);
          $("#ctable2").append(div);
 
          var found = true;
@@ -1313,6 +1285,56 @@ function activeRents(data){
 
 }
 
+//FUNZIONE PER VEDERE NOTE CLIENTI
+function Notes(insertedID){  
+  _id = insertedID;
+  console.log(_id);
+  if(_id) {
+      $.ajax({
+          type: 'GET',
+          url: '/user-rentals/' + _id ,
+          success: function (info) {
+            div = $(` 
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>      `);
+            $("#ctable").append(div);
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+          }
+      });
+  }
+  else {
+console.log("errore nell'else");
+  }
+
+}
 
 
 
+//FUNZIONI PER TORNARE INDIETRO
+function goBackClients(){
+  openClient();
+}
+
+function goBackInventory(){
+  openInventory();
+}
+
+function goBackRents(){
+  openRents();
+}
+
+//FUNZIONI AUX
+function approveRent(){
+  document.getElementById("smile").style.visibility = "visible";
+}
+function approveClient(){
+  document.getElementById("smile").style.visibility = "visible";
+}
+function approveProd(){
+  document.getElementById("smile").style.visibility = "visible";
+  
+} 
