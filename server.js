@@ -29,6 +29,10 @@ app.use("/css", express.static(path.resolve(__dirname, 'public/css')));
 app.use("/html", express.static(path.resolve(__dirname, 'public/html')));
 app.use('/img' , express.static(__dirname  +'/public/img'));
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
+app.use("/manager", express.static(path.resolve(__dirname, 'build')));
+app.use("/static", express.static(path.resolve(__dirname, 'build/static')));
+
+
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

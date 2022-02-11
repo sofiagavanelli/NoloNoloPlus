@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const client = require("./Models/client");
 
 //PER USARE QUELLO NON IN LOCALE:
-//const connectionString = process.env.DATABASE_STRING;
+//const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority"; //process.env.DATABASE_STRING;
 const connectionString = process.env.DATABASELOCAL_STRING;
 
 const Client = require("./Models/client");
@@ -114,7 +114,8 @@ module.exports = {
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log("Errore"))},
+            .catch(x => console.log("Errore"))
+    },
 
     updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
@@ -130,6 +131,29 @@ module.exports = {
                     email: mail,
                     birth: bday,
                     note: notes, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
+    updateRent: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+        console.log("prova per modifica prodotto");
+        await Prodotto.findOneAndUpdate(
+            {prod_id: id},
+            { $set: {category: categ,
+                image: im,
+                name: n,
+                brand: m,
+                speed: v,
+                length: leng,
+                guests: osp,
+                year: aa,
+                summary: description,
+                low_season: p_low,
+                high_season: p_high,
+                status: stat, }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
