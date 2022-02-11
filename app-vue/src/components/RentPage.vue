@@ -37,7 +37,7 @@
             <div id="priceTab" class="flex-container">
               <b-button v-on:click="calc()">TOTALE: </b-button>
               <div id="total-price">
-                <h5> {{total}} € </h5>
+                <h5> {{total}} </h5>
               </div>
               <template v-if="this.$store.state.discount && this.$store.state.username">
                 <input type="checkbox" v-on:click="useDiscount()"> voglio usare il mio sconto 
@@ -115,7 +115,7 @@ export default {
 
       home: true,
 
-      total: '//',
+      total: '',
 
       payment: false,
 
@@ -188,6 +188,10 @@ methods: {
 
   calc() {
 
+    if(new Date(this.endD) < new Date(this.startD)) {
+      this.total = "la data di fine deve essere successiva a quella d'inizio";
+    }
+    else {
       const diffInMs   = new Date(this.endD) - new Date(this.startD);
       const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
 
@@ -197,9 +201,9 @@ methods: {
 
       if(this.$store.state.username) {
 
-        if(this.parentData.discount) {
+        /*if(this.parentData.discount) {
           temp = temp - (temp*this.parentData.discount/100);
-        }
+        }*/
 
         if(this.parentData.status == "buono") {
           temp = temp - (temp*5/100);
@@ -223,7 +227,7 @@ methods: {
         /*this.controlDate()
           .then((valid) => {*/
             if(this.parentData.status != "rotto" && this.controlDate()) {
-              this.total = temp;
+              this.total = temp + '€';
               this.payment = true;
             }
             else {
@@ -234,8 +238,9 @@ methods: {
 
       }
       else {
-        this.total = temp;
+        this.total = temp + '€';
       }
+    }
 
   },
 
@@ -261,21 +266,30 @@ methods: {
 
   },
 
+  useDiscount() {
+
+    if(this.parentData.discount) {
+      this.total = this.toale - (this.total*this.parentData.discount/100);
+    }
+
+  },
+
   emitToParent (event) {
     this.$emit('childToParent')
   },
 
   pay(tipo) {
-    console.log("inside pay: " + tipo);
 
     /*const client = req.body.client;
       const prod = req.body.product; 
       const startdate= req.body.start;
       const enddate= req.body.end; */
     
-    this.paymethod = tipo;
+    if(tipo) {
+      this.paymethod = tipo;
 
-    this.$bvModal.show("recapModal");
+      this.$bvModal.show("recapModal");
+    }
     /*TODO CREARE NOLEGGIO
     axios.post('/new-rent', this.newRent)
       .then(() => {

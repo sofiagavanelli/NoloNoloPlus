@@ -1,14 +1,12 @@
 <template>
 <div>
 
-  <div> <!--QUESTO LO VEDE -->
+  <div>
     <Navbar />
   </div>
 
   <div role="main" id="componentView">
-		<keep-alive>
 			<router-view></router-view>
-		</keep-alive>
 	</div>
 
 </div>
@@ -94,7 +92,7 @@ export default {
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
 
-    font-size: 14px;
+    font-size: 12px;
 
     /*margin-top: 6em;*/
     padding: 0.5em 3em 1em 3em;
