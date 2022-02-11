@@ -267,6 +267,9 @@ export default {
     overflow: auto;
     /*height: 70vh;*/
     /*z-index: -1;*/
+
+    /*QUANDO E GRANDE*/;
+    width: 25vw;
 }
 
 .boat-images:hover {
@@ -311,7 +314,19 @@ export default {
   font-size: 12px;
 }
 
+@media screen and (max-width: 800px) {
+
+  .boat-images {
+    width: 40vw;
+  }
+
+}
+
 @media screen and (max-width: 500px) {
+
+  .boat-images {
+    width: auto;
+  }
 
   .boat-images:hover {
     transform: none;

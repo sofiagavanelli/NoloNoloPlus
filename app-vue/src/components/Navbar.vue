@@ -97,10 +97,6 @@ export default {
 
       localStorage.removeItem('CurrentUser');
 
-      this.$router.push({
-          path: '/home',
-      });
-
     }
 
   }

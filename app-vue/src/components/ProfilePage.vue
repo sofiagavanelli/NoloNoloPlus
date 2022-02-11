@@ -259,9 +259,10 @@ export default({
     /*props: {
         rentToEdit: [],
     },*/
-    mounted() { 
+    created() { 
 
         if(localStorage.getItem('CurrentUser')) {
+            console.log("trovato")
             this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
 
             this.username = this.$store.state.username;
