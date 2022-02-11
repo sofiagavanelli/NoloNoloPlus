@@ -29,13 +29,6 @@ button:focus{
     font-style: none;
 }
 
-  .modal-content {
-    background: #EDB5BF;
-    color: #000;
-    width: 20em;
-    margin: 20%;
-    border-radius: 5%;
-}
 
 .avatar {
     width: 5em;
@@ -510,12 +503,12 @@ form.example input[type=text] {
   color: #1da1f2;
 }
 
-  h1{
+h1{
   margin: 15px 0;
   font-weight: 400;
   color: #1a6391;
-  }
-  .testbox {
+}
+.testbox {
   position: relative;
   left: 10%;
   justify-content: center;
@@ -524,67 +517,68 @@ form.example input[type=text] {
   padding: 3px;
   width: 75%;
   bottom: 10%;
-  }
-  .create{
+}
+.create{
   width: 100%;
   padding: 20px;
   background: #fff;
   box-shadow: 0 2px 5px #ccc; 
-  }
-  .create2, select, textarea {
+}
+.create2, select, textarea {
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;}
+  border-radius: 3px;
+}
 
-  .create2:hover, select:hover, textarea:hover {
+.create2:hover, select:hover, textarea:hover {
   outline: none;
   border: 1px solid #095484;
-  }
-  .create2{
+}
+.create2{
   width: calc(100% - 10px);
   padding: 5px;
-  }
-  select {
+}
+select {
   width: 100%;
   padding: 7px 0;
   background: transparent;
-  }
-  textarea {
+}
+textarea {
   width: calc(100% - 6px);
-  }
-  .item-2{
+}
+.item-2{
   position: relative;
   margin: 10px 0;
-  }
-  input{
+}
+input{
     display: block;
-  }
-  input[type="date"]::-webkit-inner-spin-button {
+}
+input[type="date"]::-webkit-inner-spin-button {
   display: none;
-  }
-  item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
+}
+item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
   
   font-size: 20px;
   color: #a9a9a9;
-  }
-  .item-2 i {
+}
+.item-2 i {
   position: relative;
   right: 4%;
   top: 10px;
   z-index: 1;
   color: #c5c5c5;
-  }
-  [type="date"]::-webkit-calendar-picker-indicator {
+}
+[type="date"]::-webkit-calendar-picker-indicator {
 
   z-index: 2;
   opacity: 0;
   cursor: pointer;
-  }
-  .btn-block {
+}
+.btn-block {
   margin-top: 5%;
   text-align: center;
-  }
-  .btn-sub{
+}
+.btn-sub{
   width: 150px;
   padding: 10px;
   border: none;
@@ -595,10 +589,16 @@ form.example input[type=text] {
   font-size: 16px;
   color: #fff;
   cursor: pointer;
-  }
-  .btn-sub:hover {
+}
+.btn-sub:hover {
   background-color: #0666a3;
-  }
+}
+.btn-postit{
+  border: none;
+  color: #0d2948;
+  width: auto;
+  background-color: #fff;
+}
 
 
 

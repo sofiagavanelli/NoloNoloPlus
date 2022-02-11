@@ -20,11 +20,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    username: null
+    username: null,
+    discount: null
   },
   mutations: {
     setUsername(state, _user) {
-        state.username = _user
+      state.username = _user
+    },
+    setDiscount(state, value) {
+      state.discount = value
     }
   }
 })

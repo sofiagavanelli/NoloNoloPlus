@@ -104,7 +104,13 @@ export default {
 
           localStorage.setItem('CurrentUser', JSON.stringify(this.username));
 
+          if(this.clientInfo.discount)
+            this.$store.state.discount = this.clientInfo.discount;
+
           //data = this.loggedIN;
+
+          this.username = null;
+          this.pass = null;
 
           this.$router.push({
             path: '/profile',

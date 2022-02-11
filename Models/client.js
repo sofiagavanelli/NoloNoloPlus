@@ -16,7 +16,8 @@ var ClientSchema = new Schema(
     note: {type: String},
     //deleted: {type: Boolean},
     address: {type: String, required: true},
-    birth: {type: String, required: true}
+    birth: {type: String, required: true},
+    discount: {type: String}
   }
 );
 

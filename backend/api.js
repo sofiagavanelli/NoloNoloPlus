@@ -114,8 +114,6 @@ module.exports = function (app) {
             res.end();
         });
 
-        console.log("error");
-
     });
 
     ///RICERCA CLIENTE PER ID
@@ -144,8 +142,6 @@ module.exports = function (app) {
         res.writeHead(200);
 
         let id = req.params.id;
-
-        console.log(id);
 
         db.searchProd(id).then(prodsinfo => {
 
@@ -343,7 +339,7 @@ module.exports = function (app) {
         const price_low= req.body.lowseason;
         const price_high = req.body.highseason;
         const idprod = req.body.product;
-        const state = req.body.status;
+        const state = req.body.stato;
 
       db.saveProd(cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
 

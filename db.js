@@ -49,17 +49,6 @@ module.exports = {
                 note: _note
             }).save();
             
-        /*new Client({
-            //image: _img,
-            name: _name,
-            surname: _surname,
-            client_id: _username,
-            password: _pass,
-            place: _place,
-            address: _address,
-            phone: tel, 
-            email: email,
-        }).save();*/
     },
 
     saveWorker: async(_name, _surname, _password, _year, _isManager, _userId) =>{
@@ -75,7 +64,6 @@ module.exports = {
     },
 
     saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
-        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
         new Prodotto({
             category: _category,

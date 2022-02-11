@@ -106,7 +106,7 @@ export default {
     flex-wrap: wrap;
 }
 
-#main_page, #cont1, #rent_page, #login, #about-us, #profile_page{
+#main_page, #cont1, #rent_page, #contedit, #login, #about-us, #profile_page{
   justify-content: center;
   padding: 0 1.5em 0 1.5em;
 }
