@@ -1,13 +1,14 @@
 //pagina che serve per mettere insieme tutti i componenti
 import { Header } from './components/sidebar';
-//import { Container, Row, Col } from 'react-grid-system';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dipendenti from "./pages/Dipendenti";
+import Clienti from "./pages/Clienti";
+import Inventario from "./pages/Inventario";
+import StartPage from './pages/startPage';
+import Noleggi from "./pages/Noleggi";
+import AddWorker from "./pages/AddWorker";
 
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Dipendenti from "./pages/Dipendenti"
-import Clienti from "./pages/Clienti"
-import Inventario from "./pages/Inventario"
-import Noleggi from "./pages/Noleggi"
 
 /*export function Sidebar() {
   return (
@@ -25,14 +26,19 @@ import Noleggi from "./pages/Noleggi"
 } */
 
 function App(){
+  const pull_data = (data) => {
+    console.log(data); // LOGS DATA FROM CHILD Clienti
+  }
   return(
     <Router>
       <Header />
       <Routes>
-        <Route path='/' exact element={<Dipendenti />} />
-        <Route path='/clienti' element={<Clienti />} />
+        <Route path='/' exact element={<StartPage />} />
+        <Route path='/manager/impiegati' exact element={<Dipendenti />} />
+        <Route path='/manager/clienti' element={<Clienti  func={pull_data} />} />
         <Route path='/inventario' element={<Inventario />} />
         <Route path='/noleggi' element={<Noleggi />} />
+        <Route path='/aggiungiImpiegato' element={<AddWorker />} />
       </Routes>
     </Router>
   );

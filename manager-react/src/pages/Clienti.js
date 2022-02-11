@@ -9,13 +9,13 @@ var _ = require('lodash');
 
 
 
-function Clienti() {
+function Clienti(props) {
   const [valueClientRent, setValue]= React.useState([]);//contiene il ricavato totale e il numero dei noleggi per ogni cliente
   const [infoClient, setInfo]=React.useState([]);//contiene le informazioni di ogni cliente
   
   //funzione che ritorna le informazioni di tutti i noleggi e calcola il numero di noleggi per ogni cliente
   function getNumRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         const rentForClient=
@@ -47,7 +47,7 @@ function Clienti() {
 
   //funzione che ritorna le informazioni dei clienti
   function getInfo(valueRent){
-        fetch('http://localhost:8000/allClients')
+        fetch('https://site202133.tw.cs.unibo.it/allClients')
         .then(results => results.json())
         .then(info => {
           setInfo(info);
@@ -69,14 +69,15 @@ function Clienti() {
           setValue(valueRent);
         });
   }
-
+  props.func('prova');
+  
   React.useEffect(() => {//il fetch viene eseguito solo dopo il primo render grazie al parametro '[]', però i dati vengono persi ogni volta che c'è un nuovo render, per questo uso array hooks
     getNumRent();
   }, []);
 
     return (
       <div id="clienti">
-        <h1>Statistiche clienti</h1>
+        <h1 id="arcobaleno">Statistiche clienti</h1>
         
         <h5>Numero di noleggi per cliente</h5>
         <BarCharT dati={valueClientRent} name={"numero di noleggi per cliente"} xValue={"client_id"} yValue={"number"}/>

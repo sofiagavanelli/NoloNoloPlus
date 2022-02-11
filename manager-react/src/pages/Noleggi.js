@@ -74,7 +74,7 @@ function Noleggi() {
   }
   //funzione che ritorna i noleggi
   function getRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         setInfo(data);
@@ -91,13 +91,30 @@ function Noleggi() {
 
     return (
       <div id="noleggi">
-        <h1 id="arcobaleno">Stato dei Noleggi</h1>
+        <h1 id="arcobaleno">Noleggi</h1>
+        <h5>Stato dei noleggi</h5>
         <PieCharT dati={countApproved} ></PieCharT>
         <BarCharT dati={countState} name={"stato dei noleggi"} xValue={"name"} yValue={"value"}/>
-        <h5>Numero di noleggi per mese</h5>
+        <hr  style={{
+            color: 'red',
+            backgroundColor: 'red',
+            height: 5
+        }}/>
+        <h5 style={{ textAlign: 'center'}}>Numero di noleggi per mese</h5>
         <BarCharT dati={rentMonth} name={"Numero di noleggi"} xValue={"month"} yValue={"count"}/>
-        <h5>Ricavo noleggi per mese</h5>
+        <hr  style={{
+            color: 'red',
+            backgroundColor: 'red',
+            height: 5
+        }}/>
+        <h5  style={{ textAlign: 'center'}}>Ricavo noleggi per mese</h5>
         <BarCharT dati={rentMonth} name={"Ricavo noleggi"} xValue={"month"} yValue={"value"}/>
+        <hr  style={{
+            color: 'red',
+            backgroundColor: 'red',
+            height: 5
+        }}/>
+        <h4 style={{ textAlign: 'center'}}>Informazioni sui noleggi</h4>
         <CardComponentRent info={infoRent} divName={"cardRent"} keyDiv={"cardRent"}></CardComponentRent>
       </div>
       );

@@ -1,13 +1,20 @@
+import React from "react";
 import { Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {  Link } from "react-router-dom";
+import Cliente from "../pages/Cliente";
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from "react";
+
+
 
 
 
 export function CardComponentClient(props){
+
     //Card key indica la chiave per identificare ogni singola card
     return(
+        
        <div key={props.keyDiv} className={props.divName}>
             <Row xs={1} md={4} className="g-4">
             {
@@ -16,7 +23,10 @@ export function CardComponentClient(props){
                         <Card  style={{ margin: '10px' }}> 
                         <Card.Img variant="top" src={cliente.image} />
                         <Card.Body>
-                            <Card.Title>{cliente.name} {cliente.surname}</Card.Title>
+                            <Card.Title><Link to="/cliente">{cliente.name} {cliente.surname}</Link></Card.Title>
+                            <Routes>
+                                <Route exact path="/cliente" component={Cliente} info={cliente}/>          
+                            </Routes>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem><h6>client id:</h6> {cliente.client_id}</ListGroupItem>

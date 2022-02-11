@@ -1,6 +1,6 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import { Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Row, Col, Stack } from 'react-bootstrap';
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -48,9 +48,11 @@ export function CardComponentRent(props){
     //Card key indica la chiave per identificare ogni singola card
     return(
         <div>
-            <DatePicker
-                placeholderText="Clicca per selezionare una data "
+        <Stack direction="horizontal" gap={3}>
+            <div ><h5>Selezionare una data per filtrare i noleggi in base alla data di conclusione:</h5> </div>
+            <div ><DatePicker
                 dateFormat="yyyy-MM-dd"
+                placeholderText="Clicca per selezionare una data "
                 selectsRange={true}
                 startDate={startDate}
                 endDate={endDate}
@@ -58,8 +60,12 @@ export function CardComponentRent(props){
                     setDateRange(update);
                     show(update);
                 }}
-                isClearable={true}
+                
             />
+            </div>
+
+        </Stack>
+
             {isShow
                 ?   <div key={props.keyDiv} className={props.divName}>
                     <Row xs={1} md={4} className="g-7" >
@@ -110,7 +116,6 @@ export function CardComponentRent(props){
                                     <ListGroupItem><h6>Inizio noleggio:</h6> {prodotto.start_date.substr(0, 10)}</ListGroupItem>
                                     <ListGroupItem><h6>Fine noleggio:</h6> {prodotto.end_date.substr(0, 10)}</ListGroupItem>
                                     <ListGroupItem><h6>Prezzo:</h6> {prodotto.price}</ListGroupItem>
-                                    <ListGroupItem><h6>Metodo di pagamento:</h6> {prodotto.payment}</ListGroupItem>
                                 </ListGroup>
                                 </Card>
                             </Col>

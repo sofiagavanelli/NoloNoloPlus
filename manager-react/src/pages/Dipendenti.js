@@ -3,6 +3,7 @@ import {BarCharT} from '../components/barChart';
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
+import { CardWorker } from '../components/cardWorker';
 
 var _ = require('lodash');
 
@@ -10,9 +11,10 @@ var _ = require('lodash');
 function Dipendenti() {
   const [numDipRent, setData]=React.useState([]);
   const [valueDipRent, setValue]= React.useState([]);
+  const [infoWorker, setInfo]=React.useState([]);
     
   function getNumRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         setData( _.chain(data)//creao un oggetto che contiene il client id e il numero di noleggi
@@ -21,6 +23,14 @@ function Dipendenti() {
         .value()
         );
         getValue(data);
+      });
+  }
+
+  function getWorkerInfo(){
+    fetch('https://site202133.tw.cs.unibo.it/allWorker')
+      .then(results => results.json())
+      .then(workers => {
+        setInfo(workers);
       });
   }
 
@@ -52,15 +62,23 @@ function Dipendenti() {
 
   React.useEffect(() =>{
      getNumRent();
+     getWorkerInfo();
     }, []);
 
   return (
     <div id="dipendenti">
-        <h1>Statistiche degli impiegati</h1>
+        <h1 id="arcobaleno">Statistiche degli impiegati</h1>
         <h5>Numero di noleggi per impiegato</h5>
         <BarCharT dati={numDipRent} name={"numero di noleggi per impiegato"} xValue={"worker_id"} yValue={"value"}/>
         <h5>Fatturato per ogni dipendente</h5>
         <BarCharT dati={valueDipRent} name={"fatturato per ogni impiegato"} xValue={"worker_id"} yValue={"value"}/>
+        <hr  style={{
+                      color: 'red',
+                      backgroundColor: 'red',
+                      height: 5
+        }}/>
+        <h5>Informazioni dipendenti</h5>
+        <CardWorker info={infoWorker} keyDiv={"cardDipendenti"} divName={"cardDipDiv"}></CardWorker>
     </div>
     );
 }
