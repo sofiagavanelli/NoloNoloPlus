@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 
 const WorkerSchema = new Schema(
   {
-
     name: {type: String, required: true},
+    surname: {type: String, required: true},
     user_id: {type: String, required: true},
     password: {type: String, required: true, minLeght: 5},
-    manager: {type: Boolean, required: true}
+    manager: {type: Boolean, required: true},
+    year: {type: String, required: false}
   }
 );
 

@@ -62,6 +62,18 @@ module.exports = {
         }).save();*/
     },
 
+    saveWorker: async(_name, _surname, _password, _year, _isManager, _userId) =>{
+        console.log("dentro save");
+        new Worker ({
+            name:_name,
+            surname: _surname,
+            password: _password,
+            manager: _isManager, 
+            user_id: _userId,
+            year:_year
+        }).save();
+    },
+
     saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
 
@@ -154,6 +166,10 @@ module.exports = {
         return Promise.resolve(Client.find({ client_id: id }));
     },
 
+    searchWorkerID: async (id) => {
+        return Promise.resolve(Worker.find({ user_id: id }));
+    },
+
     //search con il nome per il login! così l'ID rimane ""privato""
     searchClient: async (_name) => {
         return Promise.resolve(Client.find({ name: _name }));
@@ -200,9 +216,18 @@ module.exports = {
 
     },
 
+    getWorker: async (options = {}) => {
+        
+        return Promise.resolve(Worker.find(options));
+
+    },
 
     deleteClient: async (id) => {
         return Promise.resolve(Client.findOneAndDelete({ client_id : id }));
+    },
+
+    deleteWorker: async (id) => {
+        return Promise.resolve(Worker.findOneAndDelete({ user_id : id }));
     },
 
     deleteProd: async (id) => {

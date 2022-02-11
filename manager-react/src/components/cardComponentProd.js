@@ -20,11 +20,6 @@ export function CardComponentProd(props){
                         </Card.Body>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem><h6>Id prodotto:</h6> {prodotto.prod_id}</ListGroupItem>
-                            <ListGroupItem><h6>Brand:</h6> {prodotto.brand}</ListGroupItem>
-                            <ListGroupItem><h6>Numero ospiti:</h6> {prodotto.guests}</ListGroupItem>
-                            <ListGroupItem><h6>Anno prdouzione:</h6> {prodotto.year}</ListGroupItem>
-                            <ListGroupItem><h6>Lunghezza:</h6> {prodotto.length}</ListGroupItem>
-                            <ListGroupItem><h6>Velocità:</h6> {prodotto.speed}</ListGroupItem>
                             <ListGroupItem><h6>Prezzo alta stagione:</h6> {prodotto.high_season}</ListGroupItem>
                             <ListGroupItem><h6>Prezzo bassa stagione:</h6> {prodotto.low_season}</ListGroupItem>
                             <ListGroupItem><h6>Stato:</h6> {prodotto.status}</ListGroupItem>

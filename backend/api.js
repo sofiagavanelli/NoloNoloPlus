@@ -48,6 +48,18 @@ module.exports = function (app) {
         });
     });
 
+    //FUNZIONE CHE RITORNA TUTTI I DIPENDENTI
+    app.get('/allWorker', function (req, res) {
+
+        res.writeHead(200);
+
+        db.getWorker().then(workerinfo => {
+            
+            res.write(JSON.stringify(workerinfo));
+            res.end();
+        });
+    });
+    
     app.get('/worker/:id', function (req, res) {
 
         res.writeHead(200);
@@ -204,6 +216,15 @@ module.exports = function (app) {
             )
     
     });
+
+    app.delete('/worker/:id', function(req, res){
+        const id = req.params.id;
+         db.deleteWorker(id).then(() => {
+          res.status(200);
+          res.end();
+          }
+            )
+    });
     
 
     /*************************APP POST */
@@ -255,6 +276,28 @@ module.exports = function (app) {
         })
         //console.log(data);
 
+    });
+
+    app.post('/new-worker', function(req, res){
+        res.writeHead(200);
+        var name= req.body.name;
+        var surname=req.body.surname;
+        var password= req.body.password;
+        var manager= req.body.manager;
+        var user_id= req.body.user_id;
+        var year= req.body.year;
+        db.searchWorkerID(user_id).then(proof=>{
+            var risultato= JSON.stringify(proof);
+            if(risultato.length>2){
+                res.write(JSON.stringify(false));
+                res.end();
+            }else{
+                db.saveWorker(name, surname, password, year, manager, user_id).then(result => {
+                    res.write(JSON.stringify(true));
+                    res.end();
+                })
+            }
+        })
     });
 
     app.post('/new-rent',(req, res)=>{

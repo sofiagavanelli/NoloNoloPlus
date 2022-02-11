@@ -171,3 +171,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+#startPage{
+  background-image: url('../../public/img/nolonolo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
