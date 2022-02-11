@@ -14,7 +14,7 @@ function Dipendenti() {
   const [infoWorker, setInfo]=React.useState([]);
     
   function getNumRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         setData( _.chain(data)//creao un oggetto che contiene il client id e il numero di noleggi
@@ -27,7 +27,7 @@ function Dipendenti() {
   }
 
   function getWorkerInfo(){
-    fetch('http://localhost:8000/allWorker')
+    fetch('https://site202133.tw.cs.unibo.it/allWorker')
       .then(results => results.json())
       .then(workers => {
         setInfo(workers);
@@ -72,6 +72,12 @@ function Dipendenti() {
         <BarCharT dati={numDipRent} name={"numero di noleggi per impiegato"} xValue={"worker_id"} yValue={"value"}/>
         <h5>Fatturato per ogni dipendente</h5>
         <BarCharT dati={valueDipRent} name={"fatturato per ogni impiegato"} xValue={"worker_id"} yValue={"value"}/>
+        <hr  style={{
+                      color: 'red',
+                      backgroundColor: 'red',
+                      height: 5
+        }}/>
+        <h5>Informazioni dipendenti</h5>
         <CardWorker info={infoWorker} keyDiv={"cardDipendenti"} divName={"cardDipDiv"}></CardWorker>
     </div>
     );

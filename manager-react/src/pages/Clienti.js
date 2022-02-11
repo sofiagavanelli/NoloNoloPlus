@@ -15,7 +15,7 @@ function Clienti(props) {
   
   //funzione che ritorna le informazioni di tutti i noleggi e calcola il numero di noleggi per ogni cliente
   function getNumRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         const rentForClient=
@@ -47,7 +47,7 @@ function Clienti(props) {
 
   //funzione che ritorna le informazioni dei clienti
   function getInfo(valueRent){
-        fetch('http://localhost:8000/allClients')
+        fetch('https://site202133.tw.cs.unibo.it/allClients')
         .then(results => results.json())
         .then(info => {
           setInfo(info);

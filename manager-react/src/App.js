@@ -34,8 +34,8 @@ function App(){
       <Header />
       <Routes>
         <Route path='/' exact element={<StartPage />} />
-        <Route path='/impiegati' exact element={<Dipendenti />} />
-        <Route path='/clienti' element={<Clienti  func={pull_data} />} />
+        <Route path='/manager/impiegati' exact element={<Dipendenti />} />
+        <Route path='/manager/clienti' element={<Clienti  func={pull_data} />} />
         <Route path='/inventario' element={<Inventario />} />
         <Route path='/noleggi' element={<Noleggi />} />
         <Route path='/aggiungiImpiegato' element={<AddWorker />} />

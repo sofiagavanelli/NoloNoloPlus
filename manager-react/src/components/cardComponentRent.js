@@ -116,7 +116,6 @@ export function CardComponentRent(props){
                                     <ListGroupItem><h6>Inizio noleggio:</h6> {prodotto.start_date.substr(0, 10)}</ListGroupItem>
                                     <ListGroupItem><h6>Fine noleggio:</h6> {prodotto.end_date.substr(0, 10)}</ListGroupItem>
                                     <ListGroupItem><h6>Prezzo:</h6> {prodotto.price}</ListGroupItem>
-                                    <ListGroupItem><h6>Metodo di pagamento:</h6> {prodotto.payment}</ListGroupItem>
                                 </ListGroup>
                                 </Card>
                             </Col>

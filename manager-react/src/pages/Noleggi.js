@@ -74,7 +74,7 @@ function Noleggi() {
   }
   //funzione che ritorna i noleggi
   function getRent(){
-    fetch('http://localhost:8000/allRents')
+    fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         setInfo(data);

@@ -1,6 +1,25 @@
 import React from "react";
 import { Button, Form } from 'react-bootstrap';
 function AddWorker(){
+  const [newWorker, setWorker] = React.useState({
+    name: '',
+    surname: '',
+    password: '',
+    manager: false,
+    user_id: '',
+    year: ''
+  })
+  
+  const updateData = (event, property) => {
+    const target = event.target
+    console.log(target)
+
+    event.preventDefault()
+    setWorker((prevState) => ({
+      ...prevState,
+      [property]: event.target.value,
+    }))
+  }
 
     let jsonData={
         name: 'pippo',
@@ -11,22 +30,11 @@ function AddWorker(){
         year: '2000'
     }
 
-    /* function prova(){//richiesta per aggiunta worker
-        // Send data to the backend via POST
-        console.log(JSON.stringify(jsonData));
-        fetch('http://localhost:8000/new-worker', {  // Enter your IP address here
 
-            method: 'POST', 
-            mode: 'cors', 
-            body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-
-        })
-        getWorkerInfo();
-    } */
 
     const addWorker = () => {
         console.log(JSON.stringify(jsonData));
-        fetch('http://localhost:8000/new-worker', {  // Enter your IP address here
+        fetch('https://site202133.tw.cs.unibo.it/new-worker', {  // Enter your IP address here
 
             method: 'POST', 
             mode: 'cors', 
@@ -38,7 +46,7 @@ function AddWorker(){
     };
 
     function getWorkerInfo(){
-      fetch('http://localhost:8000/allWorker')
+      fetch('https://site202133.tw.cs.unibo.it/allWorker')
         .then(results => results.json())
         .then(workers => {
           console.log(workers);
@@ -70,15 +78,19 @@ function AddWorker(){
               <Form>
                 <Form.Group className="mb-3" >
                   <Form.Label>Nome</Form.Label>
-                  <Form.Control type="textarea" placeholder="Mario" />
+                  <Form.Control 
+                  type="text" placeholder="Mario" 
+                  value={newWorker.name}
+                  onChange={(e) => updateData(e, 'name')}
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                   <Form.Label>Cognome</Form.Label>
-                  <Form.Control type="textarea" placeholder="Rossi" />
+                  <Form.Control type="text" placeholder="Rossi" />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                   <Form.Label>Id dipendente</Form.Label>
-                  <Form.Control type="textarea" placeholder="mario_rossi" />
+                  <Form.Control type="text" placeholder="mario_rossi" />
                 </Form.Group>
                 <Form.Check 
                   type="switch"

@@ -21,7 +21,7 @@ function Inventario() {
     
     //funzione che restituisce tutti i noleggi
     function getRent(){
-      fetch('http://localhost:8000/allRents')
+      fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
         getValueProduct(data);//chiamo funzione per calcolare il numero di noleggi e il costo dei noleggi per ogni prodotto 
@@ -79,7 +79,7 @@ function Inventario() {
     }
 
     function getInfo(valueRent){
-      fetch('http://localhost:8000/prods')
+      fetch('https://site202133.tw.cs.unibo.it/prods')
         .then(results => results.json())
         .then(info => {
           setInfo(info);
