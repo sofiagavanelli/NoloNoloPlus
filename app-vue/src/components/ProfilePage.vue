@@ -100,7 +100,6 @@
                             <!--/router-link-->
 
                         </template>
-
                         <template v-else>
 
                             <template v-if="!item.approved">
@@ -262,7 +261,6 @@ export default({
     created() { 
 
         if(localStorage.getItem('CurrentUser')) {
-            console.log("trovato")
             this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
 
             this.username = this.$store.state.username;
@@ -392,12 +390,14 @@ export default({
                     /*console.log(prodToRent);
                     console.log(prodToRent[0].status == "rotto");*/
 
-                    if(prodToRent[0].status == "rotto")
+                    if(prodToRent[0].status == "rotto") {
                         rotto = true;
+                        console.log("sono dentro rotto");
+                    }
                     else
                         rotto = false;
 
-                    var start = new Date(this.activeRent[_id].start_date);
+                    /*var start = new Date(this.activeRent[_id].start_date);
                     var today = null;
 
                     if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
@@ -406,10 +406,10 @@ export default({
                         today = true;
                     }
                     else
-                        today = false;
+                        today = false;*/
 
-                    //console.log(rotto && today);
-                    return(rotto && today);
+                    console.log(rotto);
+                    return(rotto);
 
                 })
                 .catch((error) => {

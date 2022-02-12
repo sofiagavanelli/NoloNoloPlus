@@ -2,9 +2,11 @@
 
     <div id="rent_page" class="flex-container">
 
-      <b-button id="backBtn" v-on:click="emitToParent">
+    <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
+      <b-button id="backBtn">
         <font-awesome-icon icon="arrow-left" /> PRODOTTI
       </b-button>
+    </router-link>
 
       <!-- cambiare estetica? -->
       <b-card class="boat-images" >
@@ -103,9 +105,10 @@ import client from '../user-data'
 
 export default {
   name: 'RentPage',
-  props: {
+  /*props: {
     parentData: '',
-  },
+  },*/
+  props: ['parentData'],
   data() {
     return {
       loading: true,
@@ -274,9 +277,9 @@ methods: {
 
   },
 
-  emitToParent (event) {
+  /*emitToParent (event) {
     this.$emit('childToParent')
-  },
+  },*/
 
   pay(tipo) {
 
@@ -484,6 +487,8 @@ methods: {
 #rent_page {
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 3em;
 }
 
 @media screen and (max-width: 800px) {
