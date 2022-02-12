@@ -88,7 +88,7 @@ function openClient() {
   div = $(`
             <form class="example">
             <input type="text" id="clientId" placeholder="Cerca cliente..." name="search">
-            <button class="form-btn" type="submit" onclick="searchClient(id)"><i class="fa fa-search"></i></button>
+            <button class="form-btn" type="submit" onclick="searchClientID(id)"><i class="fa fa-search"></i></button>
             </form>
 
             `);
@@ -239,7 +239,7 @@ function openRents() {
         <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Numero noleggio: ${RentInfo[i]._id}</h5>
-            <p class="card-text">ID Cliente: ${RentInfo[i].client_id}  <button type="button" id="${RentInfo[i].client_id}" class="btn-postit" onclick="Notes(id)"><i class="far fa-sticky-note fa-lg"></i></button>
+            <p class="card-text">ID Cliente: ${RentInfo[i].client_id}  
              <br> ID Prodotto: ${RentInfo[i].prod_id}<br></p>
             <p class="card-text">Data Inizio: ${RentInfo[i].start_date.slice(0,10)} <br> Data Fine: ${RentInfo[i].end_date.slice(0,10)}</p>
             <button id="${RentInfo[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
@@ -319,7 +319,7 @@ function acceptRent(data, insertedID) {
 
 }
 /* RICERCA CLIENTE */
-function searchClient(){
+function searchClientID(){
 
   _id = document.getElementById("clientId").value;
   if(_id) {
@@ -554,8 +554,7 @@ for (let i in rentARRAY) {
       <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
       <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
       <p class="card-text">Data Inizio: ${rentARRAY[i].start_date.slice(0,10)} <br> Data Fine: ${rentARRAY[i].end_date.slice(0,10)}</p>
-      <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Elimina</button>
-      <button class="btn-mod">Modifica</button>
+      <button id="${rentARRAY[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
     </div>
   </div> 
 </div>  
@@ -609,8 +608,7 @@ for (let i in rentARRAY) {
       <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
       <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
       <p class="card-text">Data Inizio: ${rentARRAY[i].start_date.slice(0,10)} <br> Data Fine: ${rentARRAY[i].end_date.slice(0,10)}</p>
-      <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Elimina</button>
-      <button class="btn-mod">Modifica</button>
+      <button id="${rentARRAY[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
     </div>
   </div> 
 </div>    `);
@@ -1173,7 +1171,7 @@ function modifyRent(data, insertedID){
        <h1>Noleggio numero: ${data[i]._id} </h1>
          <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 80%;">
           <div class="col-md-6">
-            <label for="inputName" class="form-label">ID Cliente</label>
+            <label for="inputName" class="form-label">ID Cliente</label>  <button type="button" id="${data[i].client_id}" class="btn-postit" onclick="searchNote(id)"><i class="far fa-sticky-note fa-lg"></i></button>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].client_id}" style="cursor: not-allowed;" readonly="readonly">
           </div>
           <div class="col-md-6">
@@ -1197,10 +1195,10 @@ function modifyRent(data, insertedID){
             <input type="text" class="create2" id="inputworker" name="worker" value="${data[i].worker_id}">
           </div>
           <div class="col-md-2">
-            <button id="${data[i]._id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="far fa-smile"></i>  Approva</button>
+            <button id="${data[i]._id}" onclick= "(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="far fa-smile"></i>  Approva</button>
             </div>
           <div class="col-md-2">
-            <button id="${data[i]._id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
+            <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
           </div>
         </form>
       </div>
@@ -1246,8 +1244,7 @@ function pastRents(data){
             <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
             <p class="card-text">Data Inizio: ${rentARRAY[i].start_date.slice(0,10)} <br> Data Fine: ${rentARRAY[i].end_date.slice(0,10)}</p>
-            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Elimina</button>
-            <button class="btn-mod">Modifica</button>
+            <button id="${rentARRAY[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
           </div>
         </div> 
       </div>  `);
@@ -1289,8 +1286,7 @@ function futureRents(data){
             <h5 class="card-title"> Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
             <p class="card-text">Data Inizio: ${rentARRAY[i].start_date.slice(0,10)} <br> Data Fine: ${rentARRAY[i].end_date.slice(0,10)}</p>
-            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Elimina</button>
-            <button class="btn-mod">Modifica</button>
+            <button id="${rentARRAY[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
           </div>
         </div> 
       </div>  `);
@@ -1331,8 +1327,7 @@ function activeRents(data){
             <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
             <p class="card-text">Data Inizio: ${rentARRAY[i].start_date.slice(0,10)} <br> Data Fine: ${rentARRAY[i].end_date.slice(0,10)}</p>
-            <button id="${rentARRAY[i]._id}" onclick= "deleteRents(id)" class="btn-d">Elimina</button>
-            <button class="btn-mod">Modifica</button>
+            <button id="${rentARRAY[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
           </div>
         </div> 
       </div>  `);
@@ -1349,26 +1344,39 @@ function activeRents(data){
 }
 
 //FUNZIONE PER VEDERE NOTE CLIENTI
-function Notes(insertedID){  
-  _id = insertedID;
-  console.log(_id);
+function searchNote(_id){  
   if(_id) {
-      $.ajax({
-          type: 'GET',
-          url: '/user-rentals/' + _id ,
-          success: function (info) {
-            div = $(`       `);
-            $("#ctable").append(div);
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
+    $.ajax({
+        type: 'GET',
+        url: '/allClients' ,
+        success: function (data) {
+          
+          clientARRAY = JSON.parse(data);
 
-          }
-      });
-  }
-  else {
+          notes(clientARRAY, _id);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+else {
 console.log("errore nell'else");
-  }
+}
+}
 
+function notes(data,insertedID){
+  console.log(data + "   " + insertedID);
+  for (let i in data) {
+
+    if(data[i].client_id == insertedID) {
+      alert("Hello! I am an alert box!!");
+      var found = true;
+    }
+
+}
+if (!found) 
+console.log("non esiste cliente");
 }
 
 

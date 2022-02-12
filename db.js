@@ -187,6 +187,10 @@ module.exports = {
         return Promise.resolve(Client.find({ name: _name }));
     },
 
+    searchNote: async (id) => {
+        return Promise.resolve(Client.find({ client_id: id }));
+    },
+
     searchWorker: async (id) => {
         return Promise.resolve(Worker.find({ work_id: id }));
     },
