@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const client = require("./Models/client");
 
 //PER USARE QUELLO NON IN LOCALE:
-//const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority"; //process.env.DATABASE_STRING;
-const connectionString = process.env.DATABASELOCAL_STRING;
+//const connectionString = process.env.DATABASE_STRING;
+const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");

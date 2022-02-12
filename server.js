@@ -52,6 +52,15 @@ app.get("/",function (req, res) {
     res.sendFile(path.join(__dirname + '/public/html/index.html'));
     
 });
+app.get("/manager",function (req, res) {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+    
+});
+
+app.get("/manager/*",function (req, res) {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+    
+});
 
 app.get("/worker", (req, res) => {
 
@@ -80,10 +89,10 @@ app.get("/new-rent", (req, res) => {
 });
 
 
-//Ambiente manager
+/* //Ambiente manager
 app.get('/manager', function (req, res) {
     res.sendFile(path.join(__dirname + "/manager.html"));
-});
+}); */
 
 
 app.use(function(req, res){

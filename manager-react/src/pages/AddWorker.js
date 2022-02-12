@@ -33,13 +33,13 @@ function AddWorker(){
 
 
     const addWorker = () => {
-        console.log(JSON.stringify(jsonData));
+        newWorker.password=newWorker.surname + newWorker.name + newWorker.year;
+        console.log(JSON.stringify(newWorker));
         fetch('https://site202133.tw.cs.unibo.it/new-worker', {  // Enter your IP address here
-
             method: 'POST', 
             mode: 'cors', 
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+            body: JSON.stringify(newWorker) // body data type must match "Content-Type" header
 
         })
         getWorkerInfo();
@@ -79,18 +79,38 @@ function AddWorker(){
                 <Form.Group className="mb-3" >
                   <Form.Label>Nome</Form.Label>
                   <Form.Control 
-                  type="text" placeholder="Mario" 
-                  value={newWorker.name}
-                  onChange={(e) => updateData(e, 'name')}
+                    type="text" 
+                    placeholder="Mario" 
+                    value={newWorker.name}
+                    onChange={(e) => updateData(e, 'name')}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                   <Form.Label>Cognome</Form.Label>
-                  <Form.Control type="text" placeholder="Rossi" />
+                  <Form.Control 
+                    type="text" 
+                    placeholder="Rossi" 
+                    value={newWorker.surname}
+                    onChange={(e) => updateData(e, 'surname')}
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                   <Form.Label>Id dipendente</Form.Label>
-                  <Form.Control type="text" placeholder="mario_rossi" />
+                  <Form.Control 
+                    type="text" 
+                    placeholder="mario_rossi"
+                    value={newWorker.user_id}
+                    onChange={(e) => updateData(e, 'user_id')}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                  <Form.Label>Anno di nascita </Form.Label>
+                  <Form.Control 
+                    type="text" 
+                    placeholder="mario_rossi"
+                    value={newWorker.year}
+                    onChange={(e) => updateData(e, 'year')}
+                  />
                 </Form.Group>
                 <Form.Check 
                   type="switch"

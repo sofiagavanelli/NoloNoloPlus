@@ -24,6 +24,8 @@ function Inventario() {
       fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
+        console.log("tutti i noleggi su inventario");
+        console.log(data);
         getValueProduct(data);//chiamo funzione per calcolare il numero di noleggi e il costo dei noleggi per ogni prodotto 
       });
     }
@@ -82,6 +84,8 @@ function Inventario() {
       fetch('https://site202133.tw.cs.unibo.it/prods')
         .then(results => results.json())
         .then(info => {
+          console.log("tutti i prodotti su inventario");
+          console.log(info);
           setInfo(info);
           setFiltrati(info);
           const rentForCategory=

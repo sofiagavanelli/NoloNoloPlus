@@ -17,6 +17,9 @@ function Dipendenti() {
     fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
+        console.log("tutti i noleggi su impiegati");
+        console.log(data);
+
         setData( _.chain(data)//creao un oggetto che contiene il client id e il numero di noleggi
         .groupBy("worker_id")
         .map((value, key) => ({worker_id: key, value: value.length})) 
@@ -30,6 +33,8 @@ function Dipendenti() {
     fetch('https://site202133.tw.cs.unibo.it/allWorker')
       .then(results => results.json())
       .then(workers => {
+        console.log("Dipendeti su pagina dipendenti");
+        console.log(workers);
         setInfo(workers);
       });
   }

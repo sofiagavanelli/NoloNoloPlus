@@ -17,7 +17,7 @@ export function CardWorker(props){
     }
 
     function deleteWorker(){
-        var del= 'http://localhost:8000/worker/' + idDelete;
+        var del= 'https://site202133.tw.cs.unibo.it/worker/' + idDelete;
         fetch(del, {  // Enter your IP address here
             method: 'DELETE', 
         })
