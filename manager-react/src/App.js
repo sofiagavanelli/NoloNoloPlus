@@ -10,35 +10,20 @@ import Noleggi from "./pages/Noleggi";
 import AddWorker from "./pages/AddWorker";
 
 
-/*export function Sidebar() {
-  return (
-    <div className="mid">
-      <Container fluid className="sidebar">
-        <Row>
-          <Col sm={3}><Link to="/">Dipendenti</Link></Col>
-          <Col sm={3}><Link to="/clienti">Clienti</Link></Col>
-          <Col sm={3}><Link to="/inventario">Inventario</Link></Col>
-          <Col sm={3}><Link to="/noleggi">Noleggi</Link></Col>
-        </Row>
-      </Container>
-    </div>
-  );
-} */
-
 function App(){
   const pull_data = (data) => {
     console.log(data); // LOGS DATA FROM CHILD Clienti
   }
   return(
-    <Router>
+    <Router >
       <Header />
-      <Routes>
-        <Route path='/' exact element={<StartPage />} />
-        <Route path='/manager/impiegati' exact element={<Dipendenti />} />
+      <Routes >
+        <Route index path='/manager' element={<StartPage />} />
+        <Route path='/manager/impiegati' element={<Dipendenti />} />
         <Route path='/manager/clienti' element={<Clienti  func={pull_data} />} />
-        <Route path='/inventario' element={<Inventario />} />
-        <Route path='/noleggi' element={<Noleggi />} />
-        <Route path='/aggiungiImpiegato' element={<AddWorker />} />
+        <Route path='/manager/inventario' element={<Inventario />} />
+        <Route path='/manager/noleggi' element={<Noleggi />} />
+        <Route path='/manager/aggiungiImpiegato' element={<AddWorker />} />
       </Routes>
     </Router>
   );

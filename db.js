@@ -3,7 +3,7 @@ const client = require("./Models/client");
 
 //PER USARE QUELLO NON IN LOCALE:
 //const connectionString = process.env.DATABASE_STRING;
-const connectionString = process.env.DATABASELOCAL_STRING;
+const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
