@@ -28,8 +28,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://site202133.tw.cs.unibo.it/",
-  "homepage": "site202133.tw.cs.unibo.it/manager",
   "eslintConfig": {
     "extends": [
       "react-app",

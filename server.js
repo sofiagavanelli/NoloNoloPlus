@@ -57,6 +57,11 @@ app.get("/manager",function (req, res) {
     
 });
 
+app.get("/manager/*",function (req, res) {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+    
+});
+
 app.get("/worker", (req, res) => {
 
     //app.use("/public", express.static(path.resolve(__dirname, 'public')));
