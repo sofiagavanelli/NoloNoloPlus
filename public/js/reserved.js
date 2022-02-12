@@ -236,7 +236,7 @@ function openRents() {
       div = $(`
 
       <div class="flex-container">
-        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Numero noleggio: ${RentInfo[i]._id}</h5>
             <p class="card-text">ID Cliente: ${RentInfo[i].client_id}  <button type="button" id="${RentInfo[i].client_id}" class="btn-postit" onclick="Notes(id)"><i class="far fa-sticky-note fa-lg"></i></button>
@@ -1170,6 +1170,7 @@ function modifyRent(data, insertedID){
       $("#ctable").append(div);
       div = $(` 
        <div class="flex-container" style=" margin-left: 5%;">
+       <h1>Noleggio numero: ${data[i]._id} </h1>
          <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 80%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">ID Cliente</label>
@@ -1191,7 +1192,7 @@ function modifyRent(data, insertedID){
             <label for="inputPrezzo" class="form-label">Prezzo </label>
             <input type="text" class="create2" id="inputend" name="end" value="${data[i].price}">
           </div>
-          <div class="col-md-2">
+          <div class="col-md-4">
             <label for="inputworker" class="form-label">Dipendente </label>
             <input type="text" class="create2" id="inputworker" name="worker" value="${data[i].worker_id}">
           </div>
