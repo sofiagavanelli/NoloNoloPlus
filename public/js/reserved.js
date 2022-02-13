@@ -404,7 +404,7 @@ function acceptProd(data, insertedID) {
             <input type="text" class="create2" id="inputHigh" name="highseason" value="${data[i].high_season}">
           </div>
           <div class="col-md-4">
-            <label for="inputStatus" class="form-label">Prezzo </label>
+            <label for="inputStatus" class="form-label">Stato </label> <button type="button" class="btn-postit" button title="La prima opzione corrisponde allo stato attuale del prodotto" ><i class="fas fa-info-circle"></i></button>
             <select class="create2" id="inputStatus" name="stato" aria-label="Select status">
             <option selected value="${data[i].status}">${data[i].status}</option>
               <option value="ottimo">ottimo</option>
@@ -1171,7 +1171,7 @@ function modifyRent(data, insertedID){
        <h1>Noleggio numero: ${data[i]._id} </h1>
          <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 80%;">
           <div class="col-md-6">
-            <label for="inputName" class="form-label">ID Cliente</label>  <button type="button" id="${data[i].client_id}" class="btn-postit" onclick="searchNote(id)"><i class="far fa-sticky-note fa-lg"></i></button>
+            <label for="inputName" class="form-label">ID Cliente</label>  <button type="button" id="${data[i].client_id}" class="btn-postit" button title="Clicca qui per vedere le informazioni del cliente" onclick="modifyClient(clientARRAY,id)"><i class="fas fa-info-circle"></i></button>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].client_id}" style="cursor: not-allowed;" readonly="readonly">
           </div>
           <div class="col-md-6">
