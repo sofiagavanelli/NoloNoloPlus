@@ -93,7 +93,7 @@
                     <template v-if="this.active">
                     <div class="rents" v-for="(item, index) in activeRent" :key="item._id">
                         <!-- green light -->
-                        <template v-if="controlStart(index)"> 
+                        <template v-if="this.broken[index]" > <!--"controlStart(index)"--> 
                             
                             <!--router-link id="toProblem" aria-labelledby="problemLabel" to="/edit-rent"-->
                             <b-button v-on:click="openAlert(item._id)" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
@@ -249,7 +249,9 @@ export default({
 
             //PER STAMPA
             myUrl: '#',
-            myFilename: ''
+            myFilename: '',
+
+            broken: [],
         };
     },
     components: {
@@ -347,6 +349,12 @@ export default({
                 }
                 else {
                     this.activeRent[k] = elem;
+
+                    //sono nei rent attivi: se uno di questi prodotti è rotto me lo segno  nella sua posizione nell'aray dei rent!!
+                    //NON ASPETTA!!!
+                    //this.broken[k] = this.controlStart(elem);
+                    //console.log(this.broken[k]);
+
                     k++;
                 }
 
@@ -354,48 +362,43 @@ export default({
 
             console.log("sto per entrare in control approved");
 
-            this.loading = !this.loading;
+            this.controlStart(this.activeRent);
+
+            //this.loading = !this.loading;
 
         },
 
-        controlStart(_id) {
+        controlStart(items) {//_id) {
 
-            /*activeR.forEach(elem => {
+            console.log(items);
+            console.log(this.broken);
 
-                var start = new Date(elem.start_date);
-                console.log(this.today);
-                console.log(start.getDay() + " " + this.today.getDay());
-                console.log(start.getMonth() + " " + this.today.getMonth());
-                console.log(start.getYear() + " " + this.today.getYear());
-                console.log(elem.approved);
-
-                if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
-                    start.getYear() == this.today.getYear() && elem.approved == false) {
-
-                    this.editing = true;
-
-                    console.log("sono dentro control approved");
-
-                }
-
-            });*/
             var prodToRent = [];
-            var rotto = null;
+            var k = 0;
 
-            axios.get('/prods/' + this.activeRent[_id].prod_id)
+            items.forEach(item => {
+
+            axios.get('/prods/' + item.prod_id)//this.activeRent[_id].prod_id)
                 .then((response) => {
                     //console.log(response.data);
                     prodToRent = response.data;
 
-                    /*console.log(prodToRent);
-                    console.log(prodToRent[0].status == "rotto");*/
+                    console.log(prodToRent);
+                    console.log(prodToRent[0].status == "rotto");
 
                     if(prodToRent[0].status == "rotto") {
-                        rotto = true;
+                        /*rotto = true;*/
                         console.log("sono dentro rotto");
+
+                        this.broken[k] = true;
+                        k++;
+
+                        console.log(this.broken[k]);
                     }
-                    else
-                        rotto = false;
+                    else {
+                        this.broken[k] = false;
+                        k++;
+                    }
 
                     /*var start = new Date(this.activeRent[_id].start_date);
                     var today = null;
@@ -408,8 +411,8 @@ export default({
                     else
                         today = false;*/
 
-                    console.log(rotto);
-                    return(rotto);
+                    /*console.log(rotto);
+                    return(rotto);*/
 
                 })
                 .catch((error) => {
@@ -431,6 +434,13 @@ export default({
 
             console.log(rotto && today);
             return(rotto && today);*/
+
+            });
+
+            console.log(k + "  " + items.length);
+
+            if(k == items.length)
+                this.loading = !this.loading;
             
 
         },

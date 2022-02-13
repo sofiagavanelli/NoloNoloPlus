@@ -11,20 +11,29 @@
       <div class="details">
         <ul class="d-flex flex-wrap pl-0" >
           <li class="title"> DATA INIZIO: <h5 class="data"> {{rentToEdit.start_date.slice(0,10)}} </h5> 
-            <b-form-input v-model="newInfo[0]" placeholder="Modifica Inizio"></b-form-input> </li>
+            <!--b-form-input v-model="newInfo[0]" placeholder="Modifica Inizio"></b-form-input-->
+            <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="newstartD" class="mb-2"></b-form-datepicker> 
+          </li>
           <li class="title"> DATA FINE: <h5 class="data"> {{rentToEdit.end_date.slice(0,10)}} </h5> 
-            <b-form-input v-model="newInfo[1]" placeholder="Modifica Fine"></b-form-input> </li>
+            <b-form-datepicker :min="newstartD" id="end-datepicker" v-model="newendD" class="mb-2"></b-form-datepicker>
+            <!--b-form-input v-model="newInfo[1]" placeholder="Modifica Fine"></b-form-input--> 
+          </li>
           <li class="title"> PREZZO: <h5 class="data"> {{rentToEdit.price}}€ </h5> </li>
             <!--b-form-input v-model="newInfo[0]" placeholder="Modifica Prodotto"></b-form-input-->
           <li class="title"> METODO DI PAGAMENTO: <h5 class="data"> {{rentToEdit.paymethod}} </h5> 
-            <b-form-input v-model="newInfo[2]" placeholder="Modifica Metodo di Pagamento"></b-form-input> </li>
+
+          <b-dropdown text="Pagamento" variant='none'> 
+            <b-form-checkbox-group v-model="checked" :options="type" v-on:change="pay(checked)"> {{type.text}} </b-form-checkbox-group> 
+          </b-dropdown>
+
+            <!--b-form-input v-model="newInfo[2]" placeholder="Modifica Metodo di Pagamento"></b-form-input> </li-->
           <li class="title"> APPROVAZIONE: <h5 class="data"> {{rentToEdit.approved}} </h5> </li>
             <!--b-form-input v-model="newInfo[0]" placeholder="Modifica Prodotto"></b-form-input-->
         </ul>
       </div>
 
       <div class="flex-container"> 
-        <b-button v-on:click="saveRent()"> salva </b-button>
+        <b-button id="saveBtn" v-on:click="saveRent()"> salva </b-button>
 
         <router-link id="toProfile" tag="b-button" aria-labelledby="profileLabel" to="/profile">
           INDIETRO
@@ -43,11 +52,24 @@ export default {
   name: 'EditRent',
   data() {
     return {
+      
+      newstartD: '',
+      newendD: '',
+
       newInfo: [],
       product: [],
 
       url: "https://site202133.tw.cs.unibo.it/img/",
       ex: ".jpg",
+
+
+      checked: '',
+        type: [ 
+          { value: null, text: 'Lascia invariato' },
+          { value: 'paypal', text: 'PayPal' },
+          { value: 'carta', text: 'Carta di credito' },
+          { value: 'satispay', text: 'Satispay' },
+          { value: 'bonifico', text: 'Bonifico' } ],
     };
   },
   components: {
@@ -96,6 +118,12 @@ export default {
   font-size: 12px;
 }*/
 
+.b-dropdown {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  color: #6c757d;
+}
+
 .button {
   margin: 0.5em !important;
 } 
@@ -140,6 +168,10 @@ export default {
     list-style: none;
     display: flex;
     border-top: 1px solid /*#4D6D9A*/ #86B3D1;
+}
+
+#saveBtn {
+  margin-right: 1em !important;
 }
 
 @media screen and (max-width: 800px) {
