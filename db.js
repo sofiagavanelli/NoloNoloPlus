@@ -126,7 +126,8 @@ module.exports = {
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log("Errore"))},
+            .catch(x => console.log("Errore"))
+    },
 
     updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
@@ -148,6 +149,29 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
+    updateRent: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+        console.log("prova per modifica prodotto");
+        await Prodotto.findOneAndUpdate(
+            {prod_id: id},
+            { $set: {category: categ,
+                image: im,
+                name: n,
+                brand: m,
+                speed: v,
+                length: leng,
+                guests: osp,
+                year: aa,
+                summary: description,
+                low_season: p_low,
+                high_season: p_high,
+                status: stat, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
 
     searchClientID: async (id) => {
         console.log("prova");
@@ -161,6 +185,10 @@ module.exports = {
     //search con il nome per il login! così l'ID rimane ""privato""
     searchClient: async (_name) => {
         return Promise.resolve(Client.find({ name: _name }));
+    },
+
+    searchNote: async (id) => {
+        return Promise.resolve(Client.find({ client_id: id }));
     },
 
     searchWorker: async (id) => {
