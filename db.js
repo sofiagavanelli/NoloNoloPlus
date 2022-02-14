@@ -140,8 +140,7 @@ module.exports = {
     },
 
     updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
-        console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
-        console.log("prova");
+        
         await Client.findOneAndUpdate(
             {client_id: id},
             { $set: {name: n,
@@ -159,10 +158,9 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
-        console.log("prova per modifica prodotto");
-        await Prodotto.findOneAndUpdate(
+    /*updateRent: async (id) => {
+        
+        await Noleggio.findOneAndUpdate(
             {prod_id: id},
             { $set: {category: categ,
                 image: im,
@@ -180,7 +178,7 @@ module.exports = {
             ).exec()
             .then(x => console.log("ok"))
             .catch(x => console.log("Errore"))
-    },
+    },*/
 
 
     searchClientID: async (id) => {
@@ -264,7 +262,7 @@ module.exports = {
     deleteBoolRent: async (id) => {
         await Noleggio.findOneAndUpdate(
             {_id: id},
-            { $set: {deleted: true, }},
+            { $set: {deleted: true }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
@@ -274,7 +272,7 @@ module.exports = {
     deliverBoolRent: async (id) => {
         await Noleggio.findOneAndUpdate(
             {_id: id},
-            { $set: {delivered: true, }},
+            { $set: {delivered: true }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

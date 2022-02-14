@@ -245,8 +245,7 @@ module.exports = function (app) {
          db.deleteWorker(id).then(() => {
           res.status(200);
           res.end();
-          }
-            )
+          })
     });
     
 
@@ -324,31 +323,31 @@ module.exports = function (app) {
     });
 
     app.post('/new-rent',(req, res)=>{
-
+        
         console.log("sono nella post");
         console.log(req.body);
 
-      const client = req.body.client;
-      console.log(client);
-      const prod = req.body.product; 
-      const startdate = req.body.start;
-      const enddate = req.body.end; 
-      const price = req.body.price;
-      const paymethod = req.body.pay;
-      
-      if(req.body.worker)
-        var work = req.body.worker;
-    else
-        var work = null;
+        const client = req.body.client;
+        console.log(client);
+        const prod = req.body.product; 
+        const startdate = req.body.start;
+        const enddate = req.body.end; 
+        const price = req.body.price;
+        const paymethod = req.body.pay;
+        
+        if(req.body.worker)
+            var work = req.body.worker;
+        else
+            var work = null;
 
 
       //non dobbiamo mettere che approved parte da false?
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
-        console.log(result);
-      }
+        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
+            console.log(result);
+        }
 
     )
     });
