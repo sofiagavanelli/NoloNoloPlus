@@ -129,7 +129,11 @@ export default {
   mounted() {
 
     if(localStorage.getItem('CurrentUser')) {
-      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser')).user || JSON.parse(localStorage.getItem('CurrentUser'));
+
+      if(JSON.parse(localStorage.getItem('CurrentUser')).discount)
+        this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;
+
     }
   
     axios.get('/prods')

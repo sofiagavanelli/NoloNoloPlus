@@ -263,7 +263,7 @@ export default({
     created() { 
 
         if(localStorage.getItem('CurrentUser')) {
-            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser')).user || JSON.parse(localStorage.getItem('CurrentUser'));
 
             this.username = this.$store.state.username;
 
@@ -620,11 +620,13 @@ export default({
 
             var user_discount = {user: this.username, discount: 15};
 
+            this.$store.state.discount = 15;
+
             localStorage.setItem('CurrentUser', JSON.stringify(user_discount));
 
-            var prova = JSON.parse(localStorage.getItem('CurrentUser'));
+            //var prova = JSON.parse(localStorage.getItem('CurrentUser'));
 
-            console.log(prova);
+            //console.log(prova);
 
         }
 

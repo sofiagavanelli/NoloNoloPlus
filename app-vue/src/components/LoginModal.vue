@@ -113,11 +113,16 @@ export default {
           this.$store.commit("setUsername", this.username);
           //console.log(this.$store.state.username);
 
-          localStorage.setItem('CurrentUser', JSON.stringify(this.username));
-
           if(this.clientInfo.discount) {
-            console.log(this.clientInfo.discount);
+            
             this.$store.state.discount = this.clientInfo.discount;
+
+            var user_discount = {user: this.username, discount: this.clientInfo.discount};
+
+            localStorage.setItem('CurrentUser', JSON.stringify(user_discount));
+          }
+          else {
+            localStorage.setItem('CurrentUser', JSON.stringify(this.username));
           }
 
           //data = this.loggedIN;

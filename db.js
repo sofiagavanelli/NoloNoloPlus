@@ -142,7 +142,7 @@ module.exports = {
     addDiscount: async (id) => {
         await Client.findOneAndUpdate(
             {client_id: id},
-            { $set: {disount: 15} },
+            { $set: {discount: 15} },
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
@@ -168,13 +168,14 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, s, e, p) => {
+    updateRent: async (id, s, e, p, pay) => {
         
         await Noleggio.findOneAndUpdate(
             {_id: id},
             { $set: {start_date: s,
                     end_date: e, 
-                    price: p}},
+                    price: p,
+                    paymethod: pay}},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

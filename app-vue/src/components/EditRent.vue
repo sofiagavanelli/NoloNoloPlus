@@ -99,6 +99,42 @@ export default {
 
     saveRent() {
 
+      /*var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
+
+            var changed = [];
+
+            for(let i=0; i<8; i++) {
+                if(this.newInfo[i] && this.newInfo[i].length > 3)
+                    changed[i] = true;
+            }
+
+            if(changed[0]) update.name = this.newInfo[0];
+            if(changed[1]) update.surname = this.newInfo[1];
+            if(changed[2]) update.place = this.newInfo[2];
+            if(changed[3]) update.address = this.newInfo[3];
+            //ci andrebbe il cambio password!
+            if(changed[4]) update.pass = this.newInfo[4];
+            if(changed[5]) update.telefono = this.newInfo[5];
+            if(changed[6]) update.email = this.newInfo[6];
+            if(changed[7]) update.birth = this.newInfo[7];
+
+            if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7]) {
+
+                axios.post('/update-client/', update)
+                    .then((response) => {
+                        //console.log(response.data);
+                        console.log(response);
+
+                        //reload!!
+                        
+                    })
+                    .catch((error) => {
+                        //this.loading = false;
+                        console.log(error);
+                    });
+            }
+            */
+
     }
 
   }

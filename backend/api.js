@@ -351,6 +351,8 @@ module.exports = function (app) {
 
     app.post('/add-discount',async (req, res)=>{
 
+        console.log(req.body.clientID);
+
         const idcliente = req.body.clientID;
 
         await db.addDiscount(idcliente, 15)

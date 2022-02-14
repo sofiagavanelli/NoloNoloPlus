@@ -39,7 +39,7 @@
             <div>
               <template v-if="this.$store.state.discount && this.$store.state.username">
                 <div id="discountTab">
-                  <h5> <input type="checkbox" v-on:click="useDiscount()"> 
+                  <h5> <input type="checkbox" v-model="sconto" v-on:change="useDiscount()"> 
                     voglio usare il mio sconto </h5>
                 </div>
               </template>
@@ -47,7 +47,7 @@
               <div id="priceTab" class="flex-container">
                 <b-button v-on:click="calc()">TOTALE: </b-button>
                 <div id="total-price">
-                  <h5> {{total}} </h5>
+                  <h5> {{total}}{{euro}} </h5>
                 </div>
               </div>
             </div>
@@ -117,6 +117,10 @@ export default {
   props: ['parentData'],
   data() {
     return {
+      euro: '',
+
+      sconto: null,
+
       loading: true,
 
       startD: '',
@@ -236,7 +240,8 @@ methods: {
         /*this.controlDate()
           .then((valid) => {*/
             if(this.parentData.status != "rotto" && this.controlDate()) {
-              this.total = temp + '€';
+              this.total = temp;
+              this.euro = '€';
               this.payment = true;
             }
             else {
@@ -247,7 +252,8 @@ methods: {
 
       }
       else {
-        this.total = temp + '€';
+        this.total = temp;
+        this.euro = '€';
       }
     }
 
@@ -277,42 +283,24 @@ methods: {
 
   useDiscount() {
 
-    //if(this.parentData.discount) {
-      this.total = this.total - (this.total*this.$store.discount/100);
-    //}
+    var temp = 0;
+
+    if(this.sconto) {
+
+      temp = this.total - (this.total*this.$store.state.discount/100);
+
+      this.total = temp;
+    }
 
   },
 
-  /*emitToParent (event) {
-    this.$emit('childToParent')
-  },*/
-
   pay(tipo) {
-
-    /*const client = req.body.client;
-      const prod = req.body.product; 
-      const startdate= req.body.start;
-      const enddate= req.body.end; */
     
     if(tipo) {
       this.paymethod = tipo;
 
       this.$bvModal.show("recapModal");
     }
-    /*TODO CREARE NOLEGGIO
-    axios.post('/new-rent', this.newRent)
-      .then(() => {
-
-        this.$router.push({
-          path: '/profile',
-        });
-                  
-      })
-      .catch((error) => {
-                //this.loading = false;
-        console.log(error);
-      });*/
-
 
   },
 
