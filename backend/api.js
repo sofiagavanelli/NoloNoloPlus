@@ -323,8 +323,10 @@ module.exports = function (app) {
     });
 
     app.post('/new-rent',(req, res)=>{
+
+
         
-        console.log("sono nella post");
+        console.log("sono in new rent");
         console.log(req.body);
 
       var client = req.body.client;
@@ -351,10 +353,6 @@ module.exports = function (app) {
 
     )
     });
-
-    /* //JOIN TRA CLIENTS E RENTAL PER GRAFICI MANAGER
-    app.get('/clientsRental', function (req, res) {
-        db.joinClientsRentals().then(prodsinfo => {*/
 
 
     app.post('/new-prod',(req, res)=>{

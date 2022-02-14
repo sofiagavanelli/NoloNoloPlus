@@ -1009,10 +1009,12 @@ function openCreate(){
   div = $(`         
   <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> NOLEGGI</button>
   `);
-$("#ctable").append(div); 
+$("#ctable").append(div);
+
+//  <form id="create" role="form">
+
   div = $(`    
   <div class="testbox">
-  <form id="create" role="form">
     <h1>Crea Noleggio</h1>
     <div class="item-2">
       <p>ID Cliente</p>
@@ -1045,7 +1047,6 @@ $("#ctable").append(div);
     <div class="btn-block">
       <button class="btn-sub" onclick="approveRent()">Crea</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
     </div>
-  </form>
 </div>
   
 `);
