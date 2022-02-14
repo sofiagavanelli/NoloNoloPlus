@@ -1,10 +1,31 @@
 
-var clientARRAY = 0;
-var inventoryARRAY = 0;
-var rentARRAY = 0;
-var WORKERINFO = 0;
-var prova = 0;
+var clientARRAY = [];
+var inventoryARRAY = [];
+var rentARRAY = [];
+var WORKERINFO = [];
+var total= 0.0;
 
+
+$(document).ready(function() {
+  
+  $.ajax({
+    type: 'GET',
+      url: '/prods' ,
+        success: function (data) {
+  
+          inventoryARRAY = JSON.parse(data);
+          console.log(inventoryARRAY);
+  
+          //populateP(inventoryARRAY);
+
+        },
+
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+  });
+
+})
 
 /************************* */
 //LOGIN DEL WORKER/MANAGER
@@ -101,7 +122,7 @@ function openClient() {
           let div = null;
 
             div = $(`
-                <div class="card" style="width: 17em; float: left; display: block; margin-left: 3%;">        
+                <div class="card" style="width: 17em; float: left; display: block; margin-left: 5em;">        
                   <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" style="height: 13em;"class="card-img-top" alt="...">              
                   <div class="card-body">              
                     <h5 class="card-title" style="text-align: center;">${ClientInfo[i].name} ${ClientInfo[i].surname}</h5>              
@@ -124,12 +145,13 @@ function openInventory() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
 
-  $.ajax({
+ /* $.ajax({
     type: 'GET',
       url: '/prods' ,
         success: function (data) {
   
           inventoryARRAY = JSON.parse(data);
+          console.log(inventoryARRAY);
   
           populateP(inventoryARRAY);
 
@@ -138,7 +160,10 @@ function openInventory() {
         error: function (xhr, ajaxOptions, thrownError) {
 
         }
-  });
+  });*/
+
+            populateP(inventoryARRAY);
+
 
     div = $(`
     <div class="flex-form-container"> 
@@ -352,6 +377,7 @@ function searchProd(){
           success: function (info) {
             //console.log("sono in success");
             acceptProd(inventoryARRAY, _id);
+
           },
           error: function (xhr, ajaxOptions, thrownError) {
 
@@ -364,7 +390,7 @@ function searchProd(){
 
 }
 function acceptProd(data, insertedID) {
-  var x = 0;
+  //var x = 0;
 
   for (let i in data) {
 
@@ -976,6 +1002,7 @@ div = $(`
 }
 ////AGGIUNTA NUOVO NOLEGGIO
 function openCreate(){
+  var x;
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
 
@@ -985,27 +1012,36 @@ function openCreate(){
 $("#ctable").append(div); 
   div = $(`    
   <div class="testbox">
-  <form id="create" action="/new-rent" method="POST" role="form">
+  <form id="create" role="form">
     <h1>Crea Noleggio</h1>
     <div class="item-2">
       <p>ID Cliente</p>
       <div>
-        <input class="create2" type="text" name="client" placeholder="Inserisci ID cliente">
+        <input class="create2" type="text" name="client" id="client" placeholder="Inserisci ID cliente">
       </div>
     </div>
     <div class="item-2">
       <p>ID Prodotto</p>
-      <input class="create2" type="text" name="product" placeholder="Inserisci ID prodotto">
+      <input class="create2" type="text" name="product" id="prod" placeholder="Inserisci ID prodotto">
     </div>
-    <div class="item-2" style="display: flex; justify-content: space-between;">
-      <p>Data Inizio</p>
-      <p style="position: relative; left: -37%;">Data Fine</p></div>
-      <div class="item-2" style=" margin-top: -3%;"> 
-
-      <input type="date" name="start" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
-      <input type="date" min=""  name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
+    <div class="col-md-6" style="margin-left: -1em;">
+      <p>ID Dipendente</p>
+      <input class="create2" type="text" name="worker" id="worker" placeholder="Inserisci ID dipendente">
+    </div>
+    <div class="col-md-6" style="margin-left: 29.5em; margin-top: -5.5em;">
+      <p>Prezzo  <button onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
+      <p id="get_price" style="visibility:hidden;"></p>
+      <input id="rentprice" class="create2" name="price" readonly="readonly"> 
     </div>
     
+    <div class="item-2" style="display: flex; justify-content: space-between; margin-top: 1em;">
+      <p>Data Inizio</p>
+      <p style="position: relative; left: -38%;">Data Fine</p></div>
+      <div class="item-2" style=" margin-top: -3%;"> 
+
+      <input id="data_inizio" type="date" name="start" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
+      <input id="data_fine" type="date" name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
+    </div>
     <div class="btn-block">
       <button class="btn-sub" onclick="approveRent()">Crea</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
     </div>
@@ -1016,11 +1052,129 @@ $("#ctable").append(div);
 $("#ctable2").append(div);
 }
 
-///MODIFICA CLIENTE
+
+//FUNZIONE CHE CALCOLA IL PREZZO
+function calc(){
+  var inizioN = new Date(document.getElementById("data_inizio").value);
+  var fineN = new Date(document.getElementById("data_fine").value);
+  var ID_prod = document.getElementById("prod").value;
+
+  var myprod = [];
+
+  var ggMS= fineN - inizioN;
+  var gg = (ggMS/(1000 * 60 * 60 * 24)) + 1;
+  var price_day;
+  inventoryARRAY.forEach(i => {
+    if(i.prod_id == ID_prod) {
+      price_day = gg*i.low_season; 
+      myprod = i;
+    }
+});
+  total=price_day;
+  var highDays = defineSeason(gg);
+  var temp = (myprod.high_season * (highDays)) + (myprod.low_season * (gg - highDays));
+
+  if(myprod.status != "rotto" && controlDate()) {
+
+    if(myprod.status == "buono") {
+      temp = temp - (temp*5/100);
+    }
+    else if(myprod.status == "rovinato") {
+      temp = temp - (temp*10/100);
+    }
+
+    document.getElementById("rentprice").value = temp;
+
+  }
+  else {
+    document.getElementById("rentprice").value = "non disponibile";
+  //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
+  }
+
+
+
+  //document.getElementById("rentprice").value = total;
+  return(price_day);
+  document.getElementById("get_price").style.visibility = "visible";
+  
+}
+
+function controlDate() {
+
+  console.log("sono dentro controldate");
+
+  var noleggi = [];
+  var k = 0;
+
+  var ID_prod = document.getElementById("prod").value;
+
+  rentARRAY.forEach(item => {
+
+    if(item.prod_id == ID_prod) {
+      noleggi[k] = item;
+      k++;
+    }
+
+  });
+
+  var myrent_sdate = new Date(document.getElementById("data_inizio").value);
+  var myrent_edate = new Date(document.getElementById("data_fine").value);
+
+  var disponibile = true;
+
+  noleggi.forEach(item => {
+
+    if(!item.deleted) { //se il noleggio che si sta guardando è stato eliminato allora le sue date NON vanno considerate come occupate
+
+      var checked_start = new Date(item.start_date);
+      var checked_end = new Date(item.end_date);
+
+      if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
+        (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
+        (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
+
+          disponibile = false;
+      }
+
+    }
+
+  })
+
+  console.log("dentro è:" + disponibile);
+
+  return(disponibile);
+
+}
+
+
+function defineSeason(i){
+  var Hdays = 0;
+    var date = new Date(document.getElementById("data_inizio").value);
+
+    while (i>0) {
+
+      if (date.getMonth() >= 5 && date.getMonth() <= 9) { 
+        /*NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8*/
+        Hdays = Hdays + 1;
+      }
+
+      date.setDate(date.getDate() + 1);
+
+      i--;
+
+    }
+
+    return(Hdays);
+
+}
+
+
+
+
 
 
 ///NOLEGGI PER CLIENTE
-function searchClientRents(_id){
+function searchRentByClient(_id){
 
   if(_id) {
       $.ajax({
@@ -1030,7 +1184,7 @@ function searchClientRents(_id){
             console.log(_id);
             console.log("trovato");
 
-            foundRents(rentARRAY, _id);
+            found(rentARRAY, _id);
           },
           error: function (xhr, ajaxOptions, thrownError) {
 
@@ -1038,52 +1192,43 @@ function searchClientRents(_id){
       });
   }
   else {
-//console.log("errore nell'else");
+    console.log("errore nell'else");
   }
 
 }
-function foundRents(data, insertedID) {
+function found(data, insertedID) {
   console.log(insertedID);
 
   for (let i in data) {
-
-    if(data[i].client_id == insertedID) {
-        console.log("???????");
+    if(data[i].client_id==insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
-        console.log("sono dopo il vuoto");
         div = $(`         
         <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> NOLEGGI</button>
-  `);
-              
-  $("#ctable").append(div);
+        `);            
+        $("#ctable").append(div);
+
         div = $(` 
-        <div class="card-new">
-          <div class="card-body">
-            <h5 class="card-title-new">NOLEGGIO: ${data[i]._id}</h5>
-            <p class="card-text-new">ID Cliente: ${data[i].client_id} <br> ID Prodotto: ${data[i].prod_id}<br></p>
-            <p class="card-text-new">Data Inizio: ${data[i].start_date.slice(0,10)} <br> Data Fine: ${data[i].end_date.slice(0,10)}</p>
-            <button id="${data[i]._id}" onclick= "openAlertRents(id)" class="btn-d2"><i class="fas fa-trash-alt"></i> Elimina</button>
-            <button class="btn-mod2"><i class="fas fa-wrench"></i> Modifica</button>
-                
-          </div>
-        </div>
-        
-        `);
+        <div class="flex-container">
+          <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+            <div class="card-body">
+              <h5 class="card-title">Numero noleggio: ${data[i]._id}</h5>
+              <p class="card-text">ID Cliente: ${data[i].client_id}  
+              <br> ID Prodotto: ${data[i].prod_id}<br></p>
+              <p class="card-text">Data Inizio: ${data[i].start_date.slice(0,10)} <br> Data Fine: ${data[i].end_date.slice(0,10)}</p>
+              <button id="${data[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
+            </div>
+          </div> 
+        </div>`);
         $("#ctable2").append(div);
-        //console.log("prooooovaaa");
-
-        
-
         var found = true;
-    }
+      }
   }
 
   if (!found) 
-      console.log("non esiste noleggio");
-
-
+    console.log("non esiste noleggio");
 }
+
 //MODIFICA CLIENTE
 function modifyClient(data, insertedID){
   console.log(data + "   " + insertedID);
@@ -1101,8 +1246,8 @@ $("#ctable").append(div);
 
 div = $(` 
       <div class="flex-container" style=" margin-left: 4%;">
-        <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="" width="280" height="300">
-        <form class="row g-3" action="/update-client" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 5%; margin-bottom: 30%;">
+        <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="" width="280" height="300" style="margin-left: 3em;">
+        <form class="row g-3" action="/update-client" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].name}">
@@ -1138,8 +1283,10 @@ div = $(`
             </div>
           </div>
           <div class="col-12">
+            <button class="btn-sub" id="${data[i].client_id}" onclick="searchRentByClient(id)">Storico noleggi</button>
             <button class="btn-sub" onclick="approveClient()">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
-          </div>
+          
+            </div>
         </form>
       </div>
        
@@ -1155,8 +1302,6 @@ console.log("non esiste cliente");
 
 //MODIFICA NOLEGGIO
 function modifyRent(data, insertedID){
-  var x = 0;
-
   for (let i in data) {
 
     if(data[i]._id == insertedID) {
@@ -1202,9 +1347,7 @@ function modifyRent(data, insertedID){
           </div>
         </form>
       </div>
-      
-
-       
+  
       `);
       $("#ctable2").append(div);
 
@@ -1343,44 +1486,6 @@ function activeRents(data){
 
 }
 
-//FUNZIONE PER VEDERE NOTE CLIENTI
-function searchNote(_id){  
-  if(_id) {
-    $.ajax({
-        type: 'GET',
-        url: '/allClients' ,
-        success: function (data) {
-          
-          clientARRAY = JSON.parse(data);
-
-          notes(clientARRAY, _id);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
-    });
-}
-else {
-console.log("errore nell'else");
-}
-}
-
-function notes(data,insertedID){
-  console.log(data + "   " + insertedID);
-  for (let i in data) {
-
-    if(data[i].client_id == insertedID) {
-      alert("Hello! I am an alert box!!");
-      var found = true;
-    }
-
-}
-if (!found) 
-console.log("non esiste cliente");
-}
-
-
-
 //FUNZIONI PER TORNARE INDIETRO
 function goBackClients(){
   openClient();
@@ -1396,6 +1501,49 @@ function goBackRents(){
 
 //FUNZIONI AUX
 function approveRent(){
+
+  var myrent_sdate = new Date(document.getElementById("data_inizio").value);
+  var myrent_edate = new Date(document.getElementById("data_fine").value);
+  var price = document.getElementById("rentprice").value;
+  var ID_prod = document.getElementById("prod").value;
+  var ID_work = document.getElementById("worker").value;
+  var client = document.getElementById("client").value;
+
+  var newRent = {};
+
+  newRent = { product: ID_prod, client:client, worker: ID_work, start: myrent_sdate, end: myrent_edate, price: price, pay: "bonifico" };
+
+    /*axios.post('/new-rent', newRent)
+      .then(() => {
+                  
+      })
+      .catch((error) => {
+        //this.loading = false;
+        console.log(error);
+      });*/
+
+
+    /*$.ajax({
+      type: 'POST',
+      url: '/new-rent' ,
+      data: newRent,
+        success: //function (data) {
+  
+          document.getElementById("smile").style.visibility = "visible",
+
+        //},
+
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+      });*/
+
+      $.post( '/new-rent', newRent, function( data ) {
+        document.getElementById("smile").style.visibility = "visible";
+      });
+
+
+
   document.getElementById("smile").style.visibility = "visible";
 }
 function approveClient(){

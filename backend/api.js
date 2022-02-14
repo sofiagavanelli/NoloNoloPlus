@@ -308,12 +308,18 @@ module.exports = function (app) {
       const enddate = req.body.end; 
       const price = req.body.price;
       const paymethod = req.body.pay;
+      
+      if(req.body.worker)
+        var work = req.body.worker;
+    else
+        var work = null;
+
 
       //non dobbiamo mettere che approved parte da false?
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, null).then((result) => {
+      db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
         console.log(result);
       }
 
@@ -327,19 +333,19 @@ module.exports = function (app) {
 
     app.post('/new-prod',(req, res)=>{
 
-        const imm = req.body.filename;
-        const cat = req.body.category;
-        const nome = req.body.name;
-        const marca = req.body.brand;
-        const vel = req.body.speed;
-        const len = req.body.length;
-        const ospiti = req.body.guests;
-        const anno = req.body.year;
-        const desc = req.body.summary;
-        const price_low= req.body.lowseason;
-        const price_high = req.body.highseason;
-        const idprod = req.body.product;
-        const state = req.body.stato;
+        var imm = req.body.filename;
+        var cat = req.body.category;
+        var nome = req.body.name;
+        var marca = req.body.brand;
+        var vel = req.body.speed;
+        var len = req.body.length;
+        var ospiti = req.body.guests;
+        var anno = req.body.year;
+        var desc = req.body.summary;
+        var price_low= req.body.lowseason;
+        var price_high = req.body.highseason;
+        var idprod = req.body.product;
+        var state = req.body.stato;
 
       db.saveProd(cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
 

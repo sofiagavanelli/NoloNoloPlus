@@ -579,7 +579,8 @@ item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
   text-align: center;
 }
 .btn-sub{
-  width: 150px;
+  width: 10em;
+  margin-right: 1em;
   padding: 10px;
   border: none;
   -webkit-border-radius: 5px; 
