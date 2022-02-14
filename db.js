@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
 
+//encrypt database data
+var encrypter = require('object-encrypter');
+var engine = encrypter('marameo');
+
+var hasher = require('node-object-hash');
+
+var sha1 = require('sha1');
+
 //PER USARE QUELLO NON IN LOCALE:
 //const connectionString = process.env.DATABASE_STRING;
 const connectionString = process.env.DATABASELOCAL_STRING;
@@ -33,6 +41,8 @@ module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
     saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, bday, _note) => {
+
+        //console.log(sha1(_pass));
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
             new Client({
@@ -40,7 +50,7 @@ module.exports = {
                 name: _name,
                 surname: _surname,
                 client_id: _username,
-                password: _pass,
+                password: sha1(_pass),
                 place: _place,
                 address: _address,
                 phone: tel, 
@@ -158,27 +168,18 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    /*updateRent: async (id) => {
+    updateRent: async (id, s, e, p) => {
         
         await Noleggio.findOneAndUpdate(
-            {prod_id: id},
-            { $set: {category: categ,
-                image: im,
-                name: n,
-                brand: m,
-                speed: v,
-                length: leng,
-                guests: osp,
-                year: aa,
-                summary: description,
-                low_season: p_low,
-                high_season: p_high,
-                status: stat, }},
+            {_id: id},
+            { $set: {start_date: s,
+                    end_date: e, 
+                    price: p}},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
             .catch(x => console.log("Errore"))
-    },*/
+    },
 
 
     searchClientID: async (id) => {

@@ -46,6 +46,11 @@
 <script>
 import axios from '../http'
 
+import encrypter from 'object-encrypter'
+
+import sha1 from 'sha1'
+
+
 export default {
   name: 'LoginModal',
     /*props: {
@@ -60,6 +65,8 @@ export default {
       loggedIN: false,
 
       errorMsg: '',
+
+      engine: null,
     };
   },
 
@@ -85,9 +92,13 @@ export default {
 
       controlInfo(data, insertedP) {
 
+        console.log(insertedP);
+
         for (let i in data) {
 
-          if(data[i].password == insertedP) {
+          console.log(data[i].password);
+
+          if(data[i].password == sha1(insertedP)) {
               var found = true;
               this.loggedIN = true;
           }

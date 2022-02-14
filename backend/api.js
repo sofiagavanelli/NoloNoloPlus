@@ -30,28 +30,6 @@ module.exports = function (app) {
 
         db.getClients().then(clientsinfo => {
 
-            //var hashed_clients = hash(clientsinfo);
-            
- 
-            /*console.dir(engine.decrypt(hex));*/
-            
-            /*var encrypted_clients = [];
-            var k = 0;
-
-            clientsinfo.forEach(item => {
-                //var hex = engine.encrypt(item); // generated string will live 5 seconds
-                //console.log(hex);
-
-                console.log("l'hash è: " + hash(item));
-                //item = hash(item);
-                encrypted_clients[k] = engine.encrypt(item);
-                k++;
-            })*/
-
-            /*console.log(hashed_clients);*/
-
-            //console.log(clientsinfo);
-
             res.write(JSON.stringify(clientsinfo));
             res.end();
         });
@@ -336,12 +314,7 @@ module.exports = function (app) {
       var enddate = req.body.end; 
       var price = req.body.price;
       var paymethod = req.body.pay;
-      
-      if(req.body.worker)
-        var work = req.body.worker;
-    else
-        var work = null;
-
+      var work = req.body.worker;
 
       //non dobbiamo mettere che approved parte da false?
 
@@ -376,7 +349,7 @@ module.exports = function (app) {
     )
     });
 
-    app.post('/update-client',async (req, res)=>{
+    app.post('/add-discount',async (req, res)=>{
 
         const idcliente = req.body.clientID;
 
