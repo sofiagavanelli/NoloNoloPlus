@@ -383,7 +383,6 @@ form.example input[type=text] {
   padding: 4px 18px;
   float:right;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-bottom: 0.8rem;
 
 }
 .btn-d{
@@ -593,6 +592,10 @@ item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .btn-sub:hover {
   background-color: #0666a3;
+}
+
+.btn-sub:disabled {
+  background-color: gray;
 }
 .btn-postit{
   border: none;

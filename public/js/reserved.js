@@ -6,7 +6,7 @@ var WORKERINFO = [];
 var total= 0.0;
 
 
-$(document).ready(function() {
+$(document).ready(function() { //NOLEGGI
   
   $.ajax({
     type: 'GET',
@@ -15,9 +15,42 @@ $(document).ready(function() {
   
           inventoryARRAY = JSON.parse(data);
           console.log(inventoryARRAY);
-  
-          //populateP(inventoryARRAY);
+        },
 
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+  });
+
+})
+
+$(document).ready(function() {  //CLIENTI
+  
+  $.ajax({
+    type: 'GET',
+      url: '/allClients' ,
+        success: function (data) {
+  
+          clientARRAY = JSON.parse(data);
+          console.log(clientARRAY);
+        },
+
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+  });
+
+})
+
+$(document).ready(function() {
+  
+  $.ajax({
+    type: 'GET',
+      url: '/allRents' ,
+        success: function (data) {
+  
+          rentARRAY = JSON.parse(data);
+          console.log(rentARRAY);
         },
 
         error: function (xhr, ajaxOptions, thrownError) {
@@ -90,22 +123,8 @@ function logOut(){
 function openClient() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-  
 
-    $.ajax({
-      type: 'GET',
-      url: '/allClients' ,
-      success: function (data) {
-
-        clientARRAY = JSON.parse(data);
-
-        populate(clientARRAY);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-
-      }
-  });
-
+  populate(clientARRAY);
   div = $(`
             <form class="example">
             <input type="text" id="clientId" placeholder="Cerca cliente..." name="search">
@@ -145,24 +164,7 @@ function openInventory() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
 
- /* $.ajax({
-    type: 'GET',
-      url: '/prods' ,
-        success: function (data) {
-  
-          inventoryARRAY = JSON.parse(data);
-          console.log(inventoryARRAY);
-  
-          populateP(inventoryARRAY);
-
-        },
-
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
-  });*/
-
-            populateP(inventoryARRAY);
+    populateP(inventoryARRAY);
 
 
     div = $(`
@@ -215,20 +217,9 @@ function openInventory() {
 function openRents() {
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-        
-  $.ajax({
-    type: 'GET',
-    url: '/allRents' ,
-    success: function (data) {
-      rentARRAY = JSON.parse(data);       
-      populate(rentARRAY);
-      
-    },
-            
-    error: function (xhr, ajaxOptions, thrownError) {  
-      
-    }
-    });
+       
+  populate(rentARRAY);
+
   div = $(`   
   <div class="flex-form-container"> 
   <button type="button" class="btn-cat" onclick="pastRents(rentARRAY)" style="margin-left: 2%;" data-bs-toggle="button">Conclusi</button>
@@ -261,13 +252,15 @@ function openRents() {
       div = $(`
 
       <div class="flex-container">
-        <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 23em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Numero noleggio: ${RentInfo[i]._id}</h5>
             <p class="card-text">ID Cliente: ${RentInfo[i].client_id}  
              <br> ID Prodotto: ${RentInfo[i].prod_id}<br></p>
             <p class="card-text">Data Inizio: ${RentInfo[i].start_date.slice(0,10)} <br> Data Fine: ${RentInfo[i].end_date.slice(0,10)}</p>
-            <button id="${RentInfo[i]._id}" onclick= "modifyRent(rentARRAY,id)"class="btn-mod"> Altro..</button>
+            <div class="card-footer">
+              <button id="${RentInfo[i]._id}" onclick= "modifyRent(rentARRAY,id)" class="btn-mod" style=""> Altro..</button>
+            </div>
           </div>
         </div> 
       </div>  `);
@@ -318,7 +311,7 @@ function acceptRent(data, insertedID) {
   $("#ctable").append(div);
         div = $(` 
         <div class="flex-container">
-          <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+          <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
             <h5 class="card-title-new">NOLEGGIO: ${data[i]._id}</h5>
             <p class="card-text-new">ID Cliente: ${data[i].client_id} <br> ID Prodotto: ${data[i].prod_id}<br></p>
             <p class="card-text-new">Data inizio: ${data[i].start_date.slice(0,10)} <br> Data fine: ${data[i].end_date.slice(0,10)}</p>
@@ -575,7 +568,7 @@ for (let i in rentARRAY) {
         
   div = $(`
   <div class="flex-container">
-  <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+  <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
     <div class="card-body">
       <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
       <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
@@ -629,7 +622,7 @@ for (let i in rentARRAY) {
         
   div = $(`
   <div class="flex-container">
-  <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+  <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
     <div class="card-body">
       <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
       <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
@@ -693,7 +686,7 @@ for (let i in inventoryARRAY) {
 }
 
 /*ORDINE PREZZO CRESCENTE PRODOTTI */
-function SortPriceHigh(){   //ordina in base alla data
+function SortPriceHigh(){   //ordina in base al prezzo crescente
   inventoryARRAY.sort((a, b) => {
    return parseFloat(b.low_season) - parseFloat(a.low_season);
  });
@@ -744,7 +737,7 @@ for (let i in inventoryARRAY) {
      } 
 }
 /*ORDINE PREZZO DECRESCENTE PRODOTTI */
-function SortPriceLow(){   //ordina in base alla data
+function SortPriceLow(){   //ordina in base al prezzo decrescente
   inventoryARRAY.sort((a, b) => {
    return parseFloat(a.low_season) - parseFloat(b.low_season);
  });
@@ -932,7 +925,7 @@ $("#ctable").append(div);
 div = $(` 
       <div class="flex-container" style=" margin-left: 6%;">
       <h1>Aggiungi Prodotto</h1>
-        <form class="row g-3" action="/new-prod" method="POST" role="form" style="width: 85%;">
+        <div class="row g-3" style="width: 85%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="create2" id="inputName" name="name" placeholder="Inserisci nome">
@@ -994,7 +987,7 @@ div = $(`
             RICORDA: per aggiungere un nuovo prodotto, prima inserire immagine nel database  
             </div>
           </div>
-        </form>
+        </div>
       </div>
        
       `);
@@ -1005,13 +998,6 @@ function openCreate(){
   var x;
   $( "#ctable" ).empty();
   $( "#ctable2" ).empty();
-
-  div = $(`         
-  <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> NOLEGGI</button>
-  `);
-$("#ctable").append(div);
-
-//  <form id="create" role="form">
 
   div = $(`    
   <div class="testbox">
@@ -1031,7 +1017,7 @@ $("#ctable").append(div);
       <input class="create2" type="text" name="worker" id="worker" placeholder="Inserisci ID dipendente">
     </div>
     <div class="col-md-6" style="margin-left: 29.5em; margin-top: -5.5em;">
-      <p>Prezzo  <button onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
+      <p>Prezzo  <button class="btn-postit" onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
       <p id="get_price" style="visibility:hidden;"></p>
       <input id="rentprice" class="create2" name="price" readonly="readonly"> 
     </div>
@@ -1045,7 +1031,7 @@ $("#ctable").append(div);
       <input id="data_fine" type="date" name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
     </div>
     <div class="btn-block">
-      <button class="btn-sub" onclick="approveRent()">Crea</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+      <button class="btn-sub" onclick="approveRent()" id="btn-saveRent" disabled>Crea</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
     </div>
 </div>
   
@@ -1085,6 +1071,8 @@ function calc(){
     }
 
     document.getElementById("rentprice").value = temp;
+
+    $("#btn-saveRent").removeAttr('disabled');
 
   }
   else {
@@ -1169,11 +1157,6 @@ function defineSeason(i){
 
 }
 
-
-
-
-
-
 ///NOLEGGI PER CLIENTE
 function searchRentByClient(_id){
 
@@ -1248,7 +1231,7 @@ $("#ctable").append(div);
 div = $(` 
       <div class="flex-container" style=" margin-left: 4%;">
         <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="" width="280" height="300" style="margin-left: 3em;">
-        <form class="row g-3" action="/update-client" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
+        <div class="row g-3" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].name}">
@@ -1285,10 +1268,10 @@ div = $(`
           </div>
           <div class="col-12">
             <button class="btn-sub" id="${data[i].client_id}" onclick="searchRentByClient(id)">Storico noleggi</button>
-            <button class="btn-sub" onclick="approveClient()">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="approveClient()" >Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           
             </div>
-        </form>
+        </div>
       </div>
        
       `);
@@ -1383,7 +1366,7 @@ function pastRents(data){
       let div = null;
         div = $(` 
         <div class="flex-container">
-        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
@@ -1425,7 +1408,7 @@ function futureRents(data){
       let div = null;
         div = $(` 
         <div class="flex-container">
-        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title"> Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
@@ -1466,7 +1449,7 @@ function activeRents(data){
       let div = null;
         div = $(` 
         <div class="flex-container">
-        <div class="card" style="width: 20em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
+        <div class="card" style="width: 20em; height:18em; float: left; display: block; margin-left: 3%; margin-top: 1em;">
           <div class="card-body">
             <h5 class="card-title">Numero noleggio: ${rentARRAY[i]._id}</h5>
             <p class="card-text">ID Cliente: ${rentARRAY[i].client_id} <br> ID Prodotto: ${rentARRAY[i].prod_id}<br></p>
@@ -1514,31 +1497,6 @@ function approveRent(){
 
   newRent = { product: ID_prod, client:client, worker: ID_work, start: myrent_sdate, end: myrent_edate, price: price, pay: "bonifico" };
 
-    /*axios.post('/new-rent', newRent)
-      .then(() => {
-                  
-      })
-      .catch((error) => {
-        //this.loading = false;
-        console.log(error);
-      });*/
-
-
-    /*$.ajax({
-      type: 'POST',
-      url: '/new-rent' ,
-      data: newRent,
-        success: //function (data) {
-  
-          document.getElementById("smile").style.visibility = "visible",
-
-        //},
-
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
-      });*/
-
       $.post( '/new-rent', newRent, function( data ) {
         document.getElementById("smile").style.visibility = "visible";
       });
@@ -1548,9 +1506,29 @@ function approveRent(){
   document.getElementById("smile").style.visibility = "visible";
 }
 function approveClient(){
+
   document.getElementById("smile").style.visibility = "visible";
 }
 function approveProd(){
-  document.getElementById("smile").style.visibility = "visible";
+  var nome_prod = new Date(document.getElementById("inputName").value);
+  var id_prod = new Date(document.getElementById("inputID").value);
+  var nome_brand = document.getElementById("inputBrand").value;
+  var prod_cat = document.getElementById("inputCat").value;
+  var low_p = document.getElementById("inputLow").value;
+  var high_p = document.getElementById("inputHigh").value;
+  var prod_stat = document.getElementById("inputStatus").value;
+  var prod_len = document.getElementById("inputLen").value;
+  var osp = document.getElementById("inputGuest").value;
+  var prod_year = document.getElementById("inputYear").value;
+  var prod_speed= document.getElementById("inputSpeed").value;
+  var prod_desc= document.getElementById("summary").value;
+
+  var newProd = {};
+
+  newProd = { category: prod_cat, name: nome_prod, brand: nome_brand, speed: prod_speed, length: prod_len, guests: osp, year: prod_year, summary: prod_desc,low_season: low_p, high_season: high_p, prod_id: id_prod, status:prod_stat};
+
+      $.post( '/new-prod', newProd, function( data ) {
+        document.getElementById("smile").style.visibility = "visible";
+      });
   
 } 
