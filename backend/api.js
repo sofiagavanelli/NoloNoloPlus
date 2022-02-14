@@ -328,13 +328,13 @@ module.exports = function (app) {
         console.log("sono nella post");
         console.log(req.body);
 
-      const client = req.body.client;
+      var client = req.body.client;
       console.log(client);
-      const prod = req.body.product; 
-      const startdate = req.body.start;
-      const enddate = req.body.end; 
-      const price = req.body.price;
-      const paymethod = req.body.pay;
+      var prod = req.body.product; 
+      var startdate = req.body.start;
+      var enddate = req.body.end; 
+      var price = req.body.price;
+      var paymethod = req.body.pay;
       
       if(req.body.worker)
         var work = req.body.worker;
