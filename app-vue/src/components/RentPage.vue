@@ -319,14 +319,12 @@ methods: {
   createRent() {
     console.log("ciao");
 
-    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
+    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, worker: false, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
 
     console.log(this.newRent);
 
     axios.post('/new-rent', this.newRent)
       .then(() => {
-
-        
                   
       })
       .catch((error) => {
