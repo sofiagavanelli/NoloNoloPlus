@@ -46,8 +46,6 @@
 <script>
 import axios from '../http'
 
-import encrypter from 'object-encrypter'
-
 import sha1 from 'sha1'
 
 

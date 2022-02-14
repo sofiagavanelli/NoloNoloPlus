@@ -2,10 +2,6 @@ var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
 
-//encrypt database data
-var encrypter = require('object-encrypter');
-var engine = encrypter('marameo');
-
 /// definizione della chiamata get
 
 module.exports = function (app) {
@@ -356,6 +352,15 @@ module.exports = function (app) {
         const idcliente = req.body.clientID;
 
         await db.addDiscount(idcliente, 15)
+    });
+
+    app.post('/remove-discount',async (req, res)=>{
+
+        console.log(req.body.clientID);
+
+        const idcliente = req.body.clientID;
+
+        await db.addDiscount(idcliente, 0)
     });
 
     app.post('/update-client',async (req, res)=>{

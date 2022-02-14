@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
 
-//encrypt database data
-var encrypter = require('object-encrypter');
-var engine = encrypter('marameo');
-
-var hasher = require('node-object-hash');
-
 var sha1 = require('sha1');
 
 //PER USARE QUELLO NON IN LOCALE:
@@ -139,10 +133,10 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    addDiscount: async (id) => {
+    addDiscount: async (id, value) => {
         await Client.findOneAndUpdate(
             {client_id: id},
-            { $set: {discount: 15} },
+            { $set: {discount: value} },
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

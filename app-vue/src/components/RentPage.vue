@@ -320,6 +320,27 @@ methods: {
         console.log(error);
       });
 
+    if(this.sconto) {
+
+      //bisogna rimuovere lo sconto dal db e da localStorage!!
+      axios.post('/remove-discount', {clientID: this.$store.state.username})
+          .then((response) => {
+            //console.log(response.data);
+            console.log(response);
+
+            this.$store.state.discount = null;
+
+          })
+          .catch((error) => {
+            
+            console.log(error);
+          });
+
+
+          localStorage.setItem('CurrentUser', JSON.stringify(this.$store.state.username));
+
+    }
+
       this.$router.push({
           path: '/profile',
         });
