@@ -129,6 +129,16 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
+    addDiscount: async (id) => {
+        await Client.findOneAndUpdate(
+            {client_id: id},
+            { $set: {disount: 15} },
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
     updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
         console.log("prova");

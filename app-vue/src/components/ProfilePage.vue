@@ -93,7 +93,7 @@
                     <template v-if="this.active">
                     <div class="rents" v-for="(item, index) in activeRent" :key="item._id">
                         <!-- green light -->
-                        <template v-if="this.broken[index]" > <!--"controlStart(index)"--> 
+                        <template v-if="broken[index]" > <!--"controlStart(index)"--> 
                             
                             <!--router-link id="toProblem" aria-labelledby="problemLabel" to="/edit-rent"-->
                             <b-button v-on:click="openAlert(item._id)" > PROBLEMA CON NOLEGGIO IN PARTENZA: CLICCA QUI. </b-button>
@@ -383,12 +383,12 @@ export default({
                     //console.log(response.data);
                     prodToRent = response.data;
 
-                    console.log(prodToRent);
-                    console.log(prodToRent[0].status == "rotto");
+                    /*console.log(prodToRent);
+                    console.log(prodToRent[0].status == "rotto");*/
 
                     if(prodToRent[0].status == "rotto") {
                         /*rotto = true;*/
-                        console.log("sono dentro rotto");
+                        //console.log("sono dentro rotto");
 
                         this.broken[k] = true;
                         k++;
@@ -437,10 +437,10 @@ export default({
 
             });
 
-            console.log(k + "  " + items.length);
+            //console.log(k + "  " + items.length);
 
-            if(k == items.length)
-                this.loading = !this.loading;
+            //if(k == items.length)
+            this.loading = !this.loading;
             
 
         },
@@ -595,6 +595,18 @@ export default({
             console.log(this.indisponibile);
 
             axios.delete('/allRents/' + this.indisponibile)
+                .then((response) => {
+                    //console.log(response.data);
+                    console.log(response);
+
+                        //reload!!
+                })
+                .catch((error) => {
+                        //this.loading = false;
+                    console.log(error);
+                });
+
+            axios.post('/add-discount', {clientID: this.username})
                 .then((response) => {
                     //console.log(response.data);
                     console.log(response);

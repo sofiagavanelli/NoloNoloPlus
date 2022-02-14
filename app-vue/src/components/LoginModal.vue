@@ -104,8 +104,10 @@ export default {
 
           localStorage.setItem('CurrentUser', JSON.stringify(this.username));
 
-          if(this.clientInfo.discount)
+          if(this.clientInfo.discount) {
+            console.log(this.clientInfo.discount);
             this.$store.state.discount = this.clientInfo.discount;
+          }
 
           //data = this.loggedIN;
 

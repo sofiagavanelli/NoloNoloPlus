@@ -2,6 +2,10 @@ var fs = require('fs');
 var formidable = require('formidable');
 var db = require('../db');
 
+//encrypt database data
+var encrypter = require('object-encrypter');
+var engine = encrypter('marameo');
+
 /// definizione della chiamata get
 
 module.exports = function (app) {
@@ -25,6 +29,29 @@ module.exports = function (app) {
         res.writeHead(200);
 
         db.getClients().then(clientsinfo => {
+
+            //var hashed_clients = hash(clientsinfo);
+            
+ 
+            /*console.dir(engine.decrypt(hex));*/
+            
+            /*var encrypted_clients = [];
+            var k = 0;
+
+            clientsinfo.forEach(item => {
+                //var hex = engine.encrypt(item); // generated string will live 5 seconds
+                //console.log(hex);
+
+                console.log("l'hash è: " + hash(item));
+                //item = hash(item);
+                encrypted_clients[k] = engine.encrypt(item);
+                k++;
+            })*/
+
+            /*console.log(hashed_clients);*/
+
+            //console.log(clientsinfo);
+
             res.write(JSON.stringify(clientsinfo));
             res.end();
         });
@@ -345,7 +372,14 @@ module.exports = function (app) {
 
     )
     });
- 
+
+    app.post('/update-client',async (req, res)=>{
+
+        const idcliente = req.body.clientID;
+
+        await db.addDiscount(idcliente, 15)
+    });
+
     app.post('/update-client',async (req, res)=>{
         console.log("sono nell'update dei clienti ");
         

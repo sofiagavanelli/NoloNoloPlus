@@ -36,14 +36,20 @@
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
 
-            <div id="priceTab" class="flex-container">
-              <b-button v-on:click="calc()">TOTALE: </b-button>
-              <div id="total-price">
-                <h5> {{total}} </h5>
-              </div>
+            <div>
               <template v-if="this.$store.state.discount && this.$store.state.username">
-                <input type="checkbox" v-on:click="useDiscount()"> voglio usare il mio sconto 
+                <div id="discountTab">
+                  <h5> <input type="checkbox" v-on:click="useDiscount()"> 
+                    voglio usare il mio sconto </h5>
+                </div>
               </template>
+
+              <div id="priceTab" class="flex-container">
+                <b-button v-on:click="calc()">TOTALE: </b-button>
+                <div id="total-price">
+                  <h5> {{total}} </h5>
+                </div>
+              </div>
             </div>
 
               <template v-if="this.payment">
@@ -271,9 +277,9 @@ methods: {
 
   useDiscount() {
 
-    if(this.parentData.discount) {
-      this.total = this.toale - (this.total*this.parentData.discount/100);
-    }
+    //if(this.parentData.discount) {
+      this.total = this.total - (this.total*this.$store.discount/100);
+    //}
 
   },
 
@@ -371,6 +377,10 @@ methods: {
 /*#rent_page {
   padding-top: 4em;
 }*/
+
+#discountTab {
+  padding: 1em;
+}
 
 #backBtn {
   height: 3em;
