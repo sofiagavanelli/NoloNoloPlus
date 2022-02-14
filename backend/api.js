@@ -245,8 +245,7 @@ module.exports = function (app) {
          db.deleteWorker(id).then(() => {
           res.status(200);
           res.end();
-          }
-            )
+          })
     });
     
 
@@ -324,7 +323,7 @@ module.exports = function (app) {
     });
 
     app.post('/new-rent',(req, res)=>{
-
+        
         console.log("sono nella post");
         console.log(req.body);
 
@@ -346,9 +345,9 @@ module.exports = function (app) {
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
-        console.log(result);
-      }
+        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
+            console.log(result);
+        }
 
     )
     });
