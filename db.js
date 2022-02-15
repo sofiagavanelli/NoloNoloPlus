@@ -106,8 +106,9 @@ module.exports = {
         //await newN.save();
     },
 
-    updateProd: async (id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+    updateProd: async (idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state) => {
+        console.log({idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state})
+        
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
             {prod_id: id},

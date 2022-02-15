@@ -396,44 +396,43 @@ function searchProd(){
 
 }
 function acceptProd(data, insertedID) {
-  //var x = 0;
-
   for (let i in data) {
 
     if(data[i].prod_id == insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
+
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
         <img src="${data[i].image}" alt="" width="380" height="280">
         <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
-            <label for="inputName" class="form-label">Nome</label>
-            <input type="text" class="create2" id="inputName" name="name" value="${data[i].name}">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" class="create2" id="name" name="name" value="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="prod_id" class="form-label">ID Prodotto</label>
             <input type="text" class="create2" id="prod_id" name="product" value="${data[i].prod_id}" style="cursor: not-allowed;" readonly="readonly">
           </div>
           <div class="col-md-6">
-            <label for="inputBrand" class="form-label">Brand</label>
-            <input type="text" class="create2" id="inputBrand" name="brand" value="${data[i].brand}">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="create2" id="brand" name="brand" value="${data[i].brand}">
           </div>
           <div class="col-md-6">
-          <label for="inputCat" class="form-label">Categoria</label>
-          <input type="text" class="create2" id="inputCat" name="category" value="${data[i].category}" >
+          <label for="category" class="form-label">Categoria</label>
+          <input type="text" class="create2" id="category" name="category" value="${data[i].category}" >
           </div>
           <div class="col-md-6">
-            <label for="inputLow" class="form-label">Prezzo Bassa Stagione</label>
-            <input type="text" class="create2" id="inputLow" name="lowseason" value="${data[i].low_season}">
+            <label for="low_season" class="form-label">Prezzo Bassa Stagione</label>
+            <input type="text" class="create2" id="low_season" name="lowseason" value="${data[i].low_season}">
           </div>
           <div class="col-md-6">
-            <label for="inputHigh" class="form-label">Prezzo Alta Stagione</label>
-            <input type="text" class="create2" id="inputHigh" name="highseason" value="${data[i].high_season}">
+            <label for="high_season" class="form-label">Prezzo Alta Stagione</label>
+            <input type="text" class="create2" id="high_season" name="highseason" value="${data[i].high_season}">
           </div>
           <div class="col-md-4">
-            <label for="inputStatus" class="form-label">Stato </label> <button type="button" class="btn-postit" button title="La prima opzione corrisponde allo stato attuale del prodotto" ><i class="fas fa-info-circle"></i></button>
-            <select class="create2" id="inputstatus" name="stato" aria-label="Select status">
+            <label for="status" class="form-label">Stato </label> <button type="button" class="btn-postit" button title="La prima opzione corrisponde allo stato attuale del prodotto" ><i class="fas fa-info-circle"></i></button>
+            <select class="create2" id="status" name="stato" aria-label="Select status">
             <option selected value="${data[i].status}">${data[i].status}</option>
               <option value="ottimo">ottimo</option>
               <option value="buono">buono</option>
@@ -442,20 +441,20 @@ function acceptProd(data, insertedID) {
             </select>
           </div>
           <div class="col-md-2">
-            <label for="inputLen" class="form-label">Lunghezza</label>
-            <input type="text" class="create2" id="inputLen" name="length" value="${data[i].length}">
+            <label for="length" class="form-label">Lunghezza</label>
+            <input type="text" class="create2" id="length" name="length" value="${data[i].length}">
             </div>
           <div class="col-md-2">
-            <label for="inputGuest" class="form-label">Ospiti</label>
-            <input type="text" class="create2" id="inputGuest" name="guests" value="${data[i].guests}">
+            <label for="guest" class="form-label">Ospiti</label>
+            <input type="text" class="create2" id="guest" name="guests" value="${data[i].guests}">
           </div>
           <div class="col-md-2">
-            <label for="inputYear" class="form-label">Anno</label>
-            <input type="text" class="create2" id="inputYear" name="year" value="${data[i].year}">
+            <label for="year" class="form-label">Anno</label>
+            <input type="text" class="create2" id="year" name="year" value="${data[i].year}">
           </div>
           <div class="col-md-2">
-            <label for="inputSpeed" class="form-label">Velocità</label>
-            <input type="text" class="create2" id="inputSpeed" name="speed" value="${data[i].speed}">
+            <label for="speed" class="form-label">Velocità</label>
+            <input type="text" class="create2" id="speed" name="speed" value="${data[i].speed}">
           </div>
           <div class="col-12">
             <div class="mb-3">
@@ -464,11 +463,7 @@ function acceptProd(data, insertedID) {
             </div>
           </div>
           <div class="col-12">
-            <label for="img" class="form-label">Carica foto: </label>
-            <input type="text" class="create2" id="img" name="img" placeholder="Immetti url">
-          </div>
-          <div class="col-12">
-            <button class="btn-sub" onclick="approveProd()" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" id="${data[i].prod_id} onclick="approveProd(id)" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </form>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
@@ -999,7 +994,7 @@ div = $(`
             </div>
           </div>
           <div class="col-12">
-            <button class="btn-sub" onclick="approveProd()" style="position: relative; float: right; right: 15em;">Aggiungi</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; position: relative; float: right; margin-right: 1em; "></i>
+            <button class="btn-sub" onclick="approveProd()" style="position: relative; float:right;">Aggiungi</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; position: relative; float: right; margin-right: 1em; "></i>
             <div id ="alert_img" class="alert alert-danger" role="alert" style="width: 30em; position: relative; float: left;">
             RICORDA: per aggiungere un nuovo prodotto, prima inserire immagine nel database  
             </div>
@@ -1251,7 +1246,7 @@ $("#ctable").append(div);
 div = $(` 
       <div class="flex-container" style=" margin-left: 4%;">
         <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="" width="280" height="300" style="margin-left: 3em;">
-        <div class="row g-3" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
+        <form class="row g-3" action="/update-client" method="POST" role="form" class="row g-3" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].name}">
@@ -1291,7 +1286,7 @@ div = $(`
             <button class="btn-sub" onclick="approveClient()" >Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           
             </div>
-        </div>
+        </form>
       </div>
        
       `);
@@ -1515,6 +1510,31 @@ function goBackRents(){
 }
 
 //FUNZIONI AUX
+function approveProd(inserted) {
+  var name= document.getElementById("name").value;
+  var prod_id= inserted
+  var brand= document.getElementById("brand").value;
+  var category= document.getElementById("category").value;
+  var low_season= document.getElementById("low_season").value;
+  var high_season= document.getElementById("high_season").value;
+  var year= document.getElementById("year").value;
+  var guest= document.getElementById("guest").value;
+  var length= document.getElementById("length").value;
+  var speed= document.getElementById("speed").value;
+  var summary= document.getElementById("summary").value;
+  var status= document.getElementById("status").value;
+
+  var changed = {};
+
+
+  changed = { prod_id: prod_id, category: category, name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: status};
+  
+  console.log(changed);
+
+      $.post( '/update-prod', changed, function( data ) {
+      });
+
+}
 function approveRent(){
 
   var myrent_sdate = new Date(document.getElementById("data_inizio").value);
@@ -1542,7 +1562,7 @@ function approveClient(){
 
   document.getElementById("smile").style.visibility = "visible";
 }
-function approva(){   //da sistemare
+function approva(){
 
 
   var myrent_sdate = new Date(document.getElementById("inputstart").value);
@@ -1568,25 +1588,22 @@ function approva(){   //da sistemare
 }
 
 function unavailable(){
-  var name_prod= document.getElementById("inputName").value;
-  var prod_id= document.getElementById("inputID").value;
-  var brand_prod= document.getElementById("inputBrand").value;
-  var cat_prod= document.getElementById("inputCat").value;
-  var low_prod= document.getElementById("inputLow").value;
-  var high_prod= document.getElementById("inputHigh").value;
-  var year_prod= document.getElementById("inputYear").value;
-  var guest_prod= document.getElementById("inputGuest").value;
-  var len_prod= document.getElementById("inputLen").value;
-  var speed_prod= document.getElementById("inputSpeed").value;
-  var desc_prod= document.getElementById("summary").value;
-
-
-
+  var name= document.getElementById("name").value;
+  var prod_id= inserted
+  var brand= document.getElementById("brand").value;
+  var category= document.getElementById("category").value;
+  var low_season= document.getElementById("low_season").value;
+  var high_season= document.getElementById("high_season").value;
+  var year= document.getElementById("year").value;
+  var guest= document.getElementById("guest").value;
+  var length= document.getElementById("length").value;
+  var speed= document.getElementById("speed").value;
+  var summary= document.getElementById("summary").value;
 
   var changed = {};
 
-  
-  changed = { prod_id: prod_id, category: cat_prod, name: name_prod, brand: brand_prod, speed: speed_prod, length: len_prod, guests: guest_prod, year: year_prod, summary: desc_prod, low_season: low_prod, high_season: high_prod, status: "rotto"};
+
+  changed = { prod_id: prod_id, category: category, name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: "rotto"};
 
   console.log(changed);
 

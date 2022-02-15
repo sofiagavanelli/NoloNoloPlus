@@ -367,7 +367,6 @@ module.exports = function (app) {
     app.post('/update-rent', async (req, res) => {
         console.log("SONO IN UPDATE NOLEGGIO API.JS");
 
-        /* updateRent: async (id, s, e, p, pay) => {*/
 
         var idrent = req.body._id;
         var start = req.body.start;
@@ -407,12 +406,11 @@ module.exports = function (app) {
 
         var idprod = req.body.prod_id;
         var cat= req.body.category;
-        var imm= req.body.img;
         var nome = req.body.name;
         var marca = req.body.brand;
         var vel = req.body.speed;
         var len = req.body.length;
-        var ospiti = req.body.guests;
+        var ospiti = req.body.guest;
         var anno = req.body.year;
         var desc = req.body.summary;
         var price_low = req.body.low_season;
@@ -421,7 +419,7 @@ module.exports = function (app) {
 
         console.log(idprod +" " + cat + " "  + nome + " " + marca + " " + vel + " " + len + " " + ospiti + " " + anno + " " + desc + " " + price_low + " " +price_high + " " + state)
 
-       await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+       await db.updateProd(idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 
     //UPDATE RENT PER L'ELIMINAZIONE
