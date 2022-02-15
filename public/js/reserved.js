@@ -114,17 +114,23 @@ function acceptWorker(data, insertedP) {
 
 
 }
-function isLogged(){
-  let log = sessionStorage.getItem('isLogged');
 
-  if(!log){
-    location.href ='/login';
-  }
-}
 function logOut(){
+  sessionStorage.setItem('isLogged', false);
   location.href = '/login';
 
 }
+
+function is_logged(){
+
+  let log = sessionStorage.getItem('isLogged');
+
+  if(!log){
+    location.href = '/login';
+  }
+
+}
+
 /***************************** */
 /*SIDEBAR -> CLIENTI */
 function openClient() {
