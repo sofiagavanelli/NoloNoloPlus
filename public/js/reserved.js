@@ -1078,10 +1078,13 @@ function calc(){
     $("#btn-saveRent").removeAttr('disabled');
 
   }
-  else {
-    document.getElementById("rentprice").value = "non disponibile";
+  else if(myprod.status == "rotto"){
+      document.getElementById("rentprice").value = "prodotto non disponibile";
+    }
+  else{
+    document.getElementById("rentprice").value = "data non disponibile";}
   //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
-  }
+  
 
 
 
@@ -1321,9 +1324,13 @@ function modifyRent(data, insertedID){
           <label for="inputend" class="form-label">Data Fine</label>
           <input type="text" class="create2" id="inputend" name="end" value="${data[i].end_date.slice(0,10)}">
         </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <label for="inputPrezzo" class="form-label">Prezzo </label>
             <input type="text" class="create2" id="inputprice" name="end" value="${data[i].price}">
+          </div>
+          <div class="col-md-4">
+            <label for="inputpay" class="form-label">Pagamento </label>
+            <input type="text" class="create2" id="inputpay" name="end" value="${data[i].paymethod}">
           </div>
           <div class="col-md-4">
             <label for="inputworker" class="form-label">Dipendente </label>
@@ -1333,11 +1340,13 @@ function modifyRent(data, insertedID){
             <label for="delivered" class="form-label">Restituito </label>
             <input type="text" class="create2" id="delivered" name="delivered" value="${x}">
           </div>
-          <div>
-          <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
-          <button id="${data[i]._id}" onclick= "approva(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;">Approva</button><i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
-          
+          <div class="col-md-2" style="visibility: hidden">
+            <input type="text" class="create2" id="idprod" name="delivered" value="${data[i]._id}">
           </div>
+          <div>
+            <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
+            ${!data[i].approved ? `<button  id="btn-approve" onclick="approva()" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em; visibility: visible;">Approva</button>
+            `: ""}</div>
         </div>
       </div>
   
@@ -1520,28 +1529,29 @@ function approveClient(){
 
   document.getElementById("smile").style.visibility = "visible";
 }
-function approva(inserted){
+function approva(){   //da sistemare
 
 
   var myrent_sdate = new Date(document.getElementById("inputstart").value);
   var myrent_edate = new Date(document.getElementById("inputend").value);
   var price = document.getElementById("inputprice").value;
-  var ID_rent = inserted;
+  var ID_rent = document.getElementById("idprod").value;
   var ID_work = document.getElementById("inputworker").value;
+  var pagamento = document.getElementById("inputpay").value;
 
-  console.log(myrent_sdate + " " + myrent_edate + " " + price + " " + ID_rent + " " + ID_work);
+  console.log(myrent_sdate + " " + myrent_edate + " " + price + " " + ID_rent +" "+ pagamento + " " + ID_work);
   
   var changed = {};
 
-  changed = { _id: ID_rent, start: myrent_sdate, end: myrent_edate, price: price, worker: ID_work, approved: "true"};
+  changed = { _id: ID_rent, start: myrent_sdate, end: myrent_edate, price: price, paymethod: pagamento, worker: ID_work, approved: "true"};
 
   console.log(changed);
 
       $.post( '/update-rent', changed, function( data ) {
-        document.getElementById("smile").style.visibility = "visible";
+        document.getElementById("btn-approve").style.visibility = "hidden";
       });
 
-  document.getElementById("smile").style.visibility = "visible";
+  document.getElementById("btn-approve").style.visibility = "hidden";
 }
 
 /*function approveProd(){
