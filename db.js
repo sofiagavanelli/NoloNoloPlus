@@ -67,11 +67,11 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,/*_imageUrl,*/_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
 
-        new Prodotto({
+        return Promise.resolve(new Prodotto({
             category: _category,
-            image: _imageUrl,
+            //image: _imageUrl,
             name: _name,
             brand: _brand,
             speed: _speed,
@@ -84,13 +84,11 @@ module.exports = {
             prod_id: _id,
             status: _status
             //available: true
-        }).save();
+        }).save());
     },
 
-    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _ok) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
-
-        if(!_ok) _ok=false;
 
         /*const newN =*/ return Promise.resolve(new Noleggio({
             //_id: _id,
@@ -101,7 +99,7 @@ module.exports = {
             worker_id: _worker,
             price: _price,
             paymethod: _payment,
-            approved: _ok,
+            approved: _approved,
             deleted: false,
             delivered: false
             //worker_id: _worker
@@ -162,14 +160,16 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, s, e, p, pay) => {
+    updateRent: async (id, s, e, p, pay, a) => {
         
         await Noleggio.findOneAndUpdate(
             {_id: id},
             { $set: {start_date: s,
                     end_date: e, 
                     price: p,
-                    paymethod: pay}},
+                    paymethod: pay,
+                    approved: a,
+                }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

@@ -298,8 +298,6 @@ module.exports = function (app) {
 
     app.post('/new-rent',(req, res)=>{
 
-
-        
         console.log("sono in new rent");
         console.log(req.body);
 
@@ -311,12 +309,13 @@ module.exports = function (app) {
       var price = req.body.price;
       var paymethod = req.body.pay;
       var work = req.body.worker;
+      var app = req.body.approved;
 
       //non dobbiamo mettere che approved parte da false?
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, null).then((result) => {
+        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, app).then((result) => {
             console.log(result);
         }
 
@@ -344,6 +343,8 @@ module.exports = function (app) {
 
     )
     });
+
+    
 
     app.post('/add-discount',async (req, res)=>{
 
@@ -400,6 +401,17 @@ module.exports = function (app) {
 
         console.log(idprod);
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+    });
+
+    app.post('/update-rent',async (req, res)=>{
+        console.log("sono nell'update dei noleggi");
+ 
+        var s_date = req.body.data_inizio;
+        var e_date = req.body.data_fine; 
+        var prezzo_noleggio = req.body.rentprice;
+        var dipendente = req.body.worker;
+        var appr = req.body.approved;
+       await db.updateProd(s_date, e_date, prezzo_noleggio, dipendente, appr)
     });
 
     //UPDATE RENT PER L'ELIMINAZIONE
