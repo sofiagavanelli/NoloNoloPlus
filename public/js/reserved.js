@@ -471,7 +471,8 @@ function acceptProd(data, insertedID) {
         </div>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
         <button id="btn-un" onclick="unavailable()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
-      </div>
+        <button id="btn-av" onclick="available()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em; visibility: visible;"><i class="far fa-thumbs-up"></i>  Rendi Disponibile</button>
+        </div>
        
       `);
       $("#ctable2").append(div);
@@ -1607,6 +1608,30 @@ function unavailable(){
 
 
   changed = { prod_id: prod_id, category: category, name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: "rotto"};
+
+  console.log(changed);
+
+      $.post( '/update-prod', changed, function( data ) {
+      });
+
+}
+function available(){
+  var name= document.getElementById("name").value;
+  var prod_id= document.getElementById("product").value;
+  var brand= document.getElementById("brand").value;
+  var category= document.getElementById("category").value;
+  var low_season= document.getElementById("low_season").value;
+  var high_season= document.getElementById("high_season").value;
+  var year= document.getElementById("year").value;
+  var guest= document.getElementById("guest").value;
+  var length= document.getElementById("length").value;
+  var speed= document.getElementById("speed").value;
+  var summary= document.getElementById("summary").value;
+
+  var changed = {};
+
+
+  changed = { prod_id: prod_id, category: category, name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: "ottimo"};
 
   console.log(changed);
 
