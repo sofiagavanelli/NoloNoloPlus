@@ -160,9 +160,9 @@ module.exports = {
 
     updateRent: async (id, s, e, w, p, pay, a) => {
 
-        console.log("SONO IN MODIFICA NOLEGGIO");
+        /*console.log("SONO IN MODIFICA NOLEGGIO");
 
-        console.log(id +  " " + s + " " + e + " " + w + " " + p + " " + pay + " " + a );
+        console.log(id +  " " + s + " " + e + " " + w + " " + p + " " + pay + " " + a );*/
         
         await Noleggio.findOneAndUpdate(
             {_id: id},

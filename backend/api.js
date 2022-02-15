@@ -373,12 +373,12 @@ module.exports = function (app) {
         var start = req.body.start;
         var end = req.body.end;
         var price = req.body.price;
-        var pay = req.body.paymethod; 
-        var app = req.body.approved;
-        var wor = req.body.worker;
+        var pay = req.body.paymethod;
+
+        var app = req.body.approved || false;
+        var wor = req.body.worker || false;
 
         console.log(req.body._id);
-        console.log(req.body.start);
         
         await db.updateRent(idrent, start, end, wor,  price, pay, app)
 

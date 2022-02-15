@@ -31,7 +31,11 @@ app.use('/img' , express.static(__dirname  +'/public/img'));
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
 app.use("/manager", express.static(path.resolve(__dirname, 'build')));
 app.use("/static", express.static(path.resolve(__dirname, 'build/static')));
-
+app.post('/loginManager', (req, res) => {
+    res.send({
+      token: req.body.username
+    });
+});
 
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
