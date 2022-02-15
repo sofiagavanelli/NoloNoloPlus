@@ -369,7 +369,7 @@ module.exports = function (app) {
 
         /* updateRent: async (id, s, e, p, pay) => {*/
 
-        const idrent = req.body._id;
+        var idrent = req.body._id;
         var start = req.body.start;
         var end = req.body.end;
         var price = req.body.price;
@@ -377,9 +377,10 @@ module.exports = function (app) {
         var app = req.body.approved;
         var wor = req.body.worker;
 
-        console.log("VISUALIZZO I REQ.BODY" + req.body);
+        console.log(req.body._id);
+        console.log(req.body.start);
         
-        await db.updateRent(idrent, start, end, price, pay, app, wor)
+        await db.updateRent(idrent, start, end, wor,  price, pay, app)
 
     });
 

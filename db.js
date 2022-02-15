@@ -178,7 +178,7 @@ module.exports = {
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log("Errore"))
+            .catch(x => console.log(x))
     },
 
 
