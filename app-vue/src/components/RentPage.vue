@@ -108,6 +108,8 @@ import axios from '../http'
 
 import client from '../user-data'
 
+import {calc} from '../utils'
+
 
 export default {
   name: 'RentPage',
@@ -164,7 +166,7 @@ mounted() {
 
 methods: {
 
-  controlDate() {
+  /*controlDate() {
 
         console.log("sono dentro controldate");
 
@@ -197,7 +199,7 @@ methods: {
 
         return(disponibile);
       
-  },
+  },*/
 
   calc() {
 
@@ -205,28 +207,29 @@ methods: {
       this.total = "la data di fine deve essere successiva a quella d'inizio";
     }
     else {
-      const diffInMs   = new Date(this.endD) - new Date(this.startD);
+
+      //export function calc(start, end, product, logged, noleggi) {
+      var result = calc(this.startD, this.endD, this.parentData, this.$store.state.username, this.noleggi);
+
+      this.total = result.err || result.total;
+      this.payment = result.pay;
+
+      if(this.payment) this.euro = '€';
+
+    }
+
+      /*const diffInMs   = new Date(this.endD) - new Date(this.startD);
       const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
 
-      let highDays = this.defineSeason(diffInDays);
+      let highDays = highSeason_days(this.startD, diffInDays);
 
       let temp = (this.parentData.high_season * (highDays)) + (this.parentData.low_season * (diffInDays - highDays));
 
       if(this.$store.state.username) {
 
-        /*if(this.parentData.discount) {
-          temp = temp - (temp*this.parentData.discount/100);
-        }*/
-
-        if(this.parentData.status == "buono") {
-          temp = temp - (temp*5/100);
-        }
-        else if(this.parentData.status == "rovinato") {
-          temp = temp - (temp*10/100);
-        }
 
         //TODO AGGIUNGERE QUESTIONE DEL MESE DI NASCITA CON LO SCONTO 
-        /* data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
+         data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
           var start_date = new Date(this.startD);
           var start_month = start_date.getMonth();
           var birth_month = birth_date.getMonth();
@@ -235,17 +238,26 @@ methods: {
             temp = temp - (temp*15/100);
           }
 
-        */
+        
 
-        /*this.controlDate()
-          .then((valid) => {*/
-            if(this.parentData.status != "rotto" && this.controlDate()) {
+            if(this.parentData.status != "rotto" && controlDate(this.noleggi, this.startD, this.endD)) {
+
+              if(this.parentData.status == "buono") {
+                temp = temp - (temp*5/100);
+              }
+              else if(this.parentData.status == "rovinato") {
+                temp = temp - (temp*10/100);
+              }
+              
               this.total = temp;
               this.euro = '€';
               this.payment = true;
             }
             else {
-              this.total = "non disponibile";
+              if(this.parentData.status == "rotto")
+                this.total = "imbarcazione non disponibile";
+              else
+                this.total = "date già occupate";
             //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
             }
           //})
@@ -255,11 +267,11 @@ methods: {
         this.total = temp;
         this.euro = '€';
       }
-    }
+    }*/
 
   },
 
-  defineSeason(i) {
+  /*defineSeason(i) {
 
     let Hdays = 0;
     var date = new Date(this.startD);
@@ -267,7 +279,7 @@ methods: {
     while (i>0) {
 
       if (date.getMonth() >= 5 && date.getMonth() <= 9) { 
-        /*NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8*/
+        //NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8
         Hdays = Hdays + 1;
       }
 
@@ -279,7 +291,7 @@ methods: {
 
     return(Hdays);
 
-  },
+  },*/
 
   useDiscount() {
 
