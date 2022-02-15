@@ -405,14 +405,14 @@ function acceptProd(data, insertedID) {
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
         <img src="${data[i].image}" alt="" width="380" height="280">
-        <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
+        <div class="row g-3" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="create2" id="name" name="name" value="${data[i].name}">
           </div>
           <div class="col-md-6">
             <label for="prod_id" class="form-label">ID Prodotto</label>
-            <input type="text" class="create2" id="prod_id" name="product" value="${data[i].prod_id}" style="cursor: not-allowed;" readonly="readonly">
+            <input type="text" class="create2" id="prod_id" name="prod_id" value="${data[i].prod_id}" style="cursor: not-allowed;" readonly="readonly">
           </div>
           <div class="col-md-6">
             <label for="brand" class="form-label">Brand</label>
@@ -424,15 +424,15 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-6">
             <label for="low_season" class="form-label">Prezzo Bassa Stagione</label>
-            <input type="text" class="create2" id="low_season" name="lowseason" value="${data[i].low_season}">
+            <input type="text" class="create2" id="low_season" name="low_season" value="${data[i].low_season}">
           </div>
           <div class="col-md-6">
             <label for="high_season" class="form-label">Prezzo Alta Stagione</label>
-            <input type="text" class="create2" id="high_season" name="highseason" value="${data[i].high_season}">
+            <input type="text" class="create2" id="high_season" name="high_season" value="${data[i].high_season}">
           </div>
           <div class="col-md-4">
             <label for="status" class="form-label">Stato </label> <button type="button" class="btn-postit" button title="La prima opzione corrisponde allo stato attuale del prodotto" ><i class="fas fa-info-circle"></i></button>
-            <select class="create2" id="status" name="stato" aria-label="Select status">
+            <select class="create2" id="status" name="status" aria-label="Select status">
             <option selected value="${data[i].status}">${data[i].status}</option>
               <option value="ottimo">ottimo</option>
               <option value="buono">buono</option>
@@ -446,7 +446,7 @@ function acceptProd(data, insertedID) {
             </div>
           <div class="col-md-2">
             <label for="guest" class="form-label">Ospiti</label>
-            <input type="text" class="create2" id="guest" name="guests" value="${data[i].guests}">
+            <input type="text" class="create2" id="guest" name="guest" value="${data[i].guests}">
           </div>
           <div class="col-md-2">
             <label for="year" class="form-label">Anno</label>
@@ -463,11 +463,14 @@ function acceptProd(data, insertedID) {
             </div>
           </div>
           <div class="col-12">
+          <div class="col-md-2" style="visibility:hidden;">
+            <input type="text" class="create2" id="product" value="${data[i].prod_id}">
+          </div>
             <button class="btn-sub" id="${data[i].prod_id} onclick="approveProd(id)" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
-        </form>
+        </div>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
-        <button id="btn-un" onclick= "unavailable()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
+        <button id="btn-un" onclick="unavailable()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
       </div>
        
       `);
@@ -1589,7 +1592,7 @@ function approva(){
 
 function unavailable(){
   var name= document.getElementById("name").value;
-  var prod_id= inserted
+  var prod_id= document.getElementById("product").value;
   var brand= document.getElementById("brand").value;
   var category= document.getElementById("category").value;
   var low_season= document.getElementById("low_season").value;

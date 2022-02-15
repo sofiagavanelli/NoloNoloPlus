@@ -111,19 +111,19 @@ module.exports = {
         
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
-            {prod_id: id},
-            { $set: {category: categ,
+            {prod_id: idprod},
+            { $set: {category: cat,
                 //image: im,
-                name: n,
-                brand: m,
-                speed: v,
-                length: leng,
-                guests: osp,
-                year: aa,
-                summary: description,
-                low_season: p_low,
-                high_season: p_high,
-                status: stat, }},
+                name: nome,
+                brand: marca,
+                speed: vel,
+                length: len,
+                guests: ospiti,
+                year: anno,
+                summary: desc,
+                low_season: price_low,
+                high_season: price_high,
+                status: state, }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
