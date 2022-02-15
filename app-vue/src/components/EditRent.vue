@@ -12,10 +12,10 @@
         <ul class="d-flex flex-wrap pl-0" >
           <li class="title"> DATA INIZIO: <h5 class="data"> {{rentToEdit.start_date.slice(0,10)}} </h5> 
             <!--b-form-input v-model="newInfo[0]" placeholder="Modifica Inizio"></b-form-input-->
-            <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="newstartD" class="mb-2"></b-form-datepicker> 
+            <b-form-datepicker :min="new Date()" id="start-datepicker" v-model="newinfo[0]" class="mb-2"></b-form-datepicker> 
           </li>
           <li class="title"> DATA FINE: <h5 class="data"> {{rentToEdit.end_date.slice(0,10)}} </h5> 
-            <b-form-datepicker :min="newstartD" id="end-datepicker" v-model="newendD" class="mb-2"></b-form-datepicker>
+            <b-form-datepicker :min="newinfo[1]" id="end-datepicker" v-model="newendD" class="mb-2"></b-form-datepicker>
             <!--b-form-input v-model="newInfo[1]" placeholder="Modifica Fine"></b-form-input--> 
           </li>
           <li class="title"> PREZZO: <h5 class="data"> {{rentToEdit.price}}€ </h5> </li>
@@ -23,7 +23,7 @@
           <li class="title"> METODO DI PAGAMENTO: <h5 class="data"> {{rentToEdit.paymethod}} </h5> 
 
           <b-dropdown text="Pagamento" variant='none'> 
-            <b-form-checkbox-group v-model="checked" :options="type" v-on:change="pay(checked)"> {{type.text}} </b-form-checkbox-group> 
+            <b-form-checkbox-group v-model="newInfo[2]" :options="type" v-on:change="pay(checked)"> {{type.text}} </b-form-checkbox-group> 
           </b-dropdown>
 
             <!--b-form-input v-model="newInfo[2]" placeholder="Modifica Metodo di Pagamento"></b-form-input> </li-->
@@ -53,8 +53,8 @@ export default {
   data() {
     return {
       
-      newstartD: '',
-      newendD: '',
+      /*newstartD: '',
+      newendD: '',*/
 
       newInfo: [],
       product: [],
@@ -62,8 +62,9 @@ export default {
       url: "https://site202133.tw.cs.unibo.it/img/",
       ex: ".jpg",
 
+      noleggi: [],
 
-      checked: '',
+      //checked: '',
         type: [ 
           { value: null, text: 'Lascia invariato' },
           { value: 'paypal', text: 'PayPal' },
@@ -78,20 +79,10 @@ export default {
 
   mounted() {
 
-    /*axios.get('/prods/' + this.rentToEdit.prod_id)
-      .then((response) => {
-        this.product = response.data;
-
-        console.log(this.product);
-
-        //TODO: SECONDO ME SI PUO CARICARE NEL DB DIRETTAMENTE COSI FIN DALL'INIZIO: SI GENERA L'URL
-        this.product[0].image = this.url + this.product[0].category + '/' + this.product[0].prod_id + this.ex;
-
-      })
-      .catch((error) => {
-        //this.loading = false;
-        console.log(error);
-      });*/
+    axios.get('/rentByProd/' + this.rentToEdit.prod_id)
+    .then((response) => {
+        this.noleggi = response.data;
+    });
 
   },
 
@@ -99,41 +90,42 @@ export default {
 
     saveRent() {
 
-      /*var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
+      var update = {rentID: rentToEdit._id, startD: rentToEdit.start_date, endD: rentToEdit.end_date, price: rentToEdit.price, paymethod: rentToEdit.paymethod};
 
-            var changed = [];
+      var changed = [];
 
-            for(let i=0; i<8; i++) {
-                if(this.newInfo[i] && this.newInfo[i].length > 3)
-                    changed[i] = true;
-            }
+        for(let i=0; i<8; i++) {
+          if(this.newInfo[i] && this.newInfo[i].length > 3)
+            changed[i] = true;
+        }
 
-            if(changed[0]) update.name = this.newInfo[0];
-            if(changed[1]) update.surname = this.newInfo[1];
-            if(changed[2]) update.place = this.newInfo[2];
-            if(changed[3]) update.address = this.newInfo[3];
-            //ci andrebbe il cambio password!
-            if(changed[4]) update.pass = this.newInfo[4];
-            if(changed[5]) update.telefono = this.newInfo[5];
-            if(changed[6]) update.email = this.newInfo[6];
-            if(changed[7]) update.birth = this.newInfo[7];
+        if(changed[0]) update.startD = this.newInfo[0];
+        if(changed[1]) update.endD = this.newInfo[1];
 
-            if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7]) {
+        if( (changed[0] || changed[1]) && this.checkNewDates() ) {
 
-                axios.post('/update-client/', update)
-                    .then((response) => {
-                        //console.log(response.data);
-                        console.log(response);
+          if(changed[2]) update.paymethod = this.newInfo[2];
 
-                        //reload!!
-                        
-                    })
-                    .catch((error) => {
-                        //this.loading = false;
-                        console.log(error);
-                    });
-            }
-            */
+          if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7]) {
+
+            axios.post('/update-client/', update)
+              .then((response) => {
+                
+              })
+              .catch((error) => {
+                //this.loading = false;
+                console.log(error);
+              });
+          }
+
+        }
+
+    },
+
+    checkNewDates() {
+
+      var newStart = new Date(this.newInfo[0]);
+      var newEnd = new Date(this.newInfo[1]);
 
     }
 

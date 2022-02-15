@@ -9,7 +9,7 @@
           tutti i portafogli. Contattateci per qualsiasi richiesta - vi garantiamo la risposta più veloce del settore.
         </div>
 
-        <div> 
+        <div id="searchB" class="flex-container"> 
           <SearchBar v-on:childToParent="filter"  />
         </div>
 
@@ -257,6 +257,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#introduzione {
+  border-bottom: 1px solid grey;
+  background-color: white;
+}
+
+#searchB {
+  justify-content: center;
+  background-color: white;
+
+  padding: 1em;
+
+  box-shadow: 0px 0px 6px 0px lightgrey;
+}
 
 .b-card-footer {
   justify-content: center;

@@ -6,14 +6,24 @@
       <div id="searchBar" class="flex-container">
           <!--b-form-select v-model="selected" :options="options" multiple></b-form-select-->
           <!--p id="text1"> applica un filtro </p-->
-          <b-dropdown toggle-class='customDropdown' text="applica un filtro " variant='none'> 
+          <!--b-dropdown toggle-class='customDropdown' text="applica un filtro " variant='none'> 
             <h6> Tipologie </h6>
             <b-form-checkbox-group v-model="boat" :options="type" multiple></b-form-checkbox-group>
             <h6> Ospiti </h6>
             <b-form-checkbox-group v-model="people" :options="guests" multiple></b-form-checkbox-group>
             <h6> Anno di produzione </h6>
             <b-form-checkbox-group v-model="age" :options="year" multiple></b-form-checkbox-group>
-          </b-dropdown>
+          </b-dropdown-->
+
+            <b-dropdown toggle-class='customDropdown' text="Categoria" variant='none'> 
+              <b-form-checkbox-group v-model="boat" :options="type" multiple></b-form-checkbox-group>
+            </b-dropdown>
+            <b-dropdown toggle-class='customDropdown' text="Ospiti" variant='none'>
+              <b-form-checkbox-group v-model="people" :options="guests" multiple></b-form-checkbox-group>
+            </b-dropdown>
+            <b-dropdown toggle-class='customDropdown' text="Anno di produzione" variant='none'>
+              <b-form-checkbox-group v-model="age" :options="year" multiple></b-form-checkbox-group>
+            </b-dropdown>
 
           <b-button id="subButtom" v-on:click="emitToParent"> SUBMIT </b-button>
           <b-button id="resetButtom" v-on:click="resetFilter"> RESET </b-button>
@@ -210,17 +220,19 @@ export default {
 }
 
 #searchBar {
-  /*width: 90%;*/
+  /*width: 90%;
   border: 1px solid #4D6D9A;
-  text-align: center;
+  text-align: center;*/
 
-  /*justify-content: space-around;*/
+  justify-content: space-around;
 }
 
 .customDropdown {
   border-radius: 0 !important;
   margin: 0 !important;
   height: 100%;
+
+  font-size: 14px;
 
   z-index: -1;
 }
