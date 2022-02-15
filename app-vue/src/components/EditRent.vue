@@ -23,7 +23,7 @@
 
           <li class="title"> METODO DI PAGAMENTO: <h5 class="data"> {{rentToEdit.paymethod}} </h5> 
           <b-dropdown text="Pagamento" variant='none'> 
-            <b-form-checkbox-group v-model="newInfo[2]" :options="type" v-on:change="pay(checked)"> {{type.text}} </b-form-checkbox-group> 
+            <b-form-checkbox-group v-model="newInfo[2]" :options="type"> {{type.text}} </b-form-checkbox-group> 
           </b-dropdown>
 
             <!--b-form-input v-model="newInfo[2]" placeholder="Modifica Metodo di Pagamento"></b-form-input> </li-->
@@ -40,7 +40,7 @@
         </router-link>
 
         <div>
-          <h5> {{response}} </h5>
+          <h5 id="response"> {{response}} </h5>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
 <script>
 import axios from '../http'
 
-import {controlDate} from '../utils'
+import {calc} from '../utils'
 
 export default {
   name: 'EditRent',
@@ -94,7 +94,7 @@ export default {
 
     axios.get('/prods/' + this.rentToEdit.prod_id)
     .then((response) => {
-        this.product = response.data;
+        this.product = response.data[0];
     });
 
 
@@ -104,7 +104,7 @@ export default {
 
     saveRent() {
 
-      var update = {rentID: rentToEdit._id, startD: rentToEdit.start_date, endD: rentToEdit.end_date, price: rentToEdit.price, paymethod: rentToEdit.paymethod};
+      var update = {_id: this.rentToEdit._id, start: this.rentToEdit.start_date, end: this.rentToEdit.end_date, price: this.rentToEdit.price, paymethod: this.rentToEdit.paymethod};
 
       var changed = [];
 
@@ -113,20 +113,24 @@ export default {
             changed[i] = true;
         }
 
-        if(changed[0]) update.startD = this.newInfo[0];
-        if(changed[1]) update.endD = this.newInfo[1];
+        if(changed[0]) update.start = this.newInfo[0];
+        if(changed[1]) update.end = this.newInfo[1];
 
         if(changed[0] || changed[1]) {
 
-          var result = calc(update.startD, update.endD, this.product, true, this.noleggi);
+          var result = calc(update.start, update.end, this.product, true, this.noleggi);
 
           this.response = result.err || result.total;
+
+          //console.log(result);
 
           if(changed[2]) update.paymethod = this.newInfo[2];
 
           if(!result.err) {
 
             update.price = result.total;
+
+            console.log(update);
 
             axios.post('/update-rent', update)
               .then((response) => {
@@ -159,6 +163,10 @@ export default {
 
   font-size: 12px;
 }*/
+
+#response {
+  padding: 0.5em;
+}
 
 .b-dropdown {
   border: 1px solid #ced4da;

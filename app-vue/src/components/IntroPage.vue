@@ -129,6 +129,7 @@ export default {
   mounted() {
 
     if(localStorage.getItem('CurrentUser')) {
+
       this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser')).user || JSON.parse(localStorage.getItem('CurrentUser'));
 
       if(JSON.parse(localStorage.getItem('CurrentUser')).discount)

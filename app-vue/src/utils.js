@@ -1,6 +1,6 @@
 
 export function calc(start, end, product, logged, noleggi) {
-
+    //console.log({start, end, product, logged, noleggi})
     let payment = false, err = null;
 
     const diffInMs   = new Date(end) - new Date(start);
