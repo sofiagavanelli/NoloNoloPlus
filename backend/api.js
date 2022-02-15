@@ -325,7 +325,7 @@ module.exports = function (app) {
 
     app.post('/new-prod',(req, res)=>{
 
-        var imm = req.body.filename;
+        var imm = req.body.image;
         var cat = req.body.category;
         var nome = req.body.name;
         var marca = req.body.brand;
@@ -405,9 +405,9 @@ module.exports = function (app) {
     app.post('/update-prod',async (req, res)=>{
         console.log("sono nell'update dei prodotti");
 
-        const idprod = req.body.product;
+        var idprod = req.body.prod_id;
         var cat= req.body.category;
-        var imm= req.body.image;
+        var imm= req.body.img;
         var nome = req.body.name;
         var marca = req.body.brand;
         var vel = req.body.speed;
@@ -415,11 +415,12 @@ module.exports = function (app) {
         var ospiti = req.body.guests;
         var anno = req.body.year;
         var desc = req.body.summary;
-        var price_low = req.body.lowseason;
-        var price_high = req.body.highseason;
-        var state = req.body.stato;  
+        var price_low = req.body.low_season;
+        var price_high = req.body.high_season;
+        var state = req.body.status;  
 
-        console.log(idprod);
+        console.log(idprod +" " + cat + " "  + nome + " " + marca + " " + vel + " " + len + " " + ospiti + " " + anno + " " + desc + " " + price_low + " " +price_high + " " + state)
+
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 

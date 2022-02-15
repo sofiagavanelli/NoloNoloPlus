@@ -102,6 +102,7 @@ function acceptWorker(data, insertedP) {
         }
         else if(document.getElementById("managCheck"))
         console.log("sono dentro");
+        sessionStorage.setItem('isLogged', true);
         location.href = '/worker';
 
         var found = true;
@@ -113,7 +114,13 @@ function acceptWorker(data, insertedP) {
 
 
 }
+function isLogged(){
+  let log = sessionStorage.getItem('isLogged');
 
+  if(!log){
+    location.href ='/login';
+  }
+}
 function logOut(){
   location.href = '/login';
 
@@ -194,7 +201,7 @@ function openInventory() {
         div = $(`     
         <div class="flex-container">
         <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%; margin-top: 1em;">        
-        <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${ProdInfo[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+        <img src="${ProdInfo[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
         <div class="card-body">              
         <h5 class="card-title" style="text-align: center;">${ProdInfo[i].name}</h5>              
         <p class="card-text" style="text-align: center;">ID: ${ProdInfo[i].prod_id}</p>
@@ -390,21 +397,17 @@ function acceptProd(data, insertedID) {
     if(data[i].prod_id == insertedID) {
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
-        div = $(`         
-        <button class="btn-back"onclick= "goBackInventory()"><i class="fas fa-home"></i> PRODOTTI</button>
-        `);
-      $("#ctable").append(div);
       div = $(` 
       <div class="flex-container" style=" margin-left: 3%;">
-        <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${data[i].prod_id}.jpg" alt="" width="380" height="280">
+        <img src="${data[i].image}" alt="" width="380" height="280">
         <form class="row g-3" action="/update-prod" method="POST" role="form" style="width: 60%; position: relative; float: right; right: 3%;margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].name}">
           </div>
           <div class="col-md-6">
-            <label for="inputID" class="form-label">ID Prodotto</label>
-            <input type="text" class="create2" id="inputID" name="product" value="${data[i].prod_id}" style="cursor: not-allowed;" readonly="readonly">
+            <label for="prod_id" class="form-label">ID Prodotto</label>
+            <input type="text" class="create2" id="prod_id" name="product" value="${data[i].prod_id}" style="cursor: not-allowed;" readonly="readonly">
           </div>
           <div class="col-md-6">
             <label for="inputBrand" class="form-label">Brand</label>
@@ -424,7 +427,7 @@ function acceptProd(data, insertedID) {
           </div>
           <div class="col-md-4">
             <label for="inputStatus" class="form-label">Stato </label> <button type="button" class="btn-postit" button title="La prima opzione corrisponde allo stato attuale del prodotto" ><i class="fas fa-info-circle"></i></button>
-            <select class="create2" id="inputStatus" name="stato" aria-label="Select status">
+            <select class="create2" id="inputstatus" name="stato" aria-label="Select status">
             <option selected value="${data[i].status}">${data[i].status}</option>
               <option value="ottimo">ottimo</option>
               <option value="buono">buono</option>
@@ -433,8 +436,8 @@ function acceptProd(data, insertedID) {
             </select>
           </div>
           <div class="col-md-2">
-            <label for="inputYear" class="form-label">Lunghezza</label>
-            <input type="text" class="create2" id="inputYear" name="length" value="${data[i].length}">
+            <label for="inputLen" class="form-label">Lunghezza</label>
+            <input type="text" class="create2" id="inputLen" name="length" value="${data[i].length}">
             </div>
           <div class="col-md-2">
             <label for="inputGuest" class="form-label">Ospiti</label>
@@ -451,15 +454,19 @@ function acceptProd(data, insertedID) {
           <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Descrizione prodotto</label>
-              <textarea type="text" class="create2" name="summary" value="${data[i].summary}" style="cursor: not-allowed;" readonly="readonly"></textarea>
+              <input type="text" class="create2" id="summary" name="summary" value="${data[i].summary}"></input>
             </div>
+          </div>
+          <div class="col-12">
+            <label for="img" class="form-label">Carica foto: </label>
+            <input type="text" class="create2" id="img" name="img" placeholder="Immetti url">
           </div>
           <div class="col-12">
             <button class="btn-sub" onclick="approveProd()" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </form>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
-        <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
+        <button id="btn-un" onclick= "unavailable()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
       </div>
        
       `);
@@ -976,6 +983,10 @@ div = $(`
             <input type="text" class="create2" id="inputSpeed" name="speed" placeholder="velocità">
           </div>
           <div class="col-12">
+            <label for="img" class="form-label">Carica foto: </label>
+            <input type="text" class="create2" id="img" name="img" placeholder="immetti url">
+          </div>
+          <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Descrizione prodotto</label>
               <textarea class="create2" id="summary" rows="3" name="summary" placeholder="Inserisci una breve descrizione"></textarea>
@@ -1300,10 +1311,6 @@ function modifyRent(data, insertedID){
 
         $( "#ctable2" ).empty();
         $( "#ctable" ).empty();
-        div = $(`         
-        <button class="btn-back"onclick= "goBackRents()"><i class="fas fa-home"></i> NOLEGGI</button>
-        `);
-      $("#ctable").append(div);
       div = $(` 
        <div class="flex-container" style=" margin-left: 5%;">
        <h1>Noleggio numero: ${data[i]._id} </h1>
@@ -1554,28 +1561,31 @@ function approva(){   //da sistemare
   document.getElementById("btn-approve").style.visibility = "hidden";
 }
 
-/*function approveProd(){
-  var nome_prod = document.getElementById("inputName").value;
-  var id_ = document.getElementById("id_prod").value;
-  var nome_brand = document.getElementById("inputBrand").value;
-  var prod_cat = document.getElementById("inputCat").value;
-  var low_p = document.getElementById("inputLow").value;
-  var high_p = document.getElementById("inputHigh").value;
-  var prod_stat = document.getElementById("inputStatus").value;
-  var prod_len = document.getElementById("inputLen").value;
-  var osp = document.getElementById("inputGuest").value;
-  var prod_year = document.getElementById("inputYear").value;
-  var prod_speed= document.getElementById("inputSpeed").value;
-  var prod_desc= document.getElementById("summary").value;
+function unavailable(){
+  var name_prod= document.getElementById("inputName").value;
+  var prod_id= document.getElementById("inputID").value;
+  var brand_prod= document.getElementById("inputBrand").value;
+  var cat_prod= document.getElementById("inputCat").value;
+  var low_prod= document.getElementById("inputLow").value;
+  var high_prod= document.getElementById("inputHigh").value;
+  var year_prod= document.getElementById("inputYear").value;
+  var guest_prod= document.getElementById("inputGuest").value;
+  var len_prod= document.getElementById("inputLen").value;
+  var speed_prod= document.getElementById("inputSpeed").value;
+  var desc_prod= document.getElementById("summary").value;
 
-  console.log(nome_prod + " " + id_ + " " + nome_brand + " " + prod_cat + " " + low_p + " " + high_p);
-  console.log(prod_stat + " " + prod_len + " " + osp + " " + prod_year + " " + prod_speed + " " + prod_desc);
-  var newProd = {};
 
-  newProd = { prod_id: id_, category: prod_cat, name: nome_prod, brand: nome_brand, speed: prod_speed, length: prod_len, guests: osp, year: prod_year, summary: prod_desc, low_season: low_p, high_season: high_p, status:prod_stat};
 
-      $.post( '/new-prod', newProd, function( data ) {
-        document.getElementById("smile").style.visibility = "visible";
-      });
+
+  var changed = {};
+
   
-} */
+  changed = { prod_id: prod_id, category: cat_prod, name: name_prod, brand: brand_prod, speed: speed_prod, length: len_prod, guests: guest_prod, year: year_prod, summary: desc_prod, low_season: low_prod, high_season: high_prod, status: "rotto"};
+
+  console.log(changed);
+
+      $.post( '/update-prod', changed, function( data ) {
+      });
+
+}
+

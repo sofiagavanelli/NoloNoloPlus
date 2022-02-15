@@ -4,8 +4,9 @@ const client = require("./Models/client");
 var sha1 = require('sha1');
 
 //PER USARE QUELLO NON IN LOCALE:
-//const connectionString = process.env.DATABASE_STRING;
+//const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
 const connectionString = process.env.DATABASELOCAL_STRING;
+
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -67,11 +68,11 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,/*_imageUrl,*/_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
 
         return Promise.resolve(new Prodotto({
             category: _category,
-            //image: _imageUrl,
+            image: _imageUrl,
             name: _name,
             brand: _brand,
             speed: _speed,
@@ -89,9 +90,7 @@ module.exports = {
 
     saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
-
-        /*const newN =*/ return Promise.resolve(new Noleggio({
-            //_id: _id,
+        return Promise.resolve(new Noleggio({
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
@@ -102,19 +101,18 @@ module.exports = {
             approved: _approved,
             deleted: false,
             delivered: false
-            //worker_id: _worker
         }).save());
         
         //await newN.save();
     },
 
-    updateProd: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+    updateProd: async (id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
+        console.log({id, categ, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
             {prod_id: id},
             { $set: {category: categ,
-                image: im,
+                //image: im,
                 name: n,
                 brand: m,
                 speed: v,
@@ -178,7 +176,7 @@ module.exports = {
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log(x))
+            .catch(x => console.log("Error"))
     },
 
 
