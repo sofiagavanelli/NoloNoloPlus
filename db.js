@@ -160,13 +160,18 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, s, e, p, pay, a) => {
+    updateRent: async (id, s, e, w, p, pay, a) => {
+
+        console.log("SONO IN MODIFICA NOLEGGIO");
+
+        console.log(id +  " " + s + " " + e + " " + w + " " + p + " " + pay + " " + a );
         
         await Noleggio.findOneAndUpdate(
             {_id: id},
             { $set: {start_date: s,
                     end_date: e, 
                     price: p,
+                    worker_id: w,
                     paymethod: pay,
                     approved: a,
                 }},

@@ -1304,7 +1304,7 @@ function modifyRent(data, insertedID){
       div = $(` 
        <div class="flex-container" style=" margin-left: 5%;">
        <h1>Noleggio numero: ${data[i]._id} </h1>
-         <div class="row g-3" action="/update-prod" method="POST" role="form" style="width: 80%;">
+         <div class="row g-3" style="width: 80%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">ID Cliente</label>  <button type="button" id="${data[i].client_id}" class="btn-postit" button title="Clicca qui per vedere le informazioni del cliente" onclick="modifyClient(clientARRAY,id)"><i class="fas fa-info-circle"></i></button>
             <input type="text" class="create2" id="inputName" name="name" value="${data[i].client_id}" style="cursor: not-allowed;" readonly="readonly">
@@ -1323,7 +1323,7 @@ function modifyRent(data, insertedID){
         </div>
           <div class="col-md-4">
             <label for="inputPrezzo" class="form-label">Prezzo </label>
-            <input type="text" class="create2" id="inputend" name="end" value="${data[i].price}">
+            <input type="text" class="create2" id="inputprice" name="end" value="${data[i].price}">
           </div>
           <div class="col-md-4">
             <label for="inputworker" class="form-label">Dipendente </label>
@@ -1334,10 +1334,11 @@ function modifyRent(data, insertedID){
             <input type="text" class="create2" id="delivered" name="delivered" value="${x}">
           </div>
           <div>
-            <button onclick= "approva()" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;">Approva</button><i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
-            <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
+          <button id="${data[i]._id}" onclick= "deleteRents(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 1em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
+          <button id="${data[i]._id}" onclick= "approva(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;">Approva</button><i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+          
           </div>
-        </form>
+        </div>
       </div>
   
       `);
@@ -1519,10 +1520,30 @@ function approveClient(){
 
   document.getElementById("smile").style.visibility = "visible";
 }
-function approva(){
+function approva(inserted){
+
+
+  var myrent_sdate = new Date(document.getElementById("inputstart").value);
+  var myrent_edate = new Date(document.getElementById("inputend").value);
+  var price = document.getElementById("inputprice").value;
+  var ID_rent = inserted;
+  var ID_work = document.getElementById("inputworker").value;
+
+  console.log(myrent_sdate + " " + myrent_edate + " " + price + " " + ID_rent + " " + ID_work);
+  
+  var changed = {};
+
+  changed = { _id: ID_rent, start: myrent_sdate, end: myrent_edate, price: price, worker: ID_work, approved: "true"};
+
+  console.log(changed);
+
+      $.post( '/update-rent', changed, function( data ) {
+        document.getElementById("smile").style.visibility = "visible";
+      });
 
   document.getElementById("smile").style.visibility = "visible";
 }
+
 /*function approveProd(){
   var nome_prod = document.getElementById("inputName").value;
   var id_ = document.getElementById("id_prod").value;

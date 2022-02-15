@@ -365,16 +365,21 @@ module.exports = function (app) {
     });
 
     app.post('/update-rent', async (req, res) => {
+        console.log("SONO IN UPDATE NOLEGGIO API.JS");
 
         /* updateRent: async (id, s, e, p, pay) => {*/
 
-        const idrent = req.body.rentID;
-        var start = req.body.startD;
-        var end = req.body.endD;
+        const idrent = req.body._id;
+        var start = req.body.start;
+        var end = req.body.end;
         var price = req.body.price;
         var pay = req.body.paymethod; 
+        var app = req.body.approved;
+        var wor = req.body.worker;
+
+        console.log("VISUALIZZO I REQ.BODY" + req.body);
         
-        await db.updateRent(idrent, start, end, price, pay)
+        await db.updateRent(idrent, start, end, price, pay, app, wor)
 
     });
 
@@ -415,17 +420,6 @@ module.exports = function (app) {
 
         console.log(idprod);
        await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
-    });
-
-    app.post('/update-rent',async (req, res)=>{
-        console.log("sono nell'update dei noleggi");
- 
-        var s_date = req.body.data_inizio;
-        var e_date = req.body.data_fine; 
-        var prezzo_noleggio = req.body.rentprice;
-        var dipendente = req.body.worker;
-        var appr = req.body.approved;
-       await db.updateProd(s_date, e_date, prezzo_noleggio, dipendente, appr)
     });
 
     //UPDATE RENT PER L'ELIMINAZIONE
