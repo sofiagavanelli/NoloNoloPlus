@@ -364,6 +364,20 @@ module.exports = function (app) {
         await db.addDiscount(idcliente, 0)
     });
 
+    app.post('/update-rent', async (req, res) => {
+
+        /* updateRent: async (id, s, e, p, pay) => {*/
+
+        const idrent = req.body.rentID;
+        var start = req.body.startD;
+        var end = req.body.endD;
+        var price = req.body.price;
+        var pay = req.body.paymethod; 
+        
+        await db.updateRent(idrent, start, end, price, pay)
+
+    });
+
     app.post('/update-client',async (req, res)=>{
         console.log("sono nell'update dei clienti ");
         
