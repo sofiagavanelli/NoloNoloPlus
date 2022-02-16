@@ -1,7 +1,7 @@
 /* Le tre applicazioni sono fatte con tre modelli applicativi diversi: il back-office deve essere realizzato 
 con Javascript e JQuery. Le altre applicazioni con due framework diversi tra Angular, React, Vue e Svelte.*/
 
-require("dotenv").config(/*{path: __dirname + '/.env'}*/);
+//require("dotenv").config(/*{path: __dirname + '/.env'}*/);
 
 var fs = require('fs');
 const cors = require("cors");
@@ -32,6 +32,12 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 app.use("/manager", express.static(path.resolve(__dirname, 'build')));
 app.use("/static", express.static(path.resolve(__dirname, 'build/static')));
 
+app.post('/loginManager', (req, res) => {
+    res.send({
+      token: req.body.username
+    });
+});
+
 
 //app.use(express.static(`${__dirname}/..`));
 app.use(bodyParser.json());
@@ -56,6 +62,7 @@ app.get("/manager",function (req, res) {
     res.sendFile(path.join(__dirname + '/build/index.html'));
     
 });
+
 
 app.get("/manager/*",function (req, res) {
     res.sendFile(path.join(__dirname + '/build/index.html'));

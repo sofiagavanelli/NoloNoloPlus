@@ -192,7 +192,7 @@ module.exports = {
     },
 
     searchWorker: async (id) => {
-        return Promise.resolve(Worker.find({ work_id: id }));
+        return Promise.resolve(Worker.find({ user_id: id }));
     },
 
     searchProd: async (id) => {

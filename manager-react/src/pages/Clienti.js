@@ -9,7 +9,7 @@ var _ = require('lodash');
 
 
 
-function Clienti(props) {
+function Clienti() {
   const [valueClientRent, setValue]= React.useState([]);//contiene il ricavato totale e il numero dei noleggi per ogni cliente
   const [infoClient, setInfo]=React.useState([]);//contiene le informazioni di ogni cliente
   
@@ -18,6 +18,7 @@ function Clienti(props) {
     fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
+        let today=new Date();
         const rentForClient=
           _.chain(data)//creao un oggetto che contiene il client id e tutti i suoi noleggi 
           .groupBy("client_id")
@@ -32,8 +33,9 @@ function Clienti(props) {
           let num=0;
           var tot=0;
           for(var j in rentForClient[i].rents){
-            
-            if(rentForClient[i].rents[j].approved){//manca da controllare se il noleggio è finito
+            let dataEnd=new Date(rentForClient[i].rents[j].end_date);
+            const difEnd=dataEnd - today;
+            if(rentForClient[i].rents[j].approved && difEnd<0){
               tot=tot + rentForClient[i].rents[j].price;
               num++;
             }
@@ -68,9 +70,7 @@ function Clienti(props) {
           }
           setValue(valueRent);
         });
-  }
-  props.func('prova');
-  
+  }  
   React.useEffect(() => {//il fetch viene eseguito solo dopo il primo render grazie al parametro '[]', però i dati vengono persi ogni volta che c'è un nuovo render, per questo uso array hooks
     getNumRent();
   }, []);
@@ -78,14 +78,20 @@ function Clienti(props) {
     return (
       <div id="clienti">
         <h1 id="arcobaleno">Statistiche clienti</h1>
-        
-        <h5>Numero di noleggi per cliente</h5>
+        <hr  style={{
+                      color: 'red',
+                      backgroundColor: 'red',
+                      height: 5
+        }}/>
         <BarCharT dati={valueClientRent} name={"numero di noleggi per cliente"} xValue={"client_id"} yValue={"number"}/>
-        
-        <h5>Fatturato per ogni cliente</h5>
+
         <BarCharT dati={valueClientRent} name={"fatturato per ogni cliente"} xValue={"client_id"} yValue={"value"}/>
-        
-        <h1>Dati clienti</h1>
+        <hr  style={{
+                      color: 'red',
+                      backgroundColor: 'red',
+                      height: 5
+        }}/>
+        <h2 id="arcobaleno">Dati clienti</h2>
         <CardComponentClient info={infoClient} divName={"cardCliDiv"} keyDiv={"cardclienti"}/>
       </div>
     );

@@ -24,8 +24,6 @@ function Inventario() {
       fetch('https://site202133.tw.cs.unibo.it/allRents')
       .then(results => results.json())
       .then(data => {
-        console.log("tutti i noleggi su inventario");
-        console.log(data);
         getValueProduct(data);//chiamo funzione per calcolare il numero di noleggi e il costo dei noleggi per ogni prodotto 
       });
     }
@@ -84,8 +82,6 @@ function Inventario() {
       fetch('https://site202133.tw.cs.unibo.it/prods')
         .then(results => results.json())
         .then(info => {
-          console.log("tutti i prodotti su inventario");
-          console.log(info);
           setInfo(info);
           setFiltrati(info);
           const rentForCategory=
@@ -165,6 +161,11 @@ function Inventario() {
     return(
       <div id="inventario">
           <h1 id="arcobaleno">Statistiche inventario</h1>
+          <hr  style={{
+                      color: 'red',
+                      backgroundColor: 'red',
+                      height: 5
+          }}/>
           <div id="buttonShow">
             <>
               <style type="text/css">
@@ -195,21 +196,14 @@ function Inventario() {
           </div>
           {isShow
               ? <div id="singoliProdotti">
-                  <h5>Numero di noleggi per prodotto</h5>
                   <BarCharT dati={valueProdRent} name={"numero di noleggi per prodotto"} xValue={"prod_id"} yValue={"number"} />
-                  <hr  style={{
-                      color: 'red',
-                      backgroundColor: 'red',
-                      height: 5
-                  }}/>
-                  <h5>Fatturato per ogni prodotto</h5>
                   <BarCharT dati={valueProdRent} name={"fatturato per ogni prodotto"} xValue={"prod_id"} yValue={"value"}/>
                   <hr  style={{
                       color: 'red',
                       backgroundColor: 'red',
                       height: 5
                   }}/>
-                  <h5 >Stato dei prodotti</h5>
+                  <h2 id="arcobaleno" >Stato dei prodotti</h2>
                   <PieCharT dati={statusProd} ></PieCharT>
                   <hr  style={{
                       color: 'red',
@@ -219,21 +213,14 @@ function Inventario() {
                 </div>
               
               : <div id="categorieProdotti">
-                  <h5>Numero di noleggi per categoria di prodotti</h5>
                   <BarCharT dati={valueCategoryRent} name={"numero di noleggi per categoria di prodotti"} xValue={"category"} yValue={"number"} />
-                  <hr  style={{
-                      color: 'red',
-                      backgroundColor: 'red',
-                      height: 5
-                  }}/>
-                  <h5>Fatturato per ogni categoria di prodotti</h5>
                   <BarCharT dati={valueCategoryRent} name={"fatturato per ogni categoria di prodotto"} xValue={"category"} yValue={"value"}/>
                   <hr  style={{
                       color: 'red',
                       backgroundColor: 'red',
                       height: 5
                   }}/>
-                  <h5 >Numero di prodotti per categoria</h5>
+                  <h2 id="arcobaleno">Numero di prodotti per categoria</h2>
                   <PieCharT dati={numProd} ></PieCharT>
                   <hr  style={{
                       color: 'red',
@@ -242,12 +229,12 @@ function Inventario() {
                   }}/>
                 </div>
           }
-          <h2>Informazioni prodotti</h2>
+          <h2 id="arcobaleno">Informazioni prodotti</h2>
           <Form.Select aria-label="Seleziona categoria prodotti" onChange={(filtro) => {
                     filterCategory(filtro);
 
                 }}>
-            <option value="tutti">Seleziona categoria</option>
+            <option value="tutti">Tutte le categorie</option>
             <option value="yacth">Yacth</option>
             <option value="barca">Barche</option>
             <option value="gommoni">Gommoni</option>

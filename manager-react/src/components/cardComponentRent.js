@@ -12,6 +12,7 @@ export function CardComponentRent(props){
     const [startDate, endDate] = dateRange;
     const [isShow, setIsShow] = React.useState(false);
     const [filteredInfo, setFiltered]= React.useState([]);
+    const [showNull, setShowN]=React.useState(false);
     
     function show(update){
         if(update[0]===null || update[1]===null){//caso in cui non è selezionata nessuna data
@@ -40,9 +41,10 @@ export function CardComponentRent(props){
         setFiltered(filteredRent);
         if(_.isEmpty(filteredRent)){
             console.log("è vuoto");
-            return(
+            setShowN(true);
+/*             return(
                 <h1>Non ci sono noleggi che vanno da {data[0].toDateString()} a {data[1].toDateString()}</h1>
-            )
+            ) */
         }
     }
     //Card key indica la chiave per identificare ogni singola card
@@ -123,6 +125,10 @@ export function CardComponentRent(props){
                     }
                     </Row>
                  </div>
+                {showNull
+                    ?    <h1>Non ci sono noleggi che vanno da {data[0].toDateString()} a {data[1].toDateString()}</h1>
+                }
+
             }
             
        </div>

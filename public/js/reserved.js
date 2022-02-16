@@ -1356,13 +1356,12 @@ function searchNote(_id){
           notes(clientARRAY, _id);
         },
         error: function (xhr, ajaxOptions, thrownError) {
-
         }
     });
-}
-else {
-console.log("errore nell'else");
-}
+  }
+  else {
+  console.log("errore nell'else");
+  }
 }
 
 function notes(data,insertedID){
