@@ -1026,31 +1026,35 @@ function openCreate(){
   div = $(`    
   <div class="testbox">
     <h1>Crea Noleggio</h1>
-    <div class="item-2">
+    <div>
       <p>ID Cliente</p>
-      <div>
+      <div >
         <input class="create2" type="text" name="client" id="client" placeholder="Inserisci ID cliente">
       </div>
     </div>
-    <div class="item-2">
+    <div>
       <p>ID Prodotto</p>
       <input class="create2" type="text" name="product" id="prod" placeholder="Inserisci ID prodotto">
     </div>
-    <div class="col-md-6" style="margin-left: -1em;">
-      <p>ID Dipendente</p>
-      <input class="create2" type="text" name="worker" id="worker" placeholder="Inserisci ID dipendente">
-    </div>
-    <div class="col-md-4" style="margin-left: 29.5em; margin-top: -5.5em;">
-      <p>Prezzo  <button class="btn-postit" onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
-      <input id="rentprice" class="create2" name="price" readonly="readonly">
-      <label for="rentdiscount"> Sconto applicato </label>
-      <input id="rentdiscount" class="create2" name="discount" readonly="readonly"> 
+    <div>
+      <div >
+        <p>ID Dipendente</p>
+        <input class="create2" type="text" name="worker" id="worker" placeholder="Inserisci ID dipendente">
+      </div>
+      <div >
+        <p>Prezzo  <button class="btn-postit" onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
+        <input id="rentprice" class="create2" name="price" readonly="readonly">
+      </div>
+      <div >
+        <label for="rentdiscount"> Sconto applicato </label>
+        <input id="rentdiscount" class="create2" name="discount" readonly="readonly"> 
+      </div>
     </div>
     
-    <div class="item-2" style="display: flex; justify-content: space-between; margin-top: 1em;">
+    <div style="display: flex; justify-content: space-between; margin-top: 1em;">
       <p>Data Inizio</p>
       <p style="position: relative; left: -38%;">Data Fine</p></div>
-      <div class="item-2" style=" margin-top: -3%;"> 
+      <div class="item-2"> 
 
       <input id="data_inizio" type="date" name="start" class="create2" style="float: left; width: 45%;"/><i class="far fa-calendar-alt fa-lg"></i>
       <input id="data_fine" type="date" name="end" class="create2" style="float: right; position: relative; right: 1%; width: 45%;"/><i class="far fa-calendar-alt fa-lg" style="left: 47%;"></i>
