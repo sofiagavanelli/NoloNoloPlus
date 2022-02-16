@@ -466,7 +466,7 @@ function acceptProd(data, insertedID) {
           <div class="col-md-2" style="visibility:hidden;">
             <input type="text" class="create2" id="product" value="${data[i].prod_id}">
           </div>
-            <button class="btn-sub" id="${data[i].prod_id} onclick="approveProd(id)" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+            <button class="btn-sub" onclick="approveProd()" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
           </div>
         </div>
         <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
@@ -1514,9 +1514,9 @@ function goBackRents(){
 }
 
 //FUNZIONI AUX
-function approveProd(inserted) {
+function approveProd() {
   var name= document.getElementById("name").value;
-  var prod_id= inserted
+  var prod_id= document.getElementById("product").value;
   var brand= document.getElementById("brand").value;
   var category= document.getElementById("category").value;
   var low_season= document.getElementById("low_season").value;
