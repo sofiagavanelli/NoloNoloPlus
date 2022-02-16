@@ -69,9 +69,9 @@ module.exports = function (app) {
 
         //console.log(id);
 
-        db.searchWorker(id).then(rentsinfo => {
+        db.searchWorker(id).then(workerinfo => {
 
-            res.write(JSON.stringify(rentsinfo));
+            res.write(JSON.stringify(workerinfo));
 
             res.end();
         });
@@ -90,9 +90,9 @@ module.exports = function (app) {
 
         //console.log(id);
 
-        db.searchRent(id).then(workerinfo => {
+        db.searchRent(id).then(rentsinfo => {
 
-            res.write(JSON.stringify(workerinfo));
+            res.write(JSON.stringify(rentsinfo));
 
             res.end();
         });

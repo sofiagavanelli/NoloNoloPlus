@@ -92,29 +92,29 @@ function Noleggi() {
     return (
       <div id="noleggi">
         <h1 id="arcobaleno">Noleggi</h1>
-        <h5>Stato dei noleggi</h5>
-        <PieCharT dati={countApproved} ></PieCharT>
-        <BarCharT dati={countState} name={"stato dei noleggi"} xValue={"name"} yValue={"value"}/>
         <hr  style={{
             color: 'red',
             backgroundColor: 'red',
             height: 5
         }}/>
-        <h5 style={{ textAlign: 'center'}}>Numero di noleggi per mese</h5>
+        <BarCharT dati={countState} name={"stato dei noleggi"} xValue={"name"} yValue={"value"}/>  
+        
         <BarCharT dati={rentMonth} name={"Numero di noleggi"} xValue={"month"} yValue={"count"}/>
-        <hr  style={{
-            color: 'red',
-            backgroundColor: 'red',
-            height: 5
-        }}/>
-        <h5  style={{ textAlign: 'center'}}>Ricavo noleggi per mese</h5>
+        
         <BarCharT dati={rentMonth} name={"Ricavo noleggi"} xValue={"month"} yValue={"value"}/>
         <hr  style={{
             color: 'red',
             backgroundColor: 'red',
             height: 5
         }}/>
-        <h4 style={{ textAlign: 'center'}}>Informazioni sui noleggi</h4>
+        <h2 id="arcobaleno">Stato dei noleggi</h2>
+        <PieCharT dati={countApproved} ></PieCharT>
+        <hr  style={{
+            color: 'red',
+            backgroundColor: 'red',
+            height: 5
+        }}/>
+        <h2 id="arcobaleno">Informazioni sui noleggi</h2>
         <CardComponentRent info={infoRent} divName={"cardRent"} keyDiv={"cardRent"}></CardComponentRent>
       </div>
       );

@@ -1500,6 +1500,46 @@ function activeRents(data){
 
 }
 
+<<<<<<< HEAD
+//FUNZIONE PER VEDERE NOTE CLIENTI
+function searchNote(_id){  
+  if(_id) {
+    $.ajax({
+        type: 'GET',
+        url: '/allClients' ,
+        success: function (data) {
+          
+          clientARRAY = JSON.parse(data);
+
+          notes(clientARRAY, _id);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+  }
+  else {
+  console.log("errore nell'else");
+  }
+}
+
+function notes(data,insertedID){
+  console.log(data + "   " + insertedID);
+  for (let i in data) {
+
+    if(data[i].client_id == insertedID) {
+      alert("Hello! I am an alert box!!");
+      var found = true;
+    }
+
+}
+if (!found) 
+console.log("non esiste cliente");
+}
+
+
+
+=======
+>>>>>>> f31fc7037beeac5ed8d4c3fe32e1bb707c405f90
 //FUNZIONI PER TORNARE INDIETRO
 function goBackClients(){
   openClient();

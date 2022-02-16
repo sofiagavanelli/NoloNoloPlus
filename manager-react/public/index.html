@@ -3,11 +3,10 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" href="https://site202133.tw.cs.unibo.it/public/img/nolonolo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <meta name="description" content="Noleggio di barche" />
   <base href="/manager"/>
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -54,76 +53,17 @@
         <span class="" role="button"><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
       </button>
 
-      <a id="logoname" class="nav-item">NoloNoloPlus</a>
-
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav navbar-nav ml-auto">
-          <li class="nav-item" title="Reserved" data-toggle="modal" data-target="#loginModal">
-            Login
-          </li>
-          <li class="nav-item" title="Reserved" onclick="load_new('/worker-module')">
-            <i class="icon fas fa-user-lock"></i>
-            <span id="workerLabel" style="display: none;">Worker</span>
-          </li>
-        </ul>
-      </div>
+      <a id="logoname" class="nav-item" href="https://site202133.tw.cs.unibo.it/">NoloNoloPlus</a>
 
     </nav>
 
   </div>
-
-  <!-- modal for login -->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <img src="public/img/avatar.png" class="avatar">
-
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">Login here</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right" for="username">Username</label>
-            <input type="email" id="username" class="form-control validate" placeholder="Enter Username">
-          </div>
-
-          <div class="md-form mb-4">
-            <label data-error="wrong" data-success="right" for="pass">Password</label>
-            <input type="password" id="pass" class="form-control validate" placeholder="Enter Password">
-          </div>
-
-          <div id="loginfo"> </div>
-        </div>
-
-        <div class="modal-footer d-flex justify-content-center">
-          <button class="btn btn-default" id="EnterlogBtn">Login</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--/div-->
-
-
-  
 
   <!-- *************************DIV PER I GRAFICI*********************-->
   <div id="root"></div>
 
 </body>
 
-<script type="text/javascript">
-  /*$(window).on('load',function() {
-    populate(); onclick="home()"
-});*/
-
-  document.getElementById("logoname").addEventListener("click", home);
-  document.getElementById("EnterlogBtn").addEventListener("click", login);
-</script>
 
 </body>
 

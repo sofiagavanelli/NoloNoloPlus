@@ -3,10 +3,6 @@ import { Card, ListGroup, ListGroupItem, Row, Col, Button, Alert } from 'react-b
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
-
 export function CardWorker(props){
     const [show, setShow] = React.useState(false);
     const [idDelete, setId]= React.useState('');
@@ -18,7 +14,7 @@ export function CardWorker(props){
 
     function deleteWorker(){
         var del= 'https://site202133.tw.cs.unibo.it/worker/' + idDelete;
-        fetch(del, {  // Enter your IP address here
+        fetch(del, {
             method: 'DELETE', 
         })
         setShow(false);
