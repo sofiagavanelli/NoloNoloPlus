@@ -4,7 +4,7 @@
 
     <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
       <b-button id="backBtn">
-        <font-awesome-icon icon="arrow-left" /> PRODOTTI
+       PRODOTTI
       </b-button>
     </router-link>
 
@@ -137,6 +137,10 @@ export default {
       //disponibile: true,
 
       //foundRents: [],
+      rentDiscount: 0,
+
+      userInfo: {},
+      birthMonth: null,
 
       noleggi: [],
 
@@ -161,6 +165,28 @@ mounted() {
     .then((response) => {
         this.noleggi = response.data;
   });
+
+  
+    if(this.$store.state.username) {
+
+      axios.get('/allClients/' + this.$store.state.username)
+        .then((response) => {
+          
+          this.userInfo = response.data[0];
+
+          let birth = null;
+          birth = new Date(this.userInfo.birth);
+
+          this.birthMonth = birth.getMonth();
+
+        })
+        .catch((error) => {
+          //this.loading = false;
+          console.log(error);
+        });
+
+
+    }
 
 },
 
@@ -209,9 +235,12 @@ methods: {
     else {
 
       //export function calc(start, end, product, logged, noleggi) {
-      var result = calc(this.startD, this.endD, this.parentData, this.$store.state.username, this.noleggi);
+      var result = calc(this.startD, this.endD, this.parentData, this.$store.state.username, this.noleggi, this.birthMonth);
 
       this.total = result.err || result.total;
+
+      this.rentDiscount = result.discount || 0;
+
       this.payment = result.pay;
 
       if(this.payment) this.euro = '€';
@@ -302,6 +331,7 @@ methods: {
       temp = this.total - (this.total*this.$store.state.discount/100);
 
       this.total = temp;
+      this.rentDiscount = this.rentDiscount + this.$store.state.discount;
     }
 
   },
@@ -319,9 +349,10 @@ methods: {
   createRent() {
     console.log("ciao");
 
-    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, worker: false, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
+    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, worker: false, start: this.startD, 
+      end: this.endD, price: this.total, pay: this.paymethod, approved: false, discount: this.rentDiscount };
 
-    console.log(this.newRent);
+    //console.log(this.newRent);
 
     axios.post('/new-rent', this.newRent)
       .then(() => {
