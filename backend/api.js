@@ -398,10 +398,11 @@ module.exports = function (app) {
             var cell = req.body.telefono;
             var mail = req.body.email;
             var bday = req.body.birth;
+            var img = req.body.image;
             var note = req.body.note;
 
         console.log(idcliente);
-       await db.updateClient(idcliente, nome, cognome, pass, city, add, cell, mail, bday, note)
+       await db.updateClient(idcliente, img, nome, cognome, pass, city, add, cell, mail, bday, note)
     });
 
     app.post('/update-prod',async (req, res)=>{

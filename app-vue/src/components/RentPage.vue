@@ -37,7 +37,7 @@
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
 
             <div>
-              <template v-if="this.$store.state.discount && this.$store.state.username">
+              <template v-if="this.$store.state.discount && this.$store.state.username && this.payment">
                 <div id="discountTab">
                   <h5> <input type="checkbox" v-model="sconto" v-on:change="useDiscount()"> 
                     voglio usare il mio sconto </h5>

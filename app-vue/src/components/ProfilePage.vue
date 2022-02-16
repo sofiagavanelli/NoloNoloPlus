@@ -15,9 +15,9 @@
         profileInfo[0]
         -->
 
-        <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap"   src="../assets/avatar.png"-->
+        <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap" "https://site202133.tw.cs.unibo.it/img/default-pic.jpg"  src="../assets/avatar.png"-->
         <div id="pic_container">
-            <img class="profile_pic" src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="Card image cap">
+            <img class="profile_pic" :src="this.profileInfo[0].image" alt="profile image">
         </div>
 
         <b-card class="profile">
@@ -69,6 +69,9 @@
                         </li>
                         <li class="title"> DATA DI NASCITA:
                             <b-form-input type="date" v-model="newInfo[7]" placeholder="Modifica Compleanno"></b-form-input>
+                        </li>
+                        <li class="title"> URL FOTO PROFILO:
+                            <b-form-input v-model="newInfo[8]" placeholder="Inserire URL Immagine"></b-form-input>
                         </li>
                     </ul>
                     </div>
@@ -162,7 +165,7 @@
                             {{elem.prod_id}} <br>
                             dal {{elem.start_date.slice(0,10)}} al {{elem.end_date.slice(0,10)}} <br>
                             costo: {{elem.price}} € <br>
-                            sconti applicati: {{elem.discount}} <br>
+                            sconti applicati: {{elem.discount}} % <br>
                             metodo di pagamento: {{elem.paymethod}} <br>
 
                             <template v-if="!elem.delivered && !elem.deleted">
@@ -470,13 +473,13 @@ export default({
 
         save() {
 
-            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, 
+            var update = {image: this.profileInfo[0].image, clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, 
             place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, 
             email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
 
             var changed = [];
 
-            for(let i=0; i<8; i++) {
+            for(let i=0; i<9; i++) {
                 if(this.newInfo[i] && this.newInfo[i].length > 3)
                     changed[i] = true;
             }
@@ -490,8 +493,9 @@ export default({
             if(changed[5]) update.telefono = this.newInfo[5];
             if(changed[6]) update.email = this.newInfo[6];
             if(changed[7]) update.birth = this.newInfo[7];
+            if(changed[8]) update.image = this.newInfo[8];
 
-            if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7]) {
+            if(changed[0] || changed[1] || changed[2] || changed[3] || changed[4] || changed[5] || changed[6] || changed[7] || changed[8]) {
 
                 axios.post('/update-client/', update)
                     .then((response) => {
@@ -499,6 +503,7 @@ export default({
                         console.log(response);
 
                         //reload!!
+                        this.$router.go(0);
                         
                     })
                     .catch((error) => {
@@ -562,12 +567,14 @@ export default({
                     //console.log(response.data);
                     console.log(response);
 
-                        //reload!!
+                    this.$router.go(0);
+
                 })
                 .catch((error) => {
                         //this.loading = false;
                     console.log(error);
                 });
+
         },
 
         deliver(_ind) {
@@ -582,7 +589,8 @@ export default({
                     //console.log(response.data);
                     console.log(response);
 
-                        //reload!!
+                    this.$router.go(0);
+
                 })
                 .catch((error) => {
                         //this.loading = false;
