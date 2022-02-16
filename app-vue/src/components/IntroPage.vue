@@ -111,8 +111,8 @@ export default {
   },
   data() {
     return {
-      url: "https://site202133.tw.cs.unibo.it/img/",
-      ex: ".jpg",
+      /*url: "https://site202133.tw.cs.unibo.it/img/",
+      ex: ".jpg",*/
 
       prodInfo: [],
       showInfo: [],
@@ -142,9 +142,9 @@ export default {
         this.prodInfo = response.data;
 
         //TODO: SECONDO ME SI PUO CARICARE NEL DB DIRETTAMENTE COSI FIN DALL'INIZIO: SI GENERA L'URL
-        this.prodInfo.forEach(elem => {
+        /*this.prodInfo.forEach(elem => {
           elem.image = this.url + 'prodotti/' + elem.prod_id + this.ex;
-        });
+        });*/
 
         this.showInfo = response.data;
 

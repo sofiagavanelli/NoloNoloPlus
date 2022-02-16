@@ -74,6 +74,8 @@ export default {
 
       noleggi: [],
 
+      account: {},
+
       //checked: '',
         type: [ 
           { value: null, text: 'Lascia invariato' },
@@ -91,7 +93,15 @@ export default {
 
     axios.get('/rentByProd/' + this.rentToEdit.prod_id)
     .then((response) => {
-        this.noleggi = response.data;
+        this.allRent = response.data;
+
+        this.noleggi = this.allRent.filter(x => x._id != this.rentToEdit._id);
+
+    });
+
+    axios.get('/allClients/' + this.$store.state.username)
+    .then((response) => {
+        this.account = response.data;
     });
 
     axios.get('/prods/' + this.rentToEdit.prod_id)
@@ -105,6 +115,8 @@ export default {
   methods: {
 
     saveRent() {
+
+      var birthday = new Date(this.account.birth);
 
       var update = {_id: this.rentToEdit._id, start: this.rentToEdit.start_date, end: this.rentToEdit.end_date, 
         price: this.rentToEdit.price, paymethod: this.rentToEdit.paymethod, discount: this.rentToEdit.discount};
@@ -121,7 +133,7 @@ export default {
 
         if(changed[0] || changed[1] || changed[2]) {
 
-          var result = calc(update.start, update.end, this.product, true, this.noleggi);
+          var result = calc(update.start, update.end, this.product, true, this.noleggi, birthday.getMonth());
 
           this.response = result.err || result.total;
 

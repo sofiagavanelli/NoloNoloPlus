@@ -20,11 +20,11 @@
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
             <!--v-on:click='smista' @click="showModal" v-on:click='open()'-->
-              <b-nav-item title="Site by">
+              <!--b-nav-item title="Site by">
                 <router-link id="toAboutUs" tag="nav-item" aria-labelledby="AboutUsLabel" to="/about">
                   ABOUT US
                 </router-link>
-              </b-nav-item>
+              </b-nav-item-->
               <template v-if="!this.$store.state.username">
                 <b-nav-item title="Login">
                   <router-link id="toLogin" tag="nav-item" aria-labelledby="loginLabel" to="/login">

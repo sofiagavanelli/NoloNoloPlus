@@ -4,7 +4,7 @@ import Router from 'vue-router'
 //const IntroPage = () => import("./components/IntroPage.vue")
 //const Foo  = () => import('./Foo.vue')
 import IntroPage from "./components/IntroPage.vue"
-import AboutUs from "./components/AboutUs.vue"
+//import AboutUs from "./components/AboutUs.vue"
 import LoginModal from "./components/LoginModal.vue"
 import ProfilePage from "./components/ProfilePage.vue"
 import RentPage from "./components/RentPage.vue"
@@ -30,10 +30,10 @@ export default new Router({
         //props: true,
         //props: params => ({ data: params.query.data })
       },
-      {
+      /*{
         path: '/about',
         component: AboutUs
-      },
+      },*/
       {
         path: '/login', 
         component: LoginModal,

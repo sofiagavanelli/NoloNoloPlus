@@ -141,11 +141,12 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
+    updateClient: async (id, img, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
         
         await Client.findOneAndUpdate(
             {client_id: id},
-            { $set: {name: n,
+            { $set: {image: img,
+                    name: n,
                     surname: s,
                     password: pass,
                     place: citta,
