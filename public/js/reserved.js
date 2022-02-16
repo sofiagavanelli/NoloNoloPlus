@@ -1032,10 +1032,11 @@ function openCreate(){
       <p>ID Dipendente</p>
       <input class="create2" type="text" name="worker" id="worker" placeholder="Inserisci ID dipendente">
     </div>
-    <div class="col-md-6" style="margin-left: 29.5em; margin-top: -5.5em;">
+    <div class="col-md-4" style="margin-left: 29.5em; margin-top: -5.5em;">
       <p>Prezzo  <button class="btn-postit" onclick="calc()"><i class="fas fa-calculator fa-lg"></i></button></p>
-      <p id="get_price" style="visibility:hidden;"></p>
-      <input id="rentprice" class="create2" name="price" readonly="readonly"> 
+      <input id="rentprice" class="create2" name="price" readonly="readonly">
+      <label for="rentdiscount"> Sconto applicato </label>
+      <input id="rentdiscount" class="create2" name="discount" readonly="readonly"> 
     </div>
     
     <div class="item-2" style="display: flex; justify-content: space-between; margin-top: 1em;">
@@ -1070,6 +1071,8 @@ function calc(){
   var ggMS= fineN - inizioN;
   var gg = (ggMS/(1000 * 60 * 60 * 24)) + 1;
   var price_day;
+  var discount = 0;
+
   inventoryARRAY.forEach(i => {
     if(i.prod_id == ID_prod) {
       price_day = gg*i.low_season; 
@@ -1084,12 +1087,17 @@ function calc(){
 
     if(myprod.status == "buono") {
       temp = temp - (temp*5/100);
+
+      discount = discount + 5;
     }
     else if(myprod.status == "rovinato") {
       temp = temp - (temp*10/100);
+
+      discount = discount + 10;
     }
 
     document.getElementById("rentprice").value = temp;
+    document.getElementById("rentdiscount").value = discount;
 
     $("#btn-saveRent").removeAttr('disabled');
 
@@ -1100,12 +1108,9 @@ function calc(){
   else{
     document.getElementById("rentprice").value = "data non disponibile";}
   //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
-  
-
-
 
   //document.getElementById("rentprice").value = total;
-  return(price_day);
+  //return({price_day, discount});
   document.getElementById("get_price").style.visibility = "visible";
   
 }
@@ -1500,46 +1505,6 @@ function activeRents(data){
 
 }
 
-<<<<<<< HEAD
-//FUNZIONE PER VEDERE NOTE CLIENTI
-function searchNote(_id){  
-  if(_id) {
-    $.ajax({
-        type: 'GET',
-        url: '/allClients' ,
-        success: function (data) {
-          
-          clientARRAY = JSON.parse(data);
-
-          notes(clientARRAY, _id);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-        }
-    });
-  }
-  else {
-  console.log("errore nell'else");
-  }
-}
-
-function notes(data,insertedID){
-  console.log(data + "   " + insertedID);
-  for (let i in data) {
-
-    if(data[i].client_id == insertedID) {
-      alert("Hello! I am an alert box!!");
-      var found = true;
-    }
-
-}
-if (!found) 
-console.log("non esiste cliente");
-}
-
-
-
-=======
->>>>>>> f31fc7037beeac5ed8d4c3fe32e1bb707c405f90
 //FUNZIONI PER TORNARE INDIETRO
 function goBackClients(){
   openClient();
@@ -1588,11 +1553,11 @@ function approveRent(){
   var ID_work = document.getElementById("worker").value;
   var client = document.getElementById("client").value;
   var app = document.getElementById("approved").value;
-
+  var discount = document.getElementById("rentdiscount").value;
 
   var newRent = {};
 
-  newRent = { product: ID_prod, client:client, worker: ID_work, start: myrent_sdate, end: myrent_edate, price: price, pay: "bonifico", approved: app};
+  newRent = { product: ID_prod, client:client, worker: ID_work, start: myrent_sdate, end: myrent_edate, price: price, pay: "bonifico", approved: app, discount: discount};
 
       $.post( '/new-rent', newRent, function( data ) {
         document.getElementById("smile").style.visibility = "visible";
