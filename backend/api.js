@@ -403,6 +403,8 @@ module.exports = function (app) {
 
         console.log(idcliente);
        await db.updateClient(idcliente, img, nome, cognome, pass, city, add, cell, mail, bday, note)
+       
+       
     });
 
     app.post('/update-prod',async (req, res)=>{
