@@ -444,6 +444,13 @@ module.exports = function (app) {
         await db.deliverBoolRent(rent_id)
     });
 
+    app.post('/late-rent',async (req, res)=>{
+
+        var _id = req.body.id;
+
+        await db.lateRent(_id)
+    });
+
     app.post('/late-prod',async (req, res)=>{
 
         var prod_id = req.body.id;

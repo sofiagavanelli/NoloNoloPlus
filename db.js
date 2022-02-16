@@ -101,7 +101,8 @@ module.exports = {
             approved: _approved,
             deleted: false,
             delivered: false,
-            discount: _discount
+            discount: _discount,
+            late: false
         }).save());
         
         //await newN.save();
@@ -273,9 +274,35 @@ module.exports = {
     },
 
     deliverBoolRent: async (id) => {
+
         await Noleggio.findOneAndUpdate(
             {_id: id},
             { $set: {delivered: true }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+
+        let toDeliver = {};
+        
+        await Noleggio.find({_id: id}).exec()
+            .then(x => toDeliver = x[0])
+            .catch(x => console.log("Errore"))
+
+        if(toDeliver.late)
+            await Prod.findOneAndUpdate(
+                {prod_id: toDeliver.prod_id},
+                { $set: {status: "ottimo" }},
+                {returnOriginal: false}
+                ).exec()
+                .then(x => console.log("ok"))
+                .catch(x => console.log("Errore"))
+    },
+
+    lateRent: async (id) => {
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {late: true }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

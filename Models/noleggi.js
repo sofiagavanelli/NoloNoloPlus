@@ -17,7 +17,8 @@ const RentalSchema = new Schema(
     paymethod: {type: String},
     deleted: {type: Boolean},
     delivered: {type: Boolean},
-    discount: {type: String}
+    discount: {type: String},
+    late: {type: Boolean},
   }
 );
 

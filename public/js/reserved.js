@@ -997,12 +997,12 @@ div = $(`
           </div>
           <div class="col-12">
             <label for="img" class="form-label">Carica foto: </label>
-            <input type="text" class="create2" id="img" name="img" placeholder="immetti url">
+            <input type="text" class="create2" id="img" name="img" placeholder="Immetti url">
           </div>
           <div class="col-12">
             <div class="mb-3">
               <label for="summary" class="form-label">Descrizione prodotto</label>
-              <textarea class="create2" id="summary" rows="3" name="summary" placeholder="Inserisci una breve descrizione"></textarea>
+              <input class="create2" id="summary" rows="3" name="summary" placeholder="Inserisci una breve descrizione"></input>
             </div>
           </div>
           <div class="col-12">
@@ -1660,8 +1660,8 @@ function lateRents(rents){
   
   let filtered = [];
   filtered =  rents.filter(x => x.delivered == false && x.end_date == yesterday);
-
-  let lateProds = [];
+  
+  /*let lateProds = [];
   let k = 0;
 
   filtered.forEach(item => {
@@ -1669,11 +1669,14 @@ function lateRents(rents){
     lateProds[k] = item.prod_id;
     k++;
 
-  });
+  });*/
 
-  for(let i in lateProds) {
+  for(let i in filtered) {
 
-    $.post( '/late-prod', {id: lateProds[i]}, function( data ) {
+    $.post( '/late-rent', {id: filtered._id}, function( data ) {
+    });
+
+    $.post( '/late-prod', {id: filtered.prod_id}, function( data ) {
     });
 
   }
