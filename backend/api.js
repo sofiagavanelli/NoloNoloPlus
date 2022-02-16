@@ -327,7 +327,7 @@ module.exports = function (app) {
 
     app.post('/new-prod',(req, res)=>{
 
-        var imm = req.body.image;
+        var imm = req.body.img;
         var cat = req.body.category;
         var nome = req.body.name;
         var marca = req.body.brand;
