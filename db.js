@@ -68,7 +68,7 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status, _discount) => {
 
         return Promise.resolve(new Prodotto({
             category: _category,
@@ -83,7 +83,8 @@ module.exports = {
             low_season:_low_season,
             high_season: _high_season,
             prod_id: _id,
-            status: _status
+            status: _status,
+            discount: _discount
             //available: true
         }).save());
     },
@@ -159,7 +160,7 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, s, e, w, p, pay, a) => {
+    updateRent: async (id, s, e, w, p, pay, a, d) => {
 
         /*console.log("SONO IN MODIFICA NOLEGGIO");
 
@@ -173,6 +174,7 @@ module.exports = {
                     worker_id: w,
                     paymethod: pay,
                     approved: a,
+                    discount: d
                 }},
             {returnOriginal: false}
             ).exec()
@@ -196,7 +198,7 @@ module.exports = {
     },
 
     searchWorker: async (id) => {
-        return Promise.resolve(Worker.find({ work_id: id }));
+        return Promise.resolve(Worker.find({ user_id: id }));
     },
 
     searchProd: async (id) => {

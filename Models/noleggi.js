@@ -16,7 +16,8 @@ const RentalSchema = new Schema(
     //METODO DI PAGAMENTO!!
     paymethod: {type: String},
     deleted: {type: Boolean},
-    delivered: {type: Boolean}
+    delivered: {type: Boolean},
+    discount: {type: String}
   }
 );
 

@@ -69,9 +69,9 @@ module.exports = function (app) {
 
         //console.log(id);
 
-        db.searchWorker(id).then(rentsinfo => {
+        db.searchWorker(id).then(workerinfo => {
 
-            res.write(JSON.stringify(rentsinfo));
+            res.write(JSON.stringify(workerinfo));
 
             res.end();
         });
@@ -90,9 +90,9 @@ module.exports = function (app) {
 
         //console.log(id);
 
-        db.searchRent(id).then(workerinfo => {
+        db.searchRent(id).then(rentsinfo => {
 
-            res.write(JSON.stringify(workerinfo));
+            res.write(JSON.stringify(rentsinfo));
 
             res.end();
         });
@@ -302,7 +302,7 @@ module.exports = function (app) {
         console.log(req.body);
 
       var client = req.body.client;
-      console.log(client);
+      //console.log(client);
       var prod = req.body.product; 
       var startdate = req.body.start;
       var enddate = req.body.end; 
@@ -311,11 +311,13 @@ module.exports = function (app) {
       var work = req.body.worker;
       var app = req.body.approved;
 
+      var discount = req.body.discount || 0;
+
       //non dobbiamo mettere che approved parte da false?
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, app).then((result) => {
+        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, app, discount).then((result) => {
             console.log(result);
         }
 
@@ -376,10 +378,11 @@ module.exports = function (app) {
 
         var app = req.body.approved || false;
         var wor = req.body.worker || false;
+        var discount = req.body.discount || 0;
 
-        console.log(req.body._id);
+        //console.log(req.body._id);
         
-        await db.updateRent(idrent, start, end, wor,  price, pay, app)
+        await db.updateRent(idrent, start, end, wor,  price, pay, app, discount)
 
     });
 

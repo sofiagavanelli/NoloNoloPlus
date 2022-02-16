@@ -1,6 +1,6 @@
-function Cliente(){
+function Cliente(props){
     return(
-        <h1>DIO PORCO</h1>
+        <h1>DIO PORCO {props.info}</h1>
     )
 }
 

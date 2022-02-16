@@ -60,6 +60,8 @@ export default {
     return {
 
       response: '',
+
+      rentDiscount: 0,
       
       /*newstartD: '',
       newendD: '',*/
@@ -104,7 +106,8 @@ export default {
 
     saveRent() {
 
-      var update = {_id: this.rentToEdit._id, start: this.rentToEdit.start_date, end: this.rentToEdit.end_date, price: this.rentToEdit.price, paymethod: this.rentToEdit.paymethod};
+      var update = {_id: this.rentToEdit._id, start: this.rentToEdit.start_date, end: this.rentToEdit.end_date, 
+        price: this.rentToEdit.price, paymethod: this.rentToEdit.paymethod, discount: this.rentToEdit.discount};
 
       var changed = [];
 
@@ -116,11 +119,13 @@ export default {
         if(changed[0]) update.start = this.newInfo[0];
         if(changed[1]) update.end = this.newInfo[1];
 
-        if(changed[0] || changed[1]) {
+        if(changed[0] || changed[1] || changed[2]) {
 
           var result = calc(update.start, update.end, this.product, true, this.noleggi);
 
           this.response = result.err || result.total;
+
+          update.discount = result.discount || this.rentToEdit.discount;
 
           //console.log(result);
 

@@ -470,7 +470,9 @@ export default({
 
         save() {
 
-            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
+            var update = {clientID: this.profileInfo[0].client_id, name: this.profileInfo[0].name, surname: this.profileInfo[0].surname, 
+            place: this.profileInfo[0].place, address: this.profileInfo[0].address, pass: this.profileInfo[0].pass, telefono: this.profileInfo[0].phone, 
+            email: this.profileInfo[0].email, birth: this.profileInfo[0].birth};
 
             var changed = [];
 

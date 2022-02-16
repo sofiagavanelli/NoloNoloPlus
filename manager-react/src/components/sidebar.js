@@ -19,13 +19,14 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { BsBoxSeam } from "react-icons/bs";
 import { AiOutlineShoppingCart, AiOutlineTeam } from "react-icons/ai";
 import { HiPlus } from "react-icons/hi";
+import { MdOutlineLogout } from "react-icons/md";
 
 //import sidebar css from react-pro-sidebar module and our custom css 
 import "react-pro-sidebar/dist/css/styles.css";
 
 
 
-export const Header = () => {
+export const Header = ({setToken}) => {
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -35,6 +36,11 @@ export const Header = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+  function logout(){
+    sessionStorage.clear()
+    setToken(false)
+  }
 
   return (
       <div id="header">
@@ -61,6 +67,7 @@ export const Header = () => {
               <MenuItem active={true} icon={<AiOutlineShoppingCart />}><Link to="/manager/noleggi">Noleggi</Link></MenuItem>
               <MenuItem active={true} icon={<BsBoxSeam />}><Link to="/manager/inventario">Prodotti</Link></MenuItem>
               <MenuItem active={true} icon={<HiPlus />}><Link to="/manager/aggiungiImpiegato">Aggiungi <br></br>Impiegato</Link></MenuItem>
+              <MenuItem active={true} onClick={logout} icon={<MdOutlineLogout />}><Link to="/manager/login">Logout</Link></MenuItem>
             </Menu>
           </SidebarContent>
           

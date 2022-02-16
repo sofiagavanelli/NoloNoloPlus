@@ -1,7 +1,9 @@
 
-export function calc(start, end, product, logged, noleggi) {
+export function calc(start, end, product, logged, noleggi, birthMonth) {
     //console.log({start, end, product, logged, noleggi})
-    let payment = false, err = null;
+    let payment = false, err = null, discount = 0;
+
+    start = new Date(start);
 
     const diffInMs   = new Date(end) - new Date(start);
     const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
@@ -14,11 +16,21 @@ export function calc(start, end, product, logged, noleggi) {
 
         if(product.status != "rotto" && controlDate(noleggi, start, end)) {
 
+            if(birthMonth == start.getMonth()) {
+                temp = temp - (temp*15/100);
+
+                discount = discount + 15;
+            }
+
             if(product.status == "buono") {
-              temp = temp - (temp*5/100);
+                temp = temp - (temp*5/100);
+
+                discount = discount + 5;
             }
             else if(product.status == "rovinato") {
-              temp = temp - (temp*10/100);
+                temp = temp - (temp*10/100);
+
+                discount = discount + 10;
             }
             
             payment = true;
@@ -34,7 +46,7 @@ export function calc(start, end, product, logged, noleggi) {
     
     } 
 
-    return {total: temp, pay: payment, err};
+    return {total: temp, pay: payment, err, discount};
 
 }
 
