@@ -686,7 +686,7 @@ export default({
 
 .profile_pic {
     width: 100%;
-    border-radius: 100%;
+    /*border-radius: 100%;*/
     padding-bottom: 0.2rem;
     margin-top: 2em;
     /*border-radius: 0.2rem;*/
