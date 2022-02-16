@@ -107,14 +107,14 @@ module.exports = {
         //await newN.save();
     },
 
-    updateProd: async (idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state) => {
-        console.log({idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state})
+    updateProd: async (idprod, cat, img, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state) => {
+        console.log({idprod, cat, img, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state})
         
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
             {prod_id: idprod},
             { $set: {category: cat,
-                //image: im,
+                image: img,
                 name: nome,
                 brand: marca,
                 speed: vel,
