@@ -500,16 +500,17 @@ export default({
                 axios.post('/update-client/', update)
                     .then((response) => {
                         //console.log(response.data);
-                        console.log(response);
+                        console.log("update" ,response);
 
                         //reload!!
-                        this.$router.go(0);
                         
                     })
                     .catch((error) => {
                         //this.loading = false;
                         console.log(error);
                     });
+
+                
             }
 
             //oppure facciamo una reload direttamente

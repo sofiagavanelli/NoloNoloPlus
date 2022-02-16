@@ -95,7 +95,7 @@ export default {
     font-size: 12px;
 
     /*margin-top: 6em;*/
-    padding: 0.5em 3em 1em 3em;
+    padding: 0em 3em 1em 3em;
 }
 
 .flex-container {
