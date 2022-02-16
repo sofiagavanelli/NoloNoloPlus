@@ -9,7 +9,7 @@
           tutti i portafogli. Contattateci per qualsiasi richiesta - vi garantiamo la risposta più veloce del settore.
         </div>
 
-        <div> 
+        <div id="searchB" class="flex-container"> 
           <SearchBar v-on:childToParent="filter"  />
         </div>
 
@@ -24,8 +24,9 @@
         
         <template v-else>
         <div id="main_page" class="flex-container">
-          
-            <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images" v-on:click="change(index)">
+
+          <b-card v-for="(item, index) in showInfo" :key="item.prod_id" class="boat-images">
+              <router-link id="toRent" aria-labelledby="rentLabel" :to="{ name: 'rentPage', params: { parentData: showInfo[index] }}" >
               <!-- PER LA SRC DELL'IMAGE: src="https://site202133.tw.cs.unibo.it/img/${ProdInfo[i].category}/${ProdInfo[i].prod_id}.jpg" 
               PRIMA: :src="item.image"
               PROVA: :src="this.url + item.category + '/' + item.prod_id + this.ex"-->
@@ -51,21 +52,24 @@
                   NOLEGGIA
                 </b-button>
               </b-card-footer-->
+            </router-link>
 
-            </b-card>
+          </b-card>
+
+
 
           </div>
         </template>
 
       </template>
 
-      <template v-else-if="!normal">
+      <!--template v-else-if="!normal">
 
-        <!-- a RENTPAGE si passa selectedID -->
+        <RENTPAGE si passa selectedID >
         <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
-        <!--PER ALLEGGERIRE QUESTO COMPONENTE-->
+        <PER ALLEGGERIRE QUESTO COMPONENTE>
 
-      </template>
+      </template-->
 
       <!--TODO: FARE UN ALTRO V-IF CHE GESTISCE LA VISIONE FILTERED-->
       <!--template v-if="filtered">
@@ -125,7 +129,12 @@ export default {
   mounted() {
 
     if(localStorage.getItem('CurrentUser')) {
-      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
+
+      this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser')).user || JSON.parse(localStorage.getItem('CurrentUser'));
+
+      if(JSON.parse(localStorage.getItem('CurrentUser')).discount)
+        this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;
+
     }
   
     axios.get('/prods')
@@ -149,18 +158,18 @@ export default {
 
   methods: {
 
-    onChildBack() {
+    /*onChildBack() {
       this.normal = !this.normal;
-    },
+    },*/
 
-    change(__id) {
+    /*change(__id) {
 
       this.mydata = this.prodInfo[__id];
       //this.mydata[1] = this.prodInfo;
 
       this.normal = !this.normal;
 
-    },
+    },*/
 
     filter(data) {
 
@@ -249,6 +258,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#introduzione {
+  border-bottom: 1px solid grey;
+  background-color: white;
+}
+
+#searchB {
+  justify-content: center;
+  background-color: white;
+
+  padding: 1em;
+
+  box-shadow: 0px 0px 6px 0px lightgrey;
+}
 
 .b-card-footer {
   justify-content: center;

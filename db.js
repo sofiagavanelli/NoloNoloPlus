@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const client = require("./Models/client");
 
+var sha1 = require('sha1');
+
 //PER USARE QUELLO NON IN LOCALE:
-//const connectionString = process.env.DATABASE_STRING;
-const connectionString = "mongodb+srv://user1:user1pass@cluster0.hbwrn.mongodb.net/rental_agency?retryWrites=true&w=majority";
+//const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
+const connectionString = process.env.DATABASELOCAL_STRING;
+
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -33,6 +36,8 @@ module.exports = {
 
     //getUsers: async (options = {}) => User.find(options) tel, email,
     saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, bday, _note) => {
+
+        //console.log(sha1(_pass));
         
         //TODO CONTROLLARE DUPLICATO DELL'USERNAME
             new Client({
@@ -40,7 +45,7 @@ module.exports = {
                 name: _name,
                 surname: _surname,
                 client_id: _username,
-                password: _pass,
+                password: sha1(_pass),
                 place: _place,
                 address: _address,
                 phone: tel, 
@@ -63,9 +68,9 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,_imageUrl, _name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
+    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
 
-        new Prodotto({
+        return Promise.resolve(new Prodotto({
             category: _category,
             image: _imageUrl,
             name: _name,
@@ -80,16 +85,12 @@ module.exports = {
             prod_id: _id,
             status: _status
             //available: true
-        }).save();
+        }).save());
     },
 
-    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _ok) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
-
-        if(!_ok) _ok=false;
-
-        /*const newN =*/ return Promise.resolve(new Noleggio({
-            //_id: _id,
+        return Promise.resolve(new Noleggio({
             prod_id: _prod,
             client_id: _client,
             start_date: _start,
@@ -97,32 +98,42 @@ module.exports = {
             worker_id: _worker,
             price: _price,
             paymethod: _payment,
-            approved: _ok,
+            approved: _approved,
             deleted: false,
             delivered: false
-            //worker_id: _worker
         }).save());
         
         //await newN.save();
     },
 
-    updateProd: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
+    updateProd: async (idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state) => {
+        console.log({idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state})
+        
         console.log("prova per modifica prodotto");
         await Prodotto.findOneAndUpdate(
-            {prod_id: id},
-            { $set: {category: categ,
-                image: im,
-                name: n,
-                brand: m,
-                speed: v,
-                length: leng,
-                guests: osp,
-                year: aa,
-                summary: description,
-                low_season: p_low,
-                high_season: p_high,
-                status: stat, }},
+            {prod_id: idprod},
+            { $set: {category: cat,
+                //image: im,
+                name: nome,
+                brand: marca,
+                speed: vel,
+                length: len,
+                guests: ospiti,
+                year: anno,
+                summary: desc,
+                low_season: price_low,
+                high_season: price_high,
+                status: state, }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
+    addDiscount: async (id, value) => {
+        await Client.findOneAndUpdate(
+            {client_id: id},
+            { $set: {discount: value} },
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
@@ -130,8 +141,7 @@ module.exports = {
     },
 
     updateClient: async (id, n, s, pass, citta, indirizzo, telefono, mail, bday, notes) => {
-        console.log({id, n, s, citta, indirizzo, telefono, mail, notes})
-        console.log("prova");
+        
         await Client.findOneAndUpdate(
             {client_id: id},
             { $set: {name: n,
@@ -149,27 +159,25 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
-    updateRent: async (id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat) => {
-        console.log({id, categ, im, n, m, v, leng, osp, aa, description, p_low, p_high, stat})
-        console.log("prova per modifica prodotto");
-        await Prodotto.findOneAndUpdate(
-            {prod_id: id},
-            { $set: {category: categ,
-                image: im,
-                name: n,
-                brand: m,
-                speed: v,
-                length: leng,
-                guests: osp,
-                year: aa,
-                summary: description,
-                low_season: p_low,
-                high_season: p_high,
-                status: stat, }},
+    updateRent: async (id, s, e, w, p, pay, a) => {
+
+        /*console.log("SONO IN MODIFICA NOLEGGIO");
+
+        console.log(id +  " " + s + " " + e + " " + w + " " + p + " " + pay + " " + a );*/
+        
+        await Noleggio.findOneAndUpdate(
+            {_id: id},
+            { $set: {start_date: s,
+                    end_date: e, 
+                    price: p,
+                    worker_id: w,
+                    paymethod: pay,
+                    approved: a,
+                }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
-            .catch(x => console.log("Errore"))
+            .catch(x => console.log("Error"))
     },
 
 
@@ -185,10 +193,6 @@ module.exports = {
     //search con il nome per il login! così l'ID rimane ""privato""
     searchClient: async (_name) => {
         return Promise.resolve(Client.find({ name: _name }));
-    },
-
-    searchNote: async (id) => {
-        return Promise.resolve(Client.find({ client_id: id }));
     },
 
     searchWorker: async (id) => {
@@ -258,7 +262,7 @@ module.exports = {
     deleteBoolRent: async (id) => {
         await Noleggio.findOneAndUpdate(
             {_id: id},
-            { $set: {deleted: true, }},
+            { $set: {deleted: true }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))
@@ -268,7 +272,7 @@ module.exports = {
     deliverBoolRent: async (id) => {
         await Noleggio.findOneAndUpdate(
             {_id: id},
-            { $set: {delivered: true, }},
+            { $set: {delivered: true }},
             {returnOriginal: false}
             ).exec()
             .then(x => console.log("ok"))

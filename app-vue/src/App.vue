@@ -39,7 +39,7 @@ export default {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 
-    font-size: 12px;
+    font-size: 10px;
 
     margin-top: 0;
     margin-left: 0;

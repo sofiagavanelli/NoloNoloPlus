@@ -2,9 +2,11 @@
 
     <div id="rent_page" class="flex-container">
 
-      <b-button id="backBtn" v-on:click="emitToParent">
+    <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
+      <b-button id="backBtn">
         <font-awesome-icon icon="arrow-left" /> PRODOTTI
       </b-button>
+    </router-link>
 
       <!-- cambiare estetica? -->
       <b-card class="boat-images" >
@@ -34,14 +36,20 @@
             <label for="end-datepicker">Fine noleggio</label>
             <b-form-datepicker :min="startD" id="end-datepicker" v-model="endD" class="mb-2"></b-form-datepicker>
 
-            <div id="priceTab" class="flex-container">
-              <b-button v-on:click="calc()">TOTALE: </b-button>
-              <div id="total-price">
-                <h5> {{total}} </h5>
-              </div>
+            <div>
               <template v-if="this.$store.state.discount && this.$store.state.username">
-                <input type="checkbox" v-on:click="useDiscount()"> voglio usare il mio sconto 
+                <div id="discountTab">
+                  <h5> <input type="checkbox" v-model="sconto" v-on:change="useDiscount()"> 
+                    voglio usare il mio sconto </h5>
+                </div>
               </template>
+
+              <div id="priceTab" class="flex-container">
+                <b-button v-on:click="calc()">TOTALE: </b-button>
+                <div id="total-price">
+                  <h5> {{total}}{{euro}} </h5>
+                </div>
+              </div>
             </div>
 
               <template v-if="this.payment">
@@ -100,14 +108,21 @@ import axios from '../http'
 
 import client from '../user-data'
 
+import {calc} from '../utils'
+
 
 export default {
   name: 'RentPage',
-  props: {
+  /*props: {
     parentData: '',
-  },
+  },*/
+  props: ['parentData'],
   data() {
     return {
+      euro: '',
+
+      sconto: null,
+
       loading: true,
 
       startD: '',
@@ -151,7 +166,7 @@ mounted() {
 
 methods: {
 
-  controlDate() {
+  /*controlDate() {
 
         console.log("sono dentro controldate");
 
@@ -184,7 +199,7 @@ methods: {
 
         return(disponibile);
       
-  },
+  },*/
 
   calc() {
 
@@ -192,28 +207,29 @@ methods: {
       this.total = "la data di fine deve essere successiva a quella d'inizio";
     }
     else {
-      const diffInMs   = new Date(this.endD) - new Date(this.startD);
+
+      //export function calc(start, end, product, logged, noleggi) {
+      var result = calc(this.startD, this.endD, this.parentData, this.$store.state.username, this.noleggi);
+
+      this.total = result.err || result.total;
+      this.payment = result.pay;
+
+      if(this.payment) this.euro = '€';
+
+    }
+
+      /*const diffInMs   = new Date(this.endD) - new Date(this.startD);
       const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
 
-      let highDays = this.defineSeason(diffInDays);
+      let highDays = highSeason_days(this.startD, diffInDays);
 
       let temp = (this.parentData.high_season * (highDays)) + (this.parentData.low_season * (diffInDays - highDays));
 
       if(this.$store.state.username) {
 
-        /*if(this.parentData.discount) {
-          temp = temp - (temp*this.parentData.discount/100);
-        }*/
-
-        if(this.parentData.status == "buono") {
-          temp = temp - (temp*5/100);
-        }
-        else if(this.parentData.status == "rovinato") {
-          temp = temp - (temp*10/100);
-        }
 
         //TODO AGGIUNGERE QUESTIONE DEL MESE DI NASCITA CON LO SCONTO 
-        /* data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
+         data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
           var start_date = new Date(this.startD);
           var start_month = start_date.getMonth();
           var birth_month = birth_date.getMonth();
@@ -222,29 +238,40 @@ methods: {
             temp = temp - (temp*15/100);
           }
 
-        */
+        
 
-        /*this.controlDate()
-          .then((valid) => {*/
-            if(this.parentData.status != "rotto" && this.controlDate()) {
-              this.total = temp + '€';
+            if(this.parentData.status != "rotto" && controlDate(this.noleggi, this.startD, this.endD)) {
+
+              if(this.parentData.status == "buono") {
+                temp = temp - (temp*5/100);
+              }
+              else if(this.parentData.status == "rovinato") {
+                temp = temp - (temp*10/100);
+              }
+              
+              this.total = temp;
+              this.euro = '€';
               this.payment = true;
             }
             else {
-              this.total = "non disponibile";
+              if(this.parentData.status == "rotto")
+                this.total = "imbarcazione non disponibile";
+              else
+                this.total = "date già occupate";
             //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
             }
           //})
 
       }
       else {
-        this.total = temp + '€';
+        this.total = temp;
+        this.euro = '€';
       }
-    }
+    }*/
 
   },
 
-  defineSeason(i) {
+  /*defineSeason(i) {
 
     let Hdays = 0;
     var date = new Date(this.startD);
@@ -252,7 +279,7 @@ methods: {
     while (i>0) {
 
       if (date.getMonth() >= 5 && date.getMonth() <= 9) { 
-        /*NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8*/
+        //NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8
         Hdays = Hdays + 1;
       }
 
@@ -264,66 +291,67 @@ methods: {
 
     return(Hdays);
 
-  },
+  },*/
 
   useDiscount() {
 
-    if(this.parentData.discount) {
-      this.total = this.toale - (this.total*this.parentData.discount/100);
+    var temp = 0;
+
+    if(this.sconto) {
+
+      temp = this.total - (this.total*this.$store.state.discount/100);
+
+      this.total = temp;
     }
 
   },
 
-  emitToParent (event) {
-    this.$emit('childToParent')
-  },
-
   pay(tipo) {
-
-    /*const client = req.body.client;
-      const prod = req.body.product; 
-      const startdate= req.body.start;
-      const enddate= req.body.end; */
     
     if(tipo) {
       this.paymethod = tipo;
 
       this.$bvModal.show("recapModal");
     }
-    /*TODO CREARE NOLEGGIO
-    axios.post('/new-rent', this.newRent)
-      .then(() => {
-
-        this.$router.push({
-          path: '/profile',
-        });
-                  
-      })
-      .catch((error) => {
-                //this.loading = false;
-        console.log(error);
-      });*/
-
 
   },
 
   createRent() {
     console.log("ciao");
 
-    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
+    this.newRent = { product: this.parentData.prod_id, client: this.$store.state.username, worker: false, start: this.startD, end: this.endD, price: this.total, pay: this.paymethod };
 
     console.log(this.newRent);
 
     axios.post('/new-rent', this.newRent)
       .then(() => {
-
-        
                   
       })
       .catch((error) => {
         //this.loading = false;
         console.log(error);
       });
+
+    if(this.sconto) {
+
+      //bisogna rimuovere lo sconto dal db e da localStorage!!
+      axios.post('/remove-discount', {clientID: this.$store.state.username})
+          .then((response) => {
+            //console.log(response.data);
+            console.log(response);
+
+            this.$store.state.discount = null;
+
+          })
+          .catch((error) => {
+            
+            console.log(error);
+          });
+
+
+          localStorage.setItem('CurrentUser', JSON.stringify(this.$store.state.username));
+
+    }
 
       this.$router.push({
           path: '/profile',
@@ -368,6 +396,10 @@ methods: {
 /*#rent_page {
   padding-top: 4em;
 }*/
+
+#discountTab {
+  padding: 1em;
+}
 
 #backBtn {
   height: 3em;
@@ -484,6 +516,8 @@ methods: {
 #rent_page {
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 3em;
 }
 
 @media screen and (max-width: 800px) {

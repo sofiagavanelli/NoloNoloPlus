@@ -25,6 +25,7 @@ module.exports = function (app) {
         res.writeHead(200);
 
         db.getClients().then(clientsinfo => {
+
             res.write(JSON.stringify(clientsinfo));
             res.end();
         });
@@ -218,8 +219,7 @@ module.exports = function (app) {
          db.deleteWorker(id).then(() => {
           res.status(200);
           res.end();
-          }
-            )
+          })
     });
     
 
@@ -298,54 +298,91 @@ module.exports = function (app) {
 
     app.post('/new-rent',(req, res)=>{
 
-        console.log("sono nella post");
+        console.log("sono in new rent");
         console.log(req.body);
 
-      const client = req.body.client;
+      var client = req.body.client;
       console.log(client);
-      const prod = req.body.product; 
-      const startdate = req.body.start;
-      const enddate = req.body.end; 
-      const price = req.body.price;
-      const paymethod = req.body.pay;
+      var prod = req.body.product; 
+      var startdate = req.body.start;
+      var enddate = req.body.end; 
+      var price = req.body.price;
+      var paymethod = req.body.pay;
+      var work = req.body.worker;
+      var app = req.body.approved;
 
       //non dobbiamo mettere che approved parte da false?
 
       /*_prod, _client, _start, _end, _worker, _price, _payment, _ok
                                                 worker: null              approved: false*/
-      db.saveRental(prod, client, startdate, enddate, null, price, paymethod, null).then((result) => {
-        console.log(result);
-      }
+        db.saveRental(prod, client, startdate, enddate, work, price, paymethod, app).then((result) => {
+            console.log(result);
+        }
 
     )
     });
 
-    /* //JOIN TRA CLIENTS E RENTAL PER GRAFICI MANAGER
-    app.get('/clientsRental', function (req, res) {
-        db.joinClientsRentals().then(prodsinfo => {*/
-
 
     app.post('/new-prod',(req, res)=>{
 
-        const imm = req.body.filename;
-        const cat = req.body.category;
-        const nome = req.body.name;
-        const marca = req.body.brand;
-        const vel = req.body.speed;
-        const len = req.body.length;
-        const ospiti = req.body.guests;
-        const anno = req.body.year;
-        const desc = req.body.summary;
-        const price_low= req.body.lowseason;
-        const price_high = req.body.highseason;
-        const idprod = req.body.product;
-        const state = req.body.stato;
+        var imm = req.body.image;
+        var cat = req.body.category;
+        var nome = req.body.name;
+        var marca = req.body.brand;
+        var vel = req.body.speed;
+        var len = req.body.length;
+        var ospiti = req.body.guests;
+        var anno = req.body.year;
+        var desc = req.body.summary;
+        var price_low= req.body.lowseason;
+        var price_high = req.body.highseason;
+        var idprod = req.body.product;
+        var state = req.body.stato;
 
       db.saveProd(cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, idprod, state).then(() => {}
 
     )
     });
- 
+
+    
+
+    app.post('/add-discount',async (req, res)=>{
+
+        console.log(req.body.clientID);
+
+        const idcliente = req.body.clientID;
+
+        await db.addDiscount(idcliente, 15)
+    });
+
+    app.post('/remove-discount',async (req, res)=>{
+
+        console.log(req.body.clientID);
+
+        const idcliente = req.body.clientID;
+
+        await db.addDiscount(idcliente, 0)
+    });
+
+    app.post('/update-rent', async (req, res) => {
+        console.log("SONO IN UPDATE NOLEGGIO API.JS");
+
+
+        var idrent = req.body._id;
+        var start = req.body.start;
+        var end = req.body.end;
+        var price = req.body.price;
+        var pay = req.body.paymethod;
+
+        var app = req.body.approved || false;
+        var wor = req.body.worker || false;
+
+        console.log(req.body._id);
+        
+        await db.updateRent(idrent, start, end, wor,  price, pay, app)
+
+    });
+
     app.post('/update-client',async (req, res)=>{
         console.log("sono nell'update dei clienti ");
         
@@ -367,22 +404,22 @@ module.exports = function (app) {
     app.post('/update-prod',async (req, res)=>{
         console.log("sono nell'update dei prodotti");
 
-        const idprod = req.body.product;
+        var idprod = req.body.prod_id;
         var cat= req.body.category;
-        var imm= req.body.image;
         var nome = req.body.name;
         var marca = req.body.brand;
         var vel = req.body.speed;
         var len = req.body.length;
-        var ospiti = req.body.guests;
+        var ospiti = req.body.guest;
         var anno = req.body.year;
         var desc = req.body.summary;
-        var price_low = req.body.lowseason;
-        var price_high = req.body.highseason;
-        var state = req.body.stato;  
+        var price_low = req.body.low_season;
+        var price_high = req.body.high_season;
+        var state = req.body.status;  
 
-        console.log(idprod);
-       await db.updateProd(idprod, cat, imm, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+        console.log(idprod +" " + cat + " "  + nome + " " + marca + " " + vel + " " + len + " " + ospiti + " " + anno + " " + desc + " " + price_low + " " +price_high + " " + state)
+
+       await db.updateProd(idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 
     //UPDATE RENT PER L'ELIMINAZIONE

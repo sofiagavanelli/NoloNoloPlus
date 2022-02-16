@@ -25,6 +25,8 @@
         <!-- link rel="stylesheet" id="stylesheetComp" href="/public/css/access.css" -->
         
         <script>
+
+            is_logged()
             function load(url){
                 window.open(url, '_self');
             }
@@ -66,8 +68,7 @@
       <li><a href="#" id="clientBtn"><i class="far fa-address-card"></i>Clienti</a></li> <!--per vedere tutti i clienti -->
       <li><a href="#" id="createBtn"><i class="fas fa-cart-plus"></i>Crea Noleggio</a></li> <!--per creare noleggio-->
       <li><a href="#" id="addBtn"><i class="far fa-plus-square"></i></i></i>Crea Prodotto</a></li> <!--per aggiungere prodotto-->
-      <li><a href="#" id="personalAreaBtn"><i class="far fa-id-badge"></i>Area Personale</a></li> <!--per vedere informazioni personali-->
-      <li><a href="#" id="logout"><i class="fas fa-home"></i>Log out</a></li> <!--per vedere informazioni personali-->
+      <li><a href="#" id="logout"><i class="fas fa-home"></i>Log out</a></li> <!--per log out-->
     </ul>
   </div> 
   
@@ -75,24 +76,14 @@
   <div id="ctable"> <img src="/public/img/nolonolo.png" style="margin-left: 20em;"></div>
   <div id="ctable2">
   </div>
-
-
-
-  
+ 
 <script type="text/javascript">
- // $(window).on('load',function(){
-    //  $('#loginModal').modal('show');
- // });
-
   document.getElementById("clientBtn").addEventListener("click", openClient);
   document.getElementById("inventoryBtn").addEventListener("click", openInventory);
   document.getElementById("rentBtn").addEventListener("click", openRents);
   document.getElementById("addBtn").addEventListener("click", addProduct);
   document.getElementById("createBtn").addEventListener("click", openCreate);
   document.getElementById("logout").addEventListener("click", logOut);
-
-  
- // document.getElementById("enterWorker").addEventListener("click", login);
 
 </script>
 	</body>

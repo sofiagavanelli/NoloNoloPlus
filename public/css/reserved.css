@@ -131,14 +131,14 @@ button:focus{
 .sidebar{
   position: fixed;
   bottom: 2px;
-  width: 16em;
+  width: 15em;
   height: 100%;
   background: #99CED3;
 
 }
 
 .sidebar header{
-  font-size: 22px;
+  font-size: 20px;
   color: black;
   text-align: center;
   line-height: 57px;
@@ -151,7 +151,7 @@ button:focus{
   height: 100%;
   width: 100%;
   line-height: 65px;
-  font-size: 20px;
+  font-size: 18px;
   color: black;
   padding-left: 40px;
   box-sizing: border-box;
@@ -383,7 +383,6 @@ form.example input[type=text] {
   padding: 4px 18px;
   float:right;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-bottom: 0.8rem;
 
 }
 .btn-d{
@@ -408,7 +407,7 @@ form.example input[type=text] {
 .btn-cat{
   border-radius: 25px;
   border: 1px solid #709dbb;
-  padding: 8px 22px;
+  padding: 4px 20px;
   background-color: #fff;
   margin-left: 1%;
 }
@@ -579,7 +578,8 @@ item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
   text-align: center;
 }
 .btn-sub{
-  width: 150px;
+  width: 10em;
+  margin-right: 1em;
   padding: 10px;
   border: none;
   -webkit-border-radius: 5px; 
@@ -592,6 +592,10 @@ item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .btn-sub:hover {
   background-color: #0666a3;
+}
+
+.btn-sub:disabled {
+  background-color: gray;
 }
 .btn-postit{
   border: none;

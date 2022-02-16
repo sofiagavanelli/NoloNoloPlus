@@ -46,6 +46,9 @@
 <script>
 import axios from '../http'
 
+import sha1 from 'sha1'
+
+
 export default {
   name: 'LoginModal',
     /*props: {
@@ -60,6 +63,8 @@ export default {
       loggedIN: false,
 
       errorMsg: '',
+
+      engine: null,
     };
   },
 
@@ -85,9 +90,13 @@ export default {
 
       controlInfo(data, insertedP) {
 
+        console.log(insertedP);
+
         for (let i in data) {
 
-          if(data[i].password == insertedP) {
+          console.log(data[i].password);
+
+          if(data[i].password == sha1(insertedP)) {
               var found = true;
               this.loggedIN = true;
           }
@@ -102,10 +111,17 @@ export default {
           this.$store.commit("setUsername", this.username);
           //console.log(this.$store.state.username);
 
-          localStorage.setItem('CurrentUser', JSON.stringify(this.username));
-
-          if(this.clientInfo.discount)
+          if(this.clientInfo.discount) {
+            
             this.$store.state.discount = this.clientInfo.discount;
+
+            var user_discount = {user: this.username, discount: this.clientInfo.discount};
+
+            localStorage.setItem('CurrentUser', JSON.stringify(user_discount));
+          }
+          else {
+            localStorage.setItem('CurrentUser', JSON.stringify(this.username));
+          }
 
           //data = this.loggedIN;
 

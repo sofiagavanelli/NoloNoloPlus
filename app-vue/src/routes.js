@@ -52,6 +52,12 @@ export default new Router({
         component: EditRent,
         props: true
       },
+      {
+        path: '/rent-page',
+        name: 'rentPage',
+        component: RentPage,
+        props: true
+      },
       /*{
         path: '/rent',
         component: RentPage

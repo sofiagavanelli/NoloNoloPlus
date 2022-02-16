@@ -126,7 +126,7 @@ export function CardComponentRent(props){
                     </Row>
                  </div>
                 {showNull
-                    ?    <h1>Non ci sono noleggi che vanno da {data[0].toDateString()} a {data[1].toDateString()}</h1>
+                    ?    <h1>Non ci sono noleggi per la data selezionata</h1>
                 }
 
             }
