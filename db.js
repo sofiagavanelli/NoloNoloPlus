@@ -4,8 +4,8 @@ const client = require("./Models/client");
 var sha1 = require('sha1');
 
 //PER USARE QUELLO NON IN LOCALE:
-//const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
-const connectionString = process.env.DATABASELOCAL_STRING;
+const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
+//const connectionString = process.env.DATABASELOCAL_STRING;
 
 
 const Client = require("./Models/client");

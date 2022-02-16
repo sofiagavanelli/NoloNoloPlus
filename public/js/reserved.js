@@ -1345,7 +1345,7 @@ function modifyRent(data, insertedID){
             <input type="text" class="create2" id="inputpay" name="end" value="${data[i].paymethod}">
           </div>
           <div class="col-md-4">
-            <label for="inputworker" class="form-label">Dipendente </label>
+            <label for="inputworker" class="form-label">Dipendente </label> <button type="button" class="btn-postit" button title="Per approvare noleggio inserire il proprio ID"></i></button>
             <input type="text" class="create2" id="inputworker" name="worker" value="${data[i].worker_id}">
           </div>
           <div class="col-md-2">
