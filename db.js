@@ -281,6 +281,16 @@ module.exports = {
             .catch(x => console.log("Errore"))
     },
 
+    lateProd: async (id) => {
+        await Prod.findOneAndUpdate(
+            {prod_id: id},
+            { $set: {status: "rotto" }},
+            {returnOriginal: false}
+            ).exec()
+            .then(x => console.log("ok"))
+            .catch(x => console.log("Errore"))
+    },
+
     /* joinClientsRentals: async (options = {}) =>{
         db.collection('rentals').aggregate([
             {

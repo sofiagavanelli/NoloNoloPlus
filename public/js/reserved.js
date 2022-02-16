@@ -51,6 +51,8 @@ $(document).ready(function() {
   
           rentARRAY = JSON.parse(data);
           console.log(rentARRAY);
+
+          lateRents(rentARRAY);
         },
 
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1652,3 +1654,29 @@ function available(){
 
 }
 
+function lateRents(rents){
+
+  let yesterday = new Date() - 1;
+  
+  let filtered = [];
+  filtered =  rents.filter(x => x.delivered == false && x.end_date == yesterday);
+
+  let lateProds = [];
+  let k = 0;
+
+  filtered.forEach(item => {
+
+    lateProds[k] = item.prod_id;
+    k++;
+
+  });
+
+  for(let i in lateProds) {
+
+    $.post( '/late-prod', {id: lateProds[i]}, function( data ) {
+    });
+
+  }
+
+
+}
