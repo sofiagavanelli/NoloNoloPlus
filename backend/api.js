@@ -311,7 +311,7 @@ module.exports = function (app) {
       var work = req.body.worker;
       var app = req.body.approved;
 
-      var discount = req.body.discount || 0;
+      var discount = req.body.discount;
 
       //non dobbiamo mettere che approved parte da false?
 

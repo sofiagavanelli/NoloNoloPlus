@@ -68,7 +68,7 @@ module.exports = {
         }).save();
     },
 
-    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status, _discount) => {
+    saveProd: async (_category,_imageUrl,_name, _brand, _speed, _len, _guests, _yy, _sum, _low_season,_high_season, _id, _status) => {
 
         return Promise.resolve(new Prodotto({
             category: _category,
@@ -84,12 +84,11 @@ module.exports = {
             high_season: _high_season,
             prod_id: _id,
             status: _status,
-            discount: _discount
             //available: true
         }).save());
     },
 
-    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved) => {
+    saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved, _discount) => {
         /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
         return Promise.resolve(new Noleggio({
             prod_id: _prod,
@@ -101,7 +100,8 @@ module.exports = {
             paymethod: _payment,
             approved: _approved,
             deleted: false,
-            delivered: false
+            delivered: false,
+            discount: _discount
         }).save());
         
         //await newN.save();
