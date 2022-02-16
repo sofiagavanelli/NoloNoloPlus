@@ -155,7 +155,7 @@ function openClient() {
 
             div = $(`
                 <div class="card" style="width: 17em; float: left; display: block; margin-left: 5em;">        
-                  <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" style="height: 13em;"class="card-img-top" alt="...">              
+                  <img src="${ClientInfo[i].image}" style="height: 13em;"class="card-img-top" alt="...">              
                   <div class="card-body">              
                     <h5 class="card-title" style="text-align: center;">${ClientInfo[i].name} ${ClientInfo[i].surname}</h5>              
                     <p class="card-text" style="text-align: center;">ID: ${ClientInfo[i].client_id}</p>    
@@ -466,13 +466,19 @@ function acceptProd(data, insertedID) {
           <div class="col-md-2" style="visibility:hidden;">
             <input type="text" class="create2" id="product" value="${data[i].prod_id}">
           </div>
-            <button class="btn-sub" onclick="approveProd()" style="margin-left: 14em;">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
-          </div>
         </div>
-        <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub" style="float: left;margin-top: 2em; margin-left: 0.5em;"><i class="fas fa-trash-alt"></i>  Elimina</button>
-        <button id="btn-un" onclick="unavailable()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
-        <button id="btn-av" onclick="available()" class="btn-sub" style="float: left; margin-top: 2em; margin-left: 1em; width: 12em; visibility: visible;"><i class="far fa-thumbs-up"></i>  Rendi Disponibile</button>
+
+        <div class="d-flex" style="flex-direction: row;">
+        <button class="btn-sub" onclick="approveProd()">Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
+        <button id="${data[i].prod_id}" onclick= "deleteProd(id)" class="btn-sub"><i class="fas fa-trash-alt"></i>  Elimina</button>
+    
+        ${data[i].status != "rotto" ? `<button id="btn-un" onclick="unavailable()" class="btn-sub" style=" width: 12em;"><i class="fas fa-ban"></i>  Rendi Indisponibile</button>
+        `: ""}
+        ${data[i].status == "rotto" ? `<button id="btn-av" onclick="available()" class="btn-sub" style=" width: 12em; visibility: visible;"><i class="far fa-thumbs-up"></i>  Rendi Disponibile</button>
+        `:""}
         </div>
+
+      </div>
        
       `);
       $("#ctable2").append(div);
@@ -682,7 +688,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-  <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">             
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">             
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -734,7 +740,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-  <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -785,7 +791,7 @@ for (let i in inventoryARRAY) {
         
   div = $(`
   <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-  <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${inventoryARRAY[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+  <img src="${inventoryARRAY[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
   <div class="card-body">              
   <h5 class="card-title" style="text-align: center;">${inventoryARRAY[i].name}</h5>              
   <p class="card-text" style="text-align: center;">ID: ${inventoryARRAY[i].prod_id}</p>
@@ -821,7 +827,7 @@ function showYacht(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-            <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -861,7 +867,7 @@ function showGomm(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-            <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -901,7 +907,7 @@ function showBarche(data){
       let div = null;
         div = $(` 
           <div class="card" style="width: 19em; float: left; display: block; margin-left: 3%;">        
-            <img src="https://site202133.tw.cs.unibo.it/img/prodotti/${data[i].prod_id}.jpg" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
+            <img src="${data[i].image}" style=" widht: 10em; height: 10rem;"class="card-img-top" alt="...">              
             <div class="card-body">              
               <h5 class="card-title" style="text-align: center;">${data[i].name}</h5>              
               <p class="card-text" style="text-align: center;">ID: ${data[i].prod_id}</p>
@@ -1254,7 +1260,7 @@ $("#ctable").append(div);
 
 div = $(` 
       <div class="flex-container" style=" margin-left: 4%;">
-        <img src="https://site202133.tw.cs.unibo.it/img/default-pic.jpg" alt="" width="280" height="300" style="margin-left: 3em;">
+        <img src="${data[i].image}" alt="" width="280" height="300" style="margin-left: 3em;">
         <form class="row g-3" action="/update-client" method="POST" role="form" class="row g-3" style="width: 60%; position: relative; float: right; right: 6%; margin-bottom: 30%;">
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
@@ -1293,7 +1299,7 @@ div = $(`
           <div class="col-12">
             <button class="btn-sub" id="${data[i].client_id}" onclick="searchRentByClient(id)">Storico noleggi</button>
             <button class="btn-sub" onclick="approveClient()" >Aggiorna</button>  <i id="smile" class="fas fa-check fa-2x" style="color: green; visibility: hidden; margin-left: 2%; "></i>
-          
+            <button class="btn-sub" id="${data[i].client_id}" onclick="deleteClient(id)">Elimina</button>
             </div>
         </form>
       </div>
@@ -1521,6 +1527,7 @@ function goBackRents(){
 //FUNZIONI AUX
 function approveProd() {
   var name= document.getElementById("name").value;
+  var img= document.getElementById("img").value;
   var prod_id= document.getElementById("product").value;
   var brand= document.getElementById("brand").value;
   var category= document.getElementById("category").value;
@@ -1536,7 +1543,7 @@ function approveProd() {
   var changed = {};
 
 
-  changed = { prod_id: prod_id, category: category, name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: status};
+  changed = { prod_id: prod_id, category: category, img: img,  name: name, brand: brand, speed: speed, length: length, guest: guest, year: year, summary: summary, low_season: low_season, high_season: high_season, status: status};
   
   console.log(changed);
 

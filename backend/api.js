@@ -409,6 +409,7 @@ module.exports = function (app) {
 
         var idprod = req.body.prod_id;
         var cat= req.body.category;
+        var img= req.body.img;
         var nome = req.body.name;
         var marca = req.body.brand;
         var vel = req.body.speed;
@@ -420,9 +421,9 @@ module.exports = function (app) {
         var price_high = req.body.high_season;
         var state = req.body.status;  
 
-        console.log(idprod +" " + cat + " "  + nome + " " + marca + " " + vel + " " + len + " " + ospiti + " " + anno + " " + desc + " " + price_low + " " +price_high + " " + state)
-
-       await db.updateProd(idprod, cat, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
+        console.log(idprod +" " + cat + " "  + img + " "  +nome + " " + marca + " " + vel + " " + len + " " + ospiti + " " + anno + " " + desc + " " + price_low + " " +price_high + " " + state)
+//updateProd: async (idprod, cat, img, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state) =
+       await db.updateProd(idprod, cat, img, nome, marca, vel, len, ospiti, anno, desc, price_low, price_high, state)
     });
 
     //UPDATE RENT PER L'ELIMINAZIONE
