@@ -17,7 +17,7 @@ import {
 import {  FiArrowLeftCircle, FiArrowRightCircle  } from "react-icons/fi";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { BsBoxSeam } from "react-icons/bs";
-import { AiOutlineShoppingCart, AiOutlineTeam } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineTeam, AiOutlineSolution } from "react-icons/ai";
 import { HiPlus } from "react-icons/hi";
 import { MdOutlineLogout } from "react-icons/md";
 
@@ -67,6 +67,7 @@ export const Header = ({setToken}) => {
               <MenuItem active={true} icon={<AiOutlineShoppingCart />}><Link to="/manager/noleggi">Noleggi</Link></MenuItem>
               <MenuItem active={true} icon={<BsBoxSeam />}><Link to="/manager/inventario">Prodotti</Link></MenuItem>
               <MenuItem active={true} icon={<HiPlus />}><Link to="/manager/aggiungiImpiegato">Aggiungi <br></br>Impiegato</Link></MenuItem>
+              <MenuItem active={true} icon={<AiOutlineSolution />}><a href="https://site202133.tw.cs.unibo.it/worker">Back office</a></MenuItem>
               <MenuItem active={true} onClick={logout} icon={<MdOutlineLogout />}><Link to="/manager/login">Logout</Link></MenuItem>
             </Menu>
           </SidebarContent>

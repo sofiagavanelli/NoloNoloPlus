@@ -12,7 +12,6 @@ function AddWorker(){
 
   const updateData = (event, property) => {
     const target = event.target
-    console.log(target)
 
     event.preventDefault()
     setWorker((prevState) => ({
@@ -23,9 +22,7 @@ function AddWorker(){
 
     const addWorker = () => {
       const flag=controlData();
-        newWorker.password=newWorker.surname + newWorker.name + newWorker.year;
         if(flag){
-          console.log(JSON.stringify(newWorker));
           fetch('https://site202133.tw.cs.unibo.it/new-worker', {  // Enter your IP address here
               method: 'POST', 
               mode: 'cors', 
@@ -33,9 +30,10 @@ function AddWorker(){
               body: JSON.stringify(newWorker) // body data type must match "Content-Type" header
 
           })
+          alert("il nuovo dipendente è stato creato correttamente")
           getWorkerInfo();
         }else{
-          alert("la data inserita non è corretta, riprovare");
+          alert("I dati inseriti non sono corretti riprovare");
         }
         
     };
@@ -44,12 +42,11 @@ function AddWorker(){
       fetch('https://site202133.tw.cs.unibo.it/allWorker')
         .then(results => results.json())
         .then(workers => {
-          console.log(workers);
         });
     }
 
     function setManager(isManager){
-      if(isManager==="true"){
+      if(isManager){
         newWorker.manager=true;
       }else{
         newWorker.manager=false;
@@ -57,7 +54,6 @@ function AddWorker(){
     }
     function controlData(){
       let app= new Date(newWorker.year).getFullYear();
-      console.log(app);
       newWorker.year=app.toString();
       if(isNaN(newWorker.year)){
         newWorker.year='';
@@ -125,6 +121,15 @@ function AddWorker(){
                           placeholder="mario_rossi"
                           value={newWorker.user_id}
                           onChange={(e) => updateData(e, 'user_id')}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3" >
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control 
+                          type="password" 
+                          placeholder="*******"
+                          value={newWorker.password}
+                          onChange={(e) => updateData(e, 'password')}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3" >

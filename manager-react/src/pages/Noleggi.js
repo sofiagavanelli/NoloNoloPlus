@@ -5,7 +5,7 @@ import {DoublePieCharT} from '../components/doublePieChart';
 import {CardComponentProd} from '../components/cardComponentProd';
 import {CardComponentRent} from '../components/cardComponentRent';
 import React from "react";
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
 var _ = require('lodash');
 
 function Noleggi() {
@@ -63,7 +63,7 @@ function Noleggi() {
         let dataEnd=new Date(data[i].end_date);
         app=dataEnd.getMonth();
         monthRent[app].count++;
-        monthRent[app].value=monthRent[app].value + data[i].price;
+        monthRent[app].value=monthRent[app].value + _.toNumber(data[i].price);
         monthRent[app].value=_.toNumber(monthRent[app].value)
       }
     }
