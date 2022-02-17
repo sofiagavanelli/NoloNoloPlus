@@ -2,8 +2,7 @@ import "../App.css";
 import {BarCharT} from '../components/barChart';
 import {CardComponentClient} from '../components/cardComponentClient';
 import React from "react";
-/*  import {FilterButton} from '../components/filterButton';  */
-//import { DropdownButton, Dropdown } from 'react-bootstrap';
+import {  Form, Stack } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 var _ = require('lodash');
 
@@ -33,18 +32,35 @@ function Clienti() {
           let num=0;
           var tot=0;
           for(var j in rentForClient[i].rents){
-            let dataEnd=new Date(rentForClient[i].rents[j].end_date);
-            const difEnd=dataEnd - today;
-            if(rentForClient[i].rents[j].approved && difEnd<0){
-              tot=tot + rentForClient[i].rents[j].price;
+            if(rentForClient[i].rents[j].approved ){
+              tot=tot + _.toNumber(rentForClient[i].rents[j].price);
               num++;
             }
-            valueRent[i].value = _.toNumber(tot);
+            valueRent[i].value = tot;
             valueRent[i].number = num;
           }
         }
         getInfo(valueRent); 
       });
+  }
+  
+  function filterOrder(filtro){
+    const value=filtro.target.value;
+    if(value==="numNC"){
+      setInfo(_.orderBy(infoClient, ['value'], ['asc']))
+    }else{
+      if(value==="numND"){
+        setInfo(_.orderBy(infoClient, ['value'], ['desc']))
+      }else{
+        if(value==="fattC"){
+          setInfo(_.orderBy(infoClient, ['number'], ['asc']))
+        }else{
+          if(value==="fattD"){
+            setInfo(_.orderBy(infoClient, ['number'], ['desc']))
+          }
+        }
+      }
+    }
   }
 
   //funzione che ritorna le informazioni dei clienti
@@ -92,6 +108,17 @@ function Clienti() {
                       height: 5
         }}/>
         <h2 id="arcobaleno">Dati clienti</h2>
+        <Stack direction="horizontal"  gap={2} className="col-md-5 mx-auto">
+          <Form.Select  aria-label="Seleziona ordine visualizzazione" onChange={(filtro) => {
+                      filterOrder(filtro);
+          }}>
+              <option >Inserire l'ordine di visualizzazione</option>
+              <option value="numNC">Numero noleggi(crescente)</option>
+              <option value="numND">Numero noleggi(decrescente)</option>
+              <option value="fattC">Fatturato(crescente)</option>
+              <option value="fattD">Fatturato(decrescente)</option>
+            </Form.Select>
+          </Stack>
         <CardComponentClient info={infoClient} divName={"cardCliDiv"} keyDiv={"cardclienti"}/>
       </div>
     );

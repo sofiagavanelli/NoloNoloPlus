@@ -18,8 +18,6 @@ function Dipendenti() {
       .then(results => results.json())
       .then(data => {
         let today=new Date();
-        console.log("today: ");
-        console.log(today);
         const rentForWorker=
           _.chain(data)//creao un oggetto che contiene il client id e tutti i suoi noleggi 
           .groupBy("worker_id")
@@ -33,13 +31,11 @@ function Dipendenti() {
           let num=0;
           var tot=0;
           for(var j in rentForWorker[i].rents){
-            let dataEnd=new Date(rentForWorker[i].rents[j].end_date);
-            const difEnd=dataEnd - today;
-            if(rentForWorker[i].rents[j].approved && difEnd<0){
-              tot=tot + rentForWorker[i].rents[j].price;
+            if(rentForWorker[i].rents[j].approved ){
+              tot=tot + _.toNumber(rentForWorker[i].rents[j].price);
               num++;
             }
-            valueRent[i].value = _.toNumber(tot);
+            valueRent[i].value = tot;
             valueRent[i].number = num;
           }
         }

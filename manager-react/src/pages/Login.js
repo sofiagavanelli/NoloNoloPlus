@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8000/loginManager', {
+  return fetch('https://site202133.tw.cs.unibo.it/loginManager', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -25,17 +25,16 @@ function Login({ setToken }){
 
     const handleSubmit = async e => {
       const app = await controlloDati();
-      console.log("app");
-      console.log(app);
       e.preventDefault();
-      const token = await loginUser({
-        username,
-        password
-      });
       if(app){
+        const token = await loginUser({
+          username,
+          password
+        });
         setToken(token);
-        console.log("In set token")
         window.location = '/manager';
+      }else{
+        alert("i dati inseriti non sono corretti")
       }
       
     }
@@ -47,7 +46,6 @@ function Login({ setToken }){
         if(username !== '' && password!== ''){
             let res = await fetch('https://site202133.tw.cs.unibo.it/allWorker')
             let info = await res.json()
-            console.log(info);
             while(!trovato && i<info.length){
               if(username === info[i].user_id && password===info[i].password && info[i].manager===true){
                   trovato=true;

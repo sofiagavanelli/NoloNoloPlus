@@ -25,12 +25,13 @@ export function CardWorker(props){
             <Alert.Heading>Sei sicuro di voler eliminare questo dipendente?</Alert.Heading>
             <hr />
             <div className="d-flex justify-content-end">
-            <Button onClick={() => setShow(false)} variant="outline-success">
-                No
-            </Button>
-            <Button onClick={() => deleteWorker()} variant="outline-success">
-                SI
-            </Button>
+                <Button onClick={() => setShow(false)} variant="danger">
+                    No
+                </Button>
+                
+                <Button onClick={() => deleteWorker()} variant="danger">
+                    SI
+                </Button>
             </div>
           </Alert>
         );

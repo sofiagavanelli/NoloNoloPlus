@@ -2,7 +2,6 @@ import React from "react";
 import { Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {  Link } from "react-router-dom";
-import Cliente from "../pages/Cliente";
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +17,8 @@ export function CardComponentClient(props){
             {
                 props.info.map(cliente =>(
                     <Col key={cliente.client_id}>
-                        <Card  style={{ margin: '10px' }}> 
+                        <Card  style={{ margin: '10px' }}>
+                        <Card.Img variant="top" src={cliente.image} />
                         <Card.Body>
                             <Card.Title>{cliente.name} {cliente.surname}</Card.Title>
                         </Card.Body>

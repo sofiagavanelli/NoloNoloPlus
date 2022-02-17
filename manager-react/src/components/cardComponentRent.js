@@ -1,6 +1,6 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import { Card, ListGroup, ListGroupItem, Row, Col, Stack } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Row, Col, Stack, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import "../App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,7 +24,6 @@ export function CardComponentRent(props){
     }
 
     function filter(data){
-        console.log(data);
         let i;
         let dataStartSelected= new Date(data[0]);
         let dataEndSelected=new Date(data[1]);
@@ -40,19 +39,25 @@ export function CardComponentRent(props){
         }
         setFiltered(filteredRent);
         if(_.isEmpty(filteredRent)){
-            console.log("è vuoto");
             setShowN(true);
-/*             return(
-                <h1>Non ci sono noleggi che vanno da {data[0].toDateString()} a {data[1].toDateString()}</h1>
-            ) */
         }
     }
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+          I noleggi vengono filtrati in base alla data di fine noleggio
+        </Tooltip>
+      );
     //Card key indica la chiave per identificare ogni singola card
     return(
         <div>
-        <Stack direction="horizontal" gap={3}>
-            <div ><h5>Selezionare una data per filtrare i noleggi in base alla data di conclusione:</h5> </div>
-            <div ><DatePicker
+        <Stack direction="horizontal" gap={3} className="col-md-2 mx-auto">
+            <div >
+            <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+            >
+                <DatePicker
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Clicca per selezionare una data "
                 selectsRange={true}
@@ -63,7 +68,9 @@ export function CardComponentRent(props){
                     show(update);
                 }}
                 
-            />
+                />
+            </OverlayTrigger>
+
             </div>
 
         </Stack>
@@ -125,9 +132,7 @@ export function CardComponentRent(props){
                     }
                     </Row>
                  </div>
-                {showNull
-                    ?    <h1>Non ci sono noleggi per la data selezionata</h1>
-                }
+               
 
             }
             

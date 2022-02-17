@@ -3,7 +3,7 @@ import {BarCharT} from '../components/barChart';
 import {PieCharT} from '../components/pieChart';
 import {CardComponentProd} from '../components/cardComponentProd';
 import React from "react";
-import { Button, ButtonGroup, Form } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, Stack } from 'react-bootstrap';
 var _ = require('lodash');
 
 
@@ -45,13 +45,11 @@ function Inventario() {
         let num=0;
         var tot=0;
         for(var j in rentForProd[i].rents){
-          let dataEnd=new Date(rentForProd[i].rents[j].end_date);
-          const dif=dataEnd - today;
-          if(rentForProd[i].rents[j].approved && dif<0){//controllo se il noleggio è stato approvato ed è anche finito
-            tot=tot + rentForProd[i].rents[j].price;
+          if(rentForProd[i].rents[j].approved ){//controllo se il noleggio è stato approvato ed è anche finito
+            tot=tot + _.toNumber(rentForProd[i].rents[j].price);
             num++;
           }
-          valueRent[i].value = _.toNumber(tot);
+          valueRent[i].value = tot;
           valueRent[i].number = num;
         }
       }
@@ -116,14 +114,14 @@ function Inventario() {
     }
 
     function getStatus(info){//funzione che raggruppa e conta i prodotti a seconda del loro stato
+
       const percentage=
         _.chain(info)
         .groupBy("status")
         .map((value, key) => ({name: key, value: value.length }))
         .value();
-      
-       for(var i in percentage){
-        percentage[i].fill=color[i];
+      for(var i in percentage){
+       percentage[i].fill=color[i];
       }
       setStatus(percentage);
     }
@@ -141,13 +139,13 @@ function Inventario() {
         setFiltrati(infoProd);
       }else{
         if(value==="yacth"){
-          setFiltrati(rentCategory[0].type);
+          setFiltrati(rentCategory[2].type);
         }else{
           if(value==="barca"){
-            setFiltrati(rentCategory[1].type);
+            setFiltrati(rentCategory[0].type);
           }else{
             if(value==="gommoni"){
-              setFiltrati(rentCategory[2].type);
+              setFiltrati(rentCategory[1].type);
             }
           }
         }
@@ -230,15 +228,17 @@ function Inventario() {
                 </div>
           }
           <h2 id="arcobaleno">Informazioni prodotti</h2>
-          <Form.Select aria-label="Seleziona categoria prodotti" onChange={(filtro) => {
-                    filterCategory(filtro);
+          <Stack direction="horizontal"  gap={2} className="col-md-5 mx-auto">
+            <Form.Select aria-label="Seleziona categoria prodotti" onChange={(filtro) => {
+                      filterCategory(filtro);
 
-                }}>
-            <option value="tutti">Tutte le categorie</option>
-            <option value="yacth">Yacth</option>
-            <option value="barca">Barche</option>
-            <option value="gommoni">Gommoni</option>
-          </Form.Select>
+                  }}>
+              <option value="tutti">Tutte le categorie</option>
+              <option value="yacth">Yacth</option>
+              <option value="barca">Barche</option>
+              <option value="gommoni">Gommoni</option>
+            </Form.Select>
+          </Stack>
           <CardComponentProd info={filtrati} divName={"cardProdDiv"} keyDiv={"cardProd"} filtrare={rentProd}/>
       </div>
     );
