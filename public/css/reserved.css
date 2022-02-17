@@ -604,7 +604,11 @@ item-2 i, input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: #fff;
 }
 
-
+.managBtn{
+  background-color: #4D6D9A;
+  border: 1px solid;
+  border: none;
+}
 
 
 

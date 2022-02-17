@@ -1664,16 +1664,7 @@ function lateRents(rents){
   
   let filtered = [];
   filtered =  rents.filter(x => x.delivered == false && x.end_date == yesterday);
-  
-  /*let lateProds = [];
-  let k = 0;
 
-  filtered.forEach(item => {
-
-    lateProds[k] = item.prod_id;
-    k++;
-
-  });*/
 
   for(let i in filtered) {
 
