@@ -192,40 +192,6 @@ mounted() {
 
 methods: {
 
-  /*controlDate() {
-
-        console.log("sono dentro controldate");
-
-        var noleggi = this.noleggi;
-
-        var myrent_sdate = new Date(this.startD);
-        var myrent_edate = new Date(this.endD);
-
-        var disponibile = true;
-
-        noleggi.forEach(item => {
-
-          if(!item.deleted) { //se il noleggio che si sta guardando è stato eliminato allora le sue date NON vanno considerate come occupate
-
-            var checked_start = new Date(item.start_date);
-            var checked_end = new Date(item.end_date);
-
-            if((myrent_sdate >= checked_start && myrent_sdate <= checked_end) ||
-              (myrent_edate >= checked_start&& myrent_edate <= checked_end) || 
-              (myrent_sdate <= checked_start && myrent_edate >= checked_start) ) {
-
-                disponibile = false;
-            }
-
-          }
-
-        })
-
-        console.log("dentro è:" + disponibile);
-
-        return(disponibile);
-      
-  },*/
 
   calc() {
 
@@ -247,80 +213,8 @@ methods: {
 
     }
 
-      /*const diffInMs   = new Date(this.endD) - new Date(this.startD);
-      const diffInDays = (diffInMs / (1000 * 60 * 60 * 24)) + 1; //+1 perché conto la data di partenza
-
-      let highDays = highSeason_days(this.startD, diffInDays);
-
-      let temp = (this.parentData.high_season * (highDays)) + (this.parentData.low_season * (diffInDays - highDays));
-
-      if(this.$store.state.username) {
-
-
-        //TODO AGGIUNGERE QUESTIONE DEL MESE DI NASCITA CON LO SCONTO 
-         data di nascita = new Date(data del cliente --> come la ottengo? faccio la get? aggiungo a vuex la data?)
-          var start_date = new Date(this.startD);
-          var start_month = start_date.getMonth();
-          var birth_month = birth_date.getMonth();
-
-          if (start_month == birth_month) {
-            temp = temp - (temp*15/100);
-          }
-
-        
-
-            if(this.parentData.status != "rotto" && controlDate(this.noleggi, this.startD, this.endD)) {
-
-              if(this.parentData.status == "buono") {
-                temp = temp - (temp*5/100);
-              }
-              else if(this.parentData.status == "rovinato") {
-                temp = temp - (temp*10/100);
-              }
-              
-              this.total = temp;
-              this.euro = '€';
-              this.payment = true;
-            }
-            else {
-              if(this.parentData.status == "rotto")
-                this.total = "imbarcazione non disponibile";
-              else
-                this.total = "date già occupate";
-            //console.log("PRODOTTO NOLEGGIATO IN QUESTE DATE: CHE FARE?");
-            }
-          //})
-
-      }
-      else {
-        this.total = temp;
-        this.euro = '€';
-      }
-    }*/
-
   },
 
-  /*defineSeason(i) {
-
-    let Hdays = 0;
-    var date = new Date(this.startD);
-
-    while (i>0) {
-
-      if (date.getMonth() >= 5 && date.getMonth() <= 9) { 
-        //NOTA BENE: I MESI PARTONO DA 0 QUINDI MAGGIO=4 E SETTEMBRE=8
-        Hdays = Hdays + 1;
-      }
-
-      date.setDate(date.getDate() + 1);
-
-      i--;
-
-    }
-
-    return(Hdays);
-
-  },*/
 
   useDiscount() {
 
@@ -390,28 +284,6 @@ methods: {
 
   }
 
-  /*check(noleggi) {
-
-    var myrent_sdate = new Date(this.startD);
-    var myrent_edate = new Date(this.endD);
-
-    var disponibile = true;
-
-    noleggi.forEach(item => {
-
-      if((myrent_sdate >= item.start_date && myrent_sdate <= item.end_date) ||
-        (myrent_edate >= item.start_date && myrent_edate <= item.end_date) ) {
-
-          disponibile = false;
-      }
-
-    })
-
-    console.log("dentro è:" + disponibile);
-
-    return(disponibile);
-
-  }*/
 
 }
 

@@ -3,18 +3,6 @@
 
     <div id="profile_page" class="flex-container">
 
-        <!-- cambiare estetica? 
-        image: {type: String},
-        name: {type: String, required: true},
-        client_id: {type: String, required: true},
-        password: {type: String, required: true, minLeght: 5},
-        place: {type: String, required: true},
-        address: {type: String, required: true}
-
-
-        profileInfo[0]
-        -->
-
         <!--img class="profile_pic" :src="this.profileInfo[0].img" alt="Card image cap" "https://site202133.tw.cs.unibo.it/img/default-pic.jpg"  src="../assets/avatar.png"-->
         <div id="pic_container">
             <img class="profile_pic" :src="this.profileInfo[0].image" alt="profile image">
@@ -45,13 +33,6 @@
                     </h3> 
                     <div class="details">
                     <ul class="d-flex flex-wrap pl-0" >
-                        <!-- NON SI PUO CAMBIARE L'USERNAME PERCHE UNICO -->
-                        <!--li class="title"> USERNAME: 
-                            <--div class="form-input"--> <!--class="md-form mb-5">
-                                <--label data-error="wrong" data-success="right" for="username">Username</label>
-                            <b-form-input v-model="username" placeholder="Modifica Username"></b-form-input>
-                            </div>
-                        </li-->
                         <li class="title"> CITTÀ: 
                             <b-form-input v-model="newInfo[2]" placeholder="Modifica Città"></b-form-input>
                         </li>
@@ -84,14 +65,6 @@
                     <div id="btnTab" class="flex-container">
                         <b-button class="viewBtn" v-on:click="changeView('a')">noleggi attivi</b-button>
                     </div>
-
-                    <!--h5 class="title"> NOLEGGI ATTIVI: </h5--> 
-
-                    <!--div id="btnTab" class="flex-container">
-                        <b-button class="viewBtn" v-on:click="changeView('p')">passati</b-button>
-                        <b-button class="viewBtn" aria-label="button noleggi attivi" v-on:click="changeView('a')">attivi</b-button>
-                        <b-button class="viewBtn" aria-label="button noleggi passati" v-on:click="changeView('f')">futuri</b-button>
-                    </div-->
                     
                     <template v-if="this.active">
                     <div class="rents" v-for="(item, index) in activeRent" :key="item._id">
@@ -270,10 +243,6 @@ export default({
 
             this.username = this.$store.state.username;
 
-            /*if( JSON.parse(localStorage.getItem('CurrentUser')).discount )
-                this.$store.state.discount = JSON.parse(localStorage.getItem('CurrentUser')).discount;*/
-
-            //console.log();
         }
         else {
             this.username = this.$store.state.username;
@@ -305,16 +274,6 @@ export default({
           });
         
     },
-
-    /*mounted() {
-
-        if(localStorage.getItem('CurrentUser')) {
-            this.$store.state.username = JSON.parse(localStorage.getItem('CurrentUser'));
-
-            this.username = this.$store.state.username;
-        }
-
-    },*/
 
     methods: {
 
@@ -353,11 +312,6 @@ export default({
                 else {
                     this.activeRent[k] = elem;
 
-                    //sono nei rent attivi: se uno di questi prodotti è rotto me lo segno  nella sua posizione nell'aray dei rent!!
-                    //NON ASPETTA!!!
-                    //this.broken[k] = this.controlStart(elem);
-                    //console.log(this.broken[k]);
-
                     k++;
                 }
 
@@ -386,12 +340,7 @@ export default({
                     //console.log(response.data);
                     prodToRent = response.data;
 
-                    /*console.log(prodToRent);
-                    console.log(prodToRent[0].status == "rotto");*/
-
                     if(prodToRent[0].status == "rotto") {
-                        /*rotto = true;*/
-                        //console.log("sono dentro rotto");
 
                         this.broken[k] = true;
                         k++;
@@ -403,46 +352,14 @@ export default({
                         k++;
                     }
 
-                    /*var start = new Date(this.activeRent[_id].start_date);
-                    var today = null;
-
-                    if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
-                        start.getYear() == this.today.getYear()) {
-
-                        today = true;
-                    }
-                    else
-                        today = false;*/
-
-                    /*console.log(rotto);
-                    return(rotto);*/
-
                 })
                 .catch((error) => {
                     //this.loading = false;
                     console.log(error);
                 });
 
-
-            /*var start = new Date(this.activeRent[_id].start_date);
-            var today = null;
-
-            if(start.getDay() == this.today.getDay() && start.getMonth() == this.today.getMonth() && 
-                start.getYear() == this.today.getYear()) {
-
-                today = true;
-            }
-            else
-                today = false;
-
-            console.log(rotto && today);
-            return(rotto && today);*/
-
             });
 
-            //console.log(k + "  " + items.length);
-
-            //if(k == items.length)
             this.loading = !this.loading;
             
 
@@ -453,23 +370,6 @@ export default({
             this.edit = !this.edit;
 
         },
-
-        /*app.post('/update-client',async (req, res)=>{
-        console.log("sono nell'update dei clienti ");
-        
-            const idcliente = req.body.clientID;
-            var nome = req.body.name;
-            var cognome = req.body.surname;
-            //var user = req.body.clientID;
-            var city = req.body.place;
-            var add = req.body.address; 
-            var cell = req.body.telefono;
-            var mail = req.body.email;
-            var note = req.body.note;
-
-        console.log(idcliente);
-       await db.updateClient(idcliente, nome, cognome, city, add, cell, mail, note)
-    });*/
 
         save() {
 
@@ -513,49 +413,17 @@ export default({
                 
             }
 
-            //oppure facciamo una reload direttamente
-            //il cliente deve fare refresh
             this.edit = !this.edit;
 
         },
 
         openAlert(/*_index, */ rent_id) {
 
-            //modale per l'edit
-            //this.id = _index;
-            //this.rentToEdit = this.showRents[_index];
-
             this.indisponibile = rent_id;
 
             this.$bvModal.show("alertModal");
 
         },
-
-        /*editRent(_id) {
-
-            this.rentToEdit = this.futureRent[_id];
-
-            console.log(this.rentToEdit);
-
-            this.$router.push({
-                path: '/edit-rent',
-            })
-
-        },
-
-        updateRent() {
-            console.log("dovrei fare la post");
-        },*/
-
-        /*print(rent_id) {
-
-            var rentToPrint = this.pastRent[rent_id];
-
-            const jsonData = encodeURIComponent('{"is_valid": true}');
-            this.myUrl = `data:text/plain;charset=utf-8,${jsonData}`;
-            this.myFilename = 'example.json';
-
-        },*/
 
         deleteRent(_ind) {
             console.log(this.futureRent[_ind]);
@@ -635,10 +503,6 @@ export default({
 
             localStorage.setItem('CurrentUser', JSON.stringify(user_discount));
 
-            //var prova = JSON.parse(localStorage.getItem('CurrentUser'));
-
-            //console.log(prova);
-
         }
 
     }
@@ -647,9 +511,6 @@ export default({
 
 <style scoped>
 
-* {
-    /*border: 1px solid red;*/
-}
 
 #disclaimer {
   background-color: rgb(252, 191, 191);

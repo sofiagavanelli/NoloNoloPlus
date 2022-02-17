@@ -4,9 +4,8 @@ const client = require("./Models/client");
 var sha1 = require('sha1');
 
 //PER USARE QUELLO NON IN LOCALE:
-const connectionString = "mongodb://site202133:Tee9youy@mongo_site202133?writeConcern=majority";
-//const connectionString = process.env.DATABASELOCAL_STRING;
-
+//const connectionString = process.env.DATABASE_STRING;
+const connectionString = process.env.DATABASELOCAL_STRING;
 
 const Client = require("./Models/client");
 const Noleggio = require("./Models/noleggi");
@@ -37,9 +36,6 @@ module.exports = {
     //getUsers: async (options = {}) => User.find(options) tel, email,
     saveClient: async (_img, _name, _surname, _username, _pass, _place, _address, tel, email, bday, _note) => {
 
-        //console.log(sha1(_pass));
-        
-        //TODO CONTROLLARE DUPLICATO DELL'USERNAME
             new Client({
                 //image: _img,
                 name: _name,
@@ -89,7 +85,7 @@ module.exports = {
     },
 
     saveRental: async (/*_rent,*/ _prod, _client, _start, _end, _worker, _price, _payment, _approved, _discount) => {
-        /*await Client.insertOne({ username }, { id }, {pass}, { upsert: true });*/
+
         return Promise.resolve(new Noleggio({
             prod_id: _prod,
             client_id: _client,
@@ -317,27 +313,6 @@ module.exports = {
             ).exec()
             .then(x => console.log("ok"))
             .catch(x => console.log("Errore"))
-    },
-
-    /* joinClientsRentals: async (options = {}) =>{
-        db.collection('rentals').aggregate([
-            {
-                $lookup:
-                {
-                    from: 'clients',
-                    localField: 'client_id',
-                    foreignField: 'client_id',
-                    as: 'clientRentals'
-                }
-            }
-        ]).toArray(function(err, resp) {
-            if (err) throw err;
-            console.log("join function");
-            console.log(JSON.stringify(resp));
-            return JSON.stringify(resp);
-        });
-    } */
-    
-    
+    },    
 
 };

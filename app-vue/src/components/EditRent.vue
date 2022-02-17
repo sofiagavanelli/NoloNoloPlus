@@ -3,8 +3,6 @@
 
   <div id="edit_rent" class="flex-container">
 
-  <!--div> {{rentToEdit}} </div-->
-
       <img class="post_image" :src="this.url + 'prodotti/' + rentToEdit.prod_id + this.ex" alt="Card image cap">
 
       <h3 class="title"> PRODOTTO: {{rentToEdit.prod_id}} </h3> 

@@ -5,10 +5,6 @@
 
       <b-navbar toggleable="lg" class="navbar navbar-expand-lg"> <!--background-color: #31708E;-->
 
-        <!--b-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="" role="button" ><i class="fa-bars" aria-hidden="true" style="color:white"></i></span>
-        </b-button-->
-
         <a id="logoname" class="nav-item">
           <router-link id="toHome" tag="nav-item" aria-labelledby="homeLabel" to="/home">
             NOLONOLOPLUS
@@ -19,12 +15,6 @@
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
-            <!--v-on:click='smista' @click="showModal" v-on:click='open()'-->
-              <!--b-nav-item title="Site by">
-                <router-link id="toAboutUs" tag="nav-item" aria-labelledby="AboutUsLabel" to="/about">
-                  ABOUT US
-                </router-link>
-              </b-nav-item-->
               <template v-if="!this.$store.state.username">
                 <b-nav-item title="Login">
                   <router-link id="toLogin" tag="nav-item" aria-labelledby="loginLabel" to="/login">
@@ -51,12 +41,6 @@
 
     </div>
     
-
-    <!--TODO: INSERIRE DIRETTAMENTE QUI IL MODALE PER UNA GESTIONE MIGLIORE SENZA IF-->
-    <!--template v-if="isModalVisible">
-      <LoginModal v-on:childToParent="onChildBack" />
-    </template-->
-
   </div>
 </template>
 
@@ -73,8 +57,6 @@ export default {
   //props: ['loggedIn'],
   data() {
     return {
-      //username: client.username,
-      //isModalVisible: false,
       loggedIN: false,
     };
   },

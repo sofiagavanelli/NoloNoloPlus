@@ -64,24 +64,10 @@ export default {
   z-index: 1;
 }
 
-/*.b-navbar {
-    list-style: none;
-}
-
-
-.navbar-toggler, .b-navbar-toggle {
-    color: white;
-}*/
-
 .nav-item, .b-nav-item, .nav-link, .navbar-toggler-icon {
     color: white !important; 
     padding: 0.5em;
 }
-
-/*.nav-item:hover {
-    color: white;
-    font-style: none;
-}*/
 
 .element {
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

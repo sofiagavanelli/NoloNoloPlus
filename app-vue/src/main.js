@@ -31,18 +31,6 @@ library.add(faTrash)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-/*Vue.use(VueMq, {
-  breakpoints: {
-    mobile: 455,
-    tablet: 900,
-    laptop: 1250,
-    desktop: Infinity,
-  }
-})*/
-
-//Vue.prototype.$username = {value: false}
-// e si accede: this.$username
-
 Vue.config.productionTip = false
 
 //Vue.use(router)
@@ -53,11 +41,3 @@ new Vue({
   //posso usare: data {username: ''}
   render: h => h(App),
 }).$mount('#app')
-  /*el: '#app', 
-})*/
-
-
-
-//per poterlo usare nelle get -- questo file deve diventare uguale a main_page
-
-

@@ -16,13 +16,6 @@ import EditRent from "./components/EditRent.vue"
 Vue.use(Router)
 
 export default new Router({
-  /*routes: [
-    {
-      path: "/",
-      alias: "/tutorials",
-      name: "tutorials",
-      component: () => import("./components/TutorialsList")
-    },*/
     routes: [
       {
         path: '/home', alias: '/',

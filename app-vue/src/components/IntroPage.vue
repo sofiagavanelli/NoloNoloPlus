@@ -40,18 +40,10 @@
                     <li class="title">Lunghezza:<h5 class="data"> {{item.length}} </h5> </li>
                     <li class="title">Ospiti:<h5 class="data"> {{item.guests}} </h5> </li>
                     <li class="title">Anno:<h5 class="data"> {{item.year}} </h5> </li>
-                    <!--template v-if="this.$store.state.username"-->
-                      <!--li class="title"> Prezzo: <h5 class="data"> {{item.price}} </h5> </li--> 
-                    <!--/template-->
                   </ul>
                 </div>
               </b-card-body>
 
-              <!--b-card-footer>
-                <b-button type="button" v-on:click="change(index)" class="noleggioBtn" :id="index">
-                  NOLEGGIA
-                </b-button>
-              </b-card-footer-->
             </router-link>
 
           </b-card>
@@ -63,33 +55,12 @@
 
       </template>
 
-      <!--template v-else-if="!normal">
-
-        <RENTPAGE si passa selectedID >
-        <RentPage :parentData="mydata" v-on:childToParent="onChildBack" />
-        <PER ALLEGGERIRE QUESTO COMPONENTE>
-
-      </template-->
-
-      <!--TODO: FARE UN ALTRO V-IF CHE GESTISCE LA VISIONE FILTERED-->
-      <!--template v-if="filtered">
-
-      </template-->
-
       <footer>
         <div class="flex-container" id="footer">
           <div class="element">
             <h3 class="title">CONTATTACI </h3> 
               nolonoloplus.yacht@gmail.com
           </div>
-          <!--div class="element">
-            <h3 class="title">DOVE TROVARCI </h3> 
-              Mura Anteo Zamboni, Bologna
-          </div>
-          <div class="element">
-            <h3 class="title">SOCI </h3> 
-              Francesca Chiriacò <br> Sofia Gavanelli <br> Federica Palestini
-          </div-->
           </div>
       </footer>
     
@@ -111,8 +82,6 @@ export default {
   },
   data() {
     return {
-      /*url: "https://site202133.tw.cs.unibo.it/img/",
-      ex: ".jpg",*/
 
       prodInfo: [],
       showInfo: [],
@@ -141,11 +110,6 @@ export default {
       .then((response) => {
         this.prodInfo = response.data;
 
-        //TODO: SECONDO ME SI PUO CARICARE NEL DB DIRETTAMENTE COSI FIN DALL'INIZIO: SI GENERA L'URL
-        /*this.prodInfo.forEach(elem => {
-          elem.image = this.url + 'prodotti/' + elem.prod_id + this.ex;
-        });*/
-
         this.showInfo = response.data;
 
       })
@@ -157,19 +121,6 @@ export default {
   },
 
   methods: {
-
-    /*onChildBack() {
-      this.normal = !this.normal;
-    },*/
-
-    /*change(__id) {
-
-      this.mydata = this.prodInfo[__id];
-      //this.mydata[1] = this.prodInfo;
-
-      this.normal = !this.normal;
-
-    },*/
 
     filter(data) {
 
