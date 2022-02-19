@@ -13,8 +13,8 @@ progetto tecnologie web 20/21, @unibo
 
 ![image](https://user-images.githubusercontent.com/49269518/154794263-d34df1ca-44ab-4047-8548-bf69df61bc4d.png)
 
-![image](https://user-images.githubusercontent.com/49269518/154794295-070615d6-aa6f-4684-9850-579befa4d26a.png)
-![image](https://user-images.githubusercontent.com/49269518/154794308-d5674258-95ce-40ad-a3f8-f33d85eb18d1.png)
+![image](https://user-images.githubusercontent.com/49269518/154794643-0bcd4ad0-3215-4ec7-87a6-4171ac7597cc.png)
+
 
 - Sofia Gavanelli
 
